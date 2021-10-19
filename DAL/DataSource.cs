@@ -12,17 +12,25 @@ namespace DalObject
         IDAL.DO.Station[] stations = new IDAL.DO.Station[5];
         IDAL.DO.Customer[] customers = new IDAL.DO.Customer[100];
         IDAL.DO.Parcel[] parcels = new IDAL.DO.Parcel[1000];
+        static Random r = new();
         internal void Initialize()
         {
-
-            int numDrones = 5;
-            int numCustomers = 10;
-            int numParcels = 10;
-            int numStations = 2;
+           
+            int numDrones = r.Next(5,10) ;
+            int numCustomers = r.Next(10, 100);
+            int numParcels = r.Next(10, 1000);
+            int numStations = r.Next(2, 5);
             for (int i = 0; i < numDrones; i++)
             {
-                drones[i] = new();
+                drones[i] = new(
+                    r.Next(0, 1000),
+                  ( r.Next(0, 25))+'A',
+                   ,
+                    r.NextDouble( ),
+                     r.Next(0, 100));
+                Config.dronesIndex++;
             }
+           
             for (int i = 0; i < numCustomers; i++)
             {
                 customers[i] = new();
@@ -34,6 +42,12 @@ namespace DalObject
             for (int i = 0; i <  numStations; i++)
             {
                 stations[i] = new();
+            }
+           
+            static T RandomEnumValue<T>()
+            {
+                var v = Enum.GetValues(typeof(T));
+                return (T)v.GetValue(r.Next(v.Length));
             }
         }
 
