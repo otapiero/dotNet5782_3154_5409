@@ -10,7 +10,7 @@ namespace DalObject
     {
         internal class Config
         {
-
+            void foo() { }
         }
     }
 }
