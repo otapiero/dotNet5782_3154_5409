@@ -13,8 +13,8 @@ namespace IDAL
             public int Id { get; set; }
             public string Model { get; set; }
 
-            //WeightCategories MaxWheight{ get; set; }
-            //DroneStatuses Status{ get; set; }
+           public WeightCategories MaxWheight{ get; set; }
+            DroneStatuses Status{ get; set; }
             public double Battery { get; set; }
 
 

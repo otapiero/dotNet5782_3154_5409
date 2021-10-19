@@ -10,11 +10,12 @@ namespace IDAL
     {
         public struct Parcel
         {
+           
             public int Id { get; set; }
             public int Sender { get; set; }
             public int TargetId { get; set; }
-            //WeightCategories Wheight{ get; set; }
-            // Priorities  Priority{ get; set; }
+            public WeightCategories Wheight{ get; set; }
+            public Priorities  Priority{ get; set; }
             public DateTime Requsted { get; set; }
             public int DroneId { get; set; }
             public DateTime Scheduled { get; set; }
