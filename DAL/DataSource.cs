@@ -25,7 +25,7 @@ namespace DalObject
                 drones[i] = new(
                     r.Next(0, 1000),
                 Convert.ToString( 'A')+(r.Next(0, 25)),
-                  IDAL.DO.WeightCategories.Heavy,
+                  GetRandomWeight(),
                    IDAL.DO.DroneStatuses.Available,
                      r.NextDouble());
                 Config.dronesIndex++;
@@ -43,11 +43,39 @@ namespace DalObject
             {
                 stations[i] = new();
             }
-           
-            static T RandomEnumValue<T>()
+
+            static  IDAL.DO.Priorities GetRandomPriorities()
             {
-                var v = Enum.GetValues(typeof(T));
-                return (T)v.GetValue(r.Next(v.Length));
+                
+                Type type = typeof(IDAL.DO.Priorities);
+
+                Array values = type.GetEnumValues();
+                //Array values = Enum.GetValues(type);
+                int index = r.Next(values.Length);
+                IDAL.DO.Priorities value = (IDAL.DO.Priorities)values.GetValue(index);
+                return value;
+            }
+            static IDAL.DO.WeightCategories GetRandomWeight()
+            {
+
+                Type type = typeof(IDAL.DO.WeightCategories);
+
+                Array values = type.GetEnumValues();
+                //Array values = Enum.GetValues(type);
+                int index = r.Next(values.Length);
+                IDAL.DO.WeightCategories value = (IDAL.DO.WeightCategories)values.GetValue(index);
+                return value;
+            }
+            static IDAL.DO.DroneStatuses GetRandomDroneStatuses()
+            {
+
+                Type type = typeof(IDAL.DO.DroneStatuses);
+
+                Array values = type.GetEnumValues();
+                //Array values = Enum.GetValues(type);
+                int index = r.Next(values.Length);
+                IDAL.DO.DroneStatuses value = (IDAL.DO.DroneStatuses)values.GetValue(index);
+                return value;
             }
         }
 
