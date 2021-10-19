@@ -24,10 +24,10 @@ namespace DalObject
             {
                 drones[i] = new(
                     r.Next(0, 1000),
-                  ( r.Next(0, 25))+'A',
-                   ,
-                    r.NextDouble( ),
-                     r.Next(0, 100));
+                Convert.ToString( 'A')+(r.Next(0, 25)),
+                  IDAL.DO.WeightCategories.Heavy,
+                   IDAL.DO.DroneStatuses.Available,
+                     r.NextDouble());
                 Config.dronesIndex++;
             }
            
