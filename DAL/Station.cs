@@ -15,7 +15,14 @@ namespace IDAL
             public double Longitude { get; set; }
             public double Lattitude { get; set; }
             public int ChargeSlots { get; set; }
-
+            public Station(int _id, int _name, double _Longitude, double _Lattitude,int _chargeSlots)
+            {
+                Id = _id;
+                Name = _name;
+                Longitude = _Longitude;
+                Lattitude = _Lattitude;
+                ChargeSlots = _chargeSlots;
+            }
         }
 
     }

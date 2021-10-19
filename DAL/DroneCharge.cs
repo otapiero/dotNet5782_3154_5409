@@ -10,5 +10,10 @@ namespace DAL
     {
         public int DroneId { get; set; }
         public int StationId { get; set; }
+        public DroneCharge(int _droneId, int _stationId)
+        {
+            DroneId = _droneId;
+            StationId = _stationId;
+        }
     }
 }
