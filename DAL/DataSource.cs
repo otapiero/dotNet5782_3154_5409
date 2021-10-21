@@ -26,7 +26,7 @@ namespace DalObject
                     r.Next(0, 1000),
                 Convert.ToString( 'A')+(r.Next(0, 25)),
                   GetRandomWeight(),
-                   IDAL.DO.DroneStatuses.Available,
+                  GetRandomDroneStatuses(),
                      r.NextDouble());
                 Config.dronesIndex++;
             }

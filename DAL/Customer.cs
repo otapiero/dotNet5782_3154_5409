@@ -19,7 +19,10 @@ namespace IDAL
                 Longitude = _Longitude;
                 Lattitude = _Lattitude;
             }
-
+            public override string ToString()
+            {
+                return "Id: " + Id + " Name: " + Name + " Phone: " + Phone + " Longitude: " + Longitude + " Lattitude: " + Lattitude;
+            }
 
 
 

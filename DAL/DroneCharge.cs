@@ -15,5 +15,9 @@ namespace DAL
             DroneId = _droneId;
             StationId = _stationId;
         }
+        public override string ToString()
+        {
+            return "Drone id: " + DroneId + " Station id: " + StationId;
+        }
     }
 }
