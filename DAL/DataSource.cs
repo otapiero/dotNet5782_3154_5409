@@ -8,48 +8,52 @@ namespace DalObject
 {
    internal class DataSource
     {
-        IDAL.DO.Drone[] drones = new IDAL.DO.Drone[10];
-        IDAL.DO.Station[] stations = new IDAL.DO.Station[5];
-        IDAL.DO.Customer[] customers = new IDAL.DO.Customer[100];
-        IDAL.DO.Parcel[] parcels = new IDAL.DO.Parcel[1000];
+
+        internal static List<IDAL.DO.Drone> drones = new List<IDAL.DO.Drone>();
+        internal static List<IDAL.DO.Station> stations = new List<IDAL.DO.Station>();
+        internal static List<IDAL.DO.Customer> customers = new List<IDAL.DO.Customer>();
+        internal static List<IDAL.DO.Parcel> parcels = new List<IDAL.DO.Parcel>();
+    
         static Random r = new();
         internal static void Initialize()
         {
-           
-            int numDrones = r.Next(5,10) ;
+
+
+            int numDrones = r.Next(5, 10);
             int numCustomers = r.Next(10, 100);
             int numParcels = r.Next(10, 1000);
             int numStations = r.Next(2, 5);
             for (int i = 0; i < numDrones; i++)
             {
-                drones[i] = new(GetRandomId(), GetRandomName(), GetRandomWeight(),
-                  GetRandomDroneStatuses(), r.NextDouble() * 100);
-                Config.dronesIndex++;
+
+                drones.Add(new IDAL.DO.Drone(GetRandomId(), GetRandomName(), (IDAL.DO.WeightCategories)r.Next(0, 3),
+                  (IDAL.DO.DroneStatuses)r.Next(0, 3), r.NextDouble() * 100));
+
             }
-           
+
             for (int i = 0; i < numCustomers; i++)
             {
-                customers[i] = new(GetRandomId(),GetRandomName(),
-                    GetRandomPhone(),r.NextDouble()*100, r.NextDouble() * 100);
-                Config.customersIndex++;
+                customers.Add(new((i+1)*1353, GetRandomName(),
+                    GetRandomPhone(), r.NextDouble() * 100, r.NextDouble() * 100));
+
             }
             for (int i = 0; i < numParcels; i++)
             {
-                parcels[i] = new(GetRandomId(), GetRandomId(), GetRandomId(), GetRandomWeight(),
-                    GetRandomPriorities(), DateTime.Now,GetRandomId(), DateTime.Now, DateTime.Now, DateTime.Now) ;
-                Config.parcelsIndex++;
+                parcels.Add(new(GetRandomId(), GetRandomId(), GetRandomId(), (IDAL.DO.WeightCategories)r.Next(0, 3),
+                    (IDAL.DO.Priorities)r.Next(0, 3), DateTime.Now, GetRandomId(), DateTime.Now, DateTime.Now, DateTime.Now));
+
             }
-            for (int i = 0; i <  numStations; i++)
+            for (int i = 0; i < numStations; i++)
             {
-                stations[i] = new(GetRandomId(),GetRandomId(), r.NextDouble() * 100,
-                    r.NextDouble() * 100,r.Next(0,101));
-                Config.stationsIndex++;
+                stations.Add(new(GetRandomId(), GetRandomId(), r.NextDouble() * 100,
+                    r.NextDouble() * 100, r.Next(0, 101)));
+
             }
-            static  string GetRandomPhone()
+            static string GetRandomPhone()
             {
                 string phone = "058";
-                
-                string[] numbers = {"0123465789" };
+
+                string[] numbers = { "0123465789" };
                 int index;
                 for (int i = 0; i < 8; i++)
                 {
@@ -76,42 +80,11 @@ namespace DalObject
                 }
                 return name;
             }
-            static  IDAL.DO.Priorities GetRandomPriorities()
-            {  
-                Type type = typeof(IDAL.DO.Priorities);
-                Array values = type.GetEnumValues();
-              
-                int index = r.Next(values.Length);
-                IDAL.DO.Priorities value = (IDAL.DO.Priorities)values.GetValue(index);
-                return value;
-            }
-            static IDAL.DO.WeightCategories GetRandomWeight()
-            {
-                Type type = typeof(IDAL.DO.WeightCategories);
-                Array values = type.GetEnumValues();
-              
-                int index = r.Next(values.Length);
-                IDAL.DO.WeightCategories value = (IDAL.DO.WeightCategories)values.GetValue(index);
-                return value;
-            }
-            static IDAL.DO.DroneStatuses GetRandomDroneStatuses()
-            {
-
-                Type type = typeof(IDAL.DO.DroneStatuses);
-                Array values = type.GetEnumValues();
-                
-                int index = r.Next(values.Length);
-                IDAL.DO.DroneStatuses value = (IDAL.DO.DroneStatuses)values.GetValue(index);
-                return value;
-            }
         }
-
+            
         internal class Config
         {
-            internal static int dronesIndex = 0;
-            internal static int stationsIndex = 0;
-            internal static int customersIndex = 0;
-            internal static int parcelsIndex = 0;
+            
             internal static int IdDefault = 0;
         }
     }
