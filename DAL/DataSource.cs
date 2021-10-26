@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DalObject
 {
-   internal class DataSource
+   internal static class DataSource
     {
         
         
@@ -35,7 +35,7 @@ namespace DalObject
 
             for (int i = 0; i < numCustomers; i++)
             {
-                customers.Add(new((i+1)*1353, GetRandomName(),
+                customers.Add(new(Config.IdDefault++, GetRandomName(),
                     GetRandomPhone(), r.NextDouble() * 100, r.NextDouble() * 100));
 
             }
