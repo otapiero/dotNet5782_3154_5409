@@ -15,14 +15,14 @@ namespace IDAL
             public WeightCategories MaxWheight{ get; set; }
             public DroneStatuses Status{ get; set; }
             public double Battery { get; set; }
-            public Drone(int _id, string _model, WeightCategories _maxWheight, DroneStatuses _status, double _battery)
+            /*public Drone(int _id, string _model, WeightCategories _maxWheight, DroneStatuses _status, double _battery)
             {
                 Id = _id;
                 Model = _model;
                 MaxWheight = _maxWheight;
                 Status = _status;
                 Battery = _battery;
-            }
+            }*/
 
         }
 

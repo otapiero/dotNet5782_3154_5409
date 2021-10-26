@@ -18,39 +18,63 @@ namespace DalObject
         internal static List<IDAL.DO.DroneCharge> DroneCharges = new List<IDAL.DO.DroneCharge>();
 
         static Random r = new();
-        /*internal static void Initialize()
+        internal static void Initialize()
         {
 
-
+            
             int numDrones = r.Next(5, 10);
             int numCustomers = r.Next(10, 100);
             int numParcels = r.Next(10, 1000);
             int numStations = r.Next(2, 5);
             for (int i = 0; i < numDrones; i++)
             {
-
-                drones.Add(new IDAL.DO.Drone(GetRandomId(), GetRandomName(), (IDAL.DO.WeightCategories)r.Next(0, 3),
-                  (IDAL.DO.DroneStatuses)r.Next(0, 3), r.NextDouble() * 100));
-
+                IDAL.DO.Drone newDrone = new IDAL.DO.Drone();
+                newDrone.Id = Config.idObject++;
+                newDrone.Model = GetRandomName();
+                newDrone.MaxWheight = (IDAL.DO.WeightCategories)r.Next(0, 3);
+                newDrone.Status = (IDAL.DO.DroneStatuses)r.Next(0, 3);
+                newDrone.Battery= r.NextDouble() * 100;
+                drones.Add(newDrone);
             }
 
             for (int i = 0; i < numCustomers; i++)
             {
-                customers.Add(new(Config.IdDefault++, GetRandomName(),
-                    GetRandomPhone(), r.NextDouble() * 100, r.NextDouble() * 100));
+                IDAL.DO.Customer newCustomer = new IDAL.DO.Customer();
+                newCustomer.Id = Config.IdDefault++;
+                newCustomer.Name = GetRandomName();
+                newCustomer.Phone = GetRandomPhone();
+                newCustomer.Longitude = r.NextDouble() * 100;
+                newCustomer.Lattitude = r.NextDouble() * 100;
+                customers.Add(newCustomer);
 
             }
             for (int i = 0; i < numParcels; i++)
             {
-                parcels.Add(new(GetRandomId(), GetRandomId(), GetRandomId(), (IDAL.DO.WeightCategories)r.Next(0, 3),
-                    (IDAL.DO.Priorities)r.Next(0, 3), DateTime.Now, GetRandomId(), DateTime.Now, DateTime.Now, DateTime.Now));
+             
+                IDAL.DO.Parcel newParcel = new IDAL.DO.Parcel();
+                newParcel.Id = Config.idObject++;
+                newParcel.Sender = r.Next(1, numCustomers);
+                newParcel.TargetId = r.Next(1, numCustomers);
+                newParcel.Wheight = (IDAL.DO.WeightCategories)r.Next(0, 3);
+                newParcel.Priority = (IDAL.DO.Priorities)r.Next(0, 3);
+                newParcel.Requsted = DateTime.Now;
+                newParcel.DroneId = r.Next(1, numDrones);
+                newParcel.Scheduled = DateTime.Now;
+                newParcel.PickedUp = DateTime.Now;
+                newParcel.Delivered = DateTime.Now;
+                parcels.Add(newParcel);
 
             }
             for (int i = 0; i < numStations; i++)
             {
-                stations.Add(new(GetRandomId(), GetRandomId(), r.NextDouble() * 100,
-                    r.NextDouble() * 100, r.Next(0, 101)));
-
+             
+                IDAL.DO.Station newStation = new IDAL.DO.Station();
+                newStation.Id = Config.idObject++;
+                newStation.Name = GetRandomName();
+                newStation.Longitude = r.NextDouble() * 100;
+                newStation.Lattitude = r.NextDouble() * 100;
+                newStation.ChargeSlots = r.Next(0, 101);
+                stations.Add(newStation);
             }
             static string GetRandomPhone()
             {
@@ -65,11 +89,7 @@ namespace DalObject
                 }
                 return phone;
             }
-            static int GetRandomId()
-            {
-                int id = r.Next(100000, 999999);
-                return id;
-            }
+            
             static string GetRandomName()
             {
                 string name = "A" + (r.Next(0, 26));
@@ -83,11 +103,11 @@ namespace DalObject
                 }
                 return name;
             }
-        }*/
+        }
             
         internal class Config
         {
-            
+            internal static int idObject = 0;
             internal static int IdDefault = 1;
         }
     }

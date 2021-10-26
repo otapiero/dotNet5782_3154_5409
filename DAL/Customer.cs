@@ -11,18 +11,18 @@ namespace IDAL
             public string Phone { get; set; }
             public double Longitude { get; set; }
             public double Lattitude { get; set;}
-            public Customer(int _id, string _Name, string _Phone, double _Longitude, double _Lattitude)
+            /*public Customer(int _id, string _Name, string _Phone, double _Longitude, double _Lattitude)
             {
                 Id = _id;
                 Name = _Name;
                 Phone = _Phone;
                 Longitude = _Longitude;
                 Lattitude = _Lattitude;
-            }
+            }*/
            
             public override string ToString()
             {
-                return "Id: " + Id + "\nName: " + Name + " Phone: " + Phone + " Longitude: " + Longitude + " Lattitude: " + Lattitude;
+                return "Id: " + Id + "\nName: " + Name + "\nPhone: " + Phone + "\nLongitude: " + Longitude + "\nLattitude: " + Lattitude;
             }
 
 
