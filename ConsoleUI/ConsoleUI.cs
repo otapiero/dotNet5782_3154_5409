@@ -43,10 +43,10 @@ namespace ConsoleUI
 
         static void AddMenu()
         {
-            string choise;
-            int id, name, chargeSlot, wheigt, status, Priority, battery, senderId, targetId, droneId;
+            string choise ;
+            int id,  chargeSlot, wheigt, status, Priority, battery, senderId, targetId;
             double longattitude, lattitude;
-            string model, stringName, phone;
+            string model, stringName, name, phone;
 
             Console.WriteLine("chose an option:\n a to add a base station.\n b to add a drone.\n" +
                 " c to add a costumer.\n d to add a parcel.\n e to return to Main menu.\n" + "Enter your choise.");
@@ -57,7 +57,7 @@ namespace ConsoleUI
                 case "a":
                     Console.WriteLine("Enter new Station details: id ,name,Longitude,Lattitude and ChargeSlots. ");
                     int.TryParse(Console.ReadLine(), out id);
-                    int.TryParse(Console.ReadLine(), out name);
+                    name= Console.ReadLine();
                     double.TryParse(Console.ReadLine(), out longattitude);
                     double.TryParse(Console.ReadLine(), out lattitude);
                     int.TryParse(Console.ReadLine(), out chargeSlot);

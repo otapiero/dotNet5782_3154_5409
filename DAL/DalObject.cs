@@ -11,7 +11,7 @@ namespace DalObject
     {
         public DalObject()
         {
-            //DataSource.Initialize();
+            DataSource.Initialize();
         }
         //search by id
         public IDAL.DO.Customer SearchCostumer(int id)
@@ -53,9 +53,9 @@ namespace DalObject
         public void AddNewDrone(string _model,int _MaxWheight, int _status, double _battery)
         {
             int _id = DataSource.Config.IdDefault++;
-            DataSource.drones.Add(new IDAL.DO.Drone(_id, _model,(IDAL.DO.WeightCategories) _MaxWheight, (IDAL.DO.DroneStatuses)_status, _battery));
+            DataSource.drones.Add(new IDAL.DO.Drone(_id, _model,(IDAL.DO.WeightCategories)_MaxWheight, (IDAL.DO.DroneStatuses)_status, _battery));
         }
-        public void AddNewStation(int _id, int _name, double _Longitude, double _Lattitude, int _chargeSlots)
+        public void AddNewStation(int _id, string _name, double _Longitude, double _Lattitude, int _chargeSlots)
         {
             DataSource.stations.Add(new IDAL.DO.Station(_id,_name, _Longitude,  _Lattitude, _chargeSlots));
         }

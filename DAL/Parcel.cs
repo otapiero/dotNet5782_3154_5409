@@ -22,7 +22,7 @@ namespace IDAL
             public DateTime PickedUp { get; set; }
             public DateTime Delivered { get; set; }
 
-           /*
+           
             public Parcel(int _Id, int _Sender, int _TargetId, WeightCategories _Wheight, Priorities _Priority, DateTime _Requsted, int _DroneId, DateTime _Scheduled, DateTime _PickedUp, DateTime _Delivered)
             {
                 Id = _Id;
@@ -35,7 +35,7 @@ namespace IDAL
                 Scheduled = _Scheduled;
                 PickedUp = _PickedUp;
                 Delivered = _Delivered;
-            }*/
+            }
             public override string ToString()
             {
                 return "Id: " + Id + "\nSender: " + Sender + "\nTargetId: " + TargetId + "\nWheight: " + Wheight +
