@@ -70,7 +70,7 @@ namespace DalObject
             DataSource.parcels.Add(new IDAL.DO.Parcel( _Id,  _Sender,  _TargetId, (IDAL.DO.WeightCategories) _Wheight, (IDAL.DO.Priorities) _Priority,  _Requsted,  _DroneId, _Requsted, _Requsted, _Requsted));
         }
         //update items
-        public void ConnectDroneToParcel(int idParcel)
+        public void ConnectParcelToDrone(int idParcel)
         {
             IDAL.DO.Drone find = new IDAL.DO.Drone();
             if (DataSource.drones.Exists(x => x.Status.Equals(IDAL.DO.DroneStatuses.Available)))
@@ -82,18 +82,45 @@ namespace DalObject
             }
 
         }
-        public void ConnectDroneToParcel1(int idParcel)
+        public void ParceCollectionByDrone(int idParcel)
         {
-            IDAL.DO.Drone find = new IDAL.DO.Drone();
-            if (DataSource.drones.Exists(x => x.Status.Equals(IDAL.DO.DroneStatuses.Available)))
+            IDAL.DO.Parcel pocket = SearchParcel(idParcel);
+            if (pocket.Id>0)
             {
-                find = DataSource.drones.Find(x => x.Status.Equals(IDAL.DO.DroneStatuses.Available));
-                find.Status = IDAL.DO.DroneStatuses.Delivery;
-                IDAL.DO.Parcel pocket = SearchParcel(idParcel);
-                pocket.DroneId = find.Id;
-                pocket.Scheduled = DateTime.Now;
+                pocket.PickedUp = DateTime.Now;
             }
 
+        }
+        public void DeliveryParcelToCustomer(int idParcel)
+        {
+            IDAL.DO.Parcel pocket = SearchParcel(idParcel);
+            if (pocket.Id > 0)
+            {
+                pocket.Delivered = DateTime.Now;
+            }
+
+        }
+        public void SendDroneToCharge(int idDrone, int idStation)
+        {
+            IDAL.DO.Drone find = SearchDrone(idDrone);
+            if (find.Id > 0)
+            {
+                find.Battery += 1;
+                find.Status = IDAL.DO.DroneStatuses.Maintenace;
+                DataSource.DroneCharges.Add(new IDAL.DO.DroneCharge(idDrone, idStation));
+            }
+        }
+        public void ReleseDroneFromCharge(int idDrone)
+        {
+            IDAL.DO.Drone find = SearchDrone(idDrone);
+            if (find.Id > 0)
+            {
+               
+                find.Status = IDAL.DO.DroneStatuses.Available;
+                IDAL.DO.DroneCharge relese = new IDAL.DO.DroneCharge();
+                relese = DataSource.DroneCharges.Find(x => x.DroneId.Equals(idDrone));
+                DataSource.DroneCharges.Remove(relese);
+            }
         }
         //view lists
         public List<IDAL.DO.Station> AllStation()

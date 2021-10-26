@@ -14,8 +14,15 @@ namespace ConsoleUI
 
             while (choise != "e")
             {
-                Console.WriteLine("chose an option:\n a to open the ADD menu.\n b to open the updet menu.\n c to open the display menu.\n" +
-                " d to the list wiew option.\n e to exit.\n" + "Enter your choise:");
+                Console.WriteLine(
+                    "chose an option:\n " +
+                    "a to open the ADD menu.\n " +
+                    "b to open the updet menu.\n " +
+                    "c to open the display menu.\n" +
+                    "d to the list wiew option.\n" +
+                    "e to exit.\n" + 
+                    "Enter your choise:"
+                    );
                 choise = Console.ReadLine();
                 switch (choise)
                 {
