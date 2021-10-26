@@ -11,7 +11,7 @@ namespace DalObject
     {
         public DalObject()
         {
-            DataSource.Initialize();
+            //DataSource.Initialize();
         }
         //search by id
         public IDAL.DO.Customer SearchCostumer(int id)
@@ -50,10 +50,10 @@ namespace DalObject
             return finded;
         }
         //Add items
-        public void AddNewDrone(string _model,IDAL.DO.WeightCategories _MaxWheight, IDAL.DO.DroneStatuses _status, double _battery)
+        public void AddNewDrone(string _model,int _MaxWheight, int _status, double _battery)
         {
             int _id = DataSource.Config.IdDefault++;
-            DataSource.drones.Add(new IDAL.DO.Drone(_id, _model, _MaxWheight, _status, _battery));
+            DataSource.drones.Add(new IDAL.DO.Drone(_id, _model,(IDAL.DO.WeightCategories) _MaxWheight, (IDAL.DO.DroneStatuses)_status, _battery));
         }
         public void AddNewStation(int _id, int _name, double _Longitude, double _Lattitude, int _chargeSlots)
         {
@@ -64,10 +64,10 @@ namespace DalObject
             
             DataSource.customers.Add(new IDAL.DO.Customer(_id,  _Name,_Phone,  _Longitude,_Lattitude));
         }
-        public void AddNewParcel(int _Id, int _Sender, int _TargetId, IDAL.DO.WeightCategories _Wheight, IDAL.DO.Priorities _Priority, int _DroneId)
+        public void AddNewParcel(int _Id, int _Sender, int _TargetId, int _Wheight, int _Priority, int _DroneId)
         {
             DateTime _Requsted = DateTime.Now;
-            DataSource.parcels.Add(new IDAL.DO.Parcel( _Id,  _Sender,  _TargetId,  _Wheight,  _Priority,  _Requsted,  _DroneId, _Requsted, _Requsted, _Requsted));
+            DataSource.parcels.Add(new IDAL.DO.Parcel( _Id,  _Sender,  _TargetId, (IDAL.DO.WeightCategories) _Wheight, (IDAL.DO.Priorities) _Priority,  _Requsted,  _DroneId, _Requsted, _Requsted, _Requsted));
         }
         //update items
         public void ConnectDroneToParcel(int idParcel)

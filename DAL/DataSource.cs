@@ -17,7 +17,7 @@ namespace DalObject
         internal static List<IDAL.DO.Parcel> parcels = new List<IDAL.DO.Parcel>();
     
         static Random r = new();
-        internal static void Initialize()
+        /*internal static void Initialize()
         {
 
 
@@ -82,7 +82,7 @@ namespace DalObject
                 }
                 return name;
             }
-        }
+        }*/
             
         internal class Config
         {
