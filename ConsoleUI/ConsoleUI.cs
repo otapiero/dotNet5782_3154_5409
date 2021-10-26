@@ -6,7 +6,7 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("chose an option:/n A to ADD anew ");
           
             
         }

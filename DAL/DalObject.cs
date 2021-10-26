@@ -8,9 +8,18 @@ namespace DalObject
 {
     public class DalObject
     {
-        DalObject()
+
+
+
+        public DalObject()
         {
             DataSource.Initialize();
         }
+
+
+
+
+
+
     }
 }
