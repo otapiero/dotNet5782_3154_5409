@@ -13,7 +13,7 @@ namespace DalObject
         IDAL.DO.Customer[] customers = new IDAL.DO.Customer[100];
         IDAL.DO.Parcel[] parcels = new IDAL.DO.Parcel[1000];
         static Random r = new();
-        internal void Initialize()
+        internal static void Initialize()
         {
            
             int numDrones = r.Next(5,10) ;
@@ -22,46 +22,74 @@ namespace DalObject
             int numStations = r.Next(2, 5);
             for (int i = 0; i < numDrones; i++)
             {
-                drones[i] = new(
-                    r.Next(0, 1000),
-                Convert.ToString( 'A')+(r.Next(0, 25)),
-                  GetRandomWeight(),
-                  GetRandomDroneStatuses(),
-                     r.NextDouble());
+                drones[i] = new(GetRandomId(), GetRandomName(), GetRandomWeight(),
+                  GetRandomDroneStatuses(), r.NextDouble() * 100);
                 Config.dronesIndex++;
             }
            
             for (int i = 0; i < numCustomers; i++)
             {
-                customers[i] = new();
+                customers[i] = new(GetRandomId(),GetRandomName(),
+                    GetRandomPhone(),r.NextDouble()*100, r.NextDouble() * 100);
+                Config.customersIndex++;
             }
             for (int i = 0; i < numParcels; i++)
             {
-                parcels[i] = new();
+                parcels[i] = new(GetRandomId(), GetRandomId(), GetRandomId(), GetRandomWeight(),
+                    GetRandomPriorities(), DateTime.Now,GetRandomId(), DateTime.Now, DateTime.Now, DateTime.Now) ;
+                Config.parcelsIndex++;
             }
             for (int i = 0; i <  numStations; i++)
             {
-                stations[i] = new();
+                stations[i] = new(GetRandomId(),GetRandomId(), r.NextDouble() * 100,
+                    r.NextDouble() * 100,r.Next(0,101));
+                Config.stationsIndex++;
             }
-
-            static  IDAL.DO.Priorities GetRandomPriorities()
+            static  string GetRandomPhone()
             {
+                string phone = "058";
                 
-                Type type = typeof(IDAL.DO.Priorities);
+                string[] numbers = {"0123465789" };
+                int index;
+                for (int i = 0; i < 8; i++)
+                {
+                    index = r.Next(0, 11);
+                    phone += numbers[index];
+                }
+                return phone;
+            }
+            static int GetRandomId()
+            {
+                int id = r.Next(100000, 999999);
+                return id;
+            }
+            static string GetRandomName()
+            {
+                string name = "A" + (r.Next(0, 26));
 
+                string[] letters = { "azertyuiopqsdfghjklmwxcvbn" };
+                int index;
+                for (int i = 0; i < 4; i++)
+                {
+                    index = r.Next(0, 26);
+                    name += letters[index];
+                }
+                return name;
+            }
+            static  IDAL.DO.Priorities GetRandomPriorities()
+            {  
+                Type type = typeof(IDAL.DO.Priorities);
                 Array values = type.GetEnumValues();
-                //Array values = Enum.GetValues(type);
+              
                 int index = r.Next(values.Length);
                 IDAL.DO.Priorities value = (IDAL.DO.Priorities)values.GetValue(index);
                 return value;
             }
             static IDAL.DO.WeightCategories GetRandomWeight()
             {
-
                 Type type = typeof(IDAL.DO.WeightCategories);
-
                 Array values = type.GetEnumValues();
-                //Array values = Enum.GetValues(type);
+              
                 int index = r.Next(values.Length);
                 IDAL.DO.WeightCategories value = (IDAL.DO.WeightCategories)values.GetValue(index);
                 return value;
@@ -70,9 +98,8 @@ namespace DalObject
             {
 
                 Type type = typeof(IDAL.DO.DroneStatuses);
-
                 Array values = type.GetEnumValues();
-                //Array values = Enum.GetValues(type);
+                
                 int index = r.Next(values.Length);
                 IDAL.DO.DroneStatuses value = (IDAL.DO.DroneStatuses)values.GetValue(index);
                 return value;
