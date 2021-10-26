@@ -8,7 +8,9 @@ namespace DalObject
 {
    internal class DataSource
     {
-
+        
+        
+        internal static List<IDAL.DO.DroneCharge> drone = new List<IDAL.DO.DroneCharge>();
         internal static List<IDAL.DO.Drone> drones = new List<IDAL.DO.Drone>();
         internal static List<IDAL.DO.Station> stations = new List<IDAL.DO.Station>();
         internal static List<IDAL.DO.Customer> customers = new List<IDAL.DO.Customer>();
