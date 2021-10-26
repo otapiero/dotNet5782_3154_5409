@@ -95,7 +95,43 @@ namespace DalObject
             }
 
         }
-
+        //view lists
+        public List<IDAL.DO.Station> AllStation()
+        {
+            List<IDAL.DO.Station> allStations = new List<IDAL.DO.Station>();
+            foreach(var t in DataSource.stations)
+            {
+                allStations.Add(t);
+            }
+            return allStations;
+        }
+        public List<IDAL.DO.Drone> AllDrones()
+        {
+            List<IDAL.DO.Drone> allDrones = new List<IDAL.DO.Drone>();
+            foreach (var t in DataSource.drones)
+            {
+                allDrones.Add(t);
+            }
+            return allDrones;
+        }
+        public List<IDAL.DO.Customer> AllCustomers()
+        {
+            List<IDAL.DO.Customer> allCustomers = new List<IDAL.DO.Customer>();
+            foreach (var t in DataSource.customers)
+            {
+                allCustomers.Add(t);
+            }
+            return allCustomers;
+        }
+        public List<IDAL.DO.Parcel> AllParcels()
+        {
+            List<IDAL.DO.Parcel> allParcels = new List<IDAL.DO.Parcel>();
+            foreach (var t in DataSource.parcels)
+            {
+                allParcels.Add(t);
+            }
+            return allParcels;
+        }
 
     }
 }
