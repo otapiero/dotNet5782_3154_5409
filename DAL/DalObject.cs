@@ -132,6 +132,17 @@ namespace DalObject
             }
             return allParcels;
         }
+        public List<IDAL.DO.Parcel> NotAssociatedParcels()
+        {
+            List<IDAL.DO.Parcel> notAssociatedParcels = new List<IDAL.DO.Parcel>();
+            foreach(var t in DataSource.parcels)
+            {
+                if (t.DroneId == 0)
+                    notAssociatedParcels.Add(t);
+            }
+
+            return notAssociatedParcels;
+        }
 
     }
 }

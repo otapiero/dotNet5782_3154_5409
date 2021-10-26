@@ -15,7 +15,8 @@ namespace DalObject
         internal static List<IDAL.DO.Station> stations = new List<IDAL.DO.Station>();
         internal static List<IDAL.DO.Customer> customers = new List<IDAL.DO.Customer>();
         internal static List<IDAL.DO.Parcel> parcels = new List<IDAL.DO.Parcel>();
-    
+        internal static List<IDAL.DO.DroneCharge> DroneCharges = new List<IDAL.DO.DroneCharge>();
+
         static Random r = new();
         /*internal static void Initialize()
         {
@@ -87,7 +88,7 @@ namespace DalObject
         internal class Config
         {
             
-            internal static int IdDefault = 0;
+            internal static int IdDefault = 1;
         }
     }
 }

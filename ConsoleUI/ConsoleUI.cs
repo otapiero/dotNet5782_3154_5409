@@ -178,7 +178,13 @@ namespace ConsoleUI
                     }
                      break;
                 case "e":
-                    ; break;
+                    Console.WriteLine("All the parcels:");
+                    List<IDAL.DO.Parcel> notAssociatedParcels = options.NotAssociatedParcels();
+                    foreach (var t in notAssociatedParcels)
+                    {
+                        Console.WriteLine(t.ToString());
+                    }
+                    break;
                 case "f":
                     ; break;
                 case "g":
