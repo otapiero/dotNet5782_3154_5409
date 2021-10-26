@@ -8,7 +8,7 @@ namespace DalObject
 {
     public class DalObject
     {
-
+       
 
 
         public DalObject()
@@ -16,6 +16,12 @@ namespace DalObject
             DataSource.Initialize();
         }
 
+        public IDAL.DO.Parcel Search(int _id)
+        {
+            IDAL.DO.Parcel finded = DataSource.parcels.Find(x => x.Id.Equals(  _id));
+
+            return finded;
+        }
 
 
 
