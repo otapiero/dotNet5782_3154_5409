@@ -38,7 +38,7 @@ namespace IDAL
             }
             public override string ToString()
             {
-                return "Id: " + Id + " Sender: " + Sender + " TargetId: " + TargetId + " Wheight: " + Wheight +
+                return "Id: " + Id + " SenderId: " + Sender + " TargetId: " + TargetId + " Wheight: " + Wheight +
                     " Priority: " + Priority + " Requsted: " + Requsted + " DroneId: " + DroneId + " Scheduled: " +
                     Scheduled + " PickedUp: " + PickedUp + " Delivered: " + Delivered;
             }

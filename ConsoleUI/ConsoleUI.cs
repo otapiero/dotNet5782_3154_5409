@@ -18,8 +18,8 @@ namespace ConsoleUI
                     "chose an option:\n " +
                     "a to open the ADD menu.\n " +
                     "b to open the updet menu.\n " +
-                    "c to open the display menu.\n" +
-                    "d to the list wiew option.\n" +
+                    "c to open the display menu.\n " +
+                    "d to the list wiew option.\n " +
                     "e to exit.\n" + 
                     "Enter your choise:"
                     );
@@ -73,6 +73,7 @@ namespace ConsoleUI
                     options.AddNewDrone(model, wheigt, status, battery);
                     ; break;
                 case "c":
+                    Console.WriteLine($"Enter new customer details:\n id, name,phone,longattitude and lattitude.");
                     int.TryParse(Console.ReadLine(), out id);
                     stringName = Console.ReadLine();
                     phone = Console.ReadLine();
@@ -81,13 +82,13 @@ namespace ConsoleUI
                     options.AddNewCustomer(id, stringName, phone, longattitude, lattitude);
                     ; break;
                 case "d":
-                    int.TryParse(Console.ReadLine(), out id);
+                    Console.WriteLine("Enter new parcel details:\n SenderId,TargetId, wheigt between 0-2" +
+                        " and Priority between 0-2.");
                     int.TryParse(Console.ReadLine(), out senderId);
                     int.TryParse(Console.ReadLine(), out targetId);
                     int.TryParse(Console.ReadLine(), out wheigt);
                     int.TryParse(Console.ReadLine(), out Priority);
-                    int.TryParse(Console.ReadLine(), out droneId);
-                    options.AddNewParcel(id, senderId, targetId, wheigt, Priority, droneId); break;
+                    options.AddNewParcel(0, senderId, targetId, wheigt, Priority,0); break;
                 case "e":
                     break;
             }
@@ -97,21 +98,42 @@ namespace ConsoleUI
         static void UpdateMenu()
         {
             string choise;
-            Console.WriteLine("chose an option:\n a to .\n b to .\n" +
-                " c .\n d to send a drone to charge.\n e to relase a drone from charge.\n f to return to Main menu.\n" +
-                "Enter your choise.");
+            int id, stationId;
+            Console.WriteLine("chose an option:\n a to Assign a package to a drone.\n" +
+                " b to collect a package.\n c to deliver a parcel to a customer.\n d to send a drone to a charge station.\n" +
+                " e to relase a drone from the charge station.\n" +
+                " f to return to Main menu.\nEnter your choise.");
             choise = Console.ReadLine();
             switch (choise)
-            {
-
+            { 
                 case "a":
-                    ; break;
+                    Console.WriteLine("Enter the parcel id.");
+                    int.TryParse(Console.ReadLine(),out id);
+                    options.ConnectParcelToDrone(id);
+                     break;
                 case "b":
-                    ; break;
+                    Console.WriteLine("Enter the parcel id.");
+                    int.TryParse(Console.ReadLine(), out id);
+                    options.ParceCollectionByDrone(id);
+                    break;
                 case "c":
-                    ; break;
+                    Console.WriteLine("Enter the parcel id.");
+                    int.TryParse(Console.ReadLine(), out id);
+                    options.DeliveryParcelToCustomer(id);
+                    break;
                 case "d":
-                    ; break;
+                    Console.WriteLine("Enter the drone id.");
+                    int.TryParse(Console.ReadLine(), out id);
+                    Console.WriteLine("chose a stations from the list by the Id.");
+                    Console.WriteLine("All the stations:");
+                    List<IDAL.DO.Station> stations = options.AllStation();
+                    foreach (var t in stations)
+                    {
+                        Console.WriteLine(t.ToString());
+                    }
+                    int.TryParse(Console.ReadLine(), out stationId);
+                    options.SendDroneToCharge(id, stationId);
+                    break;
                 case "e":
                     ; break;
 
@@ -159,7 +181,7 @@ namespace ConsoleUI
                     {
                         Console.WriteLine(t.ToString());
                     }
-                    ; break;
+                    break;
                 case "b":
                     Console.WriteLine("All the drones:");
                     List<IDAL.DO.Drone> drones = options.AllDrones();

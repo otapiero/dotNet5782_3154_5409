@@ -98,7 +98,6 @@ namespace DalObject
             {
                 pocket.Delivered = DateTime.Now;
             }
-
         }
         public void SendDroneToCharge(int idDrone, int idStation)
         {
