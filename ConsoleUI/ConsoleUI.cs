@@ -65,7 +65,7 @@ namespace ConsoleUI
                     options.AddNewStation(id, name, longattitude, lattitude, chargeSlot); break;
                 case "b":
                     Console.WriteLine($"Enter new drone details:\n model maxwheigt between 0-2,status betxeen 0-2 and battery");
-                    int.TryParse(Console.ReadLine(), out id);
+                  
                     model = Console.ReadLine();
                     int.TryParse(Console.ReadLine(), out wheigt);
                     int.TryParse(Console.ReadLine(), out status);

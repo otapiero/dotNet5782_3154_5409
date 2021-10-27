@@ -80,11 +80,11 @@ namespace DalObject
             {
                 string phone = "058";
 
-                string[] numbers = { "0123465789" };
+                string numbers =  "0123465789" ;
                 int index;
                 for (int i = 0; i < 8; i++)
                 {
-                    index = r.Next(0, 11);
+                    index = r.Next(0, 10);
                     phone += numbers[index];
                 }
                 return phone;
@@ -92,15 +92,16 @@ namespace DalObject
             
             static string GetRandomName()
             {
-                string name = "A" + (r.Next(0, 26));
-
-                string[] letters = { "azertyuiopqsdfghjklmwxcvbn" };
                 int index;
+                string name="";
+                string letters = "azertyuiopqsdfghjklmwxcvbn" ;
+               
                 for (int i = 0; i < 4; i++)
                 {
-                    index = r.Next(0, 26);
+                    index = r.Next(0, 25);
                     name += letters[index];
                 }
+             
                 return name;
             }
         }
