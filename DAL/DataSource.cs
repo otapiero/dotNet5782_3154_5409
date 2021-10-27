@@ -31,7 +31,7 @@ namespace DalObject
             for (int i = 0; i < numDrones; i++)
             {
                 IDAL.DO.Drone newDrone = new IDAL.DO.Drone();
-                newDrone.Id = Config.idObject++;
+                newDrone.Id = Config.idDrone++;
                 newDrone.Model = GetRandomName();
                 newDrone.MaxWheight = (IDAL.DO.WeightCategories)r.Next(0, 3);
                 newDrone.Status = (IDAL.DO.DroneStatuses)r.Next(0, 3);
@@ -42,7 +42,7 @@ namespace DalObject
             for (int i = 0; i < numCustomers; i++)
             {
                 IDAL.DO.Customer newCustomer = new IDAL.DO.Customer();
-                newCustomer.Id = Config.IdDefault++;
+                newCustomer.Id = Config.IdRandomCustomer++;
                 newCustomer.Name = GetRandomName();
                 newCustomer.Phone = GetRandomPhone();
                 newCustomer.Longitude = r.NextDouble() * 60;
@@ -55,16 +55,18 @@ namespace DalObject
             {
              
                 IDAL.DO.Parcel newParcel = new IDAL.DO.Parcel();
-                newParcel.Id = Config.idObject++;
+                newParcel.Id = Config.idParcel++;
                 newParcel.Sender = r.Next(1, numCustomers);
                 newParcel.TargetId = r.Next(1, numCustomers);
                 newParcel.Wheight = (IDAL.DO.WeightCategories)r.Next(0, 3);
                 newParcel.Priority = (IDAL.DO.Priorities)r.Next(0, 3);
                 newParcel.Requsted = DateTime.Now;
                 newParcel.DroneId = r.Next(1, numDrones);
-                newParcel.Scheduled = DateTime.Now;
-                newParcel.PickedUp = DateTime.Now;
-                newParcel.Delivered = DateTime.Now;
+                newParcel.Scheduled =  DateTime.Now.AddMinutes(r.Next(60));
+                newParcel.PickedUp = newParcel.Scheduled;
+                newParcel.PickedUp.AddMinutes(r.Next(60));
+                newParcel.Delivered = newParcel.PickedUp;
+                newParcel.Delivered.AddMinutes(r.Next(60));
                 parcels.Add(newParcel);
 
             }
@@ -73,11 +75,11 @@ namespace DalObject
             {
              
                 IDAL.DO.Station newStation = new IDAL.DO.Station();
-                newStation.Id = Config.idObject++;
+                newStation.Id = Config.IdStation++;
                 newStation.Name = GetRandomName();
                 newStation.Longitude = r.NextDouble() * 60;
                 newStation.Lattitude = r.NextDouble() * 60;
-                newStation.ChargeSlots = r.Next(0, 101);
+                newStation.ChargeSlots = r.Next(0, 20);
                 stations.Add(newStation);
             }
             ///<summary>method<c>GetRandomPhone</c> - return random phone</summary>
@@ -113,9 +115,10 @@ namespace DalObject
         //static var for initialize
         internal class Config
         {
-            internal static int idObject = 1;
-            internal static int IdDefault = 1;
-
+            internal static int idParcel = 1;
+            internal static int idDrone = 1;
+            internal static int IdStation = 1;
+            internal static int IdRandomCustomer = 1;
         }
     }
 }

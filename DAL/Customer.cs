@@ -27,8 +27,8 @@ namespace IDAL
             {
                 //The function print detail of the object
                 return "Id: " + Id + "\nName: " + Name + "\nPhone: " + Phone +
-                    "\nLongitude: " + DalObject.DalObject.LongitudeDoubleToString( Longitude) +
-                    "\nLattitude: " + DalObject.DalObject.LatitudeDoubleToString( Lattitude);
+                    "\nLongitude: " + DalObject.Cordinates.LongitudeDoubleToString( Longitude) +
+                    "\nLattitude: " + DalObject.Cordinates.LatitudeDoubleToString( Lattitude);
             }
 
 
