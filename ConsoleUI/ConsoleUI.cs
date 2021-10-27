@@ -55,16 +55,16 @@ namespace ConsoleUI
             {
 
                 case "a":
-                    Console.WriteLine("Enter new Station details: id ,name,Longitude,Lattitude and ChargeSlots. ");
-                    int.TryParse(Console.ReadLine(), out id);
+                    Console.WriteLine("Enter new Station details: name,Longitude,Lattitude and ChargeSlots. ");
+          
                     name= Console.ReadLine();
                     double.TryParse(Console.ReadLine(), out longattitude);
                     double.TryParse(Console.ReadLine(), out lattitude);
                     int.TryParse(Console.ReadLine(), out chargeSlot);
 
-                    options.AddNewStation(id, name, longattitude, lattitude, chargeSlot); break;
+                    options.AddNewStation( name, longattitude, lattitude, chargeSlot); break;
                 case "b":
-                    Console.WriteLine($"Enter new drone details:\n model maxwheigt between 0-2,status betxeen 0-2 and battery");
+                    Console.WriteLine("Enter new drone details:\n model maxwheigt between 0-2,status betxeen 0-2 and battery");
                   
                     model = Console.ReadLine();
                     int.TryParse(Console.ReadLine(), out wheigt);
@@ -73,7 +73,7 @@ namespace ConsoleUI
                     options.AddNewDrone(model, wheigt, status, battery);
                     ; break;
                 case "c":
-                    Console.WriteLine($"Enter new customer details:\n id, name,phone,longattitude and lattitude.");
+                    Console.WriteLine("Enter new customer details:\n id, name,phone,longattitude and lattitude.");
                     int.TryParse(Console.ReadLine(), out id);
                     stringName = Console.ReadLine();
                     phone = Console.ReadLine();
@@ -88,7 +88,7 @@ namespace ConsoleUI
                     int.TryParse(Console.ReadLine(), out targetId);
                     int.TryParse(Console.ReadLine(), out wheigt);
                     int.TryParse(Console.ReadLine(), out Priority);
-                    options.AddNewParcel(0, senderId, targetId, wheigt, Priority,0); break;
+                    options.AddNewParcel( senderId, targetId, wheigt, Priority); break;
                 case "e":
                     break;
             }
@@ -207,7 +207,7 @@ namespace ConsoleUI
                     }
                      break;
                 case "e":
-                    Console.WriteLine("All the parcels:");
+                    Console.WriteLine("Not associated parcels:");
                     List<IDAL.DO.Parcel> notAssociatedParcels = options.NotAssociatedParcels();
                     foreach (var t in notAssociatedParcels)
                     {
@@ -215,7 +215,13 @@ namespace ConsoleUI
                     }
                     break;
                 case "f":
-                    ; break;
+                    Console.WriteLine("list of station with available charging stations:");
+                    List<IDAL.DO.Station> PartOfStations = options.StationWithAvailebalChargePost();
+                        foreach (var t in PartOfStations)
+                        {
+                            Console.WriteLine(t.ToString());
+                        }
+                        break;
                 case "g":
                     ; break;
 

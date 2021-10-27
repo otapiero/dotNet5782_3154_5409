@@ -108,8 +108,9 @@ namespace DalObject
             
         internal class Config
         {
-            internal static int idObject = 0;
+            internal static int idObject = 1;
             internal static int IdDefault = 1;
+
         }
     }
 }
