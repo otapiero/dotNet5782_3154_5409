@@ -90,6 +90,7 @@ namespace ConsoleUI
                     int.TryParse(Console.ReadLine(), out Priority);
                     options.AddNewParcel( senderId, targetId, wheigt, Priority); break;
                 case "e":
+                    
                     break;
             }
             return;
@@ -142,23 +143,40 @@ namespace ConsoleUI
         static void DisplayMenu()
         {
             string choise;
-            Console.WriteLine("chose an option:\n a to .\n b to .\n" +
-                " c .\n d to .\n e to .\n f to .\n" +
+            int id;
+            Console.WriteLine("chose an option:\n a to display a station.\n b to display a drone.\n" +
+                " c to display a customer.\n d to display a parcel.\n e to return to main menu.\n" +
                 "Enter your choise.");
             choise = Console.ReadLine();
             switch (choise)
             {
 
                 case "a":
-                    ; break;
+                    Console.WriteLine("Enter station id.");
+                    int.TryParse(Console.ReadLine(), out id);
+                    IDAL.DO.Station station =options.SearchStation(id);
+                    Console.WriteLine(station.ToString());
+                        break;
                 case "b":
-                    ; break;
+                    Console.WriteLine("Enter drone id.");
+                    int.TryParse(Console.ReadLine(), out id);
+                    IDAL.DO.Drone drone = options.SearchDrone(id);
+                    Console.WriteLine(drone.ToString());
+                    break;
                 case "c":
-                    ; break;
+                    Console.WriteLine("Enter customer id.");
+                    int.TryParse(Console.ReadLine(), out id);
+                    IDAL.DO.Customer customer = options.SearchCustomer(id);
+                    Console.WriteLine(customer.ToString());
+                    break;
                 case "d":
-                    ; break;
+                    Console.WriteLine("Enter parcel id.");
+                    int.TryParse(Console.ReadLine(), out id);
+                    IDAL.DO.Parcel parcel = options.SearchParcel(id);
+                    Console.WriteLine(parcel.ToString());
+                    break;
                 case "e":
-                    ; break;
+                    break;
 
             }
         }

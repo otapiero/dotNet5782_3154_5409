@@ -23,7 +23,12 @@ namespace IDAL
                 Status = _status;
                 Battery = _battery;
             }
+            public override string ToString()
+            {
 
+                return "Id: " + Id + "\nName: " + Model + "\nMaxWheight: " + MaxWheight + "\nStatus: " + Status +
+                    "\nBattery: " + Battery + "\n";
+            }
         }
 
     }

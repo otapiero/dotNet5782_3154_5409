@@ -14,7 +14,7 @@ namespace DalObject
             DataSource.Initialize();
         }
         //search by id
-        public IDAL.DO.Customer SearchCostumer(int id)
+        public IDAL.DO.Customer SearchCustomer(int id)
         {
             IDAL.DO.Customer find= new IDAL.DO.Customer();
             if (DataSource.customers.Exists(x => x.Id.Equals(id)))
@@ -25,12 +25,13 @@ namespace DalObject
         }
         public IDAL.DO.Drone SearchDrone(int id)
         {
-            IDAL.DO.Drone find = new IDAL.DO.Drone();
             if (DataSource.drones.Exists(x => x.Id.Equals(id)))
             {
-                find = DataSource.drones.Find(x => x.Id.Equals(id));
+                IDAL.DO.Drone found = DataSource.drones.Find(x => x.Id.Equals(id));
+                return found;
             }
-            return find;
+            IDAL.DO.Drone notfound = new IDAL.DO.Drone();
+            return notfound;
         }
         public IDAL.DO.Station SearchStation(int id)
         {
@@ -41,13 +42,15 @@ namespace DalObject
             }
             return find;
         }
-        public IDAL.DO.Parcel SearchParcel(int _id)
+        public IDAL.DO.Parcel SearchParcel(int id)
         {
-            IDAL.DO.Parcel finded = new();
-
-            finded = DataSource.parcels.Find(x => x.Id.Equals(_id));
-
-            return finded;
+            if (DataSource.parcels.Exists(x => x.Id.Equals(id)))
+            {
+                IDAL.DO.Parcel found = DataSource.parcels.Find(x => x.Id.Equals(id));
+                return found;
+            }
+            IDAL.DO.Parcel notfound = new IDAL.DO.Parcel();
+            return notfound;
         }
         //Add items
         public void AddNewDrone(string _model,int _MaxWheight, int _status, double _battery)
@@ -76,8 +79,10 @@ namespace DalObject
             {
                 find = DataSource.drones.Find(x => x.Status.Equals(IDAL.DO.DroneStatuses.Available));
                 find.Status = IDAL.DO.DroneStatuses.Delivery;
-                IDAL.DO.Parcel pocket = SearchParcel(idParcel);
+                IDAL.DO.Parcel pocket = new IDAL.DO.Parcel();
+                pocket= SearchParcel(idParcel);
                 pocket.DroneId = find.Id;
+               
             }
 
         }
@@ -88,7 +93,6 @@ namespace DalObject
             if (pocket.Id>0)
             {
                 pocket.PickedUp = DateTime.Now;
-                find.Status = IDAL.DO.DroneStatuses.Available;
             }
 
         }
@@ -97,6 +101,8 @@ namespace DalObject
             IDAL.DO.Parcel pocket = SearchParcel(idParcel);
             if (pocket.Id > 0)
             {
+                IDAL.DO.Drone find = SearchDrone(pocket.Id);
+                find.Status = IDAL.DO.DroneStatuses.Available;
                 pocket.Delivered = DateTime.Now;
             }
         }
