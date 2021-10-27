@@ -5,9 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 namespace ConsoleUI
 {
+    /// <summary>Class main program - Management of a skimmer delivery company  </summary>
     class Program
     {
         static public DalObject.DalObject options = new();
+         /// <summary>method main program - Management of a skimmer delivery company  
+         /// the program running until the user return "e" to exit</summary>
         static void Main(string[] args)
         {
             string choise = "f";
@@ -40,7 +43,8 @@ namespace ConsoleUI
 
             }
         }
-
+        /// <summary>method add menu - Management of add object  
+         /// the user can add base, drone,customer and parcel to the data </summary
         static void AddMenu()
         {
             string choise ;
@@ -96,6 +100,9 @@ namespace ConsoleUI
             return;
 
         }
+        /// <summary>method update menu - Management of update object  
+        /// the user can update Assign a package to a drone, collect a package,deliver a parcel to a customer
+        /// send a drone to a charge station and relase a drone from the charge station</summary
         static void UpdateMenu()
         {
             string choise;
@@ -140,6 +147,8 @@ namespace ConsoleUI
 
             }
         }
+        /// <summary>method display menu - view of display object  
+        /// the user can display a station,  a drone,a customer and a parcel</summary
         static void DisplayMenu()
         {
             string choise;
@@ -180,6 +189,9 @@ namespace ConsoleUI
 
             }
         }
+        /// <summary>method display list menu - view of list display object  
+        /// the user can display station list, drone list, customer list ,parcel list,
+        /// not associated parcels list and view station with available charging stations  </summary
         static void ListViewMenu()
         {
             string choise;

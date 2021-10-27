@@ -2,6 +2,7 @@
 
 namespace IDAL
 {
+
     namespace DO
     {
         ///<summary>struct of customer</summary>

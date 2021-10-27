@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace DalObject
 {
-   static public class Cordinates
+    ///<summary>Class - return Cordinates</summary>
+    static public class Cordinates
     {
+        /// <summary>method <c> LatitudeDoubleToString</c> </summary>
+        /// <param name="Latitude"> get decimal Latitude</param>
+        /// <returns>return new Latitude</returns>
         public static string LatitudeDoubleToString(double Latitude)
         {
             Latitude = Math.Abs(Latitude);
@@ -24,6 +28,9 @@ namespace DalObject
             cordinates += "E";
             return cordinates;
         }
+        /// <summary>method <c> longitudeDoubleToString</c> </summary>
+        /// <param name="longitude"> get decimal longitude</param>
+        /// <returns>return new longitude</returns>
         public static string LongitudeDoubleToString(double longitude)
         {
             longitude = Math.Abs(longitude);

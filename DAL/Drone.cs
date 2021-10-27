@@ -15,7 +15,7 @@ namespace IDAL
             public string Model { get; set; }
             public WeightCategories MaxWheight{ get; set; }
             public DroneStatuses Status{ get; set; }
-            public double Battery { get; set; }
+            public double Battery { get; set;}
             //constructor
             public Drone(int _id, string _model, WeightCategories _maxWheight, DroneStatuses _status, double _battery)
             {

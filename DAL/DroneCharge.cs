@@ -8,11 +8,11 @@ namespace IDAL
 {
     namespace DO
     {
-        ///<summary>struct of DroneCharge</summary>
+        ///<summary>struct of DroneCharge </summary>
         public struct DroneCharge
         {
             public int DroneId { get; set; }
-            public int StationId { get; set; }
+            public int StationId { get; set;}
             //constructor
             public DroneCharge(int _droneId, int _stationId)
             {
