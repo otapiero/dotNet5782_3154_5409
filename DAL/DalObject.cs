@@ -64,7 +64,7 @@ namespace DalObject
         public void AddNewCustomer(int _id, string _Name, string _Phone, double _Longitude, double _Lattitude)
         {
 
-            DataSource.customers.Add(new IDAL.DO.Customer(_id, _Name, _Phone, _Longitude, _Lattitude));
+            DataSource.customers.Add(new IDAL.DO.Customer(_id, _Name, _Phone, _Longitude,  _Lattitude));
         }
         public void AddNewParcel(int _Sender, int _TargetId, int _Wheight, int _Priority)
         {
@@ -204,6 +204,38 @@ namespace DalObject
                     stations.Add(t);
             }
             return stations;
+        }
+        public static string LatitudeDoubleToString(double Latitude)
+        {
+            Latitude = Math.Abs(Latitude);
+            string cordinates = Convert.ToString((int)Latitude) + "°";
+            Latitude -= (int)Latitude;
+            Latitude *= 60;
+            cordinates += Convert.ToString((int)Latitude) + "'";
+            Latitude -= (int)Latitude;
+            Latitude *= 60;
+            cordinates += Convert.ToString((int)Latitude) + ".";
+            Latitude -= (int)Latitude;
+            Latitude *= 1000;
+            cordinates += Convert.ToString((int)Latitude) + "''";
+            cordinates += "E";
+            return cordinates;
+        }
+        public static string LongitudeDoubleToString(double longitude)
+        {
+            longitude = Math.Abs(longitude);
+            string cordinates = Convert.ToString((int)longitude) + "°";
+            longitude -= (int)longitude;
+            longitude *= 60;
+            cordinates += Convert.ToString((int)longitude) + "'";
+            longitude -= (int)longitude;
+            longitude *= 60;
+            cordinates += Convert.ToString((int)longitude) + ".";
+            longitude -= (int)longitude;
+            longitude *= 1000;
+            cordinates += Convert.ToString((int)longitude) + "''";
+            cordinates += "s";
+            return cordinates;
         }
     }
 }

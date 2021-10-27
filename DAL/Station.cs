@@ -27,7 +27,9 @@ namespace IDAL
             public override string ToString()
             {
 
-                return "Id: " + Id + "\nName: " + Name + "\nLongitude: " + Longitude + "\nLattitude: " + Lattitude +
+                return "Id: " + Id + "\nName: " + Name + "\nLongitude: " +
+                    DalObject.DalObject.LongitudeDoubleToString(Longitude) +
+                    "\nLattitude: " + DalObject.DalObject.LatitudeDoubleToString(Lattitude) +
                     "\nChargeSlots: " + ChargeSlots + "\n";
             }
         }

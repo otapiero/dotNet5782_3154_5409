@@ -43,8 +43,8 @@ namespace DalObject
                 newCustomer.Id = Config.IdDefault++;
                 newCustomer.Name = GetRandomName();
                 newCustomer.Phone = GetRandomPhone();
-                newCustomer.Longitude = r.NextDouble() * 100;
-                newCustomer.Lattitude = r.NextDouble() * 100;
+                newCustomer.Longitude = r.NextDouble() * 60;
+                newCustomer.Lattitude =r.NextDouble() * 60;
                 customers.Add(newCustomer);
 
             }
@@ -71,8 +71,8 @@ namespace DalObject
                 IDAL.DO.Station newStation = new IDAL.DO.Station();
                 newStation.Id = Config.idObject++;
                 newStation.Name = GetRandomName();
-                newStation.Longitude = r.NextDouble() * 100;
-                newStation.Lattitude = r.NextDouble() * 100;
+                newStation.Longitude = r.NextDouble() * 60;
+                newStation.Lattitude = r.NextDouble() * 60;
                 newStation.ChargeSlots = r.Next(0, 101);
                 stations.Add(newStation);
             }
