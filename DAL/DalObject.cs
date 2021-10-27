@@ -205,6 +205,5 @@ namespace DalObject
             }
             return stations;
         }
-        
     }
 }

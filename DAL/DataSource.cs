@@ -59,9 +59,11 @@ namespace DalObject
                 newParcel.Priority = (IDAL.DO.Priorities)r.Next(0, 3);
                 newParcel.Requsted = DateTime.Now;
                 newParcel.DroneId = r.Next(1, numDrones);
-                newParcel.Scheduled = DateTime.Now;
-                newParcel.PickedUp = DateTime.Now;
-                newParcel.Delivered = DateTime.Now;
+                newParcel.Scheduled =  DateTime.Now.AddMinutes(r.Next(60));
+                newParcel.PickedUp = newParcel.Scheduled;
+                newParcel.PickedUp.AddMinutes(r.Next(60));
+                newParcel.Delivered = newParcel.PickedUp;
+                newParcel.Delivered.AddMinutes(r.Next(60));
                 parcels.Add(newParcel);
 
             }
@@ -73,7 +75,7 @@ namespace DalObject
                 newStation.Name = GetRandomName();
                 newStation.Longitude = r.NextDouble() * 60;
                 newStation.Lattitude = r.NextDouble() * 60;
-                newStation.ChargeSlots = r.Next(0, 101);
+                newStation.ChargeSlots = r.Next(0, 20);
                 stations.Add(newStation);
             }
             static string GetRandomPhone()
