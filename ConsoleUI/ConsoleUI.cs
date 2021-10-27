@@ -139,6 +139,7 @@ namespace ConsoleUI
                     {
                         Console.WriteLine(t.ToString());
                     }
+                    Console.WriteLine("Enter the station id:");
                     int.TryParse(Console.ReadLine(), out stationId);
                     options.SendDroneToCharge(id, stationId);
                     break;

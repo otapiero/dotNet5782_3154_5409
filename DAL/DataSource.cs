@@ -30,8 +30,8 @@ namespace DalObject
             //Initialize random drones
             for (int i = 0; i < numDrones; i++)
             {
-                
                 IDAL.DO.Drone newDrone = new IDAL.DO.Drone();
+                newDrone.Id = Config.idObject++;
                 newDrone.Id = Config.idDrone++;
                 newDrone.Model = GetRandomName();
                 newDrone.MaxWheight = (IDAL.DO.WeightCategories)r.Next(0, 3);
@@ -43,8 +43,8 @@ namespace DalObject
             for (int i = 0; i < numCustomers; i++)
             {
 
-           
                 IDAL.DO.Customer newCustomer = new IDAL.DO.Customer();
+                newCustomer.Id = Config.IdDefault++;
                 newCustomer.Id = Config.IdRandomCustomer++;
                 newCustomer.Name = GetRandomName();
                 newCustomer.Phone = GetRandomPhone();
@@ -54,9 +54,9 @@ namespace DalObject
 
             }
             //Initialize random parcels
-             for (int i = 0; i < numParcels; i++)
+            
+            for (int i = 0; i < numParcels; i++)
             {
-             
                 IDAL.DO.Parcel newParcel = new IDAL.DO.Parcel();
                 newParcel.Id = Config.idParcel++;
                 newParcel.Sender = r.Next(1, numCustomers);
@@ -65,23 +65,22 @@ namespace DalObject
                 newParcel.Priority = (IDAL.DO.Priorities)r.Next(0, 3);
                 newParcel.Requsted = DateTime.Now;
                 newParcel.DroneId = r.Next(1, numDrones);
-                newParcel.Scheduled =  DateTime.Now.AddMinutes(r.Next(60));
-                newParcel.PickedUp = newParcel.Scheduled;
-                newParcel.PickedUp.AddMinutes(r.Next(60));
-                newParcel.Delivered = newParcel.PickedUp;
-                newParcel.Delivered.AddMinutes(r.Next(60));
+                newParcel.Scheduled = newParcel.Requsted.AddMinutes(r.Next(15)); ;
+                
+                newParcel.PickedUp = newParcel.Scheduled.AddMinutes(r.Next(15));
+               
+                newParcel.Delivered = newParcel.PickedUp.AddMinutes(r.Next(15));
                 parcels.Add(newParcel);
-
             }
             //Initialize random station
             for (int i = 0; i < numStations; i++)
             {
                 IDAL.DO.Station newStation = new IDAL.DO.Station();
-                newStation.Id = Config.IdStation++;
+                newStation.Id = Config.idObject++;
                 newStation.Name = GetRandomName();
                 newStation.Longitude = r.NextDouble() * 60;
                 newStation.Lattitude = r.NextDouble() * 60;
-                newStation.ChargeSlots = r.Next(0, 20);
+                newStation.ChargeSlots = r.Next(0, 101);
                 stations.Add(newStation);
             }
             ///<summary>method<c>GetRandomPhone</c> - return random phone</summary>
@@ -100,25 +99,24 @@ namespace DalObject
             }
             ///<summary>method<c>GetRandomName</c> - return random name</summary>
             static string GetRandomName()
-            { 
+            {
+                string name = "";
+                string letters = "azertyuiopqsdfghjklmwxcvbn";
                 int index;
-                string name="";
-                string letters = "azertyuiopqsdfghjklmwxcvbn" ;
-               
                 for (int i = 0; i < 4; i++)
                 {
                     index = r.Next(0, 25);
                     name += letters[index];
                 }
-             
+
                 return name;
             }
         }
- 
         //static var for initialize
         internal class Config
         {
-          
+            internal static int idObject = 1;
+            internal static int IdDefault = 1;
             internal static int idParcel = 1;
             internal static int idDrone = 1;
             internal static int IdStation = 1;
