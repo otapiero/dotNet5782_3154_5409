@@ -55,11 +55,11 @@ namespace DalObject
         //Add items
         public void AddNewDrone(string _model, int _MaxWheight, int _status, double _battery)
         {
-            DataSource.drones.Add(new IDAL.DO.Drone(DataSource.Config.IdDefault++, _model, (IDAL.DO.WeightCategories)_MaxWheight, (IDAL.DO.DroneStatuses)_status, _battery));
+            DataSource.drones.Add(new IDAL.DO.Drone(DataSource.Config.idDrone++, _model, (IDAL.DO.WeightCategories)_MaxWheight, (IDAL.DO.DroneStatuses)_status, _battery));
         }
         public void AddNewStation(string _name, double _Longitude, double _Lattitude, int _chargeSlots)
         {
-            DataSource.stations.Add(new IDAL.DO.Station(DataSource.Config.idObject++, _name, _Longitude, _Lattitude, _chargeSlots));
+            DataSource.stations.Add(new IDAL.DO.Station(DataSource.Config.IdStation++, _name, _Longitude, _Lattitude, _chargeSlots));
         }
         public void AddNewCustomer(int _id, string _Name, string _Phone, double _Longitude, double _Lattitude)
         {
@@ -69,7 +69,7 @@ namespace DalObject
         public void AddNewParcel(int _Sender, int _TargetId, int _Wheight, int _Priority)
         {
             DateTime _Requsted = DateTime.Now;
-            DataSource.parcels.Add(new IDAL.DO.Parcel(DataSource.Config.idObject++, _Sender, _TargetId, (IDAL.DO.WeightCategories)_Wheight, (IDAL.DO.Priorities)_Priority, _Requsted, 0, _Requsted, _Requsted, _Requsted));
+            DataSource.parcels.Add(new IDAL.DO.Parcel(DataSource.Config.idParcel++, _Sender, _TargetId, (IDAL.DO.WeightCategories)_Wheight, (IDAL.DO.Priorities)_Priority, _Requsted, 0, _Requsted, _Requsted, _Requsted));
         }
         //update items
         public void ConnectParcelToDrone(int idParcel)
@@ -205,37 +205,6 @@ namespace DalObject
             }
             return stations;
         }
-        public static string LatitudeDoubleToString(double Latitude)
-        {
-            Latitude = Math.Abs(Latitude);
-            string cordinates = Convert.ToString((int)Latitude) + "°";
-            Latitude -= (int)Latitude;
-            Latitude *= 60;
-            cordinates += Convert.ToString((int)Latitude) + "'";
-            Latitude -= (int)Latitude;
-            Latitude *= 60;
-            cordinates += Convert.ToString((int)Latitude) + ".";
-            Latitude -= (int)Latitude;
-            Latitude *= 1000;
-            cordinates += Convert.ToString((int)Latitude) + "''";
-            cordinates += "E";
-            return cordinates;
-        }
-        public static string LongitudeDoubleToString(double longitude)
-        {
-            longitude = Math.Abs(longitude);
-            string cordinates = Convert.ToString((int)longitude) + "°";
-            longitude -= (int)longitude;
-            longitude *= 60;
-            cordinates += Convert.ToString((int)longitude) + "'";
-            longitude -= (int)longitude;
-            longitude *= 60;
-            cordinates += Convert.ToString((int)longitude) + ".";
-            longitude -= (int)longitude;
-            longitude *= 1000;
-            cordinates += Convert.ToString((int)longitude) + "''";
-            cordinates += "s";
-            return cordinates;
-        }
+        
     }
 }

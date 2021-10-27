@@ -28,8 +28,8 @@ namespace IDAL
             {
 
                 return "Id: " + Id + "\nName: " + Name + "\nLongitude: " +
-                    DalObject.DalObject.LongitudeDoubleToString(Longitude) +
-                    "\nLattitude: " + DalObject.DalObject.LatitudeDoubleToString(Lattitude) +
+                    DalObject.Cordinates.LongitudeDoubleToString(Longitude) +
+                    "\nLattitude: " + DalObject.Cordinates.LatitudeDoubleToString(Lattitude) +
                     "\nChargeSlots: " + ChargeSlots + "\n";
             }
         }
