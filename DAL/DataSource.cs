@@ -6,26 +6,28 @@ using System.Threading.Tasks;
 
 namespace DalObject
 {
+    ///<summary>initialize class for the program</summary>
    internal static class DataSource
     {
         
-        
+        ///<summary>list of data for the programing<summary>
         internal static List<IDAL.DO.DroneCharge> drone = new List<IDAL.DO.DroneCharge>();
         internal static List<IDAL.DO.Drone> drones = new List<IDAL.DO.Drone>();
         internal static List<IDAL.DO.Station> stations = new List<IDAL.DO.Station>();
         internal static List<IDAL.DO.Customer> customers = new List<IDAL.DO.Customer>();
         internal static List<IDAL.DO.Parcel> parcels = new List<IDAL.DO.Parcel>();
         internal static List<IDAL.DO.DroneCharge> DroneCharges = new List<IDAL.DO.DroneCharge>();
-
+        //var random for initialize function
         static Random r = new();
+        //Initialize function
         internal static void Initialize()
         {
-
-            
+            //Set quantity of var 
             int numDrones = r.Next(5, 10);
             int numCustomers = r.Next(10, 100);
             int numParcels = r.Next(10, 1000);
             int numStations = r.Next(2, 5);
+            //Initialize random drones
             for (int i = 0; i < numDrones; i++)
             {
                 IDAL.DO.Drone newDrone = new IDAL.DO.Drone();
@@ -36,7 +38,7 @@ namespace DalObject
                 newDrone.Battery= r.NextDouble() * 100;
                 drones.Add(newDrone);
             }
-
+            //Initialize random customers
             for (int i = 0; i < numCustomers; i++)
             {
                 IDAL.DO.Customer newCustomer = new IDAL.DO.Customer();
@@ -48,6 +50,7 @@ namespace DalObject
                 customers.Add(newCustomer);
 
             }
+            //Initialize random parcels
             for (int i = 0; i < numParcels; i++)
             {
              
@@ -65,6 +68,7 @@ namespace DalObject
                 parcels.Add(newParcel);
 
             }
+            //Initialize random station
             for (int i = 0; i < numStations; i++)
             {
              
@@ -76,6 +80,7 @@ namespace DalObject
                 newStation.ChargeSlots = r.Next(0, 101);
                 stations.Add(newStation);
             }
+            ///<summary>method<c>GetRandomPhone</c> - return random phone</summary>
             static string GetRandomPhone()
             {
                 string phone = "058";
@@ -89,7 +94,7 @@ namespace DalObject
                 }
                 return phone;
             }
-            
+            ///<summary>method<c>GetRandomName</c> - return random name</summary>
             static string GetRandomName()
             {
                 int index;
@@ -105,7 +110,7 @@ namespace DalObject
                 return name;
             }
         }
-            
+        //static var for initialize
         internal class Config
         {
             internal static int idObject = 1;

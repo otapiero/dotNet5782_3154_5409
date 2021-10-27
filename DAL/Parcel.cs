@@ -8,6 +8,7 @@ namespace IDAL
 {
     namespace DO
     {
+        ///<summary>struct of Parcel</summary>
         public struct Parcel
         {
 
@@ -22,7 +23,7 @@ namespace IDAL
             public DateTime PickedUp { get; set; }
             public DateTime Delivered { get; set; }
 
-           
+            //constructor
             public Parcel(int _Id, int _Sender, int _TargetId, WeightCategories _Wheight, Priorities _Priority, DateTime _Requsted, int _DroneId, DateTime _Scheduled, DateTime _PickedUp, DateTime _Delivered)
             {
                 Id = _Id;
@@ -36,8 +37,10 @@ namespace IDAL
                 PickedUp = _PickedUp;
                 Delivered = _Delivered;
             }
+            ///<summary>The function print detail of the object</summary>
             public override string ToString()
             {
+                //The function print detail of the object
                 return "Id: " + Id + "\nSender: " + Sender + "\nTargetId: " + TargetId + "\nWheight: " + Wheight +
                     "\nPriority: " + Priority + "\nRequsted: " + Requsted + "\nDroneId: " + DroneId + "\nScheduled: " +
                     Scheduled + "\nPickedUp: " + PickedUp + "\nDelivered: " + Delivered;
