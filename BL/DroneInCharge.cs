@@ -8,8 +8,11 @@ namespace IBL
 {
     namespace BO
     {
-        class SkimmerInThePackage
-        { }
-        
+        class DroneInCharge
+        {
+            public int Id { get; set; }
+            public double Battery { get; set; }
+            
+        }
     }
 }
