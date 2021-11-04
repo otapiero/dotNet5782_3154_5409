@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace IDAL
-{
+{ 
     namespace DO
     {
         ///<summary>struct of Drone</summary>
