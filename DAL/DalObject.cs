@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace DalObject
 {
     ///<summary>Class <c>DalObject</c></summary>
-    public class DalObject
+    public class DalObject:IDAL.IDal
     {
         ///<summary>method <c>DalObject</c> initialize the data</summary>
         public DalObject()
@@ -69,9 +69,10 @@ namespace DalObject
         /// <param name="_MaxWheight"> enum of weight drone</param>
         /// <param name="_status"> enum status of drone</param>
         /// <param name=" _battery">life battery of drone</param>
+        ///         
         public void AddNewDrone(string _model, int _MaxWheight, int _status, double _battery)
         {
-            DataSource.drones.Add(new IDAL.DO.Drone(DataSource.Config.idDrone++, _model, (IDAL.DO.WeightCategories)_MaxWheight, (IDAL.DO.DroneStatuses)_status, _battery));
+            DataSource.drones.Add(new IDAL.DO.Drone(DataSource.Config.idDrone++, _model, _battery));
         }
         /// <summary>method AddNewStation </summary>
         /// <param name="_name"> station name</param>
@@ -109,20 +110,20 @@ namespace DalObject
         {
             IDAL.DO.Drone find = new IDAL.DO.Drone();
             //if have a avilable drone
-            if (DataSource.drones.Exists(x => x.Status.Equals(IDAL.DO.DroneStatuses.Available)))
-            {
+           
+            
                 //connect parcel to drone and update the list
-                find = DataSource.drones.Find(x => x.Status.Equals(IDAL.DO.DroneStatuses.Available));
+                find = DataSource.drones.Find(x => x.Id>0);
                 IDAL.DO.Drone temp = find;
                 DataSource.drones.Remove(find);
-                temp.Status = IDAL.DO.DroneStatuses.Delivery;
+               
                 DataSource.drones.Add(temp);
                 IDAL.DO.Parcel pocket = SearchParcel(idParcel);
                 IDAL.DO.Parcel tempParcel = pocket;
                 tempParcel.DroneId = find.Id;
                 DataSource.parcels.Remove(pocket);
                 DataSource.parcels.Add(tempParcel);
-            }
+            
 
         }
         /// <summary>method ParceCollectionByDrone - the function get parcel and update time picked up </summary>
@@ -152,7 +153,7 @@ namespace DalObject
                 IDAL.DO.Parcel tempParcel = pocket;
                 IDAL.DO.Drone found = SearchDrone(pocket.Id);
                 IDAL.DO.Drone tempDrone = found;
-                tempDrone.Status = IDAL.DO.DroneStatuses.Available;
+               
                 tempParcel.Delivered = DateTime.Now;
                 DataSource.parcels.Remove(pocket);
                 DataSource.parcels.Add(tempParcel);
@@ -170,7 +171,7 @@ namespace DalObject
             {
                 IDAL.DO.Drone temp = found;
                 temp.Battery += 1;
-                temp.Status = IDAL.DO.DroneStatuses.Maintenace;
+      
                 DataSource.drones.Remove(found);
                 DataSource.drones.Add(temp);
                 DataSource.DroneCharges.Add(new IDAL.DO.DroneCharge(idDrone, idStation));
@@ -185,7 +186,7 @@ namespace DalObject
             if (found.Id > 0)
             {
                 IDAL.DO.Drone temp = found;
-                temp.Status = IDAL.DO.DroneStatuses.Available;
+              
                 IDAL.DO.DroneCharge relese = DataSource.DroneCharges.Find(x => x.DroneId.Equals(idDrone));
                 DataSource.drones.Remove(found);
                 DataSource.drones.Add(temp);
@@ -194,7 +195,7 @@ namespace DalObject
         }
         ///<summary>List - copy list of station for the main program</summary>
         ///<returns>list of all stations</returns>
-        public List<IDAL.DO.Station> AllStation()
+        public IEnumerable<IDAL.DO.Station> AllStation()
         {
             List<IDAL.DO.Station> allStations = new List<IDAL.DO.Station>();
             foreach(var t in DataSource.stations)
@@ -205,7 +206,7 @@ namespace DalObject
         }
         ///<summary>List - copy list of drones for the main program</summary>
         ///<returns>list of all drones</returns>
-        public List<IDAL.DO.Drone> AllDrones()
+        public IEnumerable<IDAL.DO.Drone> AllDrones()
         {
             List<IDAL.DO.Drone> allDrones = new List<IDAL.DO.Drone>();
             foreach (var t in DataSource.drones)
@@ -216,7 +217,7 @@ namespace DalObject
         }
         ///<summary>List - copy list of customers for the main program</summary>
         ///<returns>list of all costomers</returns>
-        public List<IDAL.DO.Customer> AllCustomers()
+        public IEnumerable<IDAL.DO.Customer> AllCustomers()
         {
             List<IDAL.DO.Customer> allCustomers = new List<IDAL.DO.Customer>();
             foreach (var t in DataSource.customers)
@@ -227,7 +228,7 @@ namespace DalObject
         }
         ///<summary>List - copy list of parcels for the main program</summary>
         ///<returns>list of all parcels</returns>
-        public List<IDAL.DO.Parcel> AllParcels()
+        public IEnumerable<IDAL.DO.Parcel> AllParcels()
         {
             List<IDAL.DO.Parcel> allParcels = new List<IDAL.DO.Parcel>();
             foreach (var t in DataSource.parcels)
@@ -238,7 +239,7 @@ namespace DalObject
         }
         ///<summary>List - copy list of all pending parcels </summary>
         ///<returns>list of all free parcel</returns>
-        public List<IDAL.DO.Parcel> NotAssociatedParcels()
+        public IEnumerable<IDAL.DO.Parcel> NotAssociatedParcels()
         {
             List<IDAL.DO.Parcel> notAssociatedParcels = new List<IDAL.DO.Parcel>();
             foreach(var t in DataSource.parcels)
@@ -251,7 +252,7 @@ namespace DalObject
         }
         ///<summary>List - copy list of all free stations </summary>
         ///<returns>list of all free stations for charge</returns>
-        public List<IDAL.DO.Station> StationWithAvailebalChargePost()
+        public IEnumerable<IDAL.DO.Station> StationWithAvailebalChargePost()
         {
             List<IDAL.DO.Station> stations = new();
             foreach (var t in DataSource.stations)
@@ -261,5 +262,16 @@ namespace DalObject
             }
             return stations;
         }
+        public double[] ElectricityUse()
+        {
+            double[] arr = new double[5];
+            arr[0]=DataSource.Config.Avilable;
+            arr[1] = DataSource.Config.Light;
+            arr[2] = DataSource.Config.Intermidiate;
+            arr[3] = DataSource.Config.Heavy;
+            arr[4] = DataSource.Config.chargingRate;
+
+            return arr;
+         }
     }
 }

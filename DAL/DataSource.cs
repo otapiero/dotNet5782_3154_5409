@@ -34,8 +34,7 @@ namespace DalObject
                 newDrone.Id = Config.idObject++;
                 newDrone.Id = Config.idDrone++;
                 newDrone.Model = GetRandomName();
-                newDrone.MaxWheight = (IDAL.DO.WeightCategories)r.Next(0, 3);
-                newDrone.Status = (IDAL.DO.DroneStatuses)r.Next(0, 3);
+               
                 newDrone.Battery= r.NextDouble() * 100;
                 drones.Add(newDrone);
             }
@@ -121,6 +120,14 @@ namespace DalObject
             internal static int idDrone = 1;
             internal static int IdStation = 1;
             internal static int IdRandomCustomer = 1;
+
+            public static double Avilable;
+            public static double Light;
+            public static double Intermidiate;
+            public static double Heavy;
+            public static double chargingRate;
+
+
         }
     }
 }
