@@ -20,7 +20,7 @@ namespace IDAL
             {
                 Id = _id;
                 Model = _model;
-              
+            
                 Battery = _battery;
             }
             ///<summary>The function print detail of the object</summary>
