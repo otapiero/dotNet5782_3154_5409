@@ -8,13 +8,10 @@ namespace IBL
 {
     namespace BO
     {
-        class DroneWithParcel
+        public class CustomerInParcel
         {
             public int Id { get; set; }
-            public double Battery { get; set; }
-            public LocationBl CurrentLocation { get; set; }
-
+            public string Name { get; set; }
         }
-        
     }
 }

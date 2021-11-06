@@ -8,14 +8,15 @@ namespace IBL
 {
     namespace BO
     {
-        class CustomerInDeliveryBl
+        class CustomerBl
         {
             public int Id { get; set; }
             public string name { get; set; }
-            public string numberPhone { get; set; }
-            public LocationBL location { get; set; } 
-            List <ParcelToCustomer> toCustomers { get; set; }
-            List<ParcelToCustomer> fromCustomers { get; set; }
+            public int numberPhone { get; set; }
+            public LocationBl location { get; set; } 
+            
+            List<ParcelAtCustomer> fromCustomers { get; set; }
+            List<ParcelAtCustomer> toCustomers { get; set; }
         }
     }
 }

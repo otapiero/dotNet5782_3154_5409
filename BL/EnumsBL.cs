@@ -15,7 +15,8 @@ namespace IBL
         { Normal, Fast, Emergency }
         public enum DroneStatuses
         { Available, Maintenace, Delivery }
-
+        public enum ParcelStatus
+        { Defined, Assigned, Colected, Delivred }
     }
     
 }

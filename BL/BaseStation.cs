@@ -13,7 +13,7 @@ namespace IBL
             public int Id { get; set; }
             public string Name { get; set; }
             public LocationBl Location { get; set; }
-            public int NumeAvilableChargeStation { get; set; }
+            public int NumAvilableChargeStation { get; set; }
             public List<DroneInCharge> dronesInCharges { get; set; }
         }
     }

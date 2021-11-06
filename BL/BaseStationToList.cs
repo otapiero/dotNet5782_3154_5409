@@ -8,10 +8,14 @@ namespace IBL
 {
     namespace BO
     {
-         class CustomerInDeliveryBl
+        class BaseStationToList
         {
             public int Id { get; set; }
-            public string name { get; set; }
+            public string Name { get; set; }
+           
+            public int NumAvilableChargeStation { get; set; }
+            public int NumNotAvilableChargeStation { get; set; }
         }
     }
+    
 }
