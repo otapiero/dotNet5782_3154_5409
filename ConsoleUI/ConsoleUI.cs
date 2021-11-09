@@ -68,13 +68,13 @@ namespace ConsoleUI
 
                     options.AddNewStation( name, longattitude, lattitude, chargeSlot); break;
                 case "b":
-                    Console.WriteLine("Enter new drone details:\n model maxwheigt between 0-2,status betxeen 0-2 and battery");
+                    Console.WriteLine("Enter new drone details:\n model ");
                   
                     model = Console.ReadLine();
                     int.TryParse(Console.ReadLine(), out wheigt);
                     int.TryParse(Console.ReadLine(), out status);
                     int.TryParse(Console.ReadLine(), out battery);
-                    options.AddNewDrone(model, wheigt, status, battery);
+                    options.AddNewDrone(model, wheigt);
                     ; break;
                 case "c":
                     Console.WriteLine("Enter new customer details:\n id, name,phone,longattitude and lattitude.");

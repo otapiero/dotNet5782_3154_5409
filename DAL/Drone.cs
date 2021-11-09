@@ -14,21 +14,21 @@ namespace IDAL
             public int Id { get; set; }
             public string Model { get; set; }
           
-            public double Battery { get; set;}
+            
             //constructor
-            public Drone(int _id, string _model, double _battery)
+            public Drone(int _id, string _model)
             {
                 Id = _id;
                 Model = _model;
             
-                Battery = _battery;
+                
             }
             ///<summary>The function print detail of the object</summary>
             public override string ToString()
             {
                 //The function print detail of the object
                 return "Id: " + Id + "\nName: " + Model + 
-                    "\nBattery: " + Battery + "\n";
+                     "\n";
             }
         }
 

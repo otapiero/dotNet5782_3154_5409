@@ -19,11 +19,13 @@ namespace DalObject
         ///<param name="id"> searche the customer by id</param>
         public IDAL.DO.Customer SearchCustomer(int id)
         {
-            IDAL.DO.Customer find = new IDAL.DO.Customer();
-            if (DataSource.customers.Exists(x => x.Id.Equals(id)))
+            if (!DataSource.customers.Exists(x => x.Id.Equals(id)))
             {
-                find = DataSource.customers.Find(x => x.Id.Equals(id));
+                throw new IDAL.DO.IdExaption("Id not found.");
             }
+            IDAL.DO.Customer find = new IDAL.DO.Customer();
+            
+            find = DataSource.customers.Find(x => x.Id.Equals(id));
             return find;
         }
 
@@ -70,9 +72,9 @@ namespace DalObject
         /// <param name="_status"> enum status of drone</param>
         /// <param name=" _battery">life battery of drone</param>
         ///         
-        public void AddNewDrone(string _model, int _MaxWheight, int _status, double _battery)
+        public void AddNewDrone(string _model, int _MaxWheight)
         {
-            DataSource.drones.Add(new IDAL.DO.Drone(DataSource.Config.idDrone++, _model, _battery));
+            DataSource.drones.Add(new IDAL.DO.Drone(DataSource.Config.idDrone++, _model));
         }
         /// <summary>method AddNewStation </summary>
         /// <param name="_name"> station name</param>
@@ -170,7 +172,7 @@ namespace DalObject
             if (found.Id > 0)
             {
                 IDAL.DO.Drone temp = found;
-                temp.Battery += 1;
+                
       
                 DataSource.drones.Remove(found);
                 DataSource.drones.Add(temp);

@@ -35,7 +35,7 @@ namespace DalObject
                 newDrone.Id = Config.idDrone++;
                 newDrone.Model = GetRandomName();
                
-                newDrone.Battery= r.NextDouble() * 100;
+              
                 drones.Add(newDrone);
             }
             //Initialize random customers
