@@ -14,8 +14,8 @@ namespace IBL
             public bool statusesDelivrery { get; set; }
             public Priorities Priorities { get; set; }
             public WeightCategories weight { get; set; }
-            public LocationBl CollectionLocation { get; set; }
-            public LocationBl DeliveryLocation { get; set; }
+            public Location CollectionLocation { get; set; }
+            public Location DeliveryLocation { get; set; }
             CustomerInParcel Sender { get; set; }
             CustomerInParcel Getter { get; set; }
 

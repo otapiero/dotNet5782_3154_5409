@@ -13,7 +13,7 @@ namespace IBL
             public int Id { get; set; }
             public string name { get; set; }
             public int numberPhone { get; set; }
-            public LocationBl location { get; set; } 
+            public Location location { get; set; } 
             
             List<ParcelAtCustomer> fromCustomers { get; set; }
             List<ParcelAtCustomer> toCustomers { get; set; }

@@ -15,7 +15,7 @@ namespace IBL
             public WeightCategories Weight { get; set; }
             public double Battery { get; set; }
             public DroneStatuses status { get; set; }
-            public LocationBl CurrentLocation { get; set; }
+            public Location CurrentLocation { get; set; }
             public int NumParcels { get; set; }
         }
     }
