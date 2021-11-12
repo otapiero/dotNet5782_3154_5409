@@ -72,18 +72,27 @@ namespace DalObject
         /// <param name="_status"> enum status of drone</param>
         /// <param name=" _battery">life battery of drone</param>
         ///         
-        public void AddNewDrone(string _model, int _MaxWheight)
+        public void AddNewDrone(int id,string _model)
         {
-            DataSource.drones.Add(new IDAL.DO.Drone(DataSource.Config.idDrone++, _model));
+            IDAL.DO.Drone temp = new();
+            temp.Id = id;
+            temp.Model = _model;
+            DataSource.drones.Add(temp);
         }
         /// <summary>method AddNewStation </summary>
         /// <param name="_name"> station name</param>
         /// <param name="_Longitude"> location of station</param>
         /// <param name="_Lattitude"> location of station</param>
         /// <param name=" _chargeSlots">status of charge</param>
-        public void AddNewStation(string _name, double _Longitude, double _Lattitude, int _chargeSlots)
+        public void AddNewStation(int id,string _name, double _Longitude, double _Lattitude, int _chargeSlots)
         {
-            DataSource.stations.Add(new IDAL.DO.Station(DataSource.Config.IdStation++, _name, _Longitude, _Lattitude, _chargeSlots));
+            IDAL.DO.Station temp = new();
+            temp.Id = id;
+            temp.Name = _name;
+            temp.Longitude = _Longitude;
+            temp.Lattitude = _Lattitude;
+            temp.ChargeSlots = _chargeSlots;
+            DataSource.stations.Add(temp);
         }
         /// <summary>method AddNewCustomer </summary>
         /// <param name="_id"> customer id</param>
@@ -93,8 +102,14 @@ namespace DalObject
         /// <param name="_Lattitude"> location of station</param>
         public void AddNewCustomer(int _id, string _Name, string _Phone, double _Longitude, double _Lattitude)
         {
+            IDAL.DO.Customer temp = new();
+            temp.Id = _id;
+            temp.Name = _Name;
+            temp.Phone = _Phone;
+            temp.Longitude = _Longitude;
+            temp.Lattitude = _Lattitude;
 
-            DataSource.customers.Add(new IDAL.DO.Customer(_id, _Name, _Phone, _Longitude,  _Lattitude));
+            DataSource.customers.Add(temp);
         }
         /// <summary>method  AddNewParcel </summary>
         /// <param name="_Sender"> customer id of sender</param>
@@ -104,7 +119,18 @@ namespace DalObject
         public void AddNewParcel(int _Sender, int _TargetId, int _Wheight, int _Priority)
         {
             DateTime _Requsted = DateTime.Now;
-            DataSource.parcels.Add(new IDAL.DO.Parcel(DataSource.Config.idParcel++, _Sender, _TargetId, (IDAL.DO.WeightCategories)_Wheight, (IDAL.DO.Priorities)_Priority, _Requsted, 0, _Requsted, _Requsted, _Requsted));
+            IDAL.DO.Parcel temp = new();
+            temp.Id = DataSource.Config.idParcel++;
+            temp.Sender = _Sender;
+            temp.TargetId = _TargetId;
+            temp.Wheight = (IDAL.DO.WeightCategories)_Wheight;
+            temp.Priority = (IDAL.DO.Priorities)_Priority;
+            temp.Requsted = DateTime.Now;
+            temp.Scheduled = new DateTime();
+            temp.PickedUp = new DateTime();
+            temp.Delivered = new DateTime();
+            
+            DataSource.parcels.Add(temp);
         }
          /// <summary>method ConnectParcelToDrone - the function get parcel and connect a avilable drone </summary>
         /// <param name="idParcel"> id parcel to delivery</param>

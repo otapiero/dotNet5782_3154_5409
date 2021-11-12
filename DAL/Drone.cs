@@ -15,14 +15,7 @@ namespace IDAL
             public string Model { get; set; }
           
             
-            //constructor
-            public Drone(int _id, string _model)
-            {
-                Id = _id;
-                Model = _model;
-            
-                
-            }
+        
             ///<summary>The function print detail of the object</summary>
             public override string ToString()
             {

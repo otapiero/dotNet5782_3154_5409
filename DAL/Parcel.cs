@@ -23,20 +23,9 @@ namespace IDAL
             public DateTime PickedUp { get; set; }
             public DateTime Delivered { get; set; }
 
-            //constructor
-            public Parcel(int _Id, int _Sender, int _TargetId, WeightCategories _Wheight, Priorities _Priority, DateTime _Requsted, int _DroneId, DateTime _Scheduled, DateTime _PickedUp, DateTime _Delivered)
-            {
-                Id = _Id;
-                Sender = _Sender;
-                TargetId = _TargetId;
-                Wheight = _Wheight;
-                Priority = _Priority;
-                Requsted = _Requsted;
-                DroneId = _DroneId;
-                Scheduled = _Scheduled;
-                PickedUp = _PickedUp;
-                Delivered = _Delivered;
-            }
+
+            
+            
             ///<summary>The function print detail of the object</summary>
             public override string ToString()
             {

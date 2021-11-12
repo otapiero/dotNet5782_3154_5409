@@ -11,6 +11,11 @@ namespace IBL
     {
         public class Location
         {
+            Location(double longitude, double lattitude)
+            {
+                Longitude = longitude;
+                Lattitude = lattitude;
+            }
             public double Longitude { get; set; }
             public double Lattitude { get; set; }
         }

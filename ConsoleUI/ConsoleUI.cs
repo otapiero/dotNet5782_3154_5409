@@ -59,23 +59,22 @@ namespace ConsoleUI
             {
 
                 case "a":
-                    Console.WriteLine("Enter new Station details: name,Longitude,Lattitude and ChargeSlots. ");
-          
-                    name= Console.ReadLine();
+                    Console.WriteLine("Enter new Station details:id, name,Longitude,Lattitude and ChargeSlots. ");
+                    int.TryParse(Console.ReadLine(), out id);
+                    name = Console.ReadLine();
                     double.TryParse(Console.ReadLine(), out longattitude);
                     double.TryParse(Console.ReadLine(), out lattitude);
                     int.TryParse(Console.ReadLine(), out chargeSlot);
 
-                    options.AddNewStation( name, longattitude, lattitude, chargeSlot); break;
+                    options.AddNewStation(id, name, longattitude, lattitude, chargeSlot);
+                    break;
                 case "b":
-                    Console.WriteLine("Enter new drone details:\n model ");
-                  
+                    Console.WriteLine("Enter new drone details:id and model.");
+                    int.TryParse(Console.ReadLine(), out id);
                     model = Console.ReadLine();
-                    int.TryParse(Console.ReadLine(), out wheigt);
-                    int.TryParse(Console.ReadLine(), out status);
-                    int.TryParse(Console.ReadLine(), out battery);
-                    options.AddNewDrone(model, wheigt);
-                    ; break;
+                   
+                    options.AddNewDrone(id,model);
+                    break;
                 case "c":
                     Console.WriteLine("Enter new customer details:\n id, name,phone,longattitude and lattitude.");
                     int.TryParse(Console.ReadLine(), out id);
