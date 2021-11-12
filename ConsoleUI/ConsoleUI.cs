@@ -69,7 +69,7 @@ namespace ConsoleUI
                     options.AddNewStation(id, name, longattitude, lattitude, chargeSlot);
                     break;
                 case "b":
-                    Console.WriteLine("Enter new drone details:id and model.");
+                    Console.WriteLine("Enter new drone details: id and model.");
                     int.TryParse(Console.ReadLine(), out id);
                     model = Console.ReadLine();
                    
@@ -143,7 +143,7 @@ namespace ConsoleUI
                     options.SendDroneToCharge(id, stationId);
                     break;
                 case "e":
-                    ; break;
+                    break;
 
             }
         }

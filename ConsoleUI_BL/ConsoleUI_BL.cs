@@ -137,46 +137,74 @@ namespace ConsoleUI_BL
         /// send a drone to a charge station and relase a drone from the charge station</summary
         static void UpdateMenu()
         {
-            string choise;
-            int id, stationId;
-            Console.WriteLine("chose an option:\n a to Assign a package to a drone.\n" +
-                " b to collect a package.\n c to deliver a parcel to a customer.\n d to send a drone to a charge station.\n" +
+            string choise, model,name,phone;
+            int id, chargeSlots;
+            double time;
+            Console.WriteLine("chose an option:\n a to rename a drone model.\n" +
+                " b to update a station base details.\n c to update a costumer details .\n " +
+                "d to send a drone to a charge.\n" +
                 " e to relase a drone from the charge station.\n" +
                 " f to return to Main menu.\nEnter your choise.");
             choise = Console.ReadLine();
             switch (choise)
             {
                 case "a":
-                    Console.WriteLine("Enter the parcel id.");
+                    Console.WriteLine("Enter the drone id.");
                     int.TryParse(Console.ReadLine(), out id);
-                    options.ConnectParcelToDrone(id);
+                    Console.WriteLine("Enter the new drone model.");
+                    model = Console.ReadLine();
+                    options.UpdateDroneModel(id, model);
                     break;
                 case "b":
-                    Console.WriteLine("Enter the parcel id.");
+                    Console.WriteLine("Enter the station base id.");
                     int.TryParse(Console.ReadLine(), out id);
-                    options.ParceCollectionByDrone(id);
+                    Console.WriteLine("one or more of the follow details:name,max num of charge slots.");
+                    name = Console.ReadLine();
+                    int.TryParse(Console.ReadLine(), out chargeSlots);
+                    options.UpdateStation(id,name,chargeSlots);
                     break;
                 case "c":
-                    Console.WriteLine("Enter the parcel id.");
+                    Console.WriteLine("Enter the costumer id.");
                     int.TryParse(Console.ReadLine(), out id);
-                    options.DeliveryParcelToCustomer(id);
+                    Console.WriteLine("one or more of the follow details:name and phone.");
+                    name = Console.ReadLine();
+                    phone = Console.ReadLine();
+                    options.UpdateCostumer(id,name,phone);
                     break;
                 case "d":
                     Console.WriteLine("Enter the drone id.");
                     int.TryParse(Console.ReadLine(), out id);
-                    Console.WriteLine("chose a stations from the list by the Id.");
-                    Console.WriteLine("All the stations:");
-                    List<IDAL.DO.Station> stations = (List<IDAL.DO.Station>)options.AllStation();
-                    foreach (var t in stations)
+
+
+                    try
                     {
-                        Console.WriteLine(t.ToString());
+                        options.SendDroneToCharge(id);
+
                     }
-                    Console.WriteLine("Enter the station id:");
-                    int.TryParse(Console.ReadLine(), out stationId);
-                    options.SendDroneToCharge(id, stationId);
+                    catch
+                    {
+
+                    }
                     break;
                 case "e":
-                    ; break;
+                   
+                    Console.WriteLine("Enter the drone id.");
+                    int.TryParse(Console.ReadLine(), out id);
+                    double.TryParse(Console.ReadLine(), out time);
+
+                    try
+                    {
+                        options.RelesaeDroneFromCharge(id, time);
+                    }
+                    catch
+                    {
+
+                    }
+                    break;
+                case "f":
+
+
+                    break;
                     
             }
         }
