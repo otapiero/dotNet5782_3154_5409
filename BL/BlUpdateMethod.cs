@@ -28,5 +28,17 @@ namespace IBL
         {
 
         }
+        public void AssignPackageToDrone(int id)
+        {
+
+        }
+        public void CollectPackage(int id)
+        {
+
+        }
+        public void DeliverPackage(int id)
+        {
+
+        }
     }
 }
