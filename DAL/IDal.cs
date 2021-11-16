@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 {
    public interface IDal
     {
-        IDAL.DO.Customer SearchCustomer(int id);
+        IDAL.DO.Costumer SearchCustomer(int id);
         IDAL.DO.Drone SearchDrone(int id);
         IDAL.DO.Parcel SearchParcel(int id);
         IDAL.DO.Station SearchStation(int id);
@@ -24,7 +24,7 @@ using System.Threading.Tasks;
         void ReleseDroneFromCharge(int idDrone);
         IEnumerable<IDAL.DO.Station> AllStation();
         IEnumerable<IDAL.DO.Drone> AllDrones();
-        IEnumerable<IDAL.DO.Customer> AllCustomers();
+        IEnumerable<IDAL.DO.Costumer> AllCustomers();
         IEnumerable<IDAL.DO.Parcel> AllParcels();
         IEnumerable<IDAL.DO.Parcel> NotAssociatedParcels();
         IEnumerable<IDAL.DO.Station> StationWithAvailebalChargePost();

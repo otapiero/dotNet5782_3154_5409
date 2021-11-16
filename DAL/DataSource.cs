@@ -14,7 +14,7 @@ namespace DalObject
         internal static List<IDAL.DO.DroneCharge> drone = new List<IDAL.DO.DroneCharge>();
         internal static List<IDAL.DO.Drone> drones = new List<IDAL.DO.Drone>();
         internal static List<IDAL.DO.Station> stations = new List<IDAL.DO.Station>();
-        internal static List<IDAL.DO.Customer> customers = new List<IDAL.DO.Customer>();
+        internal static List<IDAL.DO.Costumer> customers = new List<IDAL.DO.Costumer>();
         internal static List<IDAL.DO.Parcel> parcels = new List<IDAL.DO.Parcel>();
         internal static List<IDAL.DO.DroneCharge> DroneCharges = new List<IDAL.DO.DroneCharge>();
         //var random for initialize function
@@ -42,7 +42,7 @@ namespace DalObject
             for (int i = 0; i < numCustomers; i++)
             {
 
-                IDAL.DO.Customer newCustomer = new IDAL.DO.Customer();
+                IDAL.DO.Costumer newCustomer = new IDAL.DO.Costumer();
                 newCustomer.Id = Config.IdDefault++;
                 newCustomer.Id = Config.IdRandomCustomer++;
                 newCustomer.Name = GetRandomName();
@@ -120,12 +120,13 @@ namespace DalObject
             internal static int idDrone = 1;
             internal static int IdStation = 1;
             internal static int IdRandomCustomer = 1;
-
-            public static double Avilable;
-            public static double Light;
-            public static double Intermidiate;
-            public static double Heavy;
-            public static double chargingRate;
+            //per kilometer
+            public static double Avilable=0.5;
+            public static double Light=1;
+            public static double Intermidiate=1.5;
+            public static double Heavy=2;
+            //per houre
+            public static double chargingRatePerHoure=50;
 
 
         }

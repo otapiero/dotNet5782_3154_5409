@@ -179,7 +179,7 @@ namespace ConsoleUI
                 case "c":
                     Console.WriteLine("Enter customer id.");
                     int.TryParse(Console.ReadLine(), out id);
-                    IDAL.DO.Customer customer = options.SearchCustomer(id);
+                    IDAL.DO.Costumer customer = options.SearchCustomer(id);
                     Console.WriteLine(customer.ToString());
                     break;
                 case "d":
@@ -226,7 +226,7 @@ namespace ConsoleUI
                     break;
                 case "c":
                     Console.WriteLine("All the customers:");
-                    List<IDAL.DO.Customer> customers = (List<IDAL.DO.Customer>)options.AllCustomers();
+                    List<IDAL.DO.Costumer> customers = (List<IDAL.DO.Costumer>)options.AllCustomers();
                     foreach (var t in customers)
                     {
                         Console.WriteLine(t.ToString());

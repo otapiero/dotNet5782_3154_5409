@@ -17,13 +17,13 @@ namespace DalObject
         }
         ///<summary>method <c>SearchCustomer</c> </summary>
         ///<param name="id"> searche the customer by id</param>
-        public IDAL.DO.Customer SearchCustomer(int id)
+        public IDAL.DO.Costumer SearchCustomer(int id)
         {
             if (!DataSource.customers.Exists(x => x.Id.Equals(id)))
             {
                 throw new IDAL.DO.IdExaption("Id not found.");
             }
-            IDAL.DO.Customer find = new IDAL.DO.Customer();
+            IDAL.DO.Costumer find = new IDAL.DO.Costumer();
             
             find = DataSource.customers.Find(x => x.Id.Equals(id));
             return find;
@@ -102,7 +102,7 @@ namespace DalObject
         /// <param name="_Lattitude"> location of station</param>
         public void AddNewCustomer(int _id, string _Name, string _Phone, double _Longitude, double _Lattitude)
         {
-            IDAL.DO.Customer temp = new();
+            IDAL.DO.Costumer temp = new();
             temp.Id = _id;
             temp.Name = _Name;
             temp.Phone = _Phone;
@@ -245,9 +245,9 @@ namespace DalObject
         }
         ///<summary>List - copy list of customers for the main program</summary>
         ///<returns>list of all costomers</returns>
-        public IEnumerable<IDAL.DO.Customer> AllCustomers()
+        public IEnumerable<IDAL.DO.Costumer> AllCustomers()
         {
-            List<IDAL.DO.Customer> allCustomers = new List<IDAL.DO.Customer>();
+            List<IDAL.DO.Costumer> allCustomers = new List<IDAL.DO.Costumer>();
             foreach (var t in DataSource.customers)
             {
                 allCustomers.Add(t);
@@ -297,7 +297,7 @@ namespace DalObject
             arr[1] = DataSource.Config.Light;
             arr[2] = DataSource.Config.Intermidiate;
             arr[3] = DataSource.Config.Heavy;
-            arr[4] = DataSource.Config.chargingRate;
+            arr[4] = DataSource.Config.chargingRatePerHoure;
 
             return arr;
          }
