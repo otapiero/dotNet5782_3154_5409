@@ -10,14 +10,14 @@ namespace IBL
     public partial class BL
     {
         IDAL.IDal idal;
-        IEnumerable<BO.DroneToList> drones;
+        IEnumerable<BO.DroneToList> Drones;
 
 
 
 
        public BL()
         {
-            drones = new List<BO.DroneToList>();
+            List<BO.DroneToList> DronesBl = new List<BO.DroneToList>();
             idal = new DalObject.DalObject();
             List<IDAL.DO.Drone> dronesData = (List < IDAL.DO.Drone > )idal.AllDrones();
             IEnumerable<IDAL.DO.Parcel> parcelsData = idal.AllParcels();
@@ -33,9 +33,22 @@ namespace IBL
                                                              select x;
             foreach(var x in parcelsNotDelivred)
             {
-                IDAL.DO.Drone y;
-                y = dronesData.Find(y => y.Id.Equals(x.DroneId));
+                IDAL.DO.Drone tempDlDrone;
+                tempDlDrone = dronesData.Find(z => z.Id.Equals(x.DroneId));
+                BO.DroneToList temp = new();
+                temp.Id = tempDlDrone.Id;
+                temp.Model = tempDlDrone.Model;
                 
+                temp.Weight =(BO.WeightCategories) x.Wheight;
+              
+                temp.status = BO.DroneStatuses.Delivery;
+                if (x.PickedUp == new DateTime())
+                    temp.CurrentLocation;
+                else
+                    temp.CurrentLocation;
+                temp.Battery = 0;
+                temp.NumParcels = x.Id;
+                DronesBl.Add(temp);
             }
         }
 

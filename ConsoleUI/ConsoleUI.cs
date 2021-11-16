@@ -48,7 +48,7 @@ namespace ConsoleUI
         static void AddMenu()
         {
             string choise ;
-            int id,  chargeSlot, wheigt, status, Priority, battery, senderId, targetId;
+            int id,  chargeSlot, wheigt, Priority, senderId, targetId;
             double longattitude, lattitude;
             string model, stringName, name, phone;
 
@@ -143,8 +143,12 @@ namespace ConsoleUI
                     options.SendDroneToCharge(id, stationId);
                     break;
                 case "e":
+                    Console.WriteLine("Enter the drone id:");
+                    int.TryParse(Console.ReadLine(), out id);
+                   options. ReleseDroneFromCharge(id);
                     break;
-
+                case "f":
+                    break;
             }
         }
         /// <summary>method display menu - view of display object  
