@@ -118,7 +118,7 @@ namespace DalObject
         /// <param name="_Priority"> enum priority of parcel</param>
         public void AddNewParcel(int _Sender, int _TargetId, int _Wheight, int _Priority)
         {
-            DateTime _Requsted = DateTime.Now;
+            
             IDAL.DO.Parcel temp = new();
             temp.Id = DataSource.Config.idParcel++;
             temp.Sender = _Sender;
