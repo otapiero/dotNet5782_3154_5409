@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IBL.BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace IBL
     public partial class BL
     {
         private IDAL.IDal idal;
-        private List<BO.DroneToList> DronesBl = new List<BO.DroneToList>();
+        private List<DroneToList> DronesBl = new();
 
 
 
@@ -19,10 +20,13 @@ namespace IBL
         {
             Random rand = new();
             idal = new DalObject.DalObject();
+            //data lists
             List<IDAL.DO.Drone> dronesData = (List<IDAL.DO.Drone>)idal.AllDrones();
             List<IDAL.DO.Parcel> parcelsData = (List<IDAL.DO.Parcel>)idal.AllParcels();
             List<IDAL.DO.Costumer> costumerData = (List<IDAL.DO.Costumer>)idal.AllCustomers();
             List<IDAL.DO.Station> stationData = (List<IDAL.DO.Station>)idal.AllStation();
+
+
             Double[] vs = idal.ElectricityUse();
             double Avilable = vs[0];
             double Light = vs[1];
@@ -36,8 +40,8 @@ namespace IBL
             foreach (var x in parcelsNotDelivred)
             {
                 IDAL.DO.Drone tempDlDrone = dronesData.Find(z => z.Id.Equals(x.DroneId));
-                IDAL.DO.Costumer senderCostumer = costumerData.Find(z => z.Id.Equals(x.Sender));
-                IDAL.DO.Costumer targetCostumer = costumerData.Find(z => z.Id.Equals(x.TargetId));
+                IDAL.DO.Costumer senderCostumer = idal.SearchCostumer(x.Sender);
+                IDAL.DO.Costumer targetCostumer = idal.SearchCostumer(x.TargetId);
                 BO.Location senderLocation = new(senderCostumer.Longitude, senderCostumer.Lattitude);
                 BO.Location targetLocation = new(targetCostumer.Longitude, targetCostumer.Lattitude);
                 BO.DroneToList temp = new();
@@ -109,7 +113,7 @@ namespace IBL
                     
                     temp.status = BO.DroneStatuses.Available;
                     int i = rand.Next(parcelsDelivred.Count());
-                    IDAL.DO.Costumer targetCostumer = costumerData.Find(z => z.Id.Equals(parcelsDelivred[i].TargetId));
+                    IDAL.DO.Costumer targetCostumer = idal.SearchCostumer(parcelsDelivred[i].TargetId);
                     
                     temp.CurrentLocation = new(targetCostumer.Longitude, targetCostumer.Lattitude);
                     double min= DistanceLocation(temp.CurrentLocation, FindTheClosestStation(temp.CurrentLocation, stationData))* Avilable;
@@ -119,6 +123,8 @@ namespace IBL
             }
 
         }
+
+      
 
         private static double DistanceLocation(BO.Location x, BO.Location y)
         {

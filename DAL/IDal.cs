@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 {
    public interface IDal
     {
-        IDAL.DO.Costumer SearchCustomer(int id);
+        IDAL.DO.Costumer SearchCostumer(int id);
         IDAL.DO.Drone SearchDrone(int id);
         IDAL.DO.Parcel SearchParcel(int id);
         IDAL.DO.Station SearchStation(int id);

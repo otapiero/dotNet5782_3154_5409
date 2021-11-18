@@ -179,7 +179,7 @@ namespace ConsoleUI
                 case "c":
                     Console.WriteLine("Enter customer id.");
                     int.TryParse(Console.ReadLine(), out id);
-                    IDAL.DO.Costumer customer = options.SearchCustomer(id);
+                    IDAL.DO.Costumer customer = options.SearchCostumer(id);
                     Console.WriteLine(customer.ToString());
                     break;
                 case "d":

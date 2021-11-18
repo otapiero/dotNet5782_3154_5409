@@ -17,7 +17,7 @@ namespace DalObject
         }
         ///<summary>method <c>SearchCustomer</c> </summary>
         ///<param name="id"> searche the customer by id</param>
-        public IDAL.DO.Costumer SearchCustomer(int id)
+        public IDAL.DO.Costumer SearchCostumer(int id)
         {
             if (!DataSource.customers.Exists(x => x.Id.Equals(id)))
             {
