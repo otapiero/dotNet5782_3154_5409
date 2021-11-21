@@ -231,6 +231,15 @@ namespace DalObject
                 DataSource.DroneCharges.Remove(relese);
             }
         }
+        public void UpdateDroneModel(int id,string model)
+        {
+            IDAL.DO.Drone found = DataSource.drones.First(w => w.Id == id);
+            IDAL.DO.Drone temp = found;
+            temp.Model = model;
+            DataSource.drones.Remove(found);
+
+            DataSource.drones.Add(temp);
+        }
         ///<summary>List - copy list of station for the main program</summary>
         ///<returns>list of all stations</returns>
         public IEnumerable<IDAL.DO.Station> AllStation()

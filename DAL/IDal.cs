@@ -22,6 +22,8 @@ using System.Threading.Tasks;
         void DeliveryParcelToCustomer(int idParcel);
         void SendDroneToCharge(int idDrone, int idStation);
         void ReleseDroneFromCharge(int idDrone);
+        public void UpdateDroneModel(int id, string model);
+
         IEnumerable<IDAL.DO.Station> AllStation();
         IEnumerable<IDAL.DO.Drone> AllDrones();
         IEnumerable<IDAL.DO.Costumer> AllCustomers();

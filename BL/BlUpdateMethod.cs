@@ -10,9 +10,11 @@ namespace IBL
     {
         public void UpdateDroneModel(int id ,string model)
         {
+
             try
             {
-                idal.AllDrones().ToList().Where(w => w.id === id).select(s => s.model = model);
+
+                idal.UpdateDroneModel(id, model);
             }
             catch
             {
@@ -27,20 +29,20 @@ namespace IBL
                 {
                     int numOfDronesInCharge = 0;
                     idal.AllDronesIncharge().ToList()
-                        .where(w => w.StationId === id)
+                        .where(w => w.StationId == id)
                         .ForEach(numOfDronesInCharge++);
 
 
                     if (chargeSlots >= numOfDronesInCharge)
                     {
                         idal.AllStation().ToList()
-                            .Where(w => w.id === id)
+                            .Where(w => w.id == id)
                             .select(s => { s.name = name; s.chargeSlots = chargeSlots; });
                     }
                     else else throw ... "chargeSlots lees than numOfDronesInCharge "
                 }
 
-                else throw ... "name or chargeslot is empty"
+                else throw "name or chargeslot is empty";
             }
             catch
             {
@@ -56,7 +58,7 @@ namespace IBL
                 {
 
                     idal.AllCustomers().ToList()
-                        .Where(w => w.id === id)
+                        .Where(w => w.Id == id)
                         .select(s => { s.name = name; s.phone = phone; });
                 }
                 else throw ...
