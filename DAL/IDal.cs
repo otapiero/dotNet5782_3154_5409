@@ -26,6 +26,7 @@ using System.Threading.Tasks;
         IEnumerable<IDAL.DO.Drone> AllDrones();
         IEnumerable<IDAL.DO.Costumer> AllCustomers();
         IEnumerable<IDAL.DO.Parcel> AllParcels();
+        public IEnumerable<IDAL.DO.DroneCharge> AllDronesIncharge();
         IEnumerable<IDAL.DO.Parcel> NotAssociatedParcels();
         IEnumerable<IDAL.DO.Station> StationWithAvailebalChargePost();
 

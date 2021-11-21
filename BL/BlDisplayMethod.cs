@@ -12,6 +12,17 @@ namespace IBL
         public BO.BaseStation SearchStation(int id)
         {
             BO.BaseStation temp = new();
+            IDAL.DO.Station y = idal.SearchStation(id);
+            if (y.Equals(new IDAL.DO.Station()))
+            {
+                //  excaption station dose not exsit
+            }
+            temp.Location = new(y.Longitude, y.Lattitude);
+            temp.Name = y.Name;
+            temp.Id = y.Id;
+            temp.NumAvilableChargeStation = y.ChargeSlots;//
+            
+
             return temp;
         }
         public BO.CustomerBl SearchCostumer(int id)

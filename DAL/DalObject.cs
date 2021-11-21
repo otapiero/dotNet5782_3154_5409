@@ -86,6 +86,10 @@ namespace DalObject
         /// <param name=" _chargeSlots">status of charge</param>
         public void AddNewStation(int id,string _name, double _Longitude, double _Lattitude, int _chargeSlots)
         {
+            if (DataSource.stations.Exists(x => x.Id == id))
+            {
+                //excrption id
+            }
             IDAL.DO.Station temp = new();
             temp.Id = id;
             temp.Name = _name;
@@ -102,6 +106,11 @@ namespace DalObject
         /// <param name="_Lattitude"> location of station</param>
         public void AddNewCustomer(int _id, string _Name, string _Phone, double _Longitude, double _Lattitude)
         {
+
+            if (DataSource.customers.Exists(x => x.Id == _id))
+            {
+                //excrption id
+            }
             IDAL.DO.Costumer temp = new();
             temp.Id = _id;
             temp.Name = _Name;
@@ -118,7 +127,8 @@ namespace DalObject
         /// <param name="_Priority"> enum priority of parcel</param>
         public void AddNewParcel(int _Sender, int _TargetId, int _Wheight, int _Priority)
         {
-            
+
+         
             IDAL.DO.Parcel temp = new();
             temp.Id = DataSource.Config.idParcel++;
             temp.Sender = _Sender;
@@ -258,12 +268,21 @@ namespace DalObject
         ///<returns>list of all parcels</returns>
         public IEnumerable<IDAL.DO.Parcel> AllParcels()
         {
-            List<IDAL.DO.Parcel> allParcels = new List<IDAL.DO.Parcel>();
+            List<IDAL.DO.Parcel> allParcels = new();
             foreach (var t in DataSource.parcels)
             {
                 allParcels.Add(t);
             }
             return allParcels;
+        }
+        public IEnumerable<IDAL.DO.DroneCharge> AllDronesIncharge()
+        {
+            List<IDAL.DO.DroneCharge> allDronesIncharge = new();
+            foreach (var t in DataSource.DroneCharges)
+            {
+                allDronesIncharge.Add(t);
+            }
+            return allDronesIncharge;
         }
         ///<summary>List - copy list of all pending parcels </summary>
         ///<returns>list of all free parcel</returns>
