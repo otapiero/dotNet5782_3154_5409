@@ -21,8 +21,20 @@ namespace IBL
             temp.Name = y.Name;
             temp.Id = y.Id;
             temp.NumAvilableChargeStation = y.ChargeSlots;//
-            
-
+            IEnumerable<IDAL.DO.DroneCharge> all = idal.AllDronesIncharge();
+            all = from x in all
+                  where x.StationId == id
+                  select x;
+            IEnumerable<IDAL.DO.Drone> DronesIncharge = idal.AllDrones();
+            DronesIncharge = from x in DronesIncharge
+                             where all.ToList().Exists(z => z.DroneId == x.Id)
+                             select x;
+            temp.dronesInCharges = (List<BO.DroneInCharge>)from x in DronesIncharge
+                                                           select new BO.DroneInCharge
+                                                           {
+                                                               Id = x.Id,
+                                                               Battery=0
+                                                           };
             return temp;
         }
         public BO.CustomerBl SearchCostumer(int id)
