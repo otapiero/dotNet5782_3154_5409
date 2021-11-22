@@ -3,18 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IBL.BO;
 
 namespace IBL
 {
     public partial class BL
     {
+        
         public void UpdateDroneModel(int id ,string model)
         {
-            DronesBl
+          
             try
             {
-
-                idal.UpdateDroneModel(id, model);
+                BO.DroneToList result= DronesBl.Find(x=>x.Id==id);
+                if(result != null)
+                {
+                    BO.DroneToList temp = new();
+                    temp = result;
+                    temp.Model=model;
+                    DronesBl.Remove(result);
+                    DronesBl.Add(temp);
+                    idal.UpdateDroneModel(id, model);
+                }
+                else throw " id not exist";
+               
             }
             catch
             {
@@ -24,24 +36,22 @@ namespace IBL
         public void UpdateStation(int id,string name,int chargeSlots)
         {
             try
-            {//להוסיף ערך ברירת מחדל במקרה של ערך אחד
-                if (name.Length()>0 && chargeSlots>0)
-                {
-                    int numOfDronesInCharge = 0;
-                    idal.AllDronesIncharge().ToList()
-                        .where(w => w.StationId == id)
-                        .ForEach(numOfDronesInCharge++);
-
-
-                    if (chargeSlots >= numOfDronesInCharge)
-                    {
-                        idal.UpdateStation(id, name,chargeSlots);
+            {
+                 if(idal.AllStation().ToList().Exists(x=>x.Id==stationId))
+                 {
+                    
+                        int numOfDronesInCharge = idal.AllDronesIncharge().Tolist().Count(w => w.StationId==id);
+                        if (chargeSlots >= numOfDronesInCharge)
+                        {
+                            idal.UpdateStation(id, name,chargeSlots);
                       
-                    }
-                    else throw ... "chargeSlots lees than numOfDronesInCharge "
-                }
+                        }
+                        else throw ... "chargeSlots lees than numOfDronesInCharge "
+                  
 
-                else throw "name or chargeslot is empty";
+                }
+                else throw "the id not exist";
+               
             }
             catch
             {
@@ -53,12 +63,12 @@ namespace IBL
         {
             try
             {
-                //מקרה של שדה אחד מעודכן
-                if (name.Length()>0 && phone.Length()>0)
+               
+                if (idal.AllCustomers().ToList().Exists(x=>x.Id==stationId))
                 {
                     idal.UpdateCostumer( id, name,phone);
                 }
-                else throw ..."name or phone not vaild"
+                else throw ..."id not exist"
             }
             catch
             {
@@ -70,12 +80,30 @@ namespace IBL
             try
             {
                 
-
-
-                if (IBL.BL.DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Available))
+                if (DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Available))
                 {
-
-                    
+                    List<IDAL.DO.Station> stationData = (List<IDAL.DO.Station>)idal.AllStation();
+                    List<IDAL.DO.Station> stationData = (List<IDAL.DO.Station>)(from x in stationData
+                                                                                    where x.ChargeSlots > 0
+                                                                                    select x);
+                    if (stationData > 0)
+                    {
+                        DroneToList temp = DronesBl.Find(x=>x.Id==id);
+                        BO.Location closeStation = FindTheClosestStation(temp.CurrentLocation,stationData);
+                        double dis = DistanceLocation(temp.CurrentLocation, closeStation);
+                        IDAL.DO.Station chooseStation = stationData.Find(x=>x.Longitude == closeStation.Longitude && x.Lattitude==closeStation.Lattitude);
+                        Double[] vs = idal.ElectricityUse();
+                        double chargingRate = vs[4];
+                        if(temp.Battery -dis*chargingRate > 0)
+                        {
+                            temp.Battery = temp.Battery -dis*chargingRate;
+                            temp.CurrentLocation = closeStation;
+                            temp.status = DroneStatuses.Maintenace;
+                            idal.SendDroneToCharge( id, chooseStation);
+                        }
+                        else throw "Not enough battery"
+                    }
+                    else throw "There is no station available"
                 }
                 else throw ..."the drone isnt available"
             }
@@ -84,6 +112,7 @@ namespace IBL
                 //input phone or name empty
             }
         }
+      
         public void RelesaeDroneFromCharge(int id,double time)
         {
             try

@@ -204,41 +204,86 @@ namespace DalObject
         /// <param name = "idStation"> id free station</param>
         public void SendDroneToCharge(int idDrone, int idStation)
         {
+            try { 
             IDAL.DO.Drone found = SearchDrone(idDrone);
-            if (found.Id > 0)
+            IDAL.DO.Station foundS = AllStation().ToList().Find(x=>x.Id==idStation);
+            if (found.Id > 0 && foundS.Id>0)
             {
                 IDAL.DO.Drone temp = found;
-                
-      
+                IDAL.DO.Station tempS = foundS;
+                tempS.ChargeSlots -=1;
+                DataSource.stations.Remove(foundS);
+                DataSource.stations.Add(tempS);
                 DataSource.drones.Remove(found);
                 DataSource.drones.Add(temp);
                 DataSource.DroneCharges.Add(new IDAL.DO.DroneCharge(idDrone, idStation));
             }
+            }
+            catch { }
         }
             
         /// <summary>method ReleseDroneFromCharge - the function get drone relese it fron station </summary>
         /// <param name = "idDrone"> id drone to relese</param>
-        public void ReleseDroneFromCharge(int idDrone)
+        public void ReleseDroneFromCharge(int id)
         {
-            IDAL.DO.Drone found = SearchDrone(idDrone);
-            if (found.Id > 0)
-            {
-                IDAL.DO.Drone temp = found;
-              
-                IDAL.DO.DroneCharge relese = DataSource.DroneCharges.Find(x => x.DroneId.Equals(idDrone));
-                DataSource.drones.Remove(found);
-                DataSource.drones.Add(temp);
-                DataSource.DroneCharges.Remove(relese);
-            }
+            try { 
+                IDAL.DO.Drone found = SearchDrone(idDrone);
+                IDAL.DO.Station foundS = AllStation().ToList().Find(x=>x.Id==idStation);
+                if (found.Id > 0 && foundS.Id>0)
+                {
+                    IDAL.DO.Drone temp = found;
+                    IDAL.DO.Drone temp = found;
+                    IDAL.DO.Station tempS = foundS;
+                    tempS.ChargeSlots +=1;
+                    DataSource.stations.Remove(foundS);
+                    DataSource.stations.Add(tempS);
+                    IDAL.DO.DroneCharge relese = DataSource.DroneCharges.Find(x => x.DroneId.Equals(idDrone));
+                    DataSource.drones.Remove(found);
+                    DataSource.drones.Add(temp);
+                    DataSource.DroneCharges.Remove(relese);
+                }}
+            catch { }
         }
+         
         public void UpdateDroneModel(int id,string model)
         {
-            IDAL.DO.Drone found = DataSource.drones.First(w => w.Id == id);
+            try 
+	        {	        
+		    IDAL.DO.Drone found = DataSource.drones.First(w => w.Id == id);
             IDAL.DO.Drone temp = found;
             temp.Model = model;
             DataSource.drones.Remove(found);
-
             DataSource.drones.Add(temp);
+	        }
+	        catch (Exception)
+	        {
+
+		    throw;
+	        }
+            
+        }
+          public void UpdateStation(int id, string name,int chargeSlots)
+        {
+            IDAL.DO.Station found = DataSource.stations.First(w => w.Id == id);
+            IDAL.DO.Station temp = found;
+            name = name.Length()>0 ? name : found.Name;
+            chargeSlots = chargeSlots.ToString().Length()>0 ? chargeSlots : found.ChargeSlots;
+            temp.Name = name;
+            temp.ChargeSlots=chargeSlots;
+            DataSource.stations.Remove(found);
+            DataSource.stations.Add(temp);
+        }
+        public void UpdateCostumer(int id, string name,string phone)
+        {
+            IDAL.DO.Costumer found = DataSource.customers.First(w => w.Id == id);
+            IDAL.DO.Costumer temp = found;
+            name = name.Length()>0 ? name : found.Name;
+            phone = phone.Length()>0 ? phone : found.Name;
+            temp.Name = name;
+            temp.Phone = phone;
+            temp.ChargeSlots=chargeSlots;
+            DataSource.customers.Remove(found);
+            DataSource.customers.Add(temp);
         }
         ///<summary>List - copy list of station for the main program</summary>
         ///<returns>list of all stations</returns>
