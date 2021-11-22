@@ -12,7 +12,7 @@ namespace IBL
         {
             try
             {
-                idal.AllDrones().ToList().Where(w => w.id === id).select(s => s.model = model);
+                idal.AllDrones().ToList().Where(w => w.id == id).select(s => s.model = model);
             }
             catch
             {
@@ -27,14 +27,14 @@ namespace IBL
                 {
                     int numOfDronesInCharge = 0;
                     idal.AllDronesIncharge().ToList()
-                        .where(w => w.StationId === id)
+                        .where(w => w.StationId == id)
                         .ForEach(numOfDronesInCharge++);
 
 
                     if (chargeSlots >= numOfDronesInCharge)
                     {
                         idal.AllStation().ToList()
-                            .Where(w => w.id === id)
+                            .Where(w => w.id == id)
                             .select(s => { s.name = name; s.chargeSlots = chargeSlots; });
                     }
                     else else throw ... "chargeSlots lees than numOfDronesInCharge "
@@ -56,7 +56,7 @@ namespace IBL
                 {
 
                     idal.AllCustomers().ToList()
-                        .Where(w => w.id === id)
+                        .Where(w => w.id == id)
                         .select(s => { s.name = name; s.phone = phone; });
                 }
                 else throw ...
@@ -74,7 +74,7 @@ namespace IBL
                 {
 
                     idal.AllCustomers().ToList()
-                        .Where(w => w.id === id)
+                        .Where(w => w.id == id)
                         .select(s => { s.name = name; s.phone = phone; });
                 }
                 else throw ...
