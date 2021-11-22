@@ -16,8 +16,8 @@ namespace IBL
             public WeightCategories weight { get; set; }
             public Location CollectionLocation { get; set; }
             public Location DeliveryLocation { get; set; }
-            CustomerInParcel Sender { get; set; }
-            CustomerInParcel Getter { get; set; }
+            public CustomerInParcel Sender { get; set; }
+            public CustomerInParcel Getter { get; set; }
 
             public double DistanceDelivrery { get; set; }
 

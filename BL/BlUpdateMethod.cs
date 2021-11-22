@@ -10,7 +10,7 @@ namespace IBL
     {
         public void UpdateDroneModel(int id ,string model)
         {
-
+            DronesBl
             try
             {
 
