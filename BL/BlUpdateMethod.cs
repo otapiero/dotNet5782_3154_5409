@@ -10,9 +10,11 @@ namespace IBL
     {
         public void UpdateDroneModel(int id ,string model)
         {
+
             try
             {
-                idal.AllDrones().ToList().Where(w => w.id == id).select(s => s.model = model);
+
+                idal.UpdateDroneModel(id, model);
             }
             catch
             {
@@ -22,8 +24,8 @@ namespace IBL
         public void UpdateStation(int id,string name,int chargeSlots)
         {
             try
-            {
-                if (name && chargeSlots)
+            {//להוסיף ערך ברירת מחדל במקרה של ערך אחד
+                if (name.Length()>0 && chargeSlots>0)
                 {
                     int numOfDronesInCharge = 0;
                     idal.AllDronesIncharge().ToList()
@@ -33,14 +35,13 @@ namespace IBL
 
                     if (chargeSlots >= numOfDronesInCharge)
                     {
-                        idal.AllStation().ToList()
-                            .Where(w => w.id == id)
-                            .select(s => { s.name = name; s.chargeSlots = chargeSlots; });
+                        idal.UpdateStation(id, name,chargeSlots);
+                      
                     }
-                    else else throw ... "chargeSlots lees than numOfDronesInCharge "
+                    else throw ... "chargeSlots lees than numOfDronesInCharge "
                 }
 
-                else throw ... "name or chargeslot is empty"
+                else throw "name or chargeslot is empty";
             }
             catch
             {
@@ -52,14 +53,12 @@ namespace IBL
         {
             try
             {
-                if (name && phone)
+                //מקרה של שדה אחד מעודכן
+                if (name.Length()>0 && phone.Length()>0)
                 {
-
-                    idal.AllCustomers().ToList()
-                        .Where(w => w.id == id)
-                        .select(s => { s.name = name; s.phone = phone; });
+                    idal.UpdateCostumer( id, name,phone);
                 }
-                else throw ...
+                else throw ..."name or phone not vaild"
             }
             catch
             {
@@ -70,14 +69,15 @@ namespace IBL
         {
             try
             {
-                if (name && phone)
+                
+
+
+                if (IBL.BL.DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Available))
                 {
 
-                    idal.AllCustomers().ToList()
-                        .Where(w => w.id == id)
-                        .select(s => { s.name = name; s.phone = phone; });
+                    
                 }
-                else throw ...
+                else throw ..."the drone isnt available"
             }
             catch
             {
@@ -86,7 +86,22 @@ namespace IBL
         }
         public void RelesaeDroneFromCharge(int id,double time)
         {
+            try
+            {
 
+                
+
+                if (IBL.BL.DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Maintenace))
+                {
+                    idal.UpdateCostumer(id);
+
+                }
+                else throw ..."the drone isnt in Maintenace"
+            }
+            catch
+            {
+                //input phone or name empty
+            }
         }
         public void AssignPackageToDrone(int id)
         {
