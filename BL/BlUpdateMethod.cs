@@ -10,7 +10,7 @@ namespace IBL
     {
         public void UpdateDroneModel(int id ,string model)
         {
-
+            DronesBl
             try
             {
 
@@ -88,7 +88,7 @@ namespace IBL
         }
         public void RelesaeDroneFromCharge(int id,double time)
         {
-
+            DronesBl. 
         }
         public void AssignPackageToDrone(int id)
         {
