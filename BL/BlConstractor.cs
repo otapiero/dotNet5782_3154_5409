@@ -15,7 +15,6 @@ namespace IBL
 
 
 
-        DroneToList
         public BL()
         {
             Random rand = new();

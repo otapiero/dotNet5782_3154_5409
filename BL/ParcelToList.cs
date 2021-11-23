@@ -10,6 +10,16 @@ namespace IBL
     {
      public   class ParcelToList
         {
+            public ParcelToList(int id, string nameSender, string nameGetter, WeightCategories weight, Priorities priorities, ParcelStatus status)
+            {
+                Id=id;
+                NameSender=nameSender;
+                NameGetter=nameGetter;
+                Weight=weight;
+                Priorities=priorities;
+                Status=status;
+            }
+
             public int Id { get; set; }
             public string NameSender { get; set; }
             public string NameGetter { get; set; }

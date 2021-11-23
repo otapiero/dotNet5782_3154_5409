@@ -15,7 +15,13 @@ namespace IBL
            
             public int NumAvilableChargeStation { get; set; }
             public int NumNotAvilableChargeStation { get; set; }
-        }
-    }
-    
+            public BaseStationToList(int id, string name, int numAvaiable, int numNotAvailable)
+            {
+                Id=id; 
+                Name=name; 
+                NumAvilableChargeStation=numAvaiable; 
+                NumNotAvilableChargeStation=numNotAvailable;
+            }
+        }     
+    } 
 }
