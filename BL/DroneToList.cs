@@ -10,6 +10,17 @@ namespace IBL
     {
       public class DroneToList
         {
+            public DroneToList(int id, string model, WeightCategories weight, double battery, DroneStatuses status, Location currentLocation, int parcelId)
+            {
+                Id=id;
+                Model=model;
+                Weight=weight;
+                Battery=battery;
+                this.status=status;
+                CurrentLocation=currentLocation;
+                ParcelId=parcelId;
+            }
+
             public int Id { get; set; }
             public string Model { get; set; }
             public WeightCategories Weight { get; set; }

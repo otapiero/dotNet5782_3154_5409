@@ -216,7 +216,6 @@ namespace DalObject
             }
             catch { }
         }
-            
         /// <summary>method ReleseDroneFromCharge - the function get drone relese it fron station </summary>
         /// <param name = "idDrone"> id drone to relese</param>
         public void ReleseDroneFromCharge(int id)
