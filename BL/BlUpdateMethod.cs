@@ -83,10 +83,10 @@ namespace IBL
                 if (DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Available))
                 {
                     List<IDAL.DO.Station> stationData = (List<IDAL.DO.Station>)idal.AllStation();
-                    List<IDAL.DO.Station> stationData = (List<IDAL.DO.Station>)(from x in stationData
+                    stationData = (List<IDAL.DO.Station>)(from x in stationData
                                                                                     where x.ChargeSlots > 0
                                                                                     select x);
-                    if (stationData > 0)
+                    if (stationData.Count() > 0)
                     {
                         DroneToList temp = DronesBl.Find(x=>x.Id==id);
                         BO.Location closeStation = FindTheClosestStation(temp.CurrentLocation,stationData);
@@ -94,12 +94,12 @@ namespace IBL
                         IDAL.DO.Station chooseStation = stationData.Find(x=>x.Longitude == closeStation.Longitude && x.Lattitude==closeStation.Lattitude);
                         Double[] vs = idal.ElectricityUse();
                         double chargingRate = vs[4];
-                        if(temp.Battery -dis*chargingRate > 0)
+                        if(temp.Battery - dis*chargingRate > 0)
                         {
-                            temp.Battery = temp.Battery -dis*chargingRate;
+                            temp.Battery = temp.Battery - (dis*chargingRate);
                             temp.CurrentLocation = closeStation;
                             temp.status = DroneStatuses.Maintenace;
-                            idal.SendDroneToCharge( id, chooseStation);
+                            idal.SendDroneToCharge( id, chooseStation.Id);
                         }
                         else throw "Not enough battery"
                     }

@@ -205,19 +205,14 @@ namespace DalObject
         public void SendDroneToCharge(int idDrone, int idStation)
         {
             try { 
-            IDAL.DO.Drone found = SearchDrone(idDrone);
-            IDAL.DO.Station foundS = AllStation().ToList().Find(x=>x.Id==idStation);
-            if (found.Id > 0 && foundS.Id>0)
-            {
-                IDAL.DO.Drone temp = found;
+           
+                IDAL.DO.Station foundS = SearchStation(idStation);
                 IDAL.DO.Station tempS = foundS;
                 tempS.ChargeSlots -=1;
                 DataSource.stations.Remove(foundS);
                 DataSource.stations.Add(tempS);
-                DataSource.drones.Remove(found);
-                DataSource.drones.Add(temp);
                 DataSource.DroneCharges.Add(new IDAL.DO.DroneCharge(idDrone, idStation));
-            }
+            
             }
             catch { }
         }
@@ -227,13 +222,11 @@ namespace DalObject
         public void ReleseDroneFromCharge(int id)
         {
             try { 
-                IDAL.DO.Drone found = SearchDrone(idDrone);
-                IDAL.DO.Station foundS = AllStation().ToList().Find(x=>x.Id==idStation);
-                if (found.Id > 0 && foundS.Id>0)
-                {
-                    IDAL.DO.Drone temp = found;
-                    IDAL.DO.Drone temp = found;
-                    IDAL.DO.Station tempS = foundS;
+                
+                IDAL.DO.Station foundS = SearchStation(id);
+
+
+                IDAL.DO.Station tempS = foundS;
                     tempS.ChargeSlots +=1;
                     DataSource.stations.Remove(foundS);
                     DataSource.stations.Add(tempS);
