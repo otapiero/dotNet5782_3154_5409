@@ -10,7 +10,7 @@ namespace IBL
     {
         public void UpdateDroneModel(int id ,string model)
         {
-            DronesBl
+            
             try
             {
 
@@ -27,10 +27,7 @@ namespace IBL
             {
                 if (name && chargeSlots)
                 {
-                    int numOfDronesInCharge = 0;
-                    idal.AllDronesIncharge().ToList()
-                        .where(w => w.StationId == id)
-                        .ForEach(numOfDronesInCharge++);
+                    int numOfDronesInCharge =idal.AllDronesIncharge().ToList().Count(w => w.StationId == id);
 
 
                     if (chargeSlots >= numOfDronesInCharge)

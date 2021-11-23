@@ -126,7 +126,7 @@ namespace DalObject
             public static double Intermidiate=1.5;
             public static double Heavy=2;
             //per houre
-            public static double chargingRatePerHoure=50;
+            public static double chargingRatePerHoure=0.5;
 
 
         }

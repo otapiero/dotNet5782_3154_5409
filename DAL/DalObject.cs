@@ -215,7 +215,6 @@ namespace DalObject
                 DataSource.DroneCharges.Add(new IDAL.DO.DroneCharge(idDrone, idStation));
             }
         }
-            
         /// <summary>method ReleseDroneFromCharge - the function get drone relese it fron station </summary>
         /// <param name = "idDrone"> id drone to relese</param>
         public void ReleseDroneFromCharge(int idDrone)
