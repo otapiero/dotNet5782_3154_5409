@@ -13,9 +13,6 @@ namespace IBL
         private IDAL.IDal idal;
         private List<DroneToList> DronesBl = new();
 
-
-
-        DroneToList
         public BL()
         {
             Random rand = new();
@@ -136,8 +133,8 @@ namespace IBL
 
         private static BO.Location FindTheClosestStation(BO.Location x,List<IDAL.DO.Station > stations)
         {
-            double tempDistance, dis = DistanceLocation(x, new BO.Location(stations[0].Longitude, stations[0].Longitude));
-            BO.Location stationlocation = new(stations[0].Longitude, stations[0].Longitude);
+            double tempDistance, dis = DistanceLocation(x, new BO.Location(stations[0].Longitude, stations[0].Lattitude));
+            BO.Location stationlocation = new(stations[0].Longitude, stations[0].Lattitude);
             foreach(var y in stations)
             {
                 tempDistance= DistanceLocation(x, new BO.Location(y.Longitude, y.Lattitude));

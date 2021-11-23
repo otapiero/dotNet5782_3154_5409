@@ -12,7 +12,7 @@ namespace IBL
         public enum WeightCategories
         { Light, Intermidiate, Heavy }
         public enum Priorities
-        { Normal, Fast, Emergency }
+        { Emergency, Fast, Normal }
         public enum DroneStatuses
         { Available, Maintenace, Delivery }
         public enum ParcelStatus

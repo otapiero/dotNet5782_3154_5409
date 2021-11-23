@@ -37,16 +37,16 @@ namespace IBL
         {
             try
             {
-                 if(idal.AllStation().ToList().Exists(x=>x.Id==stationId))
+                 if(idal.AllStation().ToList().Exists(x=>x.Id==id))
                  {
                     
-                        int numOfDronesInCharge = idal.AllDronesIncharge().Tolist().Count(w => w.StationId==id);
+                        int numOfDronesInCharge = idal.AllDronesIncharge().Count(w => w.StationId==id);
                         if (chargeSlots >= numOfDronesInCharge)
                         {
                             idal.UpdateStation(id, name,chargeSlots);
                       
                         }
-                        else throw ... "chargeSlots lees than numOfDronesInCharge "
+                        else throw "chargeSlots lees than numOfDronesInCharge "
                   
 
                 }
@@ -64,7 +64,7 @@ namespace IBL
             try
             {
                
-                if (idal.AllCustomers().ToList().Exists(x=>x.Id==stationId))
+                if (idal.AllCustomers().ToList().Exists(x=>x.Id==id))
                 {
                     idal.UpdateCostumer( id, name,phone);
                 }
@@ -83,8 +83,7 @@ namespace IBL
                 if (DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Available))
                 {
                     List<IDAL.DO.Station> stationData = (List<IDAL.DO.Station>)idal.AllStation();
-                    stationData = (List<IDAL.DO.Station>)(from x in stationData
-                                                                                    where x.ChargeSlots > 0
+                    stationData = (List<IDAL.DO.Station>)(from x in stationData where x.ChargeSlots > 0
                                                                                     select x);
                     if (stationData.Count() > 0)
                     {
@@ -93,12 +92,13 @@ namespace IBL
                         double dis = DistanceLocation(temp.CurrentLocation, closeStation);
                         IDAL.DO.Station chooseStation = stationData.Find(x=>x.Longitude == closeStation.Longitude && x.Lattitude==closeStation.Lattitude);
                         Double[] vs = idal.ElectricityUse();
-                        double chargingRate = vs[4];
-                        if(temp.Battery - dis*chargingRate > 0)
+                        double Rate = vs[0];
+                        if(temp.Battery - dis*Rate > 0)
                         {
-                            temp.Battery = temp.Battery - (dis*chargingRate);
+                            temp.Battery = temp.Battery - (dis*Rate);
                             temp.CurrentLocation = closeStation;
                             temp.status = DroneStatuses.Maintenace;
+
                             idal.SendDroneToCharge( id, chooseStation.Id);
                         }
                         else throw "Not enough battery"
@@ -112,17 +112,19 @@ namespace IBL
                 //input phone or name empty
             }
         }
-      
         public void RelesaeDroneFromCharge(int id,double time)
         {
             try
             {
-
-                
-
-                if (IBL.BL.DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Maintenace))
+                if (DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Maintenace))
                 {
-                    idal.UpdateCostumer(id);
+                    DroneToList temp = DronesBl.Find(x => x.Id==id);
+                    Double[] vs = idal.ElectricityUse();
+                    double chargingRate = vs[4];
+                    temp.Battery+= time*chargingRate;
+                    temp.Battery = temp.Battery > 1000 ? temp.Battery=100 : temp.Battery;
+                    temp.status =  DroneStatuses.Available;
+                    idal.ReleseDroneFromCharge(id);
 
                 }
                 else throw ..."the drone isnt in Maintenace"
@@ -134,15 +136,112 @@ namespace IBL
         }
         public void AssignPackageToDrone(int id)
         {
+            try
+            {
+                if (DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Available))
+                {
+                    DroneToList temp = DronesBl.Find(x => x.Id==id);
+                    var parcelsData = (List<IDAL.DO.Parcel>)idal.AllParcels();
+                    parcelsData = (List<IDAL.DO.Parcel>)parcelsData.Select(x => x.DroneId==0 && x.Wheight <= (IDAL.DO.WeightCategories)temp.Weight);
+                    parcelsData=(List<IDAL.DO.Parcel>)parcelsData.OrderBy(x=> (int)x.Priority);
+                    var person = idal.SearchCostumer(parcelsData[0].Sender);
+                    double tempDistance, dis = DistanceLocation(temp.CurrentLocation, new BO.Location(person.Longitude, person.Lattitude));
+                    BO.Location parcelLocation = new(person.Longitude, person.Lattitude);
+                    int parcelTarget = 0;
+                    int parcelId = 0;
+                    foreach (var y in parcelsData)
+                    {
+                        var personT = idal.SearchCostumer(parcelsData[0].Sender);
+                        tempDistance= DistanceLocation(temp.CurrentLocation, new BO.Location(personT.Longitude, personT.Lattitude));
+                        if (tempDistance<dis)
+                        {
+                            dis = tempDistance;
+                            parcelLocation = new BO.Location(personT.Longitude, personT.Lattitude);
+                            parcelTarget =(y.TargetId);
+                            parcelId= y.Id;
+                        }
+                    }
+                    DroneToList targetId = DronesBl.Find(x => x.Id==parcelTarget);
+                    List<IDAL.DO.Station> stationData = (List<IDAL.DO.Station>)idal.AllStation();
+                    stationData = (List<IDAL.DO.Station>)(from x in stationData
+                                                          where x.ChargeSlots > 0
+                                                          select x);
+                    if (stationData.Count()<1) throw "no free empty";
+                    BO.Location closeStation = FindTheClosestStation(targetId.CurrentLocation, stationData);
+                    double fullDis = DistanceLocation(temp.CurrentLocation, parcelLocation)+DistanceLocation(parcelLocation, targetId.CurrentLocation)+DistanceLocation(closeStation, targetId.CurrentLocation);
+                    Double[] vs = idal.ElectricityUse();
+                    double Rate = vs[0];
 
+                    if (temp.Battery-Rate*fullDis>0)
+                    {
+                        temp.status=DroneStatuses.Delivery;
+                        temp.ParcelId= parcelId;
+                        idal.AssignPackageToDrone(parcelId, temp.Id);
+
+                    }
+                    else throw "Not enough battery";
+                }
+                else throw ..."the drone isnt in avilable";
+            }
+            catch
+            {
+                //input phone or name empty
+            }
         }
         public void CollectPackage(int id)
         {
-
+            try
+            {
+                if (DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Delivery))
+                {
+                    DroneToList temp = DronesBl.Find(x => x.Id==id);
+                    var parcelsData = (List<IDAL.DO.Parcel>)idal.AllParcels();
+                    var parcel = parcelsData.Find(x => x.Id==temp.ParcelId);
+                    if (parcel.PickedUp== new DateTime())
+                    {
+                        var person = idal.SearchCostumer(parcel.Sender);
+                        double fullDis = DistanceLocation(temp.CurrentLocation, new BO.Location(person.Longitude, person.Lattitude));
+                        Double[] vs = idal.ElectricityUse();
+                        temp.Battery-=fullDis*vs[(int)parcel.Wheight+1];
+                        temp.CurrentLocation=new BO.Location(person.Longitude, person.Lattitude);
+                        idal.CollectPackage(parcel.Id);
+                    }
+                    else throw ..."the parcel was picked up"
+                }
+                else throw ..."the drone isnt in Delivery"
+            }
+            catch
+            {
+                //input phone or name empty
+            }
         }
         public void DeliverPackage(int id)
         {
-
+            try
+            {
+                if (DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Delivery))
+                {
+                    DroneToList temp = DronesBl.Find(x => x.Id==id);
+                    var parcelsData = (List<IDAL.DO.Parcel>)idal.AllParcels();
+                    var parcel = parcelsData.Find(x => x.Id==temp.ParcelId);
+                    if (parcel.Delivered == new DateTime())
+                    {
+                        var person = idal.SearchCostumer(parcel.TargetId);
+                        double fullDis = DistanceLocation(temp.CurrentLocation, new BO.Location(person.Longitude, person.Lattitude));
+                        Double[] vs = idal.ElectricityUse();
+                        temp.Battery-=fullDis*vs[(int)parcel.Wheight+1];
+                        temp.CurrentLocation=new BO.Location(person.Longitude, person.Lattitude);
+                        temp.status=DroneStatuses.Available;
+                        idal.DeliverPackage(parcel.Id);
+                    }
+                    else throw ..."the parcel was delivered"
+                }
+                else throw ..."the drone isnt in Delivery"
+            }
+            catch
+            {
+                //input phone or name empty
+            }
         }
     }
 }

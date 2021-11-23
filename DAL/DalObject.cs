@@ -221,20 +221,16 @@ namespace DalObject
         /// <param name = "idDrone"> id drone to relese</param>
         public void ReleseDroneFromCharge(int id)
         {
-            try { 
-                
-                IDAL.DO.Station foundS = SearchStation(id);
+            try {
 
-
+                IDAL.DO.DroneCharge relese = DataSource.DroneCharges.Find(x => x.DroneId.Equals(id));
+                IDAL.DO.Station foundS = SearchStation(relese.StationId);
                 IDAL.DO.Station tempS = foundS;
-                    tempS.ChargeSlots +=1;
-                    DataSource.stations.Remove(foundS);
-                    DataSource.stations.Add(tempS);
-                    IDAL.DO.DroneCharge relese = DataSource.DroneCharges.Find(x => x.DroneId.Equals(idDrone));
-                    DataSource.drones.Remove(found);
-                    DataSource.drones.Add(temp);
-                    DataSource.DroneCharges.Remove(relese);
-                }}
+                tempS.ChargeSlots +=1;
+                DataSource.stations.Remove(foundS);
+                DataSource.stations.Add(tempS);
+                DataSource.DroneCharges.Remove(relese);
+                }
             catch { }
         }
          
@@ -255,12 +251,37 @@ namespace DalObject
 	        }
             
         }
-          public void UpdateStation(int id, string name,int chargeSlots)
+        public void AssignPackageToDrone(int idParcel, int idDrone)
+        {
+            IDAL.DO.Parcel found = DataSource.parcels.Find(x => x.Id == idParcel);
+            IDAL.DO.Parcel temp = found;
+            temp.DroneId = idDrone;
+            temp.Scheduled = DateTime.Now;
+            DataSource.parcels.Remove(found);
+            DataSource.parcels.Add(temp);
+        }
+        public void CollectPackage(int idParcel)
+        {
+            IDAL.DO.Parcel found = DataSource.parcels.Find(x => x.Id == idParcel);
+            IDAL.DO.Parcel temp = found;
+            temp.PickedUp= DateTime.Now;
+            DataSource.parcels.Remove(found);
+            DataSource.parcels.Add(temp);
+        }
+        public void DeliverPackage(int idParcel)
+        {
+            IDAL.DO.Parcel found = DataSource.parcels.Find(x => x.Id == idParcel);
+            IDAL.DO.Parcel temp = found;
+            temp.Delivered= DateTime.Now;
+            DataSource.parcels.Remove(found);
+            DataSource.parcels.Add(temp);
+        }
+        public void UpdateStation(int id, string name,int chargeSlots)
         {
             IDAL.DO.Station found = DataSource.stations.First(w => w.Id == id);
             IDAL.DO.Station temp = found;
-            name = name.Length()>0 ? name : found.Name;
-            chargeSlots = chargeSlots.ToString().Length()>0 ? chargeSlots : found.ChargeSlots;
+            name = name.Length >0 ? name : found.Name;
+            chargeSlots = chargeSlots.ToString().Length>0 ? chargeSlots : found.ChargeSlots;
             temp.Name = name;
             temp.ChargeSlots=chargeSlots;
             DataSource.stations.Remove(found);
@@ -270,11 +291,10 @@ namespace DalObject
         {
             IDAL.DO.Costumer found = DataSource.customers.First(w => w.Id == id);
             IDAL.DO.Costumer temp = found;
-            name = name.Length()>0 ? name : found.Name;
-            phone = phone.Length()>0 ? phone : found.Name;
+            name = name.Length>0 ? name : found.Name;
+            phone = phone.Length>0 ? phone : found.Name;
             temp.Name = name;
             temp.Phone = phone;
-            temp.ChargeSlots=chargeSlots;
             DataSource.customers.Remove(found);
             DataSource.customers.Add(temp);
         }
