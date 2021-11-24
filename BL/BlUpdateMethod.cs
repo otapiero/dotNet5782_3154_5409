@@ -233,7 +233,7 @@ namespace IBL
                         temp.status=DroneStatuses.Available;
                         idal.DeliverPackage(parcel.Id);
                     }
-                    //else throw ..."the parcel was delivered"
+                    //else throw new idExapcion("the parcel was delivered");
                 }
                // else throw ..."the drone isnt in Delivery"
             }

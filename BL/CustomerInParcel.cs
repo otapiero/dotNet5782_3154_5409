@@ -19,7 +19,7 @@ namespace IBL
             public string Name { get; set; }
             public override string ToString()
             {
-                return "Id: " + Id + "\nname: " + Name;
+                return "  Id: " + Id + "\n  name: " + Name+"\n";
             }
         }
     }

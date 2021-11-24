@@ -14,6 +14,10 @@ namespace IBL
             public double Battery { get; set; }
             public Location CurrentLocation { get; set; }
 
+            public override string ToString()
+            {
+                return "\n  Id: "+Id +"\n  Battery: "+Battery+"\n  Location: "+CurrentLocation+"\n";
+            }
         }
         
     }

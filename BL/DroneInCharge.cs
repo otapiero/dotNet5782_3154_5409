@@ -12,7 +12,11 @@ namespace IBL
         {
             public int Id { get; set; }
             public double Battery { get; set; }
-            
+
+            public override string ToString()
+            {
+                return "\n  Id: "+Id+"\n  battery: "+Battery+"\n";
+            }
         }
     }
 }
