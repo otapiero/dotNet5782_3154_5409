@@ -10,7 +10,7 @@ namespace IBL
     {
       public  class CustomerToList
         {
-            public CustomerToList(int id, string name, int numberPhone, int numParcelsDelivred, int numParcelsNotDelivred, int numParcelsGetted, int numParcelsInTheWay)
+            public CustomerToList(int id, string name, string numberPhone, int numParcelsDelivred, int numParcelsNotDelivred, int numParcelsGetted, int numParcelsInTheWay)
             {
                 Id=id;
                 Name=name;
@@ -23,7 +23,7 @@ namespace IBL
 
             public int Id { get; set; }
             public string Name { get; set; }
-            public int NumberPhone { get; set; }
+            public string NumberPhone { get; set; }
             public int NumParcelsDelivred { get; set; }
             public int NumParcelsNotDelivred { get; set; }
             public int NumParcelsGetted { get; set; }

@@ -30,15 +30,14 @@ namespace IBL
             double Intermidiate = vs[2];
             double Heavy = vs[3];
             double chargingRate = vs[4];
-           ; //Filter parcel
-            List<IDAL.DO.Parcel> parcelsNotDelivred = (from j in parcelsData
-                                                                                    where j.DroneId != 0 && j.Delivered == new DateTime()
-                                                                                    select j).ToList();
-            Console.WriteLine("gggg");
+            ; //Filter parcel
 
-            ;
+            
+            List<IDAL.DO.Parcel> parcelsNotDelivred = parcelsData.Where(x => ((x.DroneId != 0) &&(x.Delivered==new DateTime()))).ToList();
+            
             foreach (var x in parcelsNotDelivred)
             {
+                
                 IDAL.DO.Drone tempDlDrone = dronesData.Find(z => z.Id.Equals(x.DroneId));
                 IDAL.DO.Costumer senderCostumer = idal.SearchCostumer(x.Sender);
                 IDAL.DO.Costumer targetCostumer = idal.SearchCostumer(x.TargetId);
@@ -82,16 +81,17 @@ namespace IBL
                 DronesBl.Add(temp);
 
             }
-
+            
 
             List<IDAL.DO.Drone> freeDrones = (from t in dronesData
                                                                    where (false == parcelsNotDelivred.Exists(y => y.DroneId == t.Id))
                                                                    select t).ToList();
+            Console.WriteLine("g");
             List<IDAL.DO.Parcel> parcelsDelivred = (from x in parcelsData
                                                                              where x.DroneId != 0 && x.Delivered != new DateTime()
                                                                              select x).ToList();
 
-
+            
             foreach (var x in freeDrones)
             {
                 int randomcase = rand.Next(0, 2);
