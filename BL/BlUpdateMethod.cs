@@ -9,31 +9,32 @@ namespace IBL
 {
     public partial class BL
     {
-        
-        public void UpdateDroneModel(int id ,string model)
+
+        public void UpdateDroneModel(int id, string model)
         {
-          
+
             try
             {
-                BO.DroneToList result= DronesBl.Find(x=>x.Id==id);
-                if(result != null)
+                BO.DroneToList result = DronesBl.Find(x => x.Id==id);
+                if (result != null)
                 {
-                    BO.DroneToList temp ;
+                    BO.DroneToList temp;
                     temp = result;
                     temp.Model=model;
                     DronesBl.Remove(result);
                     DronesBl.Add(temp);
                     idal.UpdateDroneModel(id, model);
                 }
-               // else throw " id not exist";
-               
+                throw new BO.IBException("Id not found.");
+
             }
-            catch
+            catch (IDAL.DO.IdExaption x)
             {
-                //dorone id not exist
+                throw new BO.IBException(x); ;
+
             }
         }
-        public void UpdateStation(int id,string name,int chargeSlots)
+            public void UpdateStation(int id,string name,int chargeSlots)
         {
             try
             {
@@ -46,16 +47,18 @@ namespace IBL
                             idal.UpdateStation(id, name,chargeSlots);
                       
                         }
-                       // else throw "chargeSlots lees than numOfDronesInCharge "
-                  
+                        throw new BO.IBException("chargeSlots lees than numOfDronesInCharge");
+                    
+
 
                 }
-               // else throw "the id not exist";
-               
+                throw new BO.IBException("Id not found.");
+                
             }
-            catch
+            catch (IDAL.DO.IdExaption x)
             {
-                //input chargeSlots or name empty
+                throw new BO.IBException(x); ;
+
             }
 
         }
@@ -68,11 +71,12 @@ namespace IBL
                 {
                     idal.UpdateCostumer( id, name,phone);
                 }
-               // else throw ..."id not exist"
+               throw new BO.IBException("id not exist");
             }
-            catch
+            catch (IDAL.DO.IdExaption x)
             {
-                //input phone or name empty
+                throw new BO.IBException(x); ;
+
             }
         }
         public void SendDroneToCharge(int id)
@@ -101,15 +105,19 @@ namespace IBL
 
                             idal.SendDroneToCharge( id, chooseStation.Id);
                         }
-                       // else throw "Not enough battery"
+                        throw new BO.IBException("Not enough battery");
+                        // else throw "Not enough battery"
                     }
-                   // else throw "There is no station available"
+                    throw new BO.IBException("There is no station available");
+                    // else throw "There is no station available"
                 }
-              //  else throw ..."the drone isnt available"
+                throw new BO.IBException("the drone isnt available");
+                //  else throw ..."the drone isnt available"
             }
-            catch
+            catch (IDAL.DO.IdExaption x)
             {
-                //input phone or name empty
+                throw new BO.IBException(x); ;
+
             }
         }
         public void RelesaeDroneFromCharge(int id,double time)
@@ -127,11 +135,13 @@ namespace IBL
                     idal.ReleseDroneFromCharge(id);
 
                 }
-               // else throw ..."the drone isnt in Maintenace"
+                throw new BO.IBException("the drone isnt in Maintenace");
+                // else throw ..."the drone isnt in Maintenace"
             }
-            catch
+            catch (IDAL.DO.IdExaption x)
             {
-                //input phone or name empty
+                throw new BO.IBException(x); ;
+
             }
         }
         public void AssignPackageToDrone(int id)
@@ -166,7 +176,7 @@ namespace IBL
                     stationData = (from x in stationData
                                                           where x.ChargeSlots > 0
                                                           select x).ToList();
-                   // if (stationData.Count()<1) throw "no free empty";
+                   if (stationData.Count()<1) throw new BO.IBException("no free empty"); 
                     BO.Location closeStation = FindTheClosestStation(targetId.CurrentLocation, stationData);
                     double fullDis = DistanceLocation(temp.CurrentLocation, parcelLocation)+DistanceLocation(parcelLocation, targetId.CurrentLocation)+DistanceLocation(closeStation, targetId.CurrentLocation);
                     Double[] vs = idal.ElectricityUse();
@@ -178,13 +188,15 @@ namespace IBL
                         temp.ParcelId= parcelId;
                         idal.AssignPackageToDrone(parcelId, temp.Id);
                     }
-                   // else throw "Not enough battery";
+                    throw new BO.IBException("Not enough battery"); 
                 }
-               // else throw ..."the drone isnt in avilable";
+                throw new BO.IBException("the drone isnt in avilable");
+                
             }
-            catch
+            catch (IDAL.DO.IdExaption x)
             {
-                //input phone or name empty
+                throw new BO.IBException(x); ;
+
             }
         }
         public void CollectPackage(int id)
@@ -205,13 +217,16 @@ namespace IBL
                         temp.CurrentLocation=new BO.Location(person.Longitude, person.Lattitude);
                         idal.CollectPackage(parcel.Id);
                     }
-                   // else throw ..."the parcel was picked up"
+                    throw new BO.IBException("the parcel was picked up");
+                    // else throw ..."the parcel was picked up"
                 }
-               // else throw ..."the drone isnt in Delivery"
+                throw new BO.IBException("the drone isnt in Delivery");
+                // else throw ..."the drone isnt in Delivery"
             }
-            catch
+            catch (IDAL.DO.IdExaption x)
             {
-                //input phone or name empty
+                throw new BO.IBException(x); ;
+
             }
         }
         public void DeliverPackage(int id)
@@ -233,13 +248,16 @@ namespace IBL
                         temp.status=DroneStatuses.Available;
                         idal.DeliverPackage(parcel.Id);
                     }
-                    //else throw new idExapcion("the parcel was delivered");
+                    throw new BO.IBException("the parcel was delivered");
+                    //else throw ..."the parcel was delivered"
                 }
-               // else throw ..."the drone isnt in Delivery"
+                throw new BO.IBException("the drone isnt in Delivery");
+                // else throw ..."the drone isnt in Delivery"
             }
-            catch
+            catch (IDAL.DO.IdExaption x)
             {
-                //input phone or name empty
+                throw new BO.IBException(x); ;
+
             }
         }
     }

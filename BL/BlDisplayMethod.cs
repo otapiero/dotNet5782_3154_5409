@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using IBL.BO;
+using IDAL.DO;
 namespace IBL
 {
 
@@ -38,8 +39,11 @@ namespace IBL
                 }
                 
             }
-            catch
-            { }
+            catch (IDAL.DO.IdExaption x)
+            {
+                throw new BO.IBException(x); ;
+
+            }
 
             return temp;
         }
@@ -57,16 +61,19 @@ namespace IBL
                 temp.location = new(x.Longitude, x.Lattitude);
 
             }
-            catch
-            { }
-            
+            catch (IDAL.DO.IdExaption x)
+            {
+                throw new BO.IBException(x); ;
+
+            }
+
             return temp;
         }
         public BO.DroneBL SearchDrone(int id)
         {
             if (DronesBl.Exists(y=>y.Id==id))
             {
-                //throw
+                throw new BO.IBException("id not esist");
             }
             var x = DronesBl.Find(x => x.Id == id);
           
@@ -96,8 +103,12 @@ namespace IBL
                     z.DistanceDelivrery = DistanceLocation(temp.CurrentLocation, getter.location);
                     temp.parcel = z;
                 }
-                catch
-                { }
+                catch 
+                {
+                    Console.WriteLine("error");
+
+                }
+
             }
             return temp;
         }
@@ -122,8 +133,11 @@ namespace IBL
                 temp.Getter = new(getter.Id, getter.name);
                 temp.weight =(BO.WeightCategories)x.Wheight;
             }
-            catch
-            { }
+            catch (IDAL.DO.IdExaption x)
+            {
+                throw new BO.IBException(x); ;
+
+            }
             return temp;
         }
 

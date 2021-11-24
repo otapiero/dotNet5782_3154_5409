@@ -157,10 +157,8 @@ namespace DalObject
             try
             {
                 IDAL.DO.Drone find = DataSource.drones.Find(x => x.Id > 0);
-
                 IDAL.DO.Drone temp = find;
                 DataSource.drones.Remove(find);
-
                 DataSource.drones.Add(temp);
                 IDAL.DO.Parcel pocket = SearchParcel(idParcel);
                 IDAL.DO.Parcel tempParcel = pocket;
@@ -201,7 +199,6 @@ namespace DalObject
                 IDAL.DO.Parcel tempParcel = pocket;
                 IDAL.DO.Drone found = SearchDrone(pocket.Id);
                 IDAL.DO.Drone tempDrone = found;
-               
                 tempParcel.Delivered = DateTime.Now;
                 DataSource.parcels.Remove(pocket);
                 DataSource.parcels.Add(tempParcel);
@@ -256,7 +253,7 @@ namespace DalObject
 	        catch (Exception)
 	        {
 
-		    throw;
+		    throw new IDAL.DO.IdExaption("Id not found."); ;
 	        }
             
         }

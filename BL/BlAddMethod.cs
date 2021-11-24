@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IBL.BO;
 
 
 namespace IBL
@@ -14,15 +15,15 @@ namespace IBL
         {
             if(numChargeSlot<1)
             {
-                //excaption
+                throw new BO.IBException("ChargeSlot full");
             }
             try
             {
                 idal.AddNewStation(id, name, longattitude, lattitude, numChargeSlot);
             }
-            catch
+            catch (IDAL.DO.IdExaption x)
             {
-
+                throw new BO.IBException(x); ;
             }
 
 
@@ -31,21 +32,23 @@ namespace IBL
         {
             if(!idal.AllStation().ToList().Exists(x=>x.Id==stationId))
             {
-                //excaption
+                throw new BO.IBException("not found station");
             }
             if (wheigt > 2 || wheigt < 0)
             {
-                //excaption wheigt
+                throw new BO.IBException("whiget not good");
             }
             try
             {
                 idal.AddNewDrone(id, model);
             }
-            catch
+            catch (IDAL.DO.IdExaption x)
             {
-
+                throw new BO.IBException(x); ;
             }
-            BO.DroneToList tempDroneToList= new();
+        
+
+                BO.DroneToList tempDroneToList= new();
             tempDroneToList.Id = id;
             tempDroneToList.Model = model;
             tempDroneToList.Weight = (BO.WeightCategories)wheigt;
@@ -53,46 +56,47 @@ namespace IBL
             tempDroneToList.CurrentLocation = new(tempStation.Longitude, tempStation.Lattitude);
             DronesBl.Add(tempDroneToList);
         }
-        public void AddNewCustomer(int id,string name,string phone,double longattitude, double lattitude)
+        public void AddNewCustomer(int id, string name, string phone, double longattitude, double lattitude)
         {
             try
             {
                 idal.AddNewCustomer(id, name, phone, longattitude, lattitude);
             }
-            catch
+            catch (IDAL.DO.IdExaption x)
             {
+                throw new BO.IBException(x); ;
 
             }
         }
 
-        public void AddNewParcel(int senderId,int targetId,int wheigt,int Priority)
+            public void AddNewParcel(int senderId,int targetId,int wheigt,int Priority)
         {
             if(idal.SearchCostumer(senderId).Equals(new IDAL.DO.Costumer()))
             {
-              //  excaption sender dose not exsit
+                throw new BO.IBException("customer not found");
 
             }
             if (idal.SearchCostumer(targetId).Equals(new IDAL.DO.Costumer()))
             {
-                //  excaption target dose not exsit
+                throw new BO.IBException("customer not found");
             }
             if(Priority>2||Priority<0)
             {
-                //excaption priority
+                throw new BO.IBException("customer not found");
             }
             if (wheigt > 2 || wheigt < 0)
             {
-                //excaption wheigt
+                throw new BO.IBException("customer not found");
             }
             try
             {
                 idal.AddNewParcel(senderId, targetId, wheigt, Priority);
             }
-            catch
+            catch (IDAL.DO.IdExaption x)
             {
+                throw new BO.IBException(x); ;
 
             }
         }
-    }
 }
 

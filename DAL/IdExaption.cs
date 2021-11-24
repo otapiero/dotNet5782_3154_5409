@@ -9,20 +9,23 @@ namespace IDAL
     namespace DO
     {
         [Serializable]
-        class IdExaption : Exception
+        public class IdExaption : Exception
         {
-
-            public IdExaption() : base("Id is incorrect")
+           
+            public IdExaption(string message) : base(message)
             {
             }
 
-            public IdExaption(string name) : base(name)
-            {
+           
 
-            }
-            override public string ToString()
+            public override string ToString()
             {
-                return "IdNotFoundException: DAL error id\n" + Message;
+                return $"IdNotFoundException: DAL error id\n";
+            }
+
+            public static implicit operator string(IdExaption v)
+            {
+                throw new NotImplementedException();
             }
         }
     }
