@@ -18,7 +18,7 @@ namespace IBL
                 BO.DroneToList result= DronesBl.Find(x=>x.Id==id);
                 if(result != null)
                 {
-                    BO.DroneToList temp = new();
+                    BO.DroneToList temp ;
                     temp = result;
                     temp.Model=model;
                     DronesBl.Remove(result);

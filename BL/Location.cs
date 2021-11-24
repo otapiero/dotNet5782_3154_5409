@@ -18,6 +18,13 @@ namespace IBL
             }
             public double Longitude { get; set; }
             public double Lattitude { get; set; }
+
+            public override string ToString()
+            {
+                return "Location:\nLongitude: " +
+                    DalObject.Cordinates.LongitudeDoubleToString(Longitude) +
+                    "\nLattitude: " + DalObject.Cordinates.LatitudeDoubleToString(Lattitude);
+            }
         }
     }
    
