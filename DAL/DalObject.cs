@@ -23,9 +23,7 @@ namespace DalObject
             {
                 throw new IDAL.DO.IdExaption("Id not found.");
             }
-            IDAL.DO.Costumer find = new IDAL.DO.Costumer();
-            
-            find = DataSource.customers.Find(x => x.Id.Equals(id));
+            IDAL.DO.Costumer find  = DataSource.customers.Find(x => x.Id.Equals(id));
             return find;
         }
 
@@ -34,23 +32,23 @@ namespace DalObject
         /// <returns>the drone if exsist</returns>
         public IDAL.DO.Drone SearchDrone(int id)
         {
-            if (DataSource.drones.Exists(x => x.Id.Equals(id)))
+            if (!DataSource.drones.Exists(x => x.Id.Equals(id)))
             {
-                IDAL.DO.Drone found = DataSource.drones.Find(x => x.Id.Equals(id));
-                return found;
+                throw new IDAL.DO.IdExaption("Id not found.");
             }
-            IDAL.DO.Drone notfound = new IDAL.DO.Drone();
-            return notfound;
+            IDAL.DO.Drone found = DataSource.drones.Find(x => x.Id.Equals(id));
+            return found;
         }
         ///<summary>method <c>SearchStation</c> </summary>
         ///<param name="id"> searche the Station by id</param>
         public IDAL.DO.Station SearchStation(int id)
         {
-            IDAL.DO.Station find = new IDAL.DO.Station();
-            if (DataSource.stations.Exists(x => x.Id.Equals(id)))
+          
+            if (!DataSource.stations.Exists(x => x.Id.Equals(id)))
             {
-                find = DataSource.stations.Find(x => x.Id.Equals(id));
+                throw new IDAL.DO.IdExaption("Id not found.");
             }
+            IDAL.DO.Station find = DataSource.stations.Find(x => x.Id.Equals(id));
             return find;
         }
         /// <summary>method <c> SearchParcel</c> </summary>
@@ -58,13 +56,12 @@ namespace DalObject
         /// <returns>return the parcel if exsist</returns>
         public IDAL.DO.Parcel SearchParcel(int id)
         {
-            if (DataSource.parcels.Exists(x => x.Id.Equals(id)))
+            if (!DataSource.parcels.Exists(x => x.Id.Equals(id)))
             {
-                IDAL.DO.Parcel found = DataSource.parcels.Find(x => x.Id.Equals(id));
-                return found;
+                throw new IDAL.DO.IdExaption("Id not found.");
             }
-            IDAL.DO.Parcel notfound = new IDAL.DO.Parcel();
-            return notfound;
+            IDAL.DO.Parcel found = DataSource.parcels.Find(x => x.Id.Equals(id));
+            return found;
         }
         /// <summary>method AddNewDrone </summary>
         /// <param name="_model"> model of drone</param>
@@ -74,6 +71,10 @@ namespace DalObject
         ///         
         public void AddNewDrone(int id,string _model)
         {
+            if (DataSource.drones.Exists(x => x.Id.Equals(id)))
+            {
+                throw new IDAL.DO.IdExaption("Id alredy use.");
+            }
             IDAL.DO.Drone temp = new();
             temp.Id = id;
             temp.Model = _model;
@@ -88,7 +89,7 @@ namespace DalObject
         {
             if (DataSource.stations.Exists(x => x.Id == id))
             {
-                //excrption id
+                throw new IDAL.DO.IdExaption("Id alredy use.");
             }
             IDAL.DO.Station temp = new();
             temp.Id = id;
@@ -109,7 +110,7 @@ namespace DalObject
 
             if (DataSource.customers.Exists(x => x.Id == _id))
             {
-                //excrption id
+                throw new IDAL.DO.IdExaption("Id alredy use.");
             }
             IDAL.DO.Costumer temp = new();
             temp.Id = _id;
@@ -127,8 +128,15 @@ namespace DalObject
         /// <param name="_Priority"> enum priority of parcel</param>
         public void AddNewParcel(int _Sender, int _TargetId, int _Wheight, int _Priority)
         {
+            if (!DataSource.customers.Exists(x => x.Id.Equals(_Sender)))
+            {
+                throw new IDAL.DO.IdExaption("Id of sender dose not found.");
+            }
+            if (!DataSource.customers.Exists(x => x.Id.Equals(_TargetId)))
+            {
+                throw new IDAL.DO.IdExaption("Id of target dose not found.");
+            }
 
-         
             IDAL.DO.Parcel temp = new();
             temp.Id = DataSource.Config.idParcel++;
             temp.Sender = _Sender;
@@ -146,22 +154,24 @@ namespace DalObject
         /// <param name="idParcel"> id parcel to delivery</param>
         public void ConnectParcelToDrone(int idParcel)
         {
-            IDAL.DO.Drone find = new IDAL.DO.Drone();
-            //if have a avilable drone
-           
-            
-                //connect parcel to drone and update the list
-                find = DataSource.drones.Find(x => x.Id>0);
+            try
+            {
+                IDAL.DO.Drone find = DataSource.drones.Find(x => x.Id > 0);
+
                 IDAL.DO.Drone temp = find;
                 DataSource.drones.Remove(find);
-               
+
                 DataSource.drones.Add(temp);
                 IDAL.DO.Parcel pocket = SearchParcel(idParcel);
                 IDAL.DO.Parcel tempParcel = pocket;
                 tempParcel.DroneId = find.Id;
                 DataSource.parcels.Remove(pocket);
                 DataSource.parcels.Add(tempParcel);
-            
+            }
+            catch
+            { }
+
+
 
         }
         /// <summary>method ParceCollectionByDrone - the function get parcel and update time picked up </summary>

@@ -65,5 +65,46 @@ namespace IBL
 
             return allParcels;
         }
+        IEnumerable<BO.ParcelToList> ListParcelsNotAssigned()
+        {
+            List<BO.ParcelToList> ParcelsNotAssociated = new();
+            foreach (var x in idal.NotAssociatedParcels())
+            {
+                try
+                {
+                    var sender = SearchCostumer(x.Sender);
+                    var getter = SearchCostumer(x.TargetId);
+                
+                
+                BO.ParcelStatus status;
+                if (x.DroneId==0)
+                    status=BO.ParcelStatus.Defined;
+                else if (x.PickedUp==new DateTime())
+                    status=BO.ParcelStatus.Assigned;
+                else if (x.Delivered==new DateTime())
+                    status=BO.ParcelStatus.Colected;
+                else
+                    status=BO.ParcelStatus.Delivred;
+
+                ParcelsNotAssociated.Add(new(x.Id, sender.name, getter.name, (BO.WeightCategories)x.Wheight, (BO.Priorities)x.Priority, status));
+                }
+                catch { }
+            }
+
+            return ParcelsNotAssociated;
+        }
+
+        IEnumerable<BO.BaseStationToList> StationWithAvailebalChargePost()
+        {
+            List<BO.BaseStationToList> stationWithAvailebalChargePost = new();
+            foreach (IDAL.DO.Station x in idal.StationWithAvailebalChargePost())
+            {
+                int numOfDronesInCharge = idal.AllDronesIncharge().Count(w => w.StationId==x.Id);
+                stationWithAvailebalChargePost.Add(new(x.Id, x.Name, x.ChargeSlots, numOfDronesInCharge));
+            }
+            return stationWithAvailebalChargePost;
+        }
+
+
     }
 }

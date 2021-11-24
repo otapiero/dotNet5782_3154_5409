@@ -27,6 +27,12 @@ namespace IBL
             public Priorities Priorities { get; set; }
             public ParcelStatus Status { get; set; }
 
+            
+
+            public override string ToString()
+            {
+                return "Id="+Id +"NameSender="+ NameSender+   "NameGetter= "+NameGetter+" Weight="+Weight+" Priorities="+Priorities+" Status="+Status;
+            }
         }
 
     }
