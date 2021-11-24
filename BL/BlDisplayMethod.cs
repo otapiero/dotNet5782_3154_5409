@@ -63,8 +63,8 @@ namespace IBL
                foreach(var y in parcels)
                 {
                     BO.ParcelStatus status;
-                    var s = SearchCostumer(y.Sender);
-                    var t = SearchCostumer(y.TargetId);
+                    var s = idal.SearchCostumer(y.Sender);
+                    var t = idal.SearchCostumer(y.TargetId);
                     if (y.DroneId==0)
                         status=BO.ParcelStatus.Defined;
                     else if (y.Scheduled==new DateTime())
@@ -76,11 +76,11 @@ namespace IBL
                     else status=BO.ParcelStatus.Delivred;
 
                     if (y.Sender==id)
-                        temp.toCustomers.Add(new(y.DroneId,(BO.WeightCategories)y.Wheight,(BO.Priorities)y.Priority,status,new(t.Id,t.name)));
+                        temp.toCustomers.Add(new(y.DroneId,(BO.WeightCategories)y.Wheight,(BO.Priorities)y.Priority,status,new(t.Id,t.Name)));
 
 
                     if (y.Sender==id)
-                        temp.toCustomers.Add(new(y.DroneId, (BO.WeightCategories)y.Wheight, (BO.Priorities)y.Priority, status, new(s.Id, s.name)));
+                        temp.toCustomers.Add(new(y.DroneId, (BO.WeightCategories)y.Wheight, (BO.Priorities)y.Priority, status, new(s.Id, s.Name)));
 
                 }
             }
