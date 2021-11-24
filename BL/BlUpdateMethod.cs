@@ -177,7 +177,6 @@ namespace IBL
                         temp.status=DroneStatuses.Delivery;
                         temp.ParcelId= parcelId;
                         idal.AssignPackageToDrone(parcelId, temp.Id);
-
                     }
                     else throw "Not enough battery";
                 }
