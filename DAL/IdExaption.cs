@@ -16,8 +16,16 @@ namespace IDAL
             public string Mes;
             public IdExaption(string message) : base(message)
             {
-                Mes = message;
             }
+
+           
+
+            public override string ToString()
+            {
+                return $"IdNotFoundException: DAL error id\n";
+            }
+
+            Mes = message;
         }
     }
 }
