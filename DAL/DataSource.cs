@@ -122,9 +122,9 @@ namespace DalObject
             internal static int IdRandomCustomer = 1;
             //per kilometer
             public static double Avilable=0.5;
-            public static double Light=1;
-            public static double Intermidiate=1.5;
-            public static double Heavy=2;
+            public static double Light = 0.7;
+            public static double Intermidiate=1;
+            public static double Heavy=1.5;
             //per houre
             public static double chargingRatePerHoure=0.5;
 

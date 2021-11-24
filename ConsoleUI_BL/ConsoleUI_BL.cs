@@ -89,9 +89,9 @@ namespace ConsoleUI_BL
 
                 case "a":
                     Console.WriteLine("Enter new Station details:Id, name,location and num of ChargeSlots. ");
-
+                    
                     name = Console.ReadLine();
-                    double.TryParse(Console.ReadLine(), out longattitude);
+                    if(  double.TryParse(Console.ReadLine(), out longattitude)==false) { Console.WriteLine("wrong format of input"); break; };
                     double.TryParse(Console.ReadLine(), out lattitude);
                     int.TryParse(Console.ReadLine(), out chargeSlot);
 
@@ -153,7 +153,7 @@ namespace ConsoleUI_BL
             {
                 case "a":
                     Console.WriteLine("Enter the drone id.");
-                    int.TryParse(Console.ReadLine(), out id);
+                   if (int.TryParse(Console.ReadLine(), out id) == false) { Console.WriteLine("wrong format of input");break; };
                     Console.WriteLine("Enter the new drone model.");
                     model = Console.ReadLine();
                     options.UpdateDroneModel(id, model);
@@ -163,7 +163,7 @@ namespace ConsoleUI_BL
                     int.TryParse(Console.ReadLine(), out id);
                     Console.WriteLine("one or more of the follow details:name,max num of charge slots.");
                     name = Console.ReadLine();
-                    int.TryParse(Console.ReadLine(), out chargeSlots);
+                    if (int.TryParse(Console.ReadLine(), out chargeSlots) == false) { Console.WriteLine("wrong format of input"); break; };
                     options.UpdateStation(id,name,chargeSlots);
                     break;
                 case "c":
@@ -176,7 +176,7 @@ namespace ConsoleUI_BL
                     break;
                 case "d":
                     Console.WriteLine("Enter the drone id.");
-                    int.TryParse(Console.ReadLine(), out id);
+                    if (int.TryParse(Console.ReadLine(), out id) == false) { Console.WriteLine("wrong format of input"); break; };
 
 
                     try

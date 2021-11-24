@@ -31,7 +31,7 @@ namespace IBL
 
             public override string ToString()
             {
-                return "Id="+Id +"NameSender="+ NameSender+   "NameGetter= "+NameGetter+" Weight="+Weight+" Priorities="+Priorities+" Status="+Status;
+                return "Id="+Id +"\nNameSender= "+ NameSender+ "\nNameGetter= "+NameGetter+"\nWeight= "+Weight+"\nPriorities= "+Priorities+"\nStatus= "+Status;
             }
         }
 

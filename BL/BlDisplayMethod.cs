@@ -74,7 +74,7 @@ namespace IBL
                 var y = SearchParcel(x.ParcelId);
                 BO.ParcelInDelivrery z = new();
                 z.Id = y.Id;
-                z.statusesDelivrery = true;
+                z.statusDelivrery = true;
                 z.weight = y.weight;
                 z.Priorities = y.priorities;
                 var sender = SearchCostumer(y.Sender.Id);

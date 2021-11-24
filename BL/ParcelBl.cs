@@ -20,6 +20,22 @@ namespace IBL
             DateTime Assignation { get; set; }
             DateTime ColectionTime { get; set; }
             DateTime DeliveryTime { get; set; }
+
+            public override string ToString()
+            {
+                return 
+                        "Id" + Id +
+                        "\nSender" + Sender +
+                        "\nGetter" + Getter +
+                        "\nweight" + weight +
+                        "\npriorities" + priorities +
+                        "\ndrone" + drone +
+                        "\nTime of Creation" + TimeCreation +
+                        "\nAssignation" + Assignation +
+                        "\nTime of Colection" + ColectionTime +
+                        "\nTime of Delivery" + DeliveryTime;
+            }
+        
         }
     }
     
