@@ -55,6 +55,7 @@ namespace IBL
                 temp.name = x.Name;
                 temp.numberPhone = x.Phone;
                 temp.location = new(x.Longitude, x.Lattitude);
+
             }
             catch
             { }
