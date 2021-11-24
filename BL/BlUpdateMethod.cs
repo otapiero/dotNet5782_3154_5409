@@ -83,8 +83,8 @@ namespace IBL
                 if (DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Available))
                 {
                     List<IDAL.DO.Station> stationData = (List<IDAL.DO.Station>)idal.AllStation();
-                    stationData = (List<IDAL.DO.Station>)(from x in stationData where x.ChargeSlots > 0
-                                                                                    select x);
+                    stationData = (from x in stationData where x.ChargeSlots > 0
+                                                                                    select x).ToList();
                     if (stationData.Count() > 0)
                     {
                         DroneToList temp = DronesBl.Find(x=>x.Id==id);
@@ -163,9 +163,9 @@ namespace IBL
                     }
                     DroneToList targetId = DronesBl.Find(x => x.Id==parcelTarget);
                     List<IDAL.DO.Station> stationData = (List<IDAL.DO.Station>)idal.AllStation();
-                    stationData = (List<IDAL.DO.Station>)(from x in stationData
+                    stationData = (from x in stationData
                                                           where x.ChargeSlots > 0
-                                                          select x);
+                                                          select x).ToList();
                    // if (stationData.Count()<1) throw "no free empty";
                     BO.Location closeStation = FindTheClosestStation(targetId.CurrentLocation, stationData);
                     double fullDis = DistanceLocation(temp.CurrentLocation, parcelLocation)+DistanceLocation(parcelLocation, targetId.CurrentLocation)+DistanceLocation(closeStation, targetId.CurrentLocation);
