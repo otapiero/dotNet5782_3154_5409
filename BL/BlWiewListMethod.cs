@@ -31,7 +31,7 @@ namespace IBL
                 int notDelivred = allParcels.Count(y => (y.Sender==x.Id)&&y.Delivered== new DateTime());
                 int getedParcels = allParcels.Count(y => (y.TargetId==x.Id)&&y.Delivered!= new DateTime());
                 int inTheWay = allParcels.Count(y => (y.TargetId==x.Id)&&y.Delivered== new DateTime());
-                allCustomer.Add(new(x.Id,x.Name,Convert.ToInt32( x.Phone), delivred, notDelivred, getedParcels, inTheWay));
+                allCustomer.Add(new(x.Id,x.Name, x.Phone, delivred, notDelivred, getedParcels, inTheWay));
             }
             return allCustomer;
         }

@@ -31,9 +31,10 @@ namespace IBL
             double Heavy = vs[3];
             double chargingRate = vs[4];
            ; //Filter parcel
-            List<IDAL.DO.Parcel> parcelsNotDelivred = (List<IDAL.DO.Parcel>)(from x in parcelsData
-                                                                                    where x.DroneId != 0 && x.Delivered == new DateTime()
-                                                                                    select x);
+            List<IDAL.DO.Parcel> parcelsNotDelivred = (from j in parcelsData
+                                                                                    where j.DroneId != 0 && j.Delivered == new DateTime()
+                                                                                    select j).ToList();
+            Console.WriteLine("gggg");
 
             ;
             foreach (var x in parcelsNotDelivred)
@@ -83,12 +84,12 @@ namespace IBL
             }
 
 
-            List<IDAL.DO.Drone> freeDrones = (List<IDAL.DO.Drone>)(from t in dronesData
+            List<IDAL.DO.Drone> freeDrones = (from t in dronesData
                                                                    where (false == parcelsNotDelivred.Exists(y => y.DroneId == t.Id))
-                                                                   select t);
-            List<IDAL.DO.Parcel> parcelsDelivred = (List<IDAL.DO.Parcel>)(from x in parcelsData
+                                                                   select t).ToList();
+            List<IDAL.DO.Parcel> parcelsDelivred = (from x in parcelsData
                                                                              where x.DroneId != 0 && x.Delivered != new DateTime()
-                                                                             select x);
+                                                                             select x).ToList();
 
 
             foreach (var x in freeDrones)

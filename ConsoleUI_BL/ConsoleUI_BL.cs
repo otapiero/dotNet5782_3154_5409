@@ -372,8 +372,7 @@ namespace ConsoleUI_BL
                     Console.WriteLine("All the stations:");
                     IEnumerable<IBL.BO.BaseStationToList> lst = options.ListStation();
                     
-                    Console.WriteLine("hhh");
-                    foreach (var x in lst)
+                   foreach (var x in lst)
                     {
 
                         Console.WriteLine(x);
