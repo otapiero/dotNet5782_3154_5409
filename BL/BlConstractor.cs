@@ -19,7 +19,7 @@ namespace IBL
             idal = new DalObject.DalObject();
             //data lists
             List<IDAL.DO.Drone> dronesData = (List<IDAL.DO.Drone>)idal.AllDrones();
-            List<IDAL.DO.Parcel> parcelsData = idal.AllParcels().ToList();
+            List<IDAL.DO.Parcel> parcelsData = (List<IDAL.DO.Parcel>)idal.AllParcels();
             List<IDAL.DO.Costumer> costumerData = (List<IDAL.DO.Costumer>)idal.AllCustomers();
             List<IDAL.DO.Station> stationData = (List<IDAL.DO.Station>)idal.AllStation();
 
