@@ -39,9 +39,9 @@ namespace IBL
                 }
                 
             }
-            catch (IDAL.DO.IdExaption x)
+            catch (Exception x)
             {
-                throw new BO.IBException(x); ;
+                throw new BO.IBException(x.Message); ;
 
             }
 
@@ -59,10 +59,34 @@ namespace IBL
                 temp.name = x.Name;
                 temp.numberPhone = x.Phone;
                 temp.location = new(x.Longitude, x.Lattitude);
+                var parcels = idal.AllParcels();
+               foreach(var y in parcels)
+                {
+                    BO.ParcelStatus status;
+                    var s = SearchCostumer(y.Sender);
+                    var t = SearchCostumer(y.TargetId);
+                    if (y.DroneId==0)
+                        status=BO.ParcelStatus.Defined;
+                    else if (y.Scheduled==new DateTime())
+                        status= BO.ParcelStatus.Assigned;
+                    else if (y.PickedUp==new DateTime())
+                    {
+                        status=BO.ParcelStatus.Colected;
+                    }
+                    else status=BO.ParcelStatus.Delivred;
+
+                    if (y.Sender==id)
+                        temp.toCustomers.Add(new(y.DroneId,(BO.WeightCategories)y.Wheight,(BO.Priorities)y.Priority,status,new(t.Id,t.name)));
+
+
+                    if (y.Sender==id)
+                        temp.toCustomers.Add(new(y.DroneId, (BO.WeightCategories)y.Wheight, (BO.Priorities)y.Priority, status, new(s.Id, s.name)));
+
+                }
             }
-            catch (IDAL.DO.IdExaption x)
+            catch (Exception x)
             {
-                throw new BO.IBException(x); ;
+                throw new BO.IBException(x.Message); ;
 
             }
 
@@ -132,9 +156,9 @@ namespace IBL
                 temp.Getter = new(getter.Id, getter.name);
                 temp.weight =(BO.WeightCategories)x.Wheight;
             }
-            catch (IDAL.DO.IdExaption x)
+            catch (Exception x)
             {
-                throw new BO.IBException(x); ;
+                throw new BO.IBException(x.Message); ;
 
             }
             return temp;

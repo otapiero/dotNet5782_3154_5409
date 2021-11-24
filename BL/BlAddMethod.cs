@@ -21,9 +21,10 @@ namespace IBL
             {
                 idal.AddNewStation(id, name, longattitude, lattitude, numChargeSlot);
             }
-            catch (IDAL.DO.IdExaption x)
+            catch (Exception x)
             {
-                throw new BO.IBException(x); ;
+                throw new BO.IBException(x.Message); ;
+
             }
 
 
@@ -42,9 +43,10 @@ namespace IBL
             {
                 idal.AddNewDrone(id, model);
             }
-            catch (IDAL.DO.IdExaption x)
+            catch (Exception x)
             {
-                throw new BO.IBException(x); ;
+                throw new BO.IBException(x.Message); ;
+
             }
 
 
@@ -62,9 +64,9 @@ namespace IBL
             {
                 idal.AddNewCustomer(id, name, phone, longattitude, lattitude);
             }
-            catch (IDAL.DO.IdExaption x)
+            catch (Exception x)
             {
-                throw new BO.IBException(x); ;
+                throw new BO.IBException(x.Message); ;
 
             }
         }
@@ -92,9 +94,9 @@ namespace IBL
             {
                 idal.AddNewParcel(senderId, targetId, wheigt, Priority);
             }
-            catch (IDAL.DO.IdExaption x)
+            catch (Exception x)
             {
-                throw new BO.IBException(x); ;
+                throw new BO.IBException(x.Message); ;
 
             }
         }

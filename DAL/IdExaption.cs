@@ -11,7 +11,9 @@ namespace IDAL
         [Serializable]
         public class IdExaption : Exception
         {
-           
+
+
+            public string Mes;
             public IdExaption(string message) : base(message)
             {
             }
@@ -23,10 +25,7 @@ namespace IDAL
                 return $"IdNotFoundException: DAL error id\n";
             }
 
-            public static implicit operator string(IdExaption v)
-            {
-                throw v;
-            }
+            Mes = message;
         }
     }
 }
