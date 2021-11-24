@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IBL.BO;
 
 namespace ConsoleUI_BL
 {
@@ -35,9 +36,9 @@ namespace ConsoleUI_BL
                         {
                             AddMenu();
                         }
-                        catch
+                        catch (IBL.BO.IBException x)
                         {
-
+                            Console.WriteLine(x);
                         }
                       ; break;
                     case "b":
@@ -45,9 +46,9 @@ namespace ConsoleUI_BL
                         {
                             UpdateMenu();
                         }
-                        catch
+                        catch (IBL.BO.IBException x)
                         {
-
+                            Console.WriteLine(x);
                         }
                         break;
                     case "c":
@@ -55,9 +56,9 @@ namespace ConsoleUI_BL
                         {
                             DisplayMenu();
                         }
-                        catch
+                        catch (IBL.BO.IBException x)
                         {
-
+                            Console.WriteLine(x);
                         }
                         break;
                     case "d":
@@ -66,9 +67,9 @@ namespace ConsoleUI_BL
                         try
                         {
                         }
-                        catch
+                        catch (IBL.BO.IBException x)
                         {
-
+                            Console.WriteLine(x);
                         }
                         break;
                     case "e":
@@ -104,7 +105,10 @@ namespace ConsoleUI_BL
                         options.AddNewStation(id, name, longattitude, lattitude, chargeSlot);
 
                     }
-                    catch { }
+                    catch (IBL.BO.IBException x)
+                    {
+                        Console.WriteLine(x);
+                    }
                     break;
                 case "b":
                     Console.WriteLine("Enter new drone details:\n Id,model,max wheigt to cary and id of base station.");
@@ -119,7 +123,10 @@ namespace ConsoleUI_BL
                         options.AddNewDrone(id, model, wheigt, idStation);
 
                     }
-                    catch { }
+                    catch (IBL.BO.IBException x)
+                    {
+                        Console.WriteLine(x);
+                    }
                     break;
                 case "c":
                     Console.WriteLine("Enter new customer details:\n id, name,phone and location.");
@@ -133,7 +140,10 @@ namespace ConsoleUI_BL
                         options.AddNewCustomer(id, stringName, phone, longattitude, lattitude);
 
                     }
-                    catch { }
+                    catch (IBL.BO.IBException x)
+                    {
+                        Console.WriteLine(x);
+                    }
                     break;
                 case "d":
                     Console.WriteLine("Enter new parcel details:\n Id of sender,id of target, wheigt between 0-2 and priority.");
@@ -145,7 +155,10 @@ namespace ConsoleUI_BL
                     {
                         options.AddNewParcel(senderId, targetId, wheigt, Priority);
                     }
-                    catch { }
+                    catch (IBL.BO.IBException x)
+                    {
+                        Console.WriteLine(x);
+                    }
                     break;
                 case "e":
 
@@ -183,8 +196,11 @@ namespace ConsoleUI_BL
                     {
                         options.UpdateDroneModel(id, model);
                     }
-                    catch { }
-                
+                    catch (IBL.BO.IBException x)
+                    {
+                        Console.WriteLine(x);
+                    }
+
                     break;
                 case "b":
                     Console.WriteLine("Enter the station base id.");
@@ -196,8 +212,11 @@ namespace ConsoleUI_BL
                     {
                         options.UpdateStation(id, name, chargeSlots);
                     }
-                    catch { }
-                   
+                    catch (IBL.BO.IBException x)
+                    {
+                        Console.WriteLine(x);
+                    }
+
                     break;
                 case "c":
                     Console.WriteLine("Enter the costumer id.");
@@ -209,8 +228,11 @@ namespace ConsoleUI_BL
                     {
                         options.UpdateCostumer(id, name, phone);
                     }
-                    catch { }
-                 
+                    catch (IBL.BO.IBException x)
+                    {
+                        Console.WriteLine(x);
+                    }
+
                     break;
                 case "d":
                     Console.WriteLine("Enter the drone id.");
@@ -222,9 +244,9 @@ namespace ConsoleUI_BL
                         options.SendDroneToCharge(id);
 
                     }
-                    catch
+                    catch (IBL.BO.IBException x)
                     {
-
+                        Console.WriteLine(x);
                     }
                     break;
                 case "e":
@@ -238,9 +260,9 @@ namespace ConsoleUI_BL
                     {
                         options.RelesaeDroneFromCharge(id, time);
                     }
-                    catch
+                    catch (IBL.BO.IBException x)
                     {
-
+                        Console.WriteLine(x);
                     }
                     break;
                 case "f":
@@ -250,9 +272,9 @@ namespace ConsoleUI_BL
                     {
                         options.AssignPackageToDrone(id);
                     }
-                    catch
+                    catch (IBL.BO.IBException x)
                     {
-
+                        Console.WriteLine(x);
                     }
 
                     break;
@@ -263,9 +285,9 @@ namespace ConsoleUI_BL
                     {
                         options.CollectPackage(id);
                     }
-                    catch
+                    catch (IBL.BO.IBException x)
                     {
-
+                        Console.WriteLine(x);
                     }
                     break;
                 case "k":
@@ -275,9 +297,9 @@ namespace ConsoleUI_BL
                     {
                         options.DeliverPackage(id);
                     }
-                    catch
+                    catch (IBL.BO.IBException x)
                     {
-
+                        Console.WriteLine(x);
                     }
                     break;
 
@@ -306,8 +328,10 @@ namespace ConsoleUI_BL
                         Console.WriteLine(station.ToString());
 
                     }
-                    catch
-                    { }
+                    catch (IBL.BO.IBException x)
+                    {
+                        Console.WriteLine(x);
+                    }
                     break;
                 case "b":
                     Console.WriteLine("Enter drone id.");
@@ -317,8 +341,10 @@ namespace ConsoleUI_BL
                         IBL.BO.DroneBL drone = options.SearchDrone(id);
 
                     }
-                    catch
-                    { }
+                    catch (IBL.BO.IBException x)
+                    {
+                        Console.WriteLine(x);
+                    }
                     break;
                 case "c":
                     Console.WriteLine("Enter costumer id.");
@@ -328,8 +354,10 @@ namespace ConsoleUI_BL
                         IBL.BO.CustomerBl costumer = options.SearchCostumer(id);
 
                     }
-                    catch
-                    { }
+                    catch (IBL.BO.IBException x)
+                    {
+                        Console.WriteLine(x);
+                    }
                     break;
                 case "d":
                     Console.WriteLine("Enter parcel id.");
@@ -343,8 +371,10 @@ namespace ConsoleUI_BL
                         IBL.BO.ParcelBl parcel = options.SearchParcel(id);
 
                     }
-                    catch
-                    { }
+                    catch (IBL.BO.IBException x)
+                    {
+                        Console.WriteLine(x);
+                    }
 
                     break;
                 case "e":
