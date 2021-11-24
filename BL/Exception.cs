@@ -2,7 +2,7 @@
 using System;
 namespace IBL
 {
-    namespace BO
+   /* namespace BO
     {
         [Serializable]
         public class ExistIdException : Exception
@@ -107,5 +107,5 @@ namespace IBL
 
 
 
-    }
+    }*/
 }

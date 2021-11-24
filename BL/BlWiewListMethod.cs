@@ -9,8 +9,10 @@ namespace IBL
 
     public partial class BL
     {
-        IEnumerable<BO.BaseStationToList> ListStation()
+       public IEnumerable<BO.BaseStationToList> ListStation()
         {
+            Console.WriteLine("dddddd");
+
             List<BO.BaseStationToList> allStation = new();
             foreach (IDAL.DO.Station x in idal.AllStation())
             {
@@ -19,7 +21,7 @@ namespace IBL
             }
             return allStation;
         }
-        IEnumerable<BO.CustomerToList> ListCustomer()
+      public  IEnumerable<BO.CustomerToList> ListCustomer()
         {
             List<BO.CustomerToList> allCustomer = new();
             var allParcels = idal.AllParcels();
@@ -33,7 +35,7 @@ namespace IBL
             }
             return allCustomer;
         }
-        IEnumerable<BO.DroneToList> ListDrones()
+       public IEnumerable<BO.DroneToList> ListDrones()
         {
             List<BO.DroneToList> allDrones = new();
             foreach (var x in DronesBl)
@@ -42,7 +44,7 @@ namespace IBL
             }
             return allDrones;
         }
-        IEnumerable<BO.ParcelToList> ListParcels()
+     public   IEnumerable<BO.ParcelToList> ListParcels()
         {
             List<BO.ParcelToList> allParcels = new();
 
@@ -65,12 +67,12 @@ namespace IBL
 
             return allParcels;
         }
-        IEnumerable<BO.ParcelToList> ListParcelsNotAssigned()
+       public IEnumerable<BO.ParcelToList> ListParcelsNotAssigned()
         {
             List<BO.ParcelToList> ParcelsNotAssociated = new();
             foreach (var x in idal.NotAssociatedParcels())
             {
-                try
+;                try
                 {
                     var sender = SearchCostumer(x.Sender);
                     var getter = SearchCostumer(x.TargetId);
@@ -94,7 +96,7 @@ namespace IBL
             return ParcelsNotAssociated;
         }
 
-        IEnumerable<BO.BaseStationToList> StationWithAvailebalChargePost()
+       public IEnumerable<BO.BaseStationToList> StationWithAvailebalChargePost()
         {
             List<BO.BaseStationToList> stationWithAvailebalChargePost = new();
             foreach (IDAL.DO.Station x in idal.StationWithAvailebalChargePost())

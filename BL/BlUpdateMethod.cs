@@ -25,7 +25,7 @@ namespace IBL
                     DronesBl.Add(temp);
                     idal.UpdateDroneModel(id, model);
                 }
-                else throw " id not exist";
+               // else throw " id not exist";
                
             }
             catch
@@ -46,11 +46,11 @@ namespace IBL
                             idal.UpdateStation(id, name,chargeSlots);
                       
                         }
-                        else throw "chargeSlots lees than numOfDronesInCharge "
+                       // else throw "chargeSlots lees than numOfDronesInCharge "
                   
 
                 }
-                else throw "the id not exist";
+               // else throw "the id not exist";
                
             }
             catch
@@ -68,7 +68,7 @@ namespace IBL
                 {
                     idal.UpdateCostumer( id, name,phone);
                 }
-                else throw ..."id not exist"
+               // else throw ..."id not exist"
             }
             catch
             {
@@ -101,11 +101,11 @@ namespace IBL
 
                             idal.SendDroneToCharge( id, chooseStation.Id);
                         }
-                        else throw "Not enough battery"
+                       // else throw "Not enough battery"
                     }
-                    else throw "There is no station available"
+                   // else throw "There is no station available"
                 }
-                else throw ..."the drone isnt available"
+              //  else throw ..."the drone isnt available"
             }
             catch
             {
@@ -127,7 +127,7 @@ namespace IBL
                     idal.ReleseDroneFromCharge(id);
 
                 }
-                else throw ..."the drone isnt in Maintenace"
+               // else throw ..."the drone isnt in Maintenace"
             }
             catch
             {
@@ -166,7 +166,7 @@ namespace IBL
                     stationData = (List<IDAL.DO.Station>)(from x in stationData
                                                           where x.ChargeSlots > 0
                                                           select x);
-                    if (stationData.Count()<1) throw "no free empty";
+                   // if (stationData.Count()<1) throw "no free empty";
                     BO.Location closeStation = FindTheClosestStation(targetId.CurrentLocation, stationData);
                     double fullDis = DistanceLocation(temp.CurrentLocation, parcelLocation)+DistanceLocation(parcelLocation, targetId.CurrentLocation)+DistanceLocation(closeStation, targetId.CurrentLocation);
                     Double[] vs = idal.ElectricityUse();
@@ -178,9 +178,9 @@ namespace IBL
                         temp.ParcelId= parcelId;
                         idal.AssignPackageToDrone(parcelId, temp.Id);
                     }
-                    else throw "Not enough battery";
+                   // else throw "Not enough battery";
                 }
-                else throw ..."the drone isnt in avilable";
+               // else throw ..."the drone isnt in avilable";
             }
             catch
             {
@@ -205,9 +205,9 @@ namespace IBL
                         temp.CurrentLocation=new BO.Location(person.Longitude, person.Lattitude);
                         idal.CollectPackage(parcel.Id);
                     }
-                    else throw ..."the parcel was picked up"
+                   // else throw ..."the parcel was picked up"
                 }
-                else throw ..."the drone isnt in Delivery"
+               // else throw ..."the drone isnt in Delivery"
             }
             catch
             {
@@ -233,9 +233,9 @@ namespace IBL
                         temp.status=DroneStatuses.Available;
                         idal.DeliverPackage(parcel.Id);
                     }
-                    else throw ..."the parcel was delivered"
+                    //else throw ..."the parcel was delivered"
                 }
-                else throw ..."the drone isnt in Delivery"
+               // else throw ..."the drone isnt in Delivery"
             }
             catch
             {

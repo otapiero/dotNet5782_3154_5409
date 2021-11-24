@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ConsoleUI_BL
 {
     class ConsoleUI_BL
     {
-        static IBL.BL options = new();
+        static IBL.IBL options = new  IBL.BL();
         static void Main(string[] args)
         {
-
+            
 
 
             string choise = "f";
@@ -57,9 +61,10 @@ namespace ConsoleUI_BL
                         }
                         break;
                     case "d":
+                        ListViewMenu();
+
                         try
                         {
-                            ListViewMenu();
                         }
                         catch
                         {
@@ -89,14 +94,14 @@ namespace ConsoleUI_BL
 
                 case "a":
                     Console.WriteLine("Enter new Station details:Id, name,location and num of ChargeSlots. ");
-                    
+                    if (int.TryParse(Console.ReadLine(), out id) == false) { Console.WriteLine("wrong format of input"); break; };
                     name = Console.ReadLine();
                     if(  double.TryParse(Console.ReadLine(), out longattitude)==false) { Console.WriteLine("wrong format of input"); break; };
                     double.TryParse(Console.ReadLine(), out lattitude);
                     if (int.TryParse(Console.ReadLine(), out chargeSlot) == false) { Console.WriteLine("wrong format of input"); break; };
                     try
                     {
-                        options.AddNewStation(0, name, longattitude, lattitude, chargeSlot);
+                        options.AddNewStation(id, name, longattitude, lattitude, chargeSlot);
 
                     }
                     catch { }
@@ -359,33 +364,63 @@ namespace ConsoleUI_BL
                 " f to view station with available charging spolts.\n g to return to Main menu.\n" +
                 "Enter your choise.");
             choise = Console.ReadLine();
-
+            
             switch (choise)
             {
 
                 case "a":
                     Console.WriteLine("All the stations:");
-                   options
+                    IEnumerable<IBL.BO.BaseStationToList> lst = options.ListStation();
+                    
+                    Console.WriteLine("hhh");
+                    foreach (var x in lst)
+                    {
+
+                        Console.WriteLine(x);
+                    }
+                    
+
+                    
                     break;
                 case "b":
                     Console.WriteLine("All the drones:");
-                  
+                    var ListDrones = options.ListDrones();
+                    foreach (var x in ListDrones)
+                    {
+                        Console.WriteLine(x);
+                    }
                     break;
                 case "c":
                     Console.WriteLine("All the customers:");
-                    
+                    var ListCustomer = options.ListCustomer();
+                    foreach (var x in ListCustomer)
+                    {
+                        Console.WriteLine(x);
+                    }
                     break;
                 case "d":
                     Console.WriteLine("All the parcels:");
-                   
+                    var ListParcels = options.ListParcels();
+                    foreach (var x in ListParcels)
+                    {
+                        Console.WriteLine(x);
+                    }
                     break;
                 case "e":
                     Console.WriteLine("Not associated parcels:");
-                    
+                    var ListParcelsNotAssigned = options.ListParcelsNotAssigned();
+                    foreach (var x in ListParcelsNotAssigned)
+                    {
+                        Console.WriteLine(x);
+                    }
                     break;
                 case "f":
                     Console.WriteLine("list of station with available charging stations:");
-                   
+                    var StationWithAvailebalChargePost = options.StationWithAvailebalChargePost();
+                    foreach (var x in StationWithAvailebalChargePost)
+                    {
+                        Console.WriteLine(x);
+                    }
                     break;
                 case "g":
                     break;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IBL
 {
-    interface IBL
+   public interface IBL
     {
         void AddNewStation(int id, string name, double longattitude, double lattitude, int numChargeSlot);
         void AddNewDrone(int id, string model, int wheigt, int stationId);

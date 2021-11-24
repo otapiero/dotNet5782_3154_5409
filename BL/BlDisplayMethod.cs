@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,56 +12,63 @@ namespace IBL
         public BO.BaseStation SearchStation(int id)
         {
             BO.BaseStation temp = new();
-            IDAL.DO.Station y = idal.SearchStation(id);
-            if (y.Equals(new IDAL.DO.Station()))
+            try
             {
-                //  excaption station dose not exsit
+                IDAL.DO.Station y = idal.SearchStation(id);
+                temp.Location = new(y.Longitude, y.Lattitude);
+                temp.Name = y.Name;
+                temp.Id = y.Id;
+                temp.NumAvilableChargeStation = y.ChargeSlots;//
+                IEnumerable<IDAL.DO.DroneCharge> all = idal.AllDronesIncharge();
+                all = from x in all
+                      where x.StationId == id
+                      select x;
+                IEnumerable<IDAL.DO.Drone> DronesIncharge = idal.AllDrones();
+                DronesIncharge = from x in DronesIncharge
+                                 where all.ToList().Exists(z => z.DroneId == x.Id)
+                                 select x;
+
+                temp.dronesInCharges = new();
+                foreach (var x in DronesIncharge)
+                {
+                    var t = new BO.DroneInCharge();
+                    t.Battery = 0;
+                    t.Id = x.Id;
+                    temp.dronesInCharges.Add(t);
+                }
+                
             }
-            temp.Location = new(y.Longitude, y.Lattitude);
-            temp.Name = y.Name;
-            temp.Id = y.Id;
-            temp.NumAvilableChargeStation = y.ChargeSlots;//
-            IEnumerable<IDAL.DO.DroneCharge> all = idal.AllDronesIncharge();
-            all = from x in all
-                  where x.StationId == id
-                  select x;
-            IEnumerable<IDAL.DO.Drone> DronesIncharge = idal.AllDrones();
-            DronesIncharge = from x in DronesIncharge
-                             where all.ToList().Exists(z => z.DroneId == x.Id)
-                             select x;
-           
-            temp.dronesInCharges = new();
-            foreach (var x in DronesIncharge)
-            {
-                var t = new BO.DroneInCharge();
-                t.Battery = 0;
-                t.Id = x.Id;
-                temp.dronesInCharges.Add(t);
-            }
+            catch
+            { }
+
             return temp;
         }
         public BO.CustomerBl SearchCostumer(int id)
         {
             
             BO.CustomerBl temp = new();
-            var x = idal.SearchCostumer(id);
-            if(x.Equals(new IDAL.DO.Costumer()))
+            
+            try
             {
-               // throw
+                var x = idal.SearchCostumer(id);
+                temp.Id = x.Id;
+                temp.name = x.Name;
+                temp.numberPhone = Convert.ToInt32(x.Phone);
+                temp.location = new(x.Longitude, x.Lattitude);
             }
-            temp.Id = x.Id;
-            temp.name = x.Name;
-            temp.numberPhone = Convert.ToInt32(x.Phone);
-            temp.location = new(x.Longitude, x.Lattitude);
+            catch
+            { }
+            
             return temp;
         }
         public BO.DroneBL SearchDrone(int id)
         {
-            var x = DronesBl.Find(x => x.Id == id);
-            if (x.Equals(new BO.DroneToList()))
+            if (DronesBl.Exists(y=>y.Id==id))
             {
-                //
+                //throw
             }
+            var x = DronesBl.Find(x => x.Id == id);
+          
             BO.DroneBL temp = new();
             temp.Battery = x.Battery;
             temp.CurrentLocation = x.CurrentLocation;
@@ -71,20 +78,25 @@ namespace IBL
             temp.Weight = x.Weight;
             if (x.ParcelId != 0)
             {
-                var y = SearchParcel(x.ParcelId);
-                BO.ParcelInDelivrery z = new();
-                z.Id = y.Id;
-                z.statusDelivrery = true;
-                z.weight = y.weight;
-                z.Priorities = y.priorities;
-                var sender = SearchCostumer(y.Sender.Id);
-                var getter = SearchCostumer(y.Getter.Id);
-                z.CollectionLocation = sender.location;
-               
-                z.Sender = new(sender.Id, sender.name);
-                z.Getter = new(getter.Id, getter.name);
-                z.DistanceDelivrery = DistanceLocation(temp.CurrentLocation, getter.location);
-                temp.parcel = z;
+                try
+                {
+                    var y = SearchParcel(x.ParcelId);
+                    BO.ParcelInDelivrery z = new();
+                    z.Id = y.Id;
+                    z.statusDelivrery = true;
+                    z.weight = y.weight;
+                    z.Priorities = y.priorities;
+                    var sender = SearchCostumer(y.Sender.Id);
+                    var getter = SearchCostumer(y.Getter.Id);
+                    z.CollectionLocation = sender.location;
+
+                    z.Sender = new(sender.Id, sender.name);
+                    z.Getter = new(getter.Id, getter.name);
+                    z.DistanceDelivrery = DistanceLocation(temp.CurrentLocation, getter.location);
+                    temp.parcel = z;
+                }
+                catch
+                { }
             }
             return temp;
         }
@@ -92,23 +104,25 @@ namespace IBL
         {
 
             BO.ParcelBl temp = new();
-            var x = idal.SearchParcel(id);
-            if(x.Equals(new IDAL.DO.Parcel()))
+            try
             {
-                //Throw
+                var x = idal.SearchParcel(id);
+
+                var drone = SearchDrone(x.DroneId);
+                temp.drone = new();
+                temp.drone.Battery = drone.Battery;
+                temp.drone.CurrentLocation = drone.CurrentLocation;
+                temp.drone.Id = drone.Id;
+                temp.Id = x.Id;
+                temp.priorities =(BO.Priorities)x.Priority;
+                var sender = SearchCostumer(x.Sender);
+                var getter = SearchCostumer(x.TargetId);
+                temp.Sender = new(sender.Id, sender.name);
+                temp.Getter = new(getter.Id, getter.name);
+                temp.weight =(BO.WeightCategories)x.Wheight;
             }
-            var drone = SearchDrone(x.DroneId);
-            temp.drone = new();
-            temp.drone.Battery = drone.Battery;
-            temp.drone.CurrentLocation = drone.CurrentLocation;
-            temp.drone.Id = drone.Id;
-            temp.Id = x.Id;
-            temp.priorities =(BO.Priorities) x.Priority;
-            var sender = SearchCostumer(x.Sender);
-            var getter = SearchCostumer(x.TargetId);
-            temp.Sender = new(sender.Id, sender.name);
-            temp.Getter = new(getter.Id, getter.name);
-            temp.weight =(BO.WeightCategories) x.Wheight;
+            catch
+            { }
             return temp;
         }
 

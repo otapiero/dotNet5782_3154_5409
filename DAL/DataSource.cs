@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DalObject
 {
-   ///<summary>Class - initialize class for the program</summary>
-   internal static class DataSource
+    ///<summary>Class - initialize class for the program</summary>
+    internal static class DataSource
     {
-        
+
         ///<summary>list of data for the programing<summary>
         internal static List<IDAL.DO.DroneCharge> drone = new List<IDAL.DO.DroneCharge>();
         internal static List<IDAL.DO.Drone> drones = new List<IDAL.DO.Drone>();
@@ -34,8 +31,8 @@ namespace DalObject
                 newDrone.Id = Config.idObject++;
                 newDrone.Id = Config.idDrone++;
                 newDrone.Model = GetRandomName();
-               
-              
+
+
                 drones.Add(newDrone);
             }
             //Initialize random customers
@@ -48,16 +45,16 @@ namespace DalObject
                 newCustomer.Name = GetRandomName();
                 newCustomer.Phone = GetRandomPhone();
                 newCustomer.Longitude = r.NextDouble() * 60;
-                newCustomer.Lattitude =r.NextDouble() * 60;
+                newCustomer.Lattitude = r.NextDouble() * 60;
                 customers.Add(newCustomer);
 
             }
-            //Initialize random parcels
-            
+         ;   //Initialize random parcels
+
             for (int i = 0; i < numParcels; i++)
             {
                 IDAL.DO.Parcel newParcel = new IDAL.DO.Parcel();
-                newParcel.Id = Config.idParcel++;
+                newParcel.Id = Config.idDrone++;
                 newParcel.Sender = r.Next(1, numCustomers);
                 newParcel.TargetId = r.Next(1, numCustomers);
                 newParcel.Wheight = (IDAL.DO.WeightCategories)r.Next(0, 3);
@@ -65,13 +62,13 @@ namespace DalObject
                 newParcel.Requsted = DateTime.Now;
                 newParcel.DroneId = r.Next(1, numDrones);
                 newParcel.Scheduled = newParcel.Requsted.AddMinutes(r.Next(15)); ;
-                
+
                 newParcel.PickedUp = newParcel.Scheduled.AddMinutes(r.Next(15));
-               
+
                 newParcel.Delivered = newParcel.PickedUp.AddMinutes(r.Next(15));
                 parcels.Add(newParcel);
             }
-            //Initialize random station
+           ; //Initialize random station
             for (int i = 0; i < numStations; i++)
             {
                 IDAL.DO.Station newStation = new IDAL.DO.Station();
@@ -82,12 +79,12 @@ namespace DalObject
                 newStation.ChargeSlots = r.Next(0, 101);
                 stations.Add(newStation);
             }
-            ///<summary>method<c>GetRandomPhone</c> - return random phone</summary>
+           ; ///<summary>method<c>GetRandomPhone</c> - return random phone</summary>
             static string GetRandomPhone()
             {
                 string phone = "058";
 
-                string numbers =  "0123465789" ;
+                string numbers = "0123465789";
                 int index;
                 for (int i = 0; i < 8; i++)
                 {
@@ -121,12 +118,13 @@ namespace DalObject
             internal static int IdStation = 1;
             internal static int IdRandomCustomer = 1;
             //per kilometer
-            public static double Avilable=0.5;
+            public static double Avilable = 0.5;
             public static double Light = 0.7;
-            public static double Intermidiate=1;
-            public static double Heavy=1.5;
+            public static double Intermidiate = 1;
+            public static double Heavy = 1.5;
             //per houre
-            public static double chargingRatePerHoure=0.5;
+            public static double chargingRatePerHoure = 0.5;
+
 
 
         }

@@ -213,7 +213,7 @@ namespace ConsoleUI
                     List<IDAL.DO.Station> stations = (List<IDAL.DO.Station>)options.AllStation();
                     foreach(var t in stations)
                     {
-                        Console.WriteLine(t.ToString());
+                        Console.WriteLine(t);
                     }
                     break;
                 case "b":
