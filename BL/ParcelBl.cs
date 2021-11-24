@@ -25,15 +25,15 @@ namespace IBL
             {
                 return 
                         "Id" + Id +
-                        "\nSender" + Sender +
-                        "\nGetter" + Getter +
-                        "\nweight" + weight +
-                        "\npriorities" + priorities +
-                        "\ndrone" + drone +
-                        "\nTime of Creation" + TimeCreation +
-                        "\nAssignation" + Assignation +
-                        "\nTime of Colection" + ColectionTime +
-                        "\nTime of Delivery" + DeliveryTime;
+                        "\nSender: " + Sender +
+                        "\nGetter: " + Getter +
+                        "\nweight: " + weight +
+                        "\npriorities: " + priorities +
+                        "\ndrone: " + drone +
+                        "\nTime of Creation: " + TimeCreation +
+                        "\nAssignation: " + Assignation +
+                        "\nTime of Colection: " + ColectionTime +
+                        "\nTime of Delivery: " + DeliveryTime+"\n";
             }
         
         }

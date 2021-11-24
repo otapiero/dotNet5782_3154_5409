@@ -27,7 +27,7 @@ namespace IBL
                 str +=  statusDelivrery == true ? "in delevry" : "not in delivrery";
                 str+="\n priority: "+Priorities+"\n Wheigt: "+weight+"\n Colection location: "+CollectionLocation+
                     "\n delivrery location: "+DeliveryLocation+"\n sender: "+Sender+"\n getter: "+ Getter +
-                    "\n distance: " +DistanceDelivrery;
+                    "\n distance: " +DistanceDelivrery+"\n";
                 return str;
             }
         }

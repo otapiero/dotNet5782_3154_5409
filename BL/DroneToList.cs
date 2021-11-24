@@ -35,7 +35,7 @@ namespace IBL
             public override string ToString()
             {
                 return "id: " + Id + "\nmodel: " + Model + "\nWeight: " + Weight + "\nBattery: " + Battery + "\nStattus: " + status + "\nlocation: " + CurrentLocation.ToString() +
-                    "\nparcel id: " + ParcelId;
+                    "\nparcel id: " + ParcelId+"\n";
 
             }
         }
