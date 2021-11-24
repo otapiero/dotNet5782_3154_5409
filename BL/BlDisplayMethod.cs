@@ -50,10 +50,10 @@ namespace IBL
             
             try
             {
-                var x = idal.SearchCostumer(id);
+                IDAL.DO.Costumer x = idal.SearchCostumer(id);
                 temp.Id = x.Id;
                 temp.name = x.Name;
-                temp.numberPhone = Convert.ToInt32(x.Phone);
+                temp.numberPhone = x.Phone;
                 temp.location = new(x.Longitude, x.Lattitude);
             }
             catch

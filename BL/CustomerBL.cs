@@ -18,7 +18,7 @@ namespace IBL
 
             public int Id { get; set; }
             public string name { get; set; }
-            public int numberPhone { get; set; }
+            public string numberPhone { get; set; }
             public Location location { get; set; } 
             
             List<ParcelAtCustomer> fromCustomers { get; set; }

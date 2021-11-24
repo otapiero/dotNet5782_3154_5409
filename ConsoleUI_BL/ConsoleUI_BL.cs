@@ -304,7 +304,7 @@ namespace ConsoleUI_BL
                     {
                         IBL.BO.BaseStation station = options.SearchStation(id);
                         Console.WriteLine(station.ToString());
-
+                      
                     }
                     catch
                     { }
@@ -315,7 +315,7 @@ namespace ConsoleUI_BL
                     try
                     {
                         IBL.BO.DroneBL drone = options.SearchDrone(id);
-
+                        Console.WriteLine(drone);
                     }
                     catch
                     { }
@@ -326,7 +326,7 @@ namespace ConsoleUI_BL
                     try
                     {
                         IBL.BO.CustomerBl costumer = options.SearchCostumer(id);
-
+                        Console.WriteLine(costumer);
                     }
                     catch
                     { }
@@ -341,7 +341,7 @@ namespace ConsoleUI_BL
                     try     
                     {
                         IBL.BO.ParcelBl parcel = options.SearchParcel(id);
-
+                        Console.WriteLine(parcel);
                     }
                     catch
                     { }
