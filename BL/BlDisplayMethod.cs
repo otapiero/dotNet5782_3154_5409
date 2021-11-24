@@ -39,9 +39,9 @@ namespace IBL
                 }
                 
             }
-            catch (IDAL.DO.IdExaption x)
+            catch (Exception x)
             {
-                throw new BO.IBException(x); ;
+                throw new BO.IBException(x.Message); ;
 
             }
 
@@ -61,9 +61,9 @@ namespace IBL
                 temp.location = new(x.Longitude, x.Lattitude);
 
             }
-            catch (IDAL.DO.IdExaption x)
+            catch (Exception x)
             {
-                throw new BO.IBException(x); ;
+                throw new BO.IBException(x.Message); ;
 
             }
 
@@ -133,9 +133,9 @@ namespace IBL
                 temp.Getter = new(getter.Id, getter.name);
                 temp.weight =(BO.WeightCategories)x.Wheight;
             }
-            catch (IDAL.DO.IdExaption x)
+            catch (Exception x)
             {
-                throw new BO.IBException(x); ;
+                throw new BO.IBException(x.Message); ;
 
             }
             return temp;

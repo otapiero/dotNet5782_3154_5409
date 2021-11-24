@@ -28,9 +28,9 @@ namespace IBL
                 throw new BO.IBException("Id not found.");
 
             }
-            catch (IDAL.DO.IdExaption x)
+            catch (Exception x)
             {
-                throw new BO.IBException(x); ;
+                throw new BO.IBException(x.Message); ;
 
             }
         }
@@ -55,9 +55,9 @@ namespace IBL
                 throw new BO.IBException("Id not found.");
                 
             }
-            catch (IDAL.DO.IdExaption x)
+            catch (Exception x)
             {
-                throw new BO.IBException(x); ;
+                throw new BO.IBException(x.Message); ;
 
             }
 
@@ -73,9 +73,9 @@ namespace IBL
                 }
                throw new BO.IBException("id not exist");
             }
-            catch (IDAL.DO.IdExaption x)
+            catch (Exception x)
             {
-                throw new BO.IBException(x); ;
+                throw new BO.IBException(x.Message); ;
 
             }
         }
@@ -114,9 +114,9 @@ namespace IBL
                 throw new BO.IBException("the drone isnt available");
                 //  else throw ..."the drone isnt available"
             }
-            catch (IDAL.DO.IdExaption x)
+            catch (Exception x)
             {
-                throw new BO.IBException(x); ;
+                throw new BO.IBException(x.Message); ;
 
             }
         }
@@ -138,9 +138,9 @@ namespace IBL
                 throw new BO.IBException("the drone isnt in Maintenace");
                 // else throw ..."the drone isnt in Maintenace"
             }
-            catch (IDAL.DO.IdExaption x)
+            catch (Exception x)
             {
-                throw new BO.IBException(x); ;
+                throw new BO.IBException(x.Message); ;
 
             }
         }
@@ -193,9 +193,9 @@ namespace IBL
                 throw new BO.IBException("the drone isnt in avilable");
                 
             }
-            catch (IDAL.DO.IdExaption x)
+            catch (Exception x)
             {
-                throw new BO.IBException(x); ;
+                throw new BO.IBException(x.Message); ;
 
             }
         }
@@ -223,9 +223,9 @@ namespace IBL
                 throw new BO.IBException("the drone isnt in Delivery");
                 // else throw ..."the drone isnt in Delivery"
             }
-            catch (IDAL.DO.IdExaption x)
+            catch (Exception x)
             {
-                throw new BO.IBException(x); ;
+                throw new BO.IBException(x.Message); ;
 
             }
         }
@@ -254,9 +254,9 @@ namespace IBL
                 throw new BO.IBException("the drone isnt in Delivery");
                 // else throw ..."the drone isnt in Delivery"
             }
-            catch (IDAL.DO.IdExaption x)
+            catch (Exception x)
             {
-                throw new BO.IBException(x); ;
+                throw new BO.IBException(x.Message); ;
 
             }
         }

@@ -90,6 +90,8 @@ namespace IBL
 
                 ParcelsNotAssociated.Add(new(x.Id, sender.name, getter.name, (BO.WeightCategories)x.Wheight, (BO.Priorities)x.Priority, status));
                 }
+                catch
+                { }
               
             }
 
