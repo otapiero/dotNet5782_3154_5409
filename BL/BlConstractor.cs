@@ -19,7 +19,7 @@ namespace IBL
             idal = new DalObject.DalObject();
             //data lists
             List<IDAL.DO.Drone> dronesData = (List<IDAL.DO.Drone>)idal.AllDrones();
-            List<IDAL.DO.Parcel> parcelsData = idal.AllParcels().ToList();
+            List<IDAL.DO.Parcel> parcelsData = (List<IDAL.DO.Parcel>)idal.AllParcels();
             List<IDAL.DO.Costumer> costumerData = (List<IDAL.DO.Costumer>)idal.AllCustomers();
             List<IDAL.DO.Station> stationData = (List<IDAL.DO.Station>)idal.AllStation();
 
@@ -30,17 +30,14 @@ namespace IBL
             double Intermidiate = vs[2];
             double Heavy = vs[3];
             double chargingRate = vs[4];
-            ; //Filter parcel
+           ; //Filter parcel
+            List<IDAL.DO.Parcel> parcelsNotDelivred = (List<IDAL.DO.Parcel>)(from x in parcelsData
+                                                                                    where x.DroneId != 0 && x.Delivered == new DateTime()
+                                                                                    select x);
 
-            foreach(var y in parcelsData)
-            {
-                Console.WriteLine(y.ToString());
-            }
-            List<IDAL.DO.Parcel> parcelsNotDelivred = parcelsData.Where(x => ((x.DroneId != 0) &&(x.Delivered.Equals(new DateTime())))).ToList();
-            
+            ;
             foreach (var x in parcelsNotDelivred)
             {
-
                 IDAL.DO.Drone tempDlDrone = dronesData.Find(z => z.Id.Equals(x.DroneId));
                 IDAL.DO.Costumer senderCostumer = idal.SearchCostumer(x.Sender);
                 IDAL.DO.Costumer targetCostumer = idal.SearchCostumer(x.TargetId);
