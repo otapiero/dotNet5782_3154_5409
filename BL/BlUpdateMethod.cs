@@ -195,7 +195,7 @@ namespace IBL
             }
             catch (Exception x)
             {
-                throw new BO.IBException(x.Message); ;
+                throw new BO.IBException(x.Message); 
 
             }
         }

@@ -59,7 +59,30 @@ namespace IBL
                 temp.name = x.Name;
                 temp.numberPhone = x.Phone;
                 temp.location = new(x.Longitude, x.Lattitude);
+                var parcels = idal.AllParcels();
+               foreach(var y in parcels)
+                {
+                    BO.ParcelStatus status;
+                    var s = SearchCostumer(y.Sender);
+                    var t = SearchCostumer(y.TargetId);
+                    if (y.DroneId==0)
+                        status=BO.ParcelStatus.Defined;
+                    else if (y.Scheduled==new DateTime())
+                        status= BO.ParcelStatus.Assigned;
+                    else if (y.PickedUp==new DateTime())
+                    {
+                        status=BO.ParcelStatus.Colected;
+                    }
+                    else status=BO.ParcelStatus.Delivred;
 
+                    if (y.Sender==id)
+                        temp.toCustomers.Add(new(y.DroneId,(BO.WeightCategories)y.Wheight,(BO.Priorities)y.Priority,status,new(t.Id,t.name)));
+
+
+                    if (y.Sender==id)
+                        temp.toCustomers.Add(new(y.DroneId, (BO.WeightCategories)y.Wheight, (BO.Priorities)y.Priority, status, new(s.Id, s.name)));
+
+                }
             }
             catch (Exception x)
             {
