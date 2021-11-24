@@ -25,7 +25,7 @@ namespace IDAL
 
             public static implicit operator string(IdExaption v)
             {
-                throw new NotImplementedException();
+                throw v;
             }
         }
     }

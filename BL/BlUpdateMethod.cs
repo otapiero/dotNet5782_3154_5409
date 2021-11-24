@@ -30,7 +30,7 @@ namespace IBL
             }
             catch (IDAL.DO.IdExaption x)
             {
-                throw new BO.IBException(x); ;
+                throw new BO.IBException(x); 
 
             }
         }
@@ -57,7 +57,7 @@ namespace IBL
             }
             catch (IDAL.DO.IdExaption x)
             {
-                throw new BO.IBException(x); ;
+                throw new BO.IBException(x); 
 
             }
 
@@ -75,7 +75,7 @@ namespace IBL
             }
             catch (IDAL.DO.IdExaption x)
             {
-                throw new BO.IBException(x); ;
+                throw new BO.IBException(x); 
 
             }
         }
@@ -116,7 +116,7 @@ namespace IBL
             }
             catch (IDAL.DO.IdExaption x)
             {
-                throw new BO.IBException(x); ;
+                throw new BO.IBException(x); 
 
             }
         }
@@ -140,7 +140,7 @@ namespace IBL
             }
             catch (IDAL.DO.IdExaption x)
             {
-                throw new BO.IBException(x); ;
+                throw new BO.IBException(x); 
 
             }
         }
@@ -195,7 +195,7 @@ namespace IBL
             }
             catch (IDAL.DO.IdExaption x)
             {
-                throw new BO.IBException(x); ;
+                throw new BO.IBException(x); 
 
             }
         }
@@ -225,7 +225,7 @@ namespace IBL
             }
             catch (IDAL.DO.IdExaption x)
             {
-                throw new BO.IBException(x); ;
+                throw new BO.IBException(x); 
 
             }
         }
@@ -256,7 +256,7 @@ namespace IBL
             }
             catch (IDAL.DO.IdExaption x)
             {
-                throw new BO.IBException(x); ;
+                throw new BO.IBException(x);
 
             }
         }

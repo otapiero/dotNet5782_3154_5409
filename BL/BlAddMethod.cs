@@ -11,9 +11,9 @@ namespace IBL
 
     public partial class BL
     {
-        public void AddNewStation(int id,string name,double longattitude,double lattitude,int numChargeSlot)
+        public void AddNewStation(int id, string name, double longattitude, double lattitude, int numChargeSlot)
         {
-            if(numChargeSlot<1)
+            if (numChargeSlot<1)
             {
                 throw new BO.IBException("ChargeSlot full");
             }
@@ -28,9 +28,9 @@ namespace IBL
 
 
         }
-        public void AddNewDrone(int id,string model,int wheigt,int stationId)
+        public void AddNewDrone(int id, string model, int wheigt, int stationId)
         {
-            if(!idal.AllStation().ToList().Exists(x=>x.Id==stationId))
+            if (!idal.AllStation().ToList().Exists(x => x.Id==stationId))
             {
                 throw new BO.IBException("not found station");
             }
@@ -46,9 +46,9 @@ namespace IBL
             {
                 throw new BO.IBException(x); ;
             }
-        
 
-                BO.DroneToList tempDroneToList= new();
+
+            BO.DroneToList tempDroneToList = new();
             tempDroneToList.Id = id;
             tempDroneToList.Model = model;
             tempDroneToList.Weight = (BO.WeightCategories)wheigt;
@@ -69,9 +69,9 @@ namespace IBL
             }
         }
 
-            public void AddNewParcel(int senderId,int targetId,int wheigt,int Priority)
+        public void AddNewParcel(int senderId, int targetId, int wheigt, int Priority)
         {
-            if(idal.SearchCostumer(senderId).Equals(new IDAL.DO.Costumer()))
+            if (idal.SearchCostumer(senderId).Equals(new IDAL.DO.Costumer()))
             {
                 throw new BO.IBException("customer not found");
 
@@ -80,7 +80,7 @@ namespace IBL
             {
                 throw new BO.IBException("customer not found");
             }
-            if(Priority>2||Priority<0)
+            if (Priority>2||Priority<0)
             {
                 throw new BO.IBException("customer not found");
             }
@@ -98,5 +98,6 @@ namespace IBL
 
             }
         }
+    }
 }
 
