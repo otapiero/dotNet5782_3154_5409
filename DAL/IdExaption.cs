@@ -25,7 +25,7 @@ namespace IDAL
                 return $"IdNotFoundException: DAL error id\n";
             }
 
-            Mes = message;
+            
         }
     }
 }

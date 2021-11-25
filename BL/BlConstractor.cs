@@ -86,7 +86,7 @@ namespace IBL
             List<IDAL.DO.Drone> freeDrones = (from t in dronesData
                                                                    where (false == parcelsNotDelivred.Exists(y => y.DroneId == t.Id))
                                                                    select t).ToList();
-            Console.WriteLine("g");
+            
             List<IDAL.DO.Parcel> parcelsDelivred = (from x in parcelsData
                                                                              where x.DroneId != 0 && x.Delivered != new DateTime()
                                                                              select x).ToList();
