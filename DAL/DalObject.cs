@@ -304,9 +304,32 @@ namespace DalObject
             DataSource.customers.Remove(found);
             DataSource.customers.Add(temp);
         }
+
+
+
+        public IEnumerable<IDAL.DO.Station> ListOfStations(Predicate<IDAL.DO.Station> f)
+        {
+            return DataSource.stations.FindAll(f);
+        }
+        public IEnumerable<IDAL.DO.Drone> ListOfDrones(Predicate<IDAL.DO.Drone> f)
+        {
+            return DataSource.drones.FindAll(f);
+        }
+        public IEnumerable<IDAL.DO.Costumer> ListOfCostumers(Predicate<IDAL.DO.Costumer> f)
+        {
+            return DataSource.customers.FindAll(f);
+        }
+        public IEnumerable<IDAL.DO.Parcel> ListOfParcels(Predicate<IDAL.DO.Parcel> f)
+        {
+            return DataSource.parcels.FindAll(f);
+        }
+        public IEnumerable<IDAL.DO.DroneCharge> ListOfDronesInCharge(Predicate<IDAL.DO.DroneCharge> f)
+        {
+            return DataSource.DroneCharges.FindAll(f);
+        }
         ///<summary>List - copy list of station for the main program</summary>
         ///<returns>list of all stations</returns>
-        public IEnumerable<IDAL.DO.Station> AllStation()
+        public IEnumerable<IDAL.DO.Station> AllStation( )
         {
             List<IDAL.DO.Station> allStations = new List<IDAL.DO.Station>();
             foreach(var t in DataSource.stations)
@@ -357,31 +380,10 @@ namespace DalObject
             }
             return allDronesIncharge;
         }
-        ///<summary>List - copy list of all pending parcels </summary>
-        ///<returns>list of all free parcel</returns>
-        public IEnumerable<IDAL.DO.Parcel> NotAssociatedParcels()
-        {
-            List<IDAL.DO.Parcel> notAssociatedParcels = new List<IDAL.DO.Parcel>();
-            foreach(var t in DataSource.parcels)
-            {
-                if (t.DroneId == 0)
-                    notAssociatedParcels.Add(t);
-            }
-
-            return notAssociatedParcels;
-        }
-        ///<summary>List - copy list of all free stations </summary>
-        ///<returns>list of all free stations for charge</returns>
-        public IEnumerable<IDAL.DO.Station> StationWithAvailebalChargePost()
-        {
-            List<IDAL.DO.Station> stations = new();
-            foreach (var t in DataSource.stations)
-            {
-                if (t.ChargeSlots > 0)
-                    stations.Add(t);
-            }
-            return stations;
-        }
+        
+        
+       
+        
         public double[] ElectricityUse()
         {
             double[] arr = new double[5];
