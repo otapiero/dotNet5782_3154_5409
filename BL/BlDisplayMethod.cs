@@ -67,9 +67,9 @@ namespace IBL
                     var t = idal.SearchCostumer(y.TargetId);
                     if (y.DroneId==0)
                         status=BO.ParcelStatus.Defined;
-                    else if (y.Scheduled==new DateTime())
+                    else if (y.Scheduled==null)
                         status= BO.ParcelStatus.Assigned;
-                    else if (y.PickedUp==new DateTime())
+                    else if (y.PickedUp==null)
                     {
                         status=BO.ParcelStatus.Colected;
                     }

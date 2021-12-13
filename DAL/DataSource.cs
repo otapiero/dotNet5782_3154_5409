@@ -65,33 +65,33 @@ namespace DalObject
                 {
                     case 0:
                         newParcel.DroneId = 0;
-                        newParcel.Scheduled = new DateTime();
-                        newParcel.PickedUp = new DateTime();
-                        newParcel.Delivered = new DateTime();
+                        newParcel.Scheduled = null;
+                        newParcel.PickedUp = null;
+                        newParcel.Delivered = null;
                         break;
                     case 1:
                         newParcel.DroneId = r.Next(1,numDrones);
-                        newParcel.Scheduled = new DateTime();
-                        newParcel.PickedUp = new DateTime();
-                        newParcel.Delivered = new DateTime();
+                        newParcel.Scheduled = null;
+                        newParcel.PickedUp = null;
+                        newParcel.Delivered = null;
                         break;
                     case 2:
                         newParcel.DroneId = r.Next(1, numDrones);
-                        newParcel.Scheduled = newParcel.Requsted.AddMinutes(r.Next(15)); 
-                        newParcel.PickedUp = new DateTime();
-                        newParcel.Delivered = new DateTime();
+                        newParcel.Scheduled = DateTime.Now.AddMinutes(r.Next(15)); 
+                        newParcel.PickedUp = null;
+                        newParcel.Delivered = null;
                         break;
                     case 3:
                         newParcel.DroneId = r.Next(1, numDrones);
-                        newParcel.Scheduled = newParcel.Requsted.AddMinutes(r.Next(15));
-                        newParcel.PickedUp = newParcel.Scheduled.AddMinutes(r.Next(15));
-                        newParcel.Delivered = new DateTime();
+                        newParcel.Scheduled = DateTime.Now.AddMinutes(r.Next(15));
+                        newParcel.PickedUp = DateTime.Now.AddMinutes(r.Next(15));
+                        newParcel.Delivered = null;
                         break;
                     case 4:
                         newParcel.DroneId = r.Next(1, numDrones);
-                        newParcel.Scheduled = newParcel.Requsted.AddMinutes(r.Next(15));
-                        newParcel.PickedUp = newParcel.Scheduled.AddMinutes(r.Next(15));
-                        newParcel.Delivered = newParcel.PickedUp.AddMinutes(r.Next(15));
+                        newParcel.Scheduled = DateTime.Now.AddMinutes(r.Next(15));
+                        newParcel.PickedUp = DateTime.Now.AddMinutes(r.Next(15));
+                        newParcel.Delivered = DateTime.Now.AddMinutes(r.Next(15));
                         break;
                 }
 

@@ -33,7 +33,7 @@ namespace IBL
             ; //Filter parcel
 
             
-            List<IDAL.DO.Parcel> parcelsNotDelivred = parcelsData.Where(x => ((x.DroneId != 0) &&(x.Delivered==new DateTime()))).ToList();
+            List<IDAL.DO.Parcel> parcelsNotDelivred = parcelsData.Where(x => ((x.DroneId != 0) &&(x.Delivered==null))).ToList();
             
             foreach (var x in parcelsNotDelivred)
             {
@@ -88,7 +88,7 @@ namespace IBL
                                                                    select t).ToList();
             
             List<IDAL.DO.Parcel> parcelsDelivred = (from x in parcelsData
-                                                                             where x.DroneId != 0 && x.Delivered != new DateTime()
+                                                                             where x.DroneId != 0 && x.Delivered != null
                                                                              select x).ToList();
 
             
