@@ -8,7 +8,7 @@ namespace IBL
 {
     namespace BO
     {
-     public   class ParcelToList
+        public class ParcelToList
         {
             public ParcelToList(int id, string nameSender, string nameGetter, WeightCategories weight, Priorities priorities, ParcelStatus status)
             {
@@ -27,7 +27,7 @@ namespace IBL
             public Priorities Priorities { get; set; }
             public ParcelStatus Status { get; set; }
 
-            
+
 
             public override string ToString()
             {
@@ -37,5 +37,5 @@ namespace IBL
         }
 
     }
-   
+
 }

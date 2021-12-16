@@ -18,5 +18,5 @@ namespace IBL
         public enum ParcelStatus
         { Defined, Assigned, Colected, Delivred }
     }
-    
+
 }

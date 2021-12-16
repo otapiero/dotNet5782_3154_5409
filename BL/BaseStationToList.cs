@@ -25,10 +25,9 @@ namespace IBL
 
             public override string ToString()
             {
-                return"Id: " +Id+"\nName: "+Name+"\nnumber of avilabl charge spolts: "+NumAvilableChargeStation+
+                return "Id: " +Id+"\nName: "+Name+"\nnumber of avilabl charge spolts: "+NumAvilableChargeStation+
                     "\nnumber of not avilable charge spolts: "+NumNotAvilableChargeStation+"\n";
             }
-        }     
-    } 
+        }
+    }
 }
- 

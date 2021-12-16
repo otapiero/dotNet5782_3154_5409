@@ -70,14 +70,14 @@ namespace DalObject
                         newParcel.Delivered = null;
                         break;
                     case 1:
-                        newParcel.DroneId = r.Next(1,numDrones);
+                        newParcel.DroneId = r.Next(1, numDrones);
                         newParcel.Scheduled = null;
                         newParcel.PickedUp = null;
                         newParcel.Delivered = null;
                         break;
                     case 2:
                         newParcel.DroneId = r.Next(1, numDrones);
-                        newParcel.Scheduled = DateTime.Now.AddMinutes(r.Next(15)); 
+                        newParcel.Scheduled = DateTime.Now.AddMinutes(r.Next(15));
                         newParcel.PickedUp = null;
                         newParcel.Delivered = null;
                         break;
@@ -104,7 +104,7 @@ namespace DalObject
                 IDAL.DO.Station newStation = new IDAL.DO.Station();
                 newStation.Id = Config.idObject++;
                 newStation.Name = GetRandomName();
-;                newStation.Longitude = r.NextDouble() * 60;
+                ; newStation.Longitude = r.NextDouble() * 60;
                 newStation.Lattitude = r.NextDouble() * 60;
                 newStation.ChargeSlots = r.Next(0, 101);
                 stations.Add(newStation);

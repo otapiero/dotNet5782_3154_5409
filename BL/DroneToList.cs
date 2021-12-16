@@ -8,7 +8,7 @@ namespace IBL
 {
     namespace BO
     {
-      public class DroneToList
+        public class DroneToList
         {
             public DroneToList()
             {
@@ -40,5 +40,5 @@ namespace IBL
             }
         }
     }
-    
+
 }

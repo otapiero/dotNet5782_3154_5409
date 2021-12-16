@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,7 +37,7 @@ namespace IBL
                     t.Id = x.Id;
                     temp.dronesInCharges.Add(t);
                 }
-                
+
             }
             catch (Exception x)
             {
@@ -49,9 +49,9 @@ namespace IBL
         }
         public BO.CustomerBl SearchCostumer(int id)
         {
-            
+
             BO.CustomerBl temp = new();
-            
+
             try
             {
                 IDAL.DO.Costumer x = idal.SearchCostumer(id);
@@ -60,7 +60,7 @@ namespace IBL
                 temp.numberPhone = x.Phone;
                 temp.location = new(x.Longitude, x.Lattitude);
                 var parcels = idal.AllParcels();
-               foreach(var y in parcels)
+                foreach (var y in parcels)
                 {
                     BO.ParcelStatus status;
                     var s = idal.SearchCostumer(y.Sender);
@@ -76,7 +76,7 @@ namespace IBL
                     else status=BO.ParcelStatus.Delivred;
 
                     if (y.Sender==id)
-                        temp.toCustomers.Add(new(y.DroneId,(BO.WeightCategories)y.Wheight,(BO.Priorities)y.Priority,status,new(t.Id,t.Name)));
+                        temp.toCustomers.Add(new(y.DroneId, (BO.WeightCategories)y.Wheight, (BO.Priorities)y.Priority, status, new(t.Id, t.Name)));
 
 
                     if (y.Sender==id)
@@ -94,12 +94,12 @@ namespace IBL
         }
         public BO.DroneBL SearchDrone(int id)
         {
-            if (DronesBl.Exists(y=>y.Id==id))
+            if (DronesBl.Exists(y => y.Id==id))
             {
                 throw new BO.IBException("id not esist");
             }
             var x = DronesBl.Find(x => x.Id == id);
-          
+
             BO.DroneBL temp = new();
             temp.Battery = x.Battery;
             temp.CurrentLocation = x.CurrentLocation;
@@ -126,7 +126,7 @@ namespace IBL
                     z.DistanceDelivrery = DistanceLocation(temp.CurrentLocation, getter.location);
                     temp.parcel = z;
                 }
-                catch 
+                catch
                 {
                     Console.WriteLine("error");
 

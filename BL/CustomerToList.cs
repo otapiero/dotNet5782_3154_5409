@@ -8,7 +8,7 @@ namespace IBL
 {
     namespace BO
     {
-      public  class CustomerToList
+        public class CustomerToList
         {
             public CustomerToList(int id, string name, string numberPhone, int numParcelsDelivred, int numParcelsNotDelivred, int numParcelsGetted, int numParcelsInTheWay)
             {
@@ -37,5 +37,5 @@ namespace IBL
             }
         }
     }
-   
+
 }

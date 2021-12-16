@@ -19,16 +19,16 @@ namespace IBL
             public int Id { get; set; }
             public string name { get; set; }
             public string numberPhone { get; set; }
-            public Location location { get; set; } 
-            
-           public List<ParcelAtCustomer> fromCustomers { get; set; }
-           public List<ParcelAtCustomer> toCustomers { get; set; }
+            public Location location { get; set; }
+
+            public List<ParcelAtCustomer> fromCustomers { get; set; }
+            public List<ParcelAtCustomer> toCustomers { get; set; }
 
             public override string ToString()
             {
                 string str = "Id: "+Id+"\nName: "+name+"\nPhone:"+numberPhone+"\nLocation: "+location;
                 str+="\nlist of parcels from cusomer: ";
-                foreach(var x in fromCustomers)
+                foreach (var x in fromCustomers)
                 {
                     str+="\n  "+x;
                 }

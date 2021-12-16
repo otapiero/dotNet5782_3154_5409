@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace IBL
-{ 
+{
     namespace BO
     {
-       public class BaseStation
+        public class BaseStation
         {
             public BaseStation() { dronesInCharges=new(); }
             public int Id { get; set; }

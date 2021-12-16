@@ -37,7 +37,7 @@ namespace IBL
             }
             if (wheigt > 2 || wheigt < 0)
             {
-                throw new BO.IBException("whiget not good");
+                throw new BO.IBException("weight not good");
             }
             try
             {
