@@ -143,10 +143,11 @@ namespace DalObject
         {
           
             
-            internal static int idParcel = 1;
-            internal static int idDrone = 1;
-            internal static int IdStation = 1;
-            internal static int IdCustomer = 1;
+            
+            public static int idParcel = 1;
+            public static int idDrone = 1;
+            public static int IdStation = 1;
+            public static int IdCustomer = 1;
             //per kilometer
             public static double Avilable = 0.5;
             public static double Light = 0.7;
