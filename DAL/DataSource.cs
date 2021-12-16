@@ -20,15 +20,15 @@ namespace DalObject
         internal static void Initialize()
         {
             //Set quantity of var 
-            int numDrones = r.Next(5, 10);
+            int numDrones = r.Next(5, 25);
             int numCustomers = r.Next(10, 100);
             int numParcels = r.Next(10, 1000);
             int numStations = r.Next(2, 5);
             //Initialize random drones
             for (int i = 0; i < numDrones; i++)
             {
-                IDAL.DO.Drone newDrone = new IDAL.DO.Drone();
-                newDrone.Id = Config.idObject++;
+                IDAL.DO.Drone newDrone = new();
+                
                 newDrone.Id = Config.idDrone++;
                 newDrone.Model = GetRandomName();
 
@@ -39,9 +39,9 @@ namespace DalObject
             for (int i = 0; i < numCustomers; i++)
             {
 
-                IDAL.DO.Costumer newCustomer = new IDAL.DO.Costumer();
-                newCustomer.Id = Config.IdDefault++;
-                newCustomer.Id = Config.IdRandomCustomer++;
+                IDAL.DO.Costumer newCustomer = new();
+               
+                newCustomer.Id = Config.IdCustomer++;
                 newCustomer.Name = GetRandomName();
                 newCustomer.Phone = GetRandomPhone();
                 newCustomer.Longitude = r.NextDouble() * 60;
@@ -55,7 +55,7 @@ namespace DalObject
             {
                 randomCase = r.Next(5);
                 IDAL.DO.Parcel newParcel = new IDAL.DO.Parcel();
-                newParcel.Id = Config.idDrone++;
+                newParcel.Id = Config.idParcel++;
                 newParcel.Sender = r.Next(1, numCustomers);
                 newParcel.TargetId = r.Next(1, numCustomers);
                 newParcel.Wheight = (IDAL.DO.WeightCategories)r.Next(0, 3);
@@ -102,7 +102,7 @@ namespace DalObject
             for (int i = 0; i < numStations; i++)
             {
                 IDAL.DO.Station newStation = new IDAL.DO.Station();
-                newStation.Id = Config.idObject++;
+                newStation.Id = Config.IdStation++;
                 newStation.Name = GetRandomName();
                 ; newStation.Longitude = r.NextDouble() * 60;
                 newStation.Lattitude = r.NextDouble() * 60;
@@ -141,12 +141,13 @@ namespace DalObject
         //static var for initialize
         internal class Config
         {
-            internal static int idObject = 1;
-            internal static int IdDefault = 1;
-            internal static int idParcel = 1;
-            internal static int idDrone = 1;
-            internal static int IdStation = 1;
-            internal static int IdRandomCustomer = 1;
+          
+            
+            
+            public static int idParcel = 1;
+            public static int idDrone = 1;
+            public static int IdStation = 1;
+            public static int IdCustomer = 1;
             //per kilometer
             public static double Avilable = 0.5;
             public static double Light = 0.7;

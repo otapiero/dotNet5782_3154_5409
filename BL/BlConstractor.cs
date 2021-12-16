@@ -33,8 +33,8 @@ namespace IBL
             ; //Filter parcel
 
 
-            List<IDAL.DO.Parcel> parcelsNotDelivred = parcelsData.Where(x => ((x.DroneId != 0) &&(x.Delivered==null))).ToList();
-
+            List<IDAL.DO.Parcel> parcelsNotDelivred = idal.ListOfParcels(x => ((x.DroneId != 0) &&(x.Delivered==null))).ToList();
+            
             foreach (var x in parcelsNotDelivred)
             {
 
@@ -84,12 +84,10 @@ namespace IBL
 
 
             List<IDAL.DO.Drone> freeDrones = (from t in dronesData
-                                              where (false == parcelsNotDelivred.Exists(y => y.DroneId == t.Id))
-                                              select t).ToList();
-
-            List<IDAL.DO.Parcel> parcelsDelivred = (from x in parcelsData
-                                                    where x.DroneId != 0 && x.Delivered != null
-                                                    select x).ToList();
+                                                                   where (false == parcelsNotDelivred.Exists(y => y.DroneId == t.Id))
+                                                                   select t).ToList();
+            
+            List<IDAL.DO.Parcel> parcelsDelivred = idal.ListOfParcels(x=>x.DroneId != 0 && x.Delivered != null).ToList();
 
 
             foreach (var x in freeDrones)

@@ -33,8 +33,17 @@ namespace IDAL
         IEnumerable<IDAL.DO.Costumer> AllCustomers();
         IEnumerable<IDAL.DO.Parcel> AllParcels();
         public IEnumerable<IDAL.DO.DroneCharge> AllDronesIncharge();
-        IEnumerable<IDAL.DO.Parcel> NotAssociatedParcels();
-        IEnumerable<IDAL.DO.Station> StationWithAvailebalChargePost();
+       
+    
+
+        public IEnumerable<IDAL.DO.Parcel> ListOfParcels(Predicate<IDAL.DO.Parcel> f);
+        public IEnumerable<IDAL.DO.Costumer> ListOfCostumers(Predicate<IDAL.DO.Costumer> f);
+        public IEnumerable<IDAL.DO.DroneCharge> ListOfDronesInCharge(Predicate<IDAL.DO.DroneCharge> f);
+        public IEnumerable<IDAL.DO.Station> ListOfStations(Predicate<IDAL.DO.Station> f);
+        public IEnumerable<IDAL.DO.Drone> ListOfDrones(Predicate<IDAL.DO.Drone> f);
+
+
+
 
         double[] ElectricityUse();
     }
