@@ -9,12 +9,12 @@ namespace ConsoleUI
     class Program
     {
         static public IDAL.IDal options = new DalObject.DalObject();
-         /// <summary>method main program - Management of a skimmer delivery company  
-         /// the program running until the user return "e" to exit</summary>
+        /// <summary>method main program - Management of a skimmer delivery company  
+        /// the program running until the user return "e" to exit</summary>
         static void Main(string[] args)
         {
             string choise = "f";
-           
+
             while (choise != "e")
             {
                 Console.WriteLine(
@@ -23,7 +23,7 @@ namespace ConsoleUI
                     "b to open the updet menu.\n " +
                     "c to open the display menu.\n " +
                     "d to the list wiew option.\n " +
-                    "e to exit.\n" + 
+                    "e to exit.\n" +
                     "Enter your choise:"
                     );
                 choise = Console.ReadLine();
@@ -44,11 +44,11 @@ namespace ConsoleUI
             }
         }
         /// <summary>method add menu - Management of add object  
-         /// the user can add base, drone,customer and parcel to the data </summary
+        /// the user can add base, drone,customer and parcel to the data </summary
         static void AddMenu()
         {
-            string choise ;
-            int id,  chargeSlot, wheigt, Priority, senderId, targetId;
+            string choise;
+            int id, chargeSlot, wheigt, Priority, senderId, targetId;
             double longattitude, lattitude;
             string model, stringName, name, phone;
 
@@ -72,8 +72,8 @@ namespace ConsoleUI
                     Console.WriteLine("Enter new drone details: id and model.");
                     int.TryParse(Console.ReadLine(), out id);
                     model = Console.ReadLine();
-                   
-                    options.AddNewDrone(id,model);
+
+                    options.AddNewDrone(id, model);
                     break;
                 case "c":
                     Console.WriteLine("Enter new customer details:\n id, name,phone,longattitude and lattitude.");
@@ -91,9 +91,9 @@ namespace ConsoleUI
                     int.TryParse(Console.ReadLine(), out targetId);
                     int.TryParse(Console.ReadLine(), out wheigt);
                     int.TryParse(Console.ReadLine(), out Priority);
-                    options.AddNewParcel( senderId, targetId, wheigt, Priority); break;
+                    options.AddNewParcel(senderId, targetId, wheigt, Priority); break;
                 case "e":
-                    
+
                     break;
             }
             return;
@@ -112,12 +112,12 @@ namespace ConsoleUI
                 " f to return to Main menu.\nEnter your choise.");
             choise = Console.ReadLine();
             switch (choise)
-            { 
+            {
                 case "a":
                     Console.WriteLine("Enter the parcel id.");
-                    int.TryParse(Console.ReadLine(),out id);
+                    int.TryParse(Console.ReadLine(), out id);
                     options.ConnectParcelToDrone(id);
-                     break;
+                    break;
                 case "b":
                     Console.WriteLine("Enter the parcel id.");
                     int.TryParse(Console.ReadLine(), out id);
@@ -145,7 +145,7 @@ namespace ConsoleUI
                 case "e":
                     Console.WriteLine("Enter the drone id:");
                     int.TryParse(Console.ReadLine(), out id);
-                   options. ReleseDroneFromCharge(id);
+                    options.ReleseDroneFromCharge(id);
                     break;
                 case "f":
                     break;
@@ -167,9 +167,9 @@ namespace ConsoleUI
                 case "a":
                     Console.WriteLine("Enter station id.");
                     int.TryParse(Console.ReadLine(), out id);
-                    IDAL.DO.Station station =options.SearchStation(id);
+                    IDAL.DO.Station station = options.SearchStation(id);
                     Console.WriteLine(station.ToString());
-                        break;
+                    break;
                 case "b":
                     Console.WriteLine("Enter drone id.");
                     int.TryParse(Console.ReadLine(), out id);
@@ -204,14 +204,14 @@ namespace ConsoleUI
                 " f to view station with available charging stations.\n g to return to Main menu.\n" +
                 "Enter your choise.");
             choise = Console.ReadLine();
-          
+
             switch (choise)
             {
 
                 case "a":
                     Console.WriteLine("All the stations:");
                     List<IDAL.DO.Station> stations = (List<IDAL.DO.Station>)options.AllStation();
-                    foreach(var t in stations)
+                    foreach (var t in stations)
                     {
                         Console.WriteLine(t);
                     }
@@ -239,7 +239,7 @@ namespace ConsoleUI
                     {
                         Console.WriteLine(t.ToString());
                     }
-                     break;
+                    break;
                 case "e":
                     Console.WriteLine("Not associated parcels:");
                     List<IDAL.DO.Parcel> notAssociatedParcels = options.ListOfParcels(t=>t.DroneId == 0).ToList();

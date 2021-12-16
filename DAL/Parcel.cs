@@ -12,7 +12,7 @@ namespace IDAL
         public struct Parcel
         {
 
-            public int Id { get; set;}
+            public int Id { get; set; }
             public int Sender { get; set; }
             public int TargetId { get; set; }
             public WeightCategories Wheight { get; set; }
@@ -24,8 +24,8 @@ namespace IDAL
             public DateTime? Delivered { get; set; }
 
 
-            
-            
+
+
             ///<summary>The function print detail of the object</summary>
             public override string ToString()
             {

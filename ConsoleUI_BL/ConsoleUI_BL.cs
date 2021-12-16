@@ -9,10 +9,10 @@ namespace ConsoleUI_BL
 {
     class ConsoleUI_BL
     {
-        static IBL.IBL options = new  IBL.BL();
+        static IBL.IBL options = new IBL.BL();
         static void Main(string[] args)
         {
-            
+
 
 
             string choise = "f";
@@ -97,7 +97,7 @@ namespace ConsoleUI_BL
                     Console.WriteLine("Enter new Station details:Id, name,location and num of ChargeSlots. ");
                     if (int.TryParse(Console.ReadLine(), out id) == false) { Console.WriteLine("wrong format of input"); break; };
                     name = Console.ReadLine();
-                    if(  double.TryParse(Console.ReadLine(), out longattitude)==false) { Console.WriteLine("wrong format of input"); break; };
+                    if (double.TryParse(Console.ReadLine(), out longattitude) == false) { Console.WriteLine("wrong format of input"); break; };
                     double.TryParse(Console.ReadLine(), out lattitude);
                     if (int.TryParse(Console.ReadLine(), out chargeSlot) == false) { Console.WriteLine("wrong format of input"); break; };
                     try
@@ -112,12 +112,12 @@ namespace ConsoleUI_BL
                     break;
                 case "b":
                     Console.WriteLine("Enter new drone details:\n Id,model,max wheigt to cary and id of base station.");
-                    if(int.TryParse(Console.ReadLine(), out id)==false) { Console.WriteLine("wrong format of input"); break; };
+                    if (int.TryParse(Console.ReadLine(), out id) == false) { Console.WriteLine("wrong format of input"); break; };
                     model = Console.ReadLine();
-                    if(int.TryParse(Console.ReadLine(), out wheigt)==false) { Console.WriteLine("wrong format of input"); break; };
-                    if(int.TryParse(Console.ReadLine(), out status)==false) { Console.WriteLine("wrong format of input"); break; };
-                    if(int.TryParse(Console.ReadLine(), out battery) == false) { Console.WriteLine("wrong format of input"); break; };
-                    if(int.TryParse(Console.ReadLine(), out idStation) == false) { Console.WriteLine("wrong format of input"); break; };
+                    if (int.TryParse(Console.ReadLine(), out wheigt) == false) { Console.WriteLine("wrong format of input"); break; };
+                    if (int.TryParse(Console.ReadLine(), out status) == false) { Console.WriteLine("wrong format of input"); break; };
+                    if (int.TryParse(Console.ReadLine(), out battery) == false) { Console.WriteLine("wrong format of input"); break; };
+                    if (int.TryParse(Console.ReadLine(), out idStation) == false) { Console.WriteLine("wrong format of input"); break; };
                     try
                     {
                         options.AddNewDrone(id, model, wheigt, idStation);
@@ -130,11 +130,11 @@ namespace ConsoleUI_BL
                     break;
                 case "c":
                     Console.WriteLine("Enter new customer details:\n id, name,phone and location.");
-                    if(int.TryParse(Console.ReadLine(), out id) == false) { Console.WriteLine("wrong format of input"); break; };
+                    if (int.TryParse(Console.ReadLine(), out id) == false) { Console.WriteLine("wrong format of input"); break; };
                     stringName = Console.ReadLine();
                     phone = Console.ReadLine();
-                    if(double.TryParse(Console.ReadLine(), out longattitude) == false) { Console.WriteLine("wrong format of input"); break; };
-                    if(double.TryParse(Console.ReadLine(), out lattitude) == false) { Console.WriteLine("wrong format of input"); break; };
+                    if (double.TryParse(Console.ReadLine(), out longattitude) == false) { Console.WriteLine("wrong format of input"); break; };
+                    if (double.TryParse(Console.ReadLine(), out lattitude) == false) { Console.WriteLine("wrong format of input"); break; };
                     try
                     {
                         options.AddNewCustomer(id, stringName, phone, longattitude, lattitude);
@@ -147,10 +147,10 @@ namespace ConsoleUI_BL
                     break;
                 case "d":
                     Console.WriteLine("Enter new parcel details:\n Id of sender,id of target, wheigt between 0-2 and priority.");
-                    if(int.TryParse(Console.ReadLine(), out senderId) == false) { Console.WriteLine("wrong format of input"); break; };
-                    if(int.TryParse(Console.ReadLine(), out targetId) == false) { Console.WriteLine("wrong format of input"); break; };
-                    if(int.TryParse(Console.ReadLine(), out wheigt) == false) { Console.WriteLine("wrong format of input"); break; };
-                    if(int.TryParse(Console.ReadLine(), out Priority) == false) { Console.WriteLine("wrong format of input"); break; };
+                    if (int.TryParse(Console.ReadLine(), out senderId) == false) { Console.WriteLine("wrong format of input"); break; };
+                    if (int.TryParse(Console.ReadLine(), out targetId) == false) { Console.WriteLine("wrong format of input"); break; };
+                    if (int.TryParse(Console.ReadLine(), out wheigt) == false) { Console.WriteLine("wrong format of input"); break; };
+                    if (int.TryParse(Console.ReadLine(), out Priority) == false) { Console.WriteLine("wrong format of input"); break; };
                     try
                     {
                         options.AddNewParcel(senderId, targetId, wheigt, Priority);
@@ -173,7 +173,7 @@ namespace ConsoleUI_BL
         /// send a drone to a charge station and relase a drone from the charge station</summary
         static void UpdateMenu()
         {
-            string choise, model,name,phone;
+            string choise, model, name, phone;
             int id, chargeSlots;
             double time;
             Console.WriteLine("chose an option:\n a to rename a drone model.\n" +
@@ -181,7 +181,7 @@ namespace ConsoleUI_BL
                 "d to send a drone to a charge.\n" +
                 " e to relase a drone from the charge station.\n" +
                 " f to Assign a package to a drone.\n" +
-                 " g to collect a package by a drone.\n"+
+                 " g to collect a package by a drone.\n" +
                  " k to deliver a package.\n" +
                 " l to return to Main menu.\nEnter your choise.");
             choise = Console.ReadLine();
@@ -189,7 +189,7 @@ namespace ConsoleUI_BL
             {
                 case "a":
                     Console.WriteLine("Enter the drone id.");
-                   if (int.TryParse(Console.ReadLine(), out id) == false) { Console.WriteLine("wrong format of input");break; };
+                    if (int.TryParse(Console.ReadLine(), out id) == false) { Console.WriteLine("wrong format of input"); break; };
                     Console.WriteLine("Enter the new drone model.");
                     model = Console.ReadLine();
                     try
@@ -207,7 +207,7 @@ namespace ConsoleUI_BL
                     int.TryParse(Console.ReadLine(), out id);
                     Console.WriteLine("one or more of the follow details:name,max num of charge slots.");
                     name = Console.ReadLine();
-                    int.TryParse(Console.ReadLine(), out chargeSlots) ;
+                    int.TryParse(Console.ReadLine(), out chargeSlots);
                     try
                     {
                         options.UpdateStation(id, name, chargeSlots);
@@ -250,11 +250,11 @@ namespace ConsoleUI_BL
                     }
                     break;
                 case "e":
-                   
+
                     Console.WriteLine("Enter the drone id.");
-                    if(int.TryParse(Console.ReadLine(), out id) == false) { Console.WriteLine("wrong format of input"); break; };
+                    if (int.TryParse(Console.ReadLine(), out id) == false) { Console.WriteLine("wrong format of input"); break; };
                     Console.WriteLine("Enter the carge time.");
-                    if ( double.TryParse(Console.ReadLine(), out time) == false) { Console.WriteLine("wrong format of input"); break; };
+                    if (double.TryParse(Console.ReadLine(), out time) == false) { Console.WriteLine("wrong format of input"); break; };
 
                     try
                     {
@@ -267,7 +267,7 @@ namespace ConsoleUI_BL
                     break;
                 case "f":
                     Console.WriteLine("Enter the drone id.");
-                    if(int.TryParse(Console.ReadLine(), out id) == false) { Console.WriteLine("wrong format of input"); break; };
+                    if (int.TryParse(Console.ReadLine(), out id) == false) { Console.WriteLine("wrong format of input"); break; };
                     try
                     {
                         options.AssignPackageToDrone(id);
@@ -280,7 +280,7 @@ namespace ConsoleUI_BL
                     break;
                 case "g":
                     Console.WriteLine("Enter the drone id.");
-                   if( int.TryParse(Console.ReadLine(), out id) == false) { Console.WriteLine("wrong format of input"); break; };
+                    if (int.TryParse(Console.ReadLine(), out id) == false) { Console.WriteLine("wrong format of input"); break; };
                     try
                     {
                         options.CollectPackage(id);
@@ -292,7 +292,7 @@ namespace ConsoleUI_BL
                     break;
                 case "k":
                     Console.WriteLine("Enter the drone id.");
-                    if(int.TryParse(Console.ReadLine(), out id) == false) { Console.WriteLine("wrong format of input"); break; };
+                    if (int.TryParse(Console.ReadLine(), out id) == false) { Console.WriteLine("wrong format of input"); break; };
                     try
                     {
                         options.DeliverPackage(id);
@@ -321,12 +321,12 @@ namespace ConsoleUI_BL
 
                 case "a":
                     Console.WriteLine("Enter station id.");
-                    if(int.TryParse(Console.ReadLine(), out id) == false) { Console.WriteLine("wrong format of input"); break; };
+                    if (int.TryParse(Console.ReadLine(), out id) == false) { Console.WriteLine("wrong format of input"); break; };
                     try
                     {
                         IBL.BO.BaseStation station = options.SearchStation(id);
                         Console.WriteLine(station.ToString());
-                      
+
                     }
                     catch (IBL.BO.IBException x)
                     {
@@ -335,7 +335,7 @@ namespace ConsoleUI_BL
                     break;
                 case "b":
                     Console.WriteLine("Enter drone id.");
-                    if(int.TryParse(Console.ReadLine(), out id) == false) { Console.WriteLine("wrong format of input"); break; };
+                    if (int.TryParse(Console.ReadLine(), out id) == false) { Console.WriteLine("wrong format of input"); break; };
                     try
                     {
                         IBL.BO.DroneBL drone = options.SearchDrone(id);
@@ -348,7 +348,7 @@ namespace ConsoleUI_BL
                     break;
                 case "c":
                     Console.WriteLine("Enter costumer id.");
-                    if(int.TryParse(Console.ReadLine(), out id) == false) { Console.WriteLine("wrong format of input"); break; };
+                    if (int.TryParse(Console.ReadLine(), out id) == false) { Console.WriteLine("wrong format of input"); break; };
                     try
                     {
                         IBL.BO.CustomerBl costumer = options.SearchCostumer(id);
@@ -366,7 +366,7 @@ namespace ConsoleUI_BL
                         Console.WriteLine("wrong format of input");
                         break;
                     };
-                    try     
+                    try
                     {
                         IBL.BO.ParcelBl parcel = options.SearchParcel(id);
                         Console.WriteLine(parcel);
@@ -394,22 +394,22 @@ namespace ConsoleUI_BL
                 " f to view station with available charging spolts.\n g to return to Main menu.\n" +
                 "Enter your choise.");
             choise = Console.ReadLine();
-            
+
             switch (choise)
             {
 
                 case "a":
                     Console.WriteLine("All the stations:");
                     IEnumerable<IBL.BO.BaseStationToList> lst = options.ListStation();
-                    
-                   foreach (var x in lst)
+
+                    foreach (var x in lst)
                     {
 
                         Console.WriteLine(x);
                     }
-                    
 
-                    
+
+
                     break;
                 case "b":
                     Console.WriteLine("All the drones:");

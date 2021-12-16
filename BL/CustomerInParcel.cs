@@ -10,7 +10,7 @@ namespace IBL
     {
         public class CustomerInParcel
         {
-            public CustomerInParcel(int id,string name)
+            public CustomerInParcel(int id, string name)
             {
                 Id = id;
                 Name = name;

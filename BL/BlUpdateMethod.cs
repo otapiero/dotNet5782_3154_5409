@@ -34,7 +34,7 @@ namespace IBL
 
             }
         }
-            public void UpdateStation(int id,string name,int chargeSlots)
+        public void UpdateStation(int id, string name, int chargeSlots)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace IBL
 
                 }
                 throw new BO.IBException("Id not found.");
-                
+
             }
             catch (Exception x)
             {
@@ -62,16 +62,16 @@ namespace IBL
             }
 
         }
-        public void UpdateCostumer(int id, string name,string phone)
+        public void UpdateCostumer(int id, string name, string phone)
         {
             try
             {
-               
-                if (idal.AllCustomers().ToList().Exists(x=>x.Id==id))
+
+                if (idal.AllCustomers().ToList().Exists(x => x.Id==id))
                 {
-                    idal.UpdateCostumer( id, name,phone);
+                    idal.UpdateCostumer(id, name, phone);
                 }
-               throw new BO.IBException("id not exist");
+                throw new BO.IBException("id not exist");
             }
             catch (Exception x)
             {
@@ -83,26 +83,26 @@ namespace IBL
         {
             try
             {
-                
+
                 if (DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Available))
                 {
                     List<IDAL.DO.Station> stationData = idal.ListOfStations(x=>x.ChargeSlots > 0).ToList();
                     
                     if (stationData.Count > 0)
                     {
-                        DroneToList temp = DronesBl.Find(x=>x.Id==id);
-                        BO.Location closeStation = FindTheClosestStation(temp.CurrentLocation,stationData);
+                        DroneToList temp = DronesBl.Find(x => x.Id==id);
+                        BO.Location closeStation = FindTheClosestStation(temp.CurrentLocation, stationData);
                         double dis = DistanceLocation(temp.CurrentLocation, closeStation);
-                        IDAL.DO.Station chooseStation = stationData.Find(x=>x.Longitude == closeStation.Longitude && x.Lattitude==closeStation.Lattitude);
+                        IDAL.DO.Station chooseStation = stationData.Find(x => x.Longitude == closeStation.Longitude && x.Lattitude==closeStation.Lattitude);
                         Double[] vs = idal.ElectricityUse();
                         double Rate = vs[0];
-                        if(temp.Battery - dis*Rate > 0)
+                        if (temp.Battery - dis*Rate > 0)
                         {
                             temp.Battery = temp.Battery - (dis*Rate);
                             temp.CurrentLocation = closeStation;
                             temp.status = DroneStatuses.Maintenace;
 
-                            idal.SendDroneToCharge( id, chooseStation.Id);
+                            idal.SendDroneToCharge(id, chooseStation.Id);
                         }
                         throw new BO.IBException("Not enough battery");
                         // else throw "Not enough battery"
@@ -119,7 +119,7 @@ namespace IBL
 
             }
         }
-        public void RelesaeDroneFromCharge(int id,double time)
+        public void RelesaeDroneFromCharge(int id, double time)
         {
             try
             {
@@ -185,14 +185,14 @@ namespace IBL
                         temp.ParcelId= parcelId;
                         idal.AssignPackageToDrone(parcelId, temp.Id);
                     }
-                    throw new BO.IBException("Not enough battery"); 
+                    throw new BO.IBException("Not enough battery");
                 }
                 throw new BO.IBException("the drone isnt in avilable");
-                
+
             }
             catch (Exception x)
             {
-                throw new BO.IBException(x.Message); 
+                throw new BO.IBException(x.Message);
 
             }
         }

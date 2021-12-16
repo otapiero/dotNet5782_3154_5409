@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace IBL
 {
-   
-    public partial class BL:IBL
+
+    public partial class BL : IBL
     {
         private IDAL.IDal idal;
         private List<DroneToList> DronesBl = new();
@@ -37,7 +37,7 @@ namespace IBL
             
             foreach (var x in parcelsNotDelivred)
             {
-                
+
                 IDAL.DO.Drone tempDlDrone = dronesData.Find(z => z.Id.Equals(x.DroneId));
                 IDAL.DO.Costumer senderCostumer = idal.SearchCostumer(x.Sender);
                 IDAL.DO.Costumer targetCostumer = idal.SearchCostumer(x.TargetId);
@@ -81,7 +81,7 @@ namespace IBL
                 DronesBl.Add(temp);
 
             }
-            
+
 
             List<IDAL.DO.Drone> freeDrones = (from t in dronesData
                                                                    where (false == parcelsNotDelivred.Exists(y => y.DroneId == t.Id))
@@ -89,7 +89,7 @@ namespace IBL
             
             List<IDAL.DO.Parcel> parcelsDelivred = idal.ListOfParcels(x=>x.DroneId != 0 && x.Delivered != null).ToList();
 
-            
+
             foreach (var x in freeDrones)
             {
                 int randomcase = rand.Next(0, 2);
@@ -98,7 +98,7 @@ namespace IBL
                 temp.Model = x.Model;
                 temp.Weight = (BO.WeightCategories)rand.Next(3);
                 temp.ParcelId = 0;
-              
+
                 if (randomcase==0)
                 {
                     temp.status = BO.DroneStatuses.Maintenace;
@@ -108,13 +108,13 @@ namespace IBL
                 }
                 else
                 {
-                    
+
                     temp.status = BO.DroneStatuses.Available;
                     int i = rand.Next(parcelsDelivred.Count());
                     IDAL.DO.Costumer targetCostumer = idal.SearchCostumer(parcelsDelivred[i].TargetId);
-                    
+
                     temp.CurrentLocation = new(targetCostumer.Longitude, targetCostumer.Lattitude);
-                    double min= DistanceLocation(temp.CurrentLocation, FindTheClosestStation(temp.CurrentLocation, stationData))* Avilable;
+                    double min = DistanceLocation(temp.CurrentLocation, FindTheClosestStation(temp.CurrentLocation, stationData))* Avilable;
                     temp.Battery = min+rand.NextDouble()*(100-min);
                 }
                 DronesBl.Add(temp);
@@ -122,24 +122,24 @@ namespace IBL
 
         }
 
-      
+
 
         private static double DistanceLocation(BO.Location x, BO.Location y)
         {
             double locX = Math.Pow(x.Lattitude - y.Lattitude, 2);
             double locY = Math.Pow(x.Longitude - y.Longitude, 2);
-            double dis = Math.Sqrt(locX +locY );
+            double dis = Math.Sqrt(locX +locY);
             return dis;
         }
 
-        private static BO.Location FindTheClosestStation(BO.Location x,List<IDAL.DO.Station > stations)
+        private static BO.Location FindTheClosestStation(BO.Location x, List<IDAL.DO.Station> stations)
         {
             double tempDistance, dis = DistanceLocation(x, new BO.Location(stations[0].Longitude, stations[0].Lattitude));
             BO.Location stationlocation = new(stations[0].Longitude, stations[0].Lattitude);
-            foreach(var y in stations)
+            foreach (var y in stations)
             {
                 tempDistance= DistanceLocation(x, new BO.Location(y.Longitude, y.Lattitude));
-                if(tempDistance<dis)
+                if (tempDistance<dis)
                 {
                     dis = tempDistance;
                     stationlocation = new BO.Location(y.Longitude, y.Lattitude);

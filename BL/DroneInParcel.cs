@@ -8,7 +8,7 @@ namespace IBL
 {
     namespace BO
     {
-       public class DroneInParcel
+        public class DroneInParcel
         {
             public int Id { get; set; }
             public double Battery { get; set; }
@@ -19,6 +19,6 @@ namespace IBL
                 return "\n  Id: "+Id +"\n  Battery: "+Battery+"\n  Location: "+CurrentLocation+"\n";
             }
         }
-        
+
     }
 }

@@ -23,7 +23,7 @@ namespace IBL
 
             public override string ToString()
             {
-                return 
+                return
                         "Id" + Id +
                         "\nSender: " + Sender +
                         "\nGetter: " + Getter +
@@ -35,8 +35,8 @@ namespace IBL
                         "\nTime of Colection: " + ColectionTime +
                         "\nTime of Delivery: " + DeliveryTime+"\n";
             }
-        
+
         }
     }
-    
+
 }

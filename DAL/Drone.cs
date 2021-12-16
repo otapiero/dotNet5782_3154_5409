@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace IDAL
-{ 
+{
     namespace DO
     {
         ///<summary>struct of Drone</summary>
@@ -13,14 +13,14 @@ namespace IDAL
         {
             public int Id { get; set; }
             public string Model { get; set; }
-          
-            
-        
+
+
+
             ///<summary>The function print detail of the object</summary>
             public override string ToString()
             {
                 //The function print detail of the object
-                return "Id: " + Id + "\nName: " + Model + 
+                return "Id: " + Id + "\nName: " + Model +
                      "\n";
             }
         }

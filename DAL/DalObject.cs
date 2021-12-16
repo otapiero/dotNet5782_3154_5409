@@ -1,5 +1,5 @@
 
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace DalObject
 {
     ///<summary>Class <c>DalObject</c></summary>
-    public class DalObject:IDAL.IDal
+    public class DalObject : IDAL.IDal
     {
         ///<summary>method <c>DalObject</c> initialize the data</summary>
         public DalObject()
@@ -23,7 +23,7 @@ namespace DalObject
             {
                 throw new IDAL.DO.IdExaption("Id not found.");
             }
-            IDAL.DO.Costumer find  = DataSource.customers.Find(x => x.Id.Equals(id));
+            IDAL.DO.Costumer find = DataSource.customers.Find(x => x.Id.Equals(id));
             return find;
         }
 
@@ -43,7 +43,7 @@ namespace DalObject
         ///<param name="id"> searche the Station by id</param>
         public IDAL.DO.Station SearchStation(int id)
         {
-          
+
             if (!DataSource.stations.Exists(x => x.Id.Equals(id)))
             {
                 throw new IDAL.DO.IdExaption("Id not found.");
@@ -69,11 +69,11 @@ namespace DalObject
         /// <param name="_status"> enum status of drone</param>
         /// <param name=" _battery">life battery of drone</param>
         ///         
-        public void AddNewDrone(int id,string _model)
+        public void AddNewDrone(int id, string _model)
         {
             if (DataSource.drones.Exists(x => x.Id.Equals(id)))
             {
-                throw new IDAL.DO.IdExaption("Id alredy use.");
+                throw new IDAL.DO.IdExaption("Drone Id alredy use.");
             }
             IDAL.DO.Drone temp = new();
             temp.Id = id;
@@ -85,7 +85,7 @@ namespace DalObject
         /// <param name="_Longitude"> location of station</param>
         /// <param name="_Lattitude"> location of station</param>
         /// <param name=" _chargeSlots">status of charge</param>
-        public void AddNewStation(int id,string _name, double _Longitude, double _Lattitude, int _chargeSlots)
+        public void AddNewStation(int id, string _name, double _Longitude, double _Lattitude, int _chargeSlots)
         {
             if (DataSource.stations.Exists(x => x.Id == id))
             {
@@ -147,10 +147,10 @@ namespace DalObject
             temp.Scheduled = new DateTime();
             temp.PickedUp = new DateTime();
             temp.Delivered = new DateTime();
-            
+
             DataSource.parcels.Add(temp);
         }
-         /// <summary>method ConnectParcelToDrone - the function get parcel and connect a avilable drone </summary>
+        /// <summary>method ConnectParcelToDrone - the function get parcel and connect a avilable drone </summary>
         /// <param name="idParcel"> id parcel to delivery</param>
         public void ConnectParcelToDrone(int idParcel)
         {
@@ -211,15 +211,16 @@ namespace DalObject
         /// <param name = "idStation"> id free station</param>
         public void SendDroneToCharge(int idDrone, int idStation)
         {
-            try { 
-           
+            try
+            {
+
                 IDAL.DO.Station foundS = SearchStation(idStation);
                 IDAL.DO.Station tempS = foundS;
-                tempS.ChargeSlots -=1;
+                tempS.ChargeSlots -= 1;
                 DataSource.stations.Remove(foundS);
                 DataSource.stations.Add(tempS);
                 DataSource.DroneCharges.Add(new IDAL.DO.DroneCharge(idDrone, idStation));
-            
+
             }
             catch { }
         }
@@ -227,35 +228,36 @@ namespace DalObject
         /// <param name = "idDrone"> id drone to relese</param>
         public void ReleseDroneFromCharge(int id)
         {
-            try {
+            try
+            {
 
                 IDAL.DO.DroneCharge relese = DataSource.DroneCharges.Find(x => x.DroneId.Equals(id));
                 IDAL.DO.Station foundS = SearchStation(relese.StationId);
                 IDAL.DO.Station tempS = foundS;
-                tempS.ChargeSlots +=1;
+                tempS.ChargeSlots += 1;
                 DataSource.stations.Remove(foundS);
                 DataSource.stations.Add(tempS);
                 DataSource.DroneCharges.Remove(relese);
-                }
+            }
             catch { }
         }
-         
-        public void UpdateDroneModel(int id,string model)
-        {
-            try 
-	        {	        
-		    IDAL.DO.Drone found = DataSource.drones.First(w => w.Id == id);
-            IDAL.DO.Drone temp = found;
-            temp.Model = model;
-            DataSource.drones.Remove(found);
-            DataSource.drones.Add(temp);
-	        }
-	        catch (Exception)
-	        {
 
-		    throw new IDAL.DO.IdExaption("Id not found."); ;
-	        }
-            
+        public void UpdateDroneModel(int id, string model)
+        {
+            try
+            {
+                IDAL.DO.Drone found = DataSource.drones.First(w => w.Id == id);
+                IDAL.DO.Drone temp = found;
+                temp.Model = model;
+                DataSource.drones.Remove(found);
+                DataSource.drones.Add(temp);
+            }
+            catch (Exception)
+            {
+
+                throw new IDAL.DO.IdExaption("Id not found."); ;
+            }
+
         }
         public void AssignPackageToDrone(int idParcel, int idDrone)
         {
@@ -270,7 +272,7 @@ namespace DalObject
         {
             IDAL.DO.Parcel found = DataSource.parcels.Find(x => x.Id == idParcel);
             IDAL.DO.Parcel temp = found;
-            temp.PickedUp= DateTime.Now;
+            temp.PickedUp = DateTime.Now;
             DataSource.parcels.Remove(found);
             DataSource.parcels.Add(temp);
         }
@@ -278,27 +280,27 @@ namespace DalObject
         {
             IDAL.DO.Parcel found = DataSource.parcels.Find(x => x.Id == idParcel);
             IDAL.DO.Parcel temp = found;
-            temp.Delivered= DateTime.Now;
+            temp.Delivered = DateTime.Now;
             DataSource.parcels.Remove(found);
             DataSource.parcels.Add(temp);
         }
-        public void UpdateStation(int id, string name,int chargeSlots)
+        public void UpdateStation(int id, string name, int chargeSlots)
         {
             IDAL.DO.Station found = DataSource.stations.First(w => w.Id == id);
             IDAL.DO.Station temp = found;
-            name = name.Length >0 ? name : found.Name;
-            chargeSlots = chargeSlots.ToString().Length>0 ? chargeSlots : found.ChargeSlots;
+            name = name.Length > 0 ? name : found.Name;
+            chargeSlots = chargeSlots.ToString().Length > 0 ? chargeSlots : found.ChargeSlots;
             temp.Name = name;
-            temp.ChargeSlots=chargeSlots;
+            temp.ChargeSlots = chargeSlots;
             DataSource.stations.Remove(found);
             DataSource.stations.Add(temp);
         }
-        public void UpdateCostumer(int id, string name,string phone)
+        public void UpdateCostumer(int id, string name, string phone)
         {
             IDAL.DO.Costumer found = DataSource.customers.First(w => w.Id == id);
             IDAL.DO.Costumer temp = found;
-            name = name.Length>0 ? name : found.Name;
-            phone = phone.Length>0 ? phone : found.Name;
+            name = name.Length > 0 ? name : found.Name;
+            phone = phone.Length > 0 ? phone : found.Name;
             temp.Name = name;
             temp.Phone = phone;
             DataSource.customers.Remove(found);
@@ -332,7 +334,7 @@ namespace DalObject
         public IEnumerable<IDAL.DO.Station> AllStation( )
         {
             List<IDAL.DO.Station> allStations = new List<IDAL.DO.Station>();
-            foreach(var t in DataSource.stations)
+            foreach (var t in DataSource.stations)
             {
                 allStations.Add(t);
             }
@@ -387,13 +389,13 @@ namespace DalObject
         public double[] ElectricityUse()
         {
             double[] arr = new double[5];
-            arr[0]=DataSource.Config.Avilable;
+            arr[0] = DataSource.Config.Avilable;
             arr[1] = DataSource.Config.Light;
             arr[2] = DataSource.Config.Intermidiate;
             arr[3] = DataSource.Config.Heavy;
             arr[4] = DataSource.Config.chargingRatePerHoure;
 
             return arr;
-         }
+        }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IBL
 {
-   public interface IBL
+    public interface IBL
     {
         void AddNewStation(int id, string name, double longattitude, double lattitude, int numChargeSlot);
         void AddNewDrone(int id, string model, int wheigt, int stationId);
@@ -20,7 +20,7 @@ namespace IBL
         void UpdateStation(int id, string name, int chargeSlots);
         void UpdateCostumer(int id, string name, string phone);
         void SendDroneToCharge(int id);
-       
+
         void CollectPackage(int id);
         void AssignPackageToDrone(int id);
         void RelesaeDroneFromCharge(int id, double time);
@@ -31,7 +31,9 @@ namespace IBL
         IEnumerable<BO.ParcelToList> ListParcels();
         IEnumerable<BO.ParcelToList> ListParcelsNotAssigned();
         IEnumerable<BO.BaseStationToList> StationWithAvailebalChargePost();
-
+        IEnumerable<BO.DroneToList> FilterListDrones(BO.DroneStatuses status);
+        IEnumerable<BO.DroneToList> FilterListDrones1(BO.WeightCategories weight);
+        IEnumerable<BO.DroneToList> FilterListDrones2(BO.DroneStatuses status, BO.WeightCategories weight);
 
     }
 }
