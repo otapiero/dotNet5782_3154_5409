@@ -242,7 +242,7 @@ namespace ConsoleUI
                      break;
                 case "e":
                     Console.WriteLine("Not associated parcels:");
-                    List<IDAL.DO.Parcel> notAssociatedParcels = options.ListOfParcels(t.DroneId == 0).ToList();
+                    List<IDAL.DO.Parcel> notAssociatedParcels = options.ListOfParcels(t=>t.DroneId == 0).ToList();
                     foreach (var t in notAssociatedParcels)
                     {
                         Console.WriteLine(t.ToString());

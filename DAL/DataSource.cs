@@ -49,7 +49,7 @@ namespace DalObject
                 customers.Add(newCustomer);
 
             }
-         ;   //Initialize random parcels
+            //Initialize random parcels
             int randomCase;
             for (int i = 0; i < numParcels; i++)
             {
@@ -128,6 +128,7 @@ namespace DalObject
             {
                 string name = "";
                 string letters = "azertyuiopqsdfghjklmwxcvbn";
+
                 int index;
                 for (int i = 0; i < 4; i++)
                 {
