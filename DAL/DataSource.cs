@@ -30,7 +30,7 @@ namespace DalObject
                 IDAL.DO.Drone newDrone = new();
                 
                 newDrone.Id = Config.idDrone++;
-                newDrone.Model = GetRandomName();
+                newDrone.Model = GetModelName();
 
 
                 drones.Add(newDrone);
@@ -61,8 +61,16 @@ namespace DalObject
                 newParcel.Wheight = (IDAL.DO.WeightCategories)r.Next(0, 3);
                 newParcel.Priority = (IDAL.DO.Priorities)r.Next(0, 3);
                 newParcel.Requsted = DateTime.Now;
+                if (Config.idDrone == 0)
+                {
+                    randomCase = 0;
+
+                }
                 switch (randomCase)
                 {
+
+
+
                     case 0:
                         newParcel.DroneId = 0;
                         newParcel.Scheduled = null;
@@ -70,25 +78,25 @@ namespace DalObject
                         newParcel.Delivered = null;
                         break;
                     case 1:
-                        newParcel.DroneId = r.Next(1, numDrones);
+                        newParcel.DroneId = Config.idDrone--;
                         newParcel.Scheduled = null;
                         newParcel.PickedUp = null;
                         newParcel.Delivered = null;
                         break;
                     case 2:
-                        newParcel.DroneId = r.Next(1, numDrones);
+                        newParcel.DroneId = Config.idDrone--;
                         newParcel.Scheduled = DateTime.Now.AddMinutes(r.Next(15));
                         newParcel.PickedUp = null;
                         newParcel.Delivered = null;
                         break;
                     case 3:
-                        newParcel.DroneId = r.Next(1, numDrones);
+                        newParcel.DroneId = Config.idDrone--;
                         newParcel.Scheduled = DateTime.Now.AddMinutes(r.Next(15));
                         newParcel.PickedUp = DateTime.Now.AddMinutes(r.Next(15));
                         newParcel.Delivered = null;
                         break;
                     case 4:
-                        newParcel.DroneId = r.Next(1, numDrones);
+                        newParcel.DroneId = Config.idDrone--;
                         newParcel.Scheduled = DateTime.Now.AddMinutes(r.Next(15));
                         newParcel.PickedUp = DateTime.Now.AddMinutes(r.Next(15));
                         newParcel.Delivered = DateTime.Now.AddMinutes(r.Next(15));
@@ -138,11 +146,18 @@ namespace DalObject
 
                 return name;
             }
+            static string GetModelName()
+            {
+                
+
+                return Config.models[r.Next(5)];
+            }
         }
         //static var for initialize
         internal class Config
         {
           
+
             
             
             public static int idParcel = 1;
@@ -158,7 +173,8 @@ namespace DalObject
             public static double chargingRatePerHoure = 0.5;
 
 
-
+            public static string[] models = new string[] { "Alpha", "beta", "gema", "delta", "omicorion" };
+           
         }
     }
 }
