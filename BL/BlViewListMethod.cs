@@ -26,10 +26,10 @@ namespace IBL
             var allParcels = idal.AllParcels();
             foreach (var x in idal.AllCustomers())
             {
-                int delivred = allParcels.Count(y => (y.Sender==x.Id)&&y.Delivered!= new DateTime());
-                int notDelivred = allParcels.Count(y => (y.Sender==x.Id)&&y.Delivered== new DateTime());
-                int getedParcels = allParcels.Count(y => (y.TargetId==x.Id)&&y.Delivered!= new DateTime());
-                int inTheWay = allParcels.Count(y => (y.TargetId==x.Id)&&y.Delivered== new DateTime());
+                int delivred = allParcels.Count(y => (y.Sender==x.Id)&&y.Delivered!=null);
+                int notDelivred = allParcels.Count(y => (y.Sender==x.Id)&&y.Delivered== null);
+                int getedParcels = allParcels.Count(y => (y.TargetId==x.Id)&&y.Delivered!= null);
+                int inTheWay = allParcels.Count(y => (y.TargetId==x.Id)&&y.Delivered== null);
                 allCustomer.Add(new(x.Id, x.Name, x.Phone, delivred, notDelivred, getedParcels, inTheWay));
             }
             return allCustomer;
@@ -54,9 +54,9 @@ namespace IBL
                 BO.ParcelStatus status;
                 if (x.DroneId==0)
                     status=BO.ParcelStatus.Defined;
-                else if (x.PickedUp==new DateTime())
+                else if (x.PickedUp==null)
                     status=BO.ParcelStatus.Assigned;
-                else if (x.Delivered==new DateTime())
+                else if (x.Delivered==null)
                     status=BO.ParcelStatus.Colected;
                 else
                     status=BO.ParcelStatus.Delivred;
@@ -80,9 +80,9 @@ namespace IBL
                     BO.ParcelStatus status;
                     if (x.DroneId==0)
                         status=BO.ParcelStatus.Defined;
-                    else if (x.PickedUp==new DateTime())
+                    else if (x.PickedUp==null)
                         status=BO.ParcelStatus.Assigned;
-                    else if (x.Delivered==new DateTime())
+                    else if (x.Delivered==null)
                         status=BO.ParcelStatus.Colected;
                     else
                         status=BO.ParcelStatus.Delivred;
