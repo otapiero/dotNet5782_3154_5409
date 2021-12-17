@@ -7,9 +7,15 @@ using IBL.BO;
 using IDAL.DO;
 namespace IBL
 {
+   
 
     public partial class BL
     {
+     /// <summary>
+     /// search a station
+     /// </summary>
+     /// <param name="id"> searche the station by id</param>
+     /// <returns>return the station if exsist </returns>
         public BO.BaseStation SearchStation(int id)
         {
             BO.BaseStation temp = new();
@@ -45,6 +51,11 @@ namespace IBL
 
             return temp;
         }
+        /// <summary>
+        /// search a costumer
+        /// </summary>
+        /// <param name="id"> searche the costumer by id</param>
+        /// <returns>return the costumer if exsist or default costumer</returns>
         public BO.CustomerBl SearchCostumer(int id)
         {
 
@@ -90,6 +101,11 @@ namespace IBL
 
             return temp;
         }
+        /// <summary>
+        /// search a drone
+        /// </summary>
+        /// <param name="id"> searche the drone by id</param>
+        /// <returns>return the drone if exsist or default drone</returns>
         public BO.DroneBL SearchDrone(int id)
         {
             if (DronesBl.Exists(y => y.Id==id))
@@ -133,6 +149,11 @@ namespace IBL
             }
             return temp;
         }
+        /// <summary>
+        /// search a parcel
+        /// </summary>
+        /// <param name="id"> searche the parcel by id</param>
+        /// <returns>return the parcel if exsist or default parcel</returns>
         public BO.ParcelBl SearchParcel(int id)
         {
 

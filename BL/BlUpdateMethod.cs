@@ -9,7 +9,11 @@ namespace IBL
 {
     public partial class BL
     {
-
+        /// <summary>
+        /// uptate the drone model
+        /// </summary>
+        /// <param name="id">the id of drone to change</param>
+        /// <param name="model">the new model</param>
         public void UpdateDroneModel(int id, string model)
         {
 
@@ -34,6 +38,12 @@ namespace IBL
 
             }
         }
+        /// <summary>
+        /// update a station
+        /// </summary>
+        /// <param name="id">the id of the station </param>
+        /// <param name="name">the name to update</param>
+        /// <param name="chargeSlots">num of charge slots </param>
         public void UpdateStation(int id, string name, int chargeSlots)
         {
             try
@@ -62,6 +72,12 @@ namespace IBL
             }
 
         }
+        /// <summary>
+        /// update a costumer
+        /// </summary>
+        /// <param name="id">the id of the costumer to update</param>
+        /// <param name="name">the name to update</param>
+        /// <param name="phone">the phoneto update</param>
         public void UpdateCostumer(int id, string name, string phone)
         {
             try
@@ -79,6 +95,10 @@ namespace IBL
 
             }
         }
+        /// <summary>
+        /// send a drone to charge
+        /// </summary>
+        /// <param name="id">the id of drone sended to charge</param>
         public void SendDroneToCharge(int id)
         {
             try
@@ -119,6 +139,11 @@ namespace IBL
 
             }
         }
+        /// <summary>
+        /// relesae a drone from charging
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="time"></param>
         public void RelesaeDroneFromCharge(int id, double time)
         {
             try
@@ -143,6 +168,10 @@ namespace IBL
 
             }
         }
+        /// <summary>
+        /// asssign a parcel to a drone
+        /// </summary>
+        /// <param name="id">the id of drone to assign</param>
         public void AssignPackageToDrone(int id)
         {
             try
@@ -196,6 +225,10 @@ namespace IBL
 
             }
         }
+        /// <summary>
+        /// colect a parcel by a drone
+        /// </summary>
+        /// <param name="id">the id of drone to collect a parcel</param>
         public void CollectPackage(int id)
         {
             try
@@ -226,6 +259,10 @@ namespace IBL
 
             }
         }
+        /// <summary>
+        /// deliver a parcel
+        /// </summary>
+        /// <param name="id">the id of drone to deliver a parcel</param>
         public void DeliverPackage(int id)
         {
             try

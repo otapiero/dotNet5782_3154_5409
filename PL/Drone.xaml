@@ -13,7 +13,7 @@
                 <ColumnDefinition Width="341*"/>
                 <ColumnDefinition Width="107*"/>
             </Grid.ColumnDefinitions>
-            <Label Content="Model:" HorizontalAlignment="Left" Margin="43,31,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.536,0.862"/>
+            <Label Content="Model:" HorizontalAlignment="Left" Margin="43,31,0,0" VerticalAlignment="Top" />
             <Label Content="Id:" HorizontalAlignment="Left" Margin="43,54,0,0" VerticalAlignment="Top"/>
             <Label Content="Weight:" HorizontalAlignment="Left" Margin="43,81,0,0" VerticalAlignment="Top"/>
             <Label Content="Station:" HorizontalAlignment="Left" Margin="43,225,0,0" VerticalAlignment="Top"/>
@@ -22,6 +22,7 @@
             <Label Content="Battery:" HorizontalAlignment="Left" Margin="42,104,0,0" VerticalAlignment="Top"/>
             <Label Content="Delivery:" HorizontalAlignment="Left" Margin="43,154,0,0" VerticalAlignment="Top"/>
             <Label Content="Status:" HorizontalAlignment="Left" Margin="43,129,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="Option_Label" Content="option:" HorizontalAlignment="Left" Margin="43,251,0,0" VerticalAlignment="Top" />
             <Button x:Name="updateDrone" Content="Ok"  HorizontalAlignment="Left" Margin="64,303,0,0" VerticalAlignment="Top" Click="Update_Bottun" Width="50"/>
             <Button Content="Cancel" HorizontalAlignment="Center" Margin="0,303,0,0" VerticalAlignment="Top" Click="Button_Click" Width="50" RenderTransformOrigin="0.579,0.742"/>
             <TextBox x:Name="ModelText" TextChanged="ModelText_SelectionChanged" HorizontalAlignment="Center" Margin="0,35,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewKeyDown="TextBox_PreviewKeyDown"/>
@@ -35,11 +36,14 @@
                 </ListView.View>
             </ListView>
             <ComboBox  x:Name="StatusCombo" HorizontalAlignment="Center" Margin="0,131,0,0" VerticalAlignment="Top" Width="120"/>
+            <ComboBox SelectionChanged="OptionCombo_SelectionChanged" x:Name="OptionCombo" HorizontalAlignment="Center" Margin="0,256,0,0" VerticalAlignment="Top" Width="120" />
             <TextBox x:Name="DeliveryText"    HorizontalAlignment="Center" Margin="0,158,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
             <TextBox x:Name="Latitude"  HorizontalAlignment="Center" Margin="0,181,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewKeyDown="DroneId_PreviewKeyDown"/>
             <TextBox x:Name="Longitude"  HorizontalAlignment="Center" Margin="0,204,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewKeyDown="DroneId_PreviewKeyDown"/>
             <Label Content="Latitude:" HorizontalAlignment="Left" Margin="43,177,0,0" VerticalAlignment="Top"/>
             <Label Content="Longitude:" HorizontalAlignment="Left" Margin="43,200,0,0" VerticalAlignment="Top"/>
+           
+           
         </Grid>
 
         <Grid Margin="0,0,0,368">
