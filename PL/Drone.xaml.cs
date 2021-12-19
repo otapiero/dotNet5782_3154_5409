@@ -23,17 +23,20 @@ namespace PL
         IBL.BO.DroneBL drone;
         IBL.BO.DroneToList NewDrone;
         private int clickCount;
+        private bool newDrone;
         int station;
         public Drone(IBL.IBL bl1)
         {
-
+            newDrone = true;
             ibl = bl1;
             drone = new IBL.BO.DroneBL();
             InitializeComponent();
             WeightCombo.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
             StationCombo.ItemsSource = ibl.ListStation();
 
-          
+
+            Option_Label.Visibility = Visibility.Hidden;
+            OptionCombo.Visibility = Visibility.Hidden;
             BatteryText.Visibility = Visibility.Hidden;
             StatusCombo.Visibility = Visibility.Hidden;
             DeliveryText.Visibility = Visibility.Hidden;
@@ -53,14 +56,24 @@ namespace PL
         }
         public Drone(IBL.IBL bl1, IBL.BO.DroneToList x)
         {
+            newDrone = false;
             InitializeComponent();
             ibl = bl1;
             drone = new();
             WeightCombo.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
             DroneView.Items.Add(x);
-
+            
             StationCombo.Visibility = Visibility.Hidden;
-           
+            List<string> OperationsPosebilities = new List<string>()
+                {
+                    "Update Model",
+                    "Assign a parcel to the drown",
+                    "Pickedup a parcel",
+                    "Suplay a parcel to costumer",
+                    "Send the drone to Charge ",
+                    "Release drown from charging"
+            };
+            OptionCombo.ItemsSource = OperationsPosebilities;
             DroneId.IsReadOnly = true;
             BatteryText.IsReadOnly = true;
             StationCombo.IsReadOnly = true;
@@ -141,8 +154,83 @@ namespace PL
 
         private void Update_Bottun(object sender, RoutedEventArgs e)
         {
+           
+            if (newDrone)
+            {
+                try
+                {
+
+                    addNewDrone();
 
 
+                }
+                catch (Exception)
+                {
+                    MessageBoxResult mbResult = MessageBox.Show("press OK to continue, else press Cancel", "Error Occurred", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                    switch (mbResult)
+                    {
+                        case MessageBoxResult.OK:
+                            break;
+                        case MessageBoxResult.Cancel:
+                            this.Close();
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                try
+                {
+                    
+                    updateADrone();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Errohhr", "Errohhr", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+        }
+        
+        private void updateADrone()
+        {
+            try
+            {
+                switch (OptionCombo.SelectedIndex)
+                {
+                    case -1:
+                        MessageBox.Show("Choose Action", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case 0: // update
+                        ibl.UpdateDroneModel(Convert.ToInt32(DroneId.Text), ModelText.Text);
+                        break;
+                    case 1: // Assign a parcel to a drown
+                        ibl.AssignPackageToDrone(Convert.ToInt32(DroneId.Text));
+                        break;
+                    case 2: // Pickup a parcel
+
+                        ibl.CollectPackage(Convert.ToInt32(DroneId.Text));
+                        MessageBox.Show("Err", "Err", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        break;
+                    case 3: // Suplay a parcel to costumer 
+                        ibl.DeliverPackage(Convert.ToInt32(DroneId.Text));
+                        break;
+                    case 4: // Charge drown
+                        ibl.SendDroneToCharge(Convert.ToInt32(DroneId.Text));
+                        break;
+                    case 5: // Release drown from station
+                        ibl.RelesaeDroneFromCharge(Convert.ToInt32(DroneId.Text), 12);
+                        break;
+                }
+                MessageBox.Show("Done", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                DroneId.Background = Brushes.White;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        private void addNewDrone()
+        {
             try
             {
                 ibl.AddNewDrone(drone.Id, drone.Model, (int)drone.Weight, station);
@@ -156,7 +244,7 @@ namespace PL
                         this.Close();
                         break;
                 }
-                
+
 
             }
             catch (Exception)
@@ -170,15 +258,16 @@ namespace PL
                         this.Close();
                         break;
                 }
-
-
-
             }
+        }
+        private void BatteryText_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
         }
 
-        private void BatteryText_TextChanged(object sender, TextChangedEventArgs e)
+        private void OptionCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+           
 
         }
     }

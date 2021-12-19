@@ -9,6 +9,10 @@ namespace IBL
 
     public partial class BL
     {
+        /// <summary>
+        /// list of all station
+        /// </summary>
+        /// <returns>return the lust of all the station </returns>
         public IEnumerable<BO.BaseStationToList> ListStation()
         {
 
@@ -20,20 +24,28 @@ namespace IBL
             }
             return allStation;
         }
+        /// <summary>
+        /// list of all costumer
+        /// </summary>
+        /// <returns>return the lust of all the costumer </returns>
         public IEnumerable<BO.CustomerToList> ListCustomer()
         {
             List<BO.CustomerToList> allCustomer = new();
             var allParcels = idal.AllParcels();
             foreach (var x in idal.AllCustomers())
             {
-                int delivred = allParcels.Count(y => (y.Sender==x.Id)&&y.Delivered!= new DateTime());
-                int notDelivred = allParcels.Count(y => (y.Sender==x.Id)&&y.Delivered== new DateTime());
-                int getedParcels = allParcels.Count(y => (y.TargetId==x.Id)&&y.Delivered!= new DateTime());
-                int inTheWay = allParcels.Count(y => (y.TargetId==x.Id)&&y.Delivered== new DateTime());
+                int delivred = allParcels.Count(y => (y.Sender==x.Id)&&y.Delivered!=null);
+                int notDelivred = allParcels.Count(y => (y.Sender==x.Id)&&y.Delivered== null);
+                int getedParcels = allParcels.Count(y => (y.TargetId==x.Id)&&y.Delivered!= null);
+                int inTheWay = allParcels.Count(y => (y.TargetId==x.Id)&&y.Delivered== null);
                 allCustomer.Add(new(x.Id, x.Name, x.Phone, delivred, notDelivred, getedParcels, inTheWay));
             }
             return allCustomer;
         }
+        /// <summary>
+        /// list of all drone
+        /// </summary>
+        /// <returns>return the lust of all the drone </returns>
         public IEnumerable<BO.DroneToList> ListDrones()
         {
             List<BO.DroneToList> allDrones = new();
@@ -43,6 +55,10 @@ namespace IBL
             }
             return allDrones;
         }
+        /// <summary>
+        /// list of all parcel
+        /// </summary>
+        /// <returns>return the lust of all the parcel </returns>
         public IEnumerable<BO.ParcelToList> ListParcels()
         {
             List<BO.ParcelToList> allParcels = new();
@@ -54,9 +70,9 @@ namespace IBL
                 BO.ParcelStatus status;
                 if (x.DroneId==0)
                     status=BO.ParcelStatus.Defined;
-                else if (x.PickedUp==new DateTime())
+                else if (x.PickedUp==null)
                     status=BO.ParcelStatus.Assigned;
-                else if (x.Delivered==new DateTime())
+                else if (x.Delivered==null)
                     status=BO.ParcelStatus.Colected;
                 else
                     status=BO.ParcelStatus.Delivred;
@@ -66,6 +82,10 @@ namespace IBL
 
             return allParcels;
         }
+        /// <summary>
+        /// list of the not assined parcels
+        /// </summary>
+        /// <returns>list of  parcels</returns>
         public IEnumerable<BO.ParcelToList> ListParcelsNotAssigned()
         {
             List<BO.ParcelToList> ParcelsNotAssociated = new();
@@ -80,9 +100,9 @@ namespace IBL
                     BO.ParcelStatus status;
                     if (x.DroneId==0)
                         status=BO.ParcelStatus.Defined;
-                    else if (x.PickedUp==new DateTime())
+                    else if (x.PickedUp==null)
                         status=BO.ParcelStatus.Assigned;
-                    else if (x.Delivered==new DateTime())
+                    else if (x.Delivered==null)
                         status=BO.ParcelStatus.Colected;
                     else
                         status=BO.ParcelStatus.Delivred;
@@ -96,7 +116,10 @@ namespace IBL
 
             return ParcelsNotAssociated;
         }
-
+        /// <summary>
+        /// list of station with availebal charge post
+        /// </summary>
+        /// <returns>list of  station</returns>
         public IEnumerable<BO.BaseStationToList> StationWithAvailebalChargePost()
         {
             List<BO.BaseStationToList> stationWithAvailebalChargePost = new();
@@ -107,7 +130,12 @@ namespace IBL
             }
             return stationWithAvailebalChargePost;
         }
-
+        /// <summary>
+        /// filter the drone list by status and weight
+        /// </summary>
+        /// <param name="status">status filter </param>
+        /// <param name="weight">weight filter</param>
+        /// <returns>list of drones filtered    </returns>
         public IEnumerable<BO.DroneToList> FilterListDrones2(BO.DroneStatuses status, BO.WeightCategories weight)
         {
             List<BO.DroneToList> allDrones = new();
@@ -121,6 +149,11 @@ namespace IBL
             }
             return allDrones;
         }
+        /// <summary>
+        /// filter the drone list  weight
+        /// </summary>
+        /// <param name="weight">weight filter</param>
+        /// <returns>list of drones filtered    </returns>
         public IEnumerable<BO.DroneToList> FilterListDrones1(BO.WeightCategories weight)
         {
             List<BO.DroneToList> allDrones = new();
@@ -134,6 +167,11 @@ namespace IBL
             }
             return allDrones;
         }
+        /// <summary>
+        /// filter the drone list by status 
+        /// </summary>
+        /// <param name="status">status filter </param>
+        /// <returns>list of drones filtered    </returns>
         public IEnumerable<BO.DroneToList> FilterListDrones(BO.DroneStatuses status)
         {
             List<BO.DroneToList> allDrones = new();

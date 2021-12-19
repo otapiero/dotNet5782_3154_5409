@@ -34,7 +34,7 @@ namespace IBL
             public int ParcelId { get; set; }
             public override string ToString()
             {
-                return "id: " + Id + "\nmodel: " + Model + "\nWeight: " + Weight + "\nBattery: " + Battery + "\nStattus: " + status + "\nlocation: " + CurrentLocation.ToString() +
+                return "id: " + Id + "\nmodel: " + Model + "\nWeight: " + Weight + "\nBattery: " + (Battery -Battery% 0.001)+ "\nStattus: " + status + "\nlocation: " + CurrentLocation.ToString() +
                     "\nparcel id: " + ParcelId+"\n";
 
             }
