@@ -29,7 +29,6 @@ namespace IBL
                     DronesBl.Add(temp);
                     idal.UpdateDroneModel(id, model);
                 }
-                else
                 throw new BO.IBException("Id not found.");
 
             }
