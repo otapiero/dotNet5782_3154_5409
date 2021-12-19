@@ -201,7 +201,7 @@ namespace PL
                         MessageBox.Show("Choose Action", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                         break;
                     case 0: // update
-                        ibl.UpdateDroneModel(Convert.ToInt32(DroneId.Text), ModelText.Text);
+                        ibl.UpdateDroneModel(int.Parse(DroneId.Text), ModelText.Text.ToString());
                         break;
                     case 1: // Assign a parcel to a drown
                         ibl.AssignPackageToDrone(Convert.ToInt32(DroneId.Text));
