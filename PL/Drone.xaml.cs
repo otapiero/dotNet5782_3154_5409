@@ -22,7 +22,7 @@ namespace PL
         IBL.IBL ibl;
         IBL.BO.DroneBL drone;
         IBL.BO.DroneToList NewDrone;
-        private int clickCount;
+        ;
         private bool newDrone;
         int station;
         public Drone(IBL.IBL bl1)
@@ -207,7 +207,6 @@ namespace PL
                         ibl.AssignPackageToDrone(Convert.ToInt32(DroneId.Text));
                         break;
                     case 2: // Pickup a parcel
-
                         ibl.CollectPackage(Convert.ToInt32(DroneId.Text));
                         MessageBox.Show("Err", "Err", MessageBoxButton.OK, MessageBoxImage.Warning);
                         break;
