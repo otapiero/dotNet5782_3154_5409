@@ -26,7 +26,7 @@
             <Button Content="Cancel" HorizontalAlignment="Center" Margin="0,303,0,0" VerticalAlignment="Top" Click="Button_Click" Width="50" RenderTransformOrigin="0.579,0.742"/>
             <TextBox x:Name="ModelText" TextChanged="ModelText_SelectionChanged" HorizontalAlignment="Center" Margin="0,35,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewKeyDown="TextBox_PreviewKeyDown"/>
             <TextBox x:Name="DroneId" TextChanged="DroneId_SelectionChanged"  MaxLength="9" HorizontalAlignment="Center" Margin="0,58,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewKeyDown="DroneId_PreviewKeyDown" />
-            <TextBox x:Name="BatteryText" MaxLength="3" TextChanged="BatteryText_TextChanged"  HorizontalAlignment="Center" Margin="0,108,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewKeyDown="DroneId_PreviewKeyDown"/>
+            <TextBox x:Name="BatteryText" MaxLength="4" TextChanged="BatteryText_TextChanged"  HorizontalAlignment="Center" Margin="0,108,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewKeyDown="DroneId_PreviewKeyDown"/>
             <ListView x:Name="DroneView" Margin="272,27,10,42" Grid.ColumnSpan="2">
                 <ListView.View>
                     <GridView>

@@ -33,9 +33,7 @@ namespace PL
             WeightCombo.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
             StationCombo.ItemsSource = ibl.ListStation();
 
-           
-
-           
+          
             BatteryText.Visibility = Visibility.Hidden;
             StatusCombo.Visibility = Visibility.Hidden;
             DeliveryText.Visibility = Visibility.Hidden;
@@ -87,7 +85,7 @@ namespace PL
             Latitude.Text = x.CurrentLocation.Lattitude.ToString();
             Longitude.Text = x.CurrentLocation.Longitude.ToString();
             StatusCombo.SelectedItem = x.status.ToString();
-            StationCombo.SelectedItem = "???";
+            StationCombo.Items.Add("???");
             BatteryText.Text = x.Battery.ToString();
             WeightCombo.SelectedItem = x.Weight;
             MessageBox.Show(x.ToString());
