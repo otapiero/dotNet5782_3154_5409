@@ -30,7 +30,7 @@ namespace PL
             DronesListView.ItemsSource = ibl.ListDrones();
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-
+           
 
         }
 
@@ -39,7 +39,6 @@ namespace PL
         private void AddDroneButton_Click(object sender, RoutedEventArgs e)
         {
             new Drone(ibl).ShowDialog();
-            DronesListView.ItemsSource = null;
         }
         private void CloseList(object sender, RoutedEventArgs e)
         {
@@ -49,12 +48,12 @@ namespace PL
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            if (WeightSelector.SelectedItem == default)
+            if (WeightSelector.SelectedItem == null)
             {
 
                 DronesListView.ItemsSource = ibl.FilterListDrones((DroneStatuses)StatusSelector.SelectedItem);
             }
-            else if (StatusSelector.SelectedItem == default)
+            else if (StatusSelector.SelectedItem == null)
             {
 
                 DronesListView.ItemsSource = ibl.FilterListDrones1((WeightCategories)WeightSelector.SelectedItem);

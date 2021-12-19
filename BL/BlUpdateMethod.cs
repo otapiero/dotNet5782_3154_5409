@@ -29,7 +29,7 @@ namespace IBL
                     DronesBl.Add(temp);
                     idal.UpdateDroneModel(id, model);
                 }
-                throw new BO.IBException("Id not found.");
+                else throw new BO.IBException("Id not found.");
 
             }
             catch (Exception x)
@@ -62,7 +62,7 @@ namespace IBL
 
 
                 }
-                throw new BO.IBException("Id not found.");
+                else throw new BO.IBException("Id not found.");
 
             }
             catch (Exception x)
@@ -87,7 +87,7 @@ namespace IBL
                 {
                     idal.UpdateCostumer(id, name, phone);
                 }
-                throw new BO.IBException("id not exist");
+                else throw new BO.IBException("id not exist");
             }
             catch (Exception x)
             {
@@ -124,13 +124,13 @@ namespace IBL
 
                             idal.SendDroneToCharge(id, chooseStation.Id);
                         }
-                        throw new BO.IBException("Not enough battery");
+                        else throw new BO.IBException("Not enough battery");
                         // else throw "Not enough battery"
                     }
-                    throw new BO.IBException("There is no station available");
+                    else throw new BO.IBException("There is no station available");
                     // else throw "There is no station available"
                 }
-                throw new BO.IBException("the drone isnt available");
+                else throw new BO.IBException("the drone isnt available");
                 //  else throw ..."the drone isnt available"
             }
             catch (Exception x)
@@ -159,7 +159,7 @@ namespace IBL
                     idal.ReleseDroneFromCharge(id);
 
                 }
-                throw new BO.IBException("the drone isnt in Maintenace");
+                else throw new BO.IBException("the drone isnt in Maintenace");
                 // else throw ..."the drone isnt in Maintenace"
             }
             catch (Exception x)
@@ -214,9 +214,9 @@ namespace IBL
                         temp.ParcelId= parcelId;
                         idal.AssignPackageToDrone(parcelId, temp.Id);
                     }
-                    throw new BO.IBException("Not enough battery");
+                    else throw new BO.IBException("Not enough battery");
                 }
-                throw new BO.IBException("the drone isnt in avilable");
+                else throw new BO.IBException("the drone isnt in avilable");
 
             }
             catch (Exception x)
@@ -247,10 +247,10 @@ namespace IBL
                         temp.CurrentLocation=new BO.Location(person.Longitude, person.Lattitude);
                         idal.CollectPackage(parcel.Id);
                     }
-                    throw new BO.IBException("the parcel was picked up");
+                    else throw new BO.IBException("the parcel was picked up");
                     // else throw ..."the parcel was picked up"
                 }
-                throw new BO.IBException("the drone isnt in Delivery");
+                else throw new BO.IBException("the drone isnt in Delivery");
                 // else throw ..."the drone isnt in Delivery"
             }
             catch (Exception x)
@@ -282,10 +282,10 @@ namespace IBL
                         temp.status=DroneStatuses.Available;
                         idal.DeliverPackage(parcel.Id);
                     }
-                    throw new BO.IBException("the parcel was delivered");
+                    else throw new BO.IBException("the parcel was delivered");
                     //else throw ..."the parcel was delivered"
                 }
-                throw new BO.IBException("the drone isnt in Delivery");
+                else throw new BO.IBException("the drone isnt in Delivery");
                 // else throw ..."the drone isnt in Delivery"
             }
             catch (Exception x)
