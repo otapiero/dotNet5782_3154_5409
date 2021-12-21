@@ -42,13 +42,9 @@ namespace PL
             WeightCombo.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
             StationCombo.ItemsSource = ibl.ListStation();
 
+            MainGrid.RowDefinitions[2].Height = new GridLength(0);
 
-            Option_Label.Visibility = Visibility.Hidden;
-            OptionCombo.Visibility = Visibility.Hidden;
-            BatteryText.Visibility = Visibility.Hidden;
-            Battery_Label.Visibility = Visibility.Hidden;
-            Status_Label.Visibility = Visibility.Hidden;
-            StatusContenetLabel.Visibility = Visibility.Hidden;
+          
      
             /*  cmbActions.Visibility = Visibility.Hidden;
                btnGO.Visibility = Visibility.Hidden;
@@ -69,7 +65,7 @@ namespace PL
             ibl = bl1;
             drone = new();
             WeightCombo.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
-            DroneView.Items.Add(x);
+            
 
             StationCombo.Visibility = Visibility.Hidden;
             Station_Label.Visibility = Visibility.Hidden;
@@ -79,7 +75,7 @@ namespace PL
             StatusContenetLabel.Content = x.status;
 
 
-            BatteryText.Content = (x.Battery - x.Battery % 0.001);
+            BatteryText.Content = (x.Battery).ToString().Substring(0,5);
          
            
 
@@ -128,7 +124,7 @@ namespace PL
             StationCombo.Items.Add("???");
             
             WeightCombo.SelectedItem = x.Weight;
-            MessageBox.Show(x.ToString());
+          
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

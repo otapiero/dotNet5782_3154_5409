@@ -5,54 +5,49 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Drone" Height="450" Width="500
-        ">
-    <Grid Margin="10,0,10,-6">
-        <Grid HorizontalAlignment="Center" Height="344" Margin="0,58,0,0" VerticalAlignment="Top" Width="448">
+        Title="Drone" Height="400
+        " Width="250">
+    <Grid Name="MainGrid" >
+
+        <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="341*"/>
-                <ColumnDefinition Width="107*"/>
-            </Grid.ColumnDefinitions>
-            <Label Content="Model:" HorizontalAlignment="Left" Margin="43,31,0,0" VerticalAlignment="Top" />
-            <TextBox x:Name="ModelText" TextChanged="ModelText_SelectionChanged" HorizontalAlignment="Center" Margin="0,35,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewKeyDown="TextBox_PreviewKeyDown"/>
-
-            <Label Content="Id:" HorizontalAlignment="Left" Margin="43,54,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="DroneId" TextChanged="DroneId_SelectionChanged"  MaxLength="9" HorizontalAlignment="Center" Margin="0,58,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewKeyDown="DroneId_PreviewKeyDown" />
-
-            <Label Content="Weight:" HorizontalAlignment="Left" Margin="43,81,0,0" VerticalAlignment="Top"/>
-            <ComboBox SelectionChanged="WeightCombo_SelectionChanged" Name="WeightCombo"  HorizontalAlignment="Center" Margin="0,81,0,0" VerticalAlignment="Top" Width="120"/>
-
-            <Label x:Name="Station_Label" Content="Station:" HorizontalAlignment="Left" Margin="42,104,0,0" VerticalAlignment="Top"/>
-            <ComboBox SelectionChanged="StationCombo_SelectionChanged" Name="StationCombo" HorizontalAlignment="Center" Margin="0,108,0,0" VerticalAlignment="Top" Width="120"/>
-
-            <Label x:Name="Battery_Label" Content="Battery:" HorizontalAlignment="Left" Margin="42,104,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="BatteryText"    HorizontalAlignment="Center" Margin="0,104,0,0"  VerticalAlignment="Top" RenderTransformOrigin="-1.976,0.467" Width="120" />
-
-            <Label x:Name="Status_Label" Content="Status:" HorizontalAlignment="Left" Margin="43,129,0,0" VerticalAlignment="Top"/>
-            <Label x:Name="StatusContenetLabel"   HorizontalAlignment="Center" Margin="0,129,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.976,0.467" Width="120"/>
-
-            <Label x:Name="Option_Label" Content="option:" HorizontalAlignment="Left" Margin="43,251,0,0" VerticalAlignment="Top" />
-            <ComboBox SelectionChanged="OptionCombo_SelectionChanged" x:Name="OptionCombo" HorizontalAlignment="Center" Margin="0,256,0,0" VerticalAlignment="Top" Width="120" />
-
-            
-            <Label  x:Name="Location" Content="Latitude:" HorizontalAlignment="Left" Margin="43,177,0,0" VerticalAlignment="Top"  />
-            <Button x:Name="updateDrone" Content="Ok"  HorizontalAlignment="Left" Margin="64,303,0,0" VerticalAlignment="Top" Click="Update_Bottun" Width="50"/>
-            <Button Content="Cancel" HorizontalAlignment="Center" Margin="0,303,0,0" VerticalAlignment="Top" Click="Button_Click" Width="50" RenderTransformOrigin="0.579,0.742"/>
-
-            <ListView x:Name="DroneView" Margin="272,27,10,42" Grid.ColumnSpan="2">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-
-
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions >
+            <Label Content="Display Drone" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="32" FontWeight="Bold" FontFamily="Consolas" Height="48" Margin="0,-1,0,0"/>
         </Grid>
+        <Label Content="Model:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="31,12,0,0" Grid.Row="1" />
+        <TextBox x:Name="ModelText" TextChanged="ModelText_SelectionChanged" HorizontalAlignment="Left"   TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewKeyDown="TextBox_PreviewKeyDown" Margin="90,16,0,0" Grid.Row="1"/>
 
-        <Grid Margin="0,0,0,368">
-            <Label Content="Display Drone" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="42" FontWeight="Bold" FontFamily="Consolas"/>
-        </Grid>
+        <Label Content="Id:" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="54,33,0,0" Grid.Row="1"/>
+        <TextBox x:Name="DroneId" TextChanged="DroneId_SelectionChanged"  MaxLength="9" HorizontalAlignment="Left"   TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewKeyDown="DroneId_PreviewKeyDown" Margin="90,37,0,0" Grid.Row="1" />
 
+        <Label Content="Weight:" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="26,56,0,0" Grid.Row="1"/>
+        <ComboBox SelectionChanged="WeightCombo_SelectionChanged" Name="WeightCombo"  HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Margin="90,60,0,0" Grid.Row="1"/>
+
+        <Label x:Name="Station_Label" Content="Station:" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="27,81,0,0" Grid.Row="1"/>
+        <ComboBox SelectionChanged="StationCombo_SelectionChanged" Name="StationCombo" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="90,87,0,0" Grid.Row="1"/>
+
+        <Label x:Name="Battery_Label" Content="Battery:" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="29,9,0,0" Grid.Row="2"/>
+        <Label x:Name="BatteryText"    HorizontalAlignment="Left"  VerticalAlignment="Top" RenderTransformOrigin="-1.976,0.467" Width="120" Margin="90,9,0,0" Grid.Row="2" Height="26" />
+
+        <Label x:Name="Status_Label" Content="Status:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,31,0,0" Grid.Row="2"/>
+        <Label x:Name="StatusContenetLabel"   HorizontalAlignment="Left"  VerticalAlignment="Top" RenderTransformOrigin="-1.976,0.467" Width="120" Margin="90,35,0,0" Grid.Row="2" Height="26"/>
+
+        <Label x:Name="Option_Label" Content="option:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="32,104,0,0" Grid.Row="2" />
+        <ComboBox SelectionChanged="OptionCombo_SelectionChanged" x:Name="OptionCombo" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Margin="90,108,0,0" Grid.Row="2" />
+
+
+
+        <Label  x:Name="Location" Content="Latitude:" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="24,48,0,0" Grid.Row="2"  />
+        <Button x:Name="updateDrone" Content="Ok"  HorizontalAlignment="Left" VerticalAlignment="Center" Click="Update_Bottun" Width="50" Grid.Row="3" Margin="55,0,0,0"/>
+        <Button Content="Cancel" HorizontalAlignment="Left"  VerticalAlignment="Center" Click="Button_Click" Width="50" RenderTransformOrigin="0.579,0.742" Grid.Row="3" Margin="150,0,0,0"/>
+
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="130*"/>
+            <RowDefinition  Height="180*"/>
+            <RowDefinition Height="50*"/>
+        </Grid.RowDefinitions>
     </Grid>
 </Window>

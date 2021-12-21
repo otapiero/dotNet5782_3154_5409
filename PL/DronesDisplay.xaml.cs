@@ -69,8 +69,8 @@ namespace PL
 
         private void ClearStatusButton_Click(object sender, RoutedEventArgs e)
         {
-            StatusSelector.SelectedItem = default;
-            if (WeightSelector.SelectedItem != default)
+            StatusSelector.SelectedItem = null;
+            if (WeightSelector.SelectedItem != null)
             {
                 DronesListView.ItemsSource = ibl.FilterListDrones1((WeightCategories)WeightSelector.SelectedItem);
             }
@@ -80,8 +80,8 @@ namespace PL
 
         private void ClearWeightButton_Click(object sender, RoutedEventArgs e)
         {
-            WeightSelector.SelectedItem = default;
-            if (StatusSelector.SelectedItem != default)
+            WeightSelector.SelectedItem = null;
+            if (StatusSelector.SelectedItem != null)
             {
                 DronesListView.ItemsSource = ibl.FilterListDrones((DroneStatuses)StatusSelector.SelectedItem);
             }
