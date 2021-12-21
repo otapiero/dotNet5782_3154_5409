@@ -23,14 +23,15 @@
 
         <Label Content="Weight:" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="26,56,0,0" Grid.Row="1"/>
         <ComboBox SelectionChanged="WeightCombo_SelectionChanged" Name="WeightCombo"  HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Margin="90,60,0,0" Grid.Row="1"/>
-
+        <Label x:Name="Weiht_content" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Margin="90,56,0,0" Grid.Row="1"/>
+        
         <Label x:Name="Station_Label" Content="Station:" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="27,81,0,0" Grid.Row="1"/>
         <ComboBox SelectionChanged="StationCombo_SelectionChanged" Name="StationCombo" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="90,87,0,0" Grid.Row="1"/>
 
         <Label x:Name="Battery_Label" Content="Battery:" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="29,9,0,0" Grid.Row="2"/>
         <Label x:Name="BatteryText"    HorizontalAlignment="Left"  VerticalAlignment="Top" RenderTransformOrigin="-1.976,0.467" Width="120" Margin="90,9,0,0" Grid.Row="2" Height="26" />
 
-        <Label x:Name="Status_Label" Content="Status:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,31,0,0" Grid.Row="2"/>
+        <Label x:Name="Status_Label" Content="Status:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="35,35,0,0" Grid.Row="2"/>
         <Label x:Name="StatusContenetLabel"   HorizontalAlignment="Left"  VerticalAlignment="Top" RenderTransformOrigin="-1.976,0.467" Width="120" Margin="90,35,0,0" Grid.Row="2" Height="26"/>
 
         <Label x:Name="Option_Label" Content="option:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="32,104,0,0" Grid.Row="2" />
