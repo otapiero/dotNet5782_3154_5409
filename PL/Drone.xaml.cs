@@ -234,7 +234,7 @@ namespace PL
             {
                 switch (OptionCombo.SelectedValue)
                 {
-                    case -1:
+                    case null:
                         MessageBox.Show("Choose Action", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                         break;
                     case "Update Model": // update
