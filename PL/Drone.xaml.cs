@@ -50,7 +50,6 @@ namespace PL
             Battery_Label.Visibility = Visibility.Hidden;
             Status_Label.Visibility = Visibility.Hidden;
             StatusContenetLabel.Visibility = Visibility.Hidden;
-     
             /*  cmbActions.Visibility = Visibility.Hidden;
                btnGO.Visibility = Visibility.Hidden;
 
@@ -74,13 +73,14 @@ namespace PL
 
             StationCombo.Visibility = Visibility.Hidden;
             Station_Label.Visibility = Visibility.Hidden;
-
+            Weiht_content.Content = x.Weight;
+            WeightCombo.Visibility = Visibility.Hidden;
             Location.Content = x.CurrentLocation.ToString();
 
             StatusContenetLabel.Content = x.status;
 
 
-            BatteryText.Content = (x.Battery).ToString().Substring(0,5);
+            BatteryText.Content = x.Battery.ToString().Substring(0,5);
          
            
 
@@ -253,8 +253,17 @@ namespace PL
                         ibl.RelesaeDroneFromCharge(Convert.ToInt32(DroneId.Text), 12);
                         break;
                 }
-                MessageBox.Show("Done", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                DroneId.Background = Brushes.White;
+                MessageBoxResult mbResult = MessageBox.Show("Done", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                
+                switch (mbResult)
+                {
+                    case MessageBoxResult.OK:
+                        this.Close();
+                        break;
+                    case MessageBoxResult.Cancel:
+                        this.Close();
+                        break;
+                }
             }
             catch (Exception ex)
             {
@@ -292,10 +301,7 @@ namespace PL
                 }
             }
         }
-        private void BatteryText_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
+       
 
         private void OptionCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

@@ -23,7 +23,7 @@ namespace IBL
             {
                 return "\nLongitude:    " +
                     DalObject.Cordinates.LongitudeDoubleToString(Longitude) +
-                    "\nLattitude:    " + DalObject.Cordinates.LatitudeDoubleToString(Lattitude);
+                    "\nLattitude:     " + DalObject.Cordinates.LatitudeDoubleToString(Lattitude);
             }
         }
     }

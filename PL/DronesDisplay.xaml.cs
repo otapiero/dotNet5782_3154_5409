@@ -22,14 +22,6 @@ namespace PL
     public partial class DronesDisplay : Window
     {
 
-
-       
-        
-        
-
-
-
-
         IBL.IBL ibl;
 
         public DronesDisplay(IBL.IBL bl1)
