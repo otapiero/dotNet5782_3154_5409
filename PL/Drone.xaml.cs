@@ -253,6 +253,8 @@ namespace PL
                 }
                 MessageBox.Show("Done", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 DroneId.Background = Brushes.White;
+                cancel = 1;
+                this.Close();
             }
             catch (Exception ex)
             {

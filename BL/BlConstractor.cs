@@ -34,52 +34,55 @@ namespace IBL
 
 
             List<IDAL.DO.Parcel> parcelsNotDelivred = idal.ListOfParcels(x => ((x.DroneId != 0) &&(x.Delivered==null))).ToList();
-            
+
             foreach (var x in parcelsNotDelivred)
             {
 
                 IDAL.DO.Drone tempDlDrone = dronesData.Find(z => z.Id.Equals(x.DroneId));
-                IDAL.DO.Costumer senderCostumer = idal.SearchCostumer(x.Sender);
-                IDAL.DO.Costumer targetCostumer = idal.SearchCostumer(x.TargetId);
-                BO.Location senderLocation = new(senderCostumer.Longitude, senderCostumer.Lattitude);
-                BO.Location targetLocation = new(targetCostumer.Longitude, targetCostumer.Lattitude);
-                BO.DroneToList temp = new();
-                temp.Id = tempDlDrone.Id;
-                temp.Model = tempDlDrone.Model;
-
-                temp.Weight = (BO.WeightCategories)x.Wheight;
-
-                temp.status = BO.DroneStatuses.Delivery;
-                if (x.PickedUp == new DateTime())
+                if (tempDlDrone.Id!=0)
                 {
-                    temp.CurrentLocation = FindTheClosestStation(senderLocation, stationData);
-                    double min = DistanceLocation(temp.CurrentLocation, senderLocation);
-                    min += DistanceLocation(targetLocation, senderLocation);
-                    min += DistanceLocation(targetLocation, FindTheClosestStation(targetLocation, stationData));
-                    min *= vs[(int)temp.Weight + 1];
-                    if (min < 100)
-                        temp.Battery = min + rand.NextDouble() * (100 - min);
+                    IDAL.DO.Costumer senderCostumer = idal.SearchCostumer(x.Sender);
+                    IDAL.DO.Costumer targetCostumer = idal.SearchCostumer(x.TargetId);
+                    BO.Location senderLocation = new(senderCostumer.Longitude, senderCostumer.Lattitude);
+                    BO.Location targetLocation = new(targetCostumer.Longitude, targetCostumer.Lattitude);
+                    BO.DroneToList temp = new();
+                    temp.Id = tempDlDrone.Id;
+                    temp.Model = tempDlDrone.Model;
+
+                    temp.Weight = (BO.WeightCategories)x.Wheight;
+
+                    temp.status = BO.DroneStatuses.Delivery;
+                    if (x.PickedUp == new DateTime())
+                    {
+                        temp.CurrentLocation = FindTheClosestStation(senderLocation, stationData);
+                        double min = DistanceLocation(temp.CurrentLocation, senderLocation);
+                        min += DistanceLocation(targetLocation, senderLocation);
+                        min += DistanceLocation(targetLocation, FindTheClosestStation(targetLocation, stationData));
+                        min *= vs[(int)temp.Weight + 1];
+                        if (min < 100)
+                            temp.Battery = min + rand.NextDouble() * (100 - min);
+                        else
+                            temp.Battery = 50;
+
+                    }
                     else
-                        temp.Battery = 50;
+                    {
+
+                        temp.CurrentLocation = new BO.Location(senderCostumer.Longitude, senderCostumer.Lattitude);
+
+                        double min = DistanceLocation(temp.CurrentLocation, new BO.Location(targetCostumer.Longitude, targetCostumer.Lattitude));
+                        min += DistanceLocation(new BO.Location(targetCostumer.Longitude, targetCostumer.Lattitude), FindTheClosestStation(new BO.Location(targetCostumer.Longitude, targetCostumer.Lattitude), stationData));
+                        min *= vs[(int)temp.Weight + 1];
+                        if (min < 100)
+                            temp.Battery = min + rand.NextDouble() * (100 - min);
+                        else
+                            temp.Battery = 50;
+                    }
+
+
+                    temp.ParcelId = x.Id;
+                    DronesBl.Add(temp);
                 }
-                else
-                {
-
-                    temp.CurrentLocation = new BO.Location(senderCostumer.Longitude, senderCostumer.Lattitude);
-
-                    double min = DistanceLocation(temp.CurrentLocation, new BO.Location(targetCostumer.Longitude, targetCostumer.Lattitude));
-                    min += DistanceLocation(new BO.Location(targetCostumer.Longitude, targetCostumer.Lattitude), FindTheClosestStation(new BO.Location(targetCostumer.Longitude, targetCostumer.Lattitude), stationData));
-                    min *= vs[(int)temp.Weight + 1];
-                    if (min < 100)
-                        temp.Battery = min + rand.NextDouble() * (100 - min);
-                    else
-                        temp.Battery = 50;
-                }
-
-
-                temp.ParcelId = x.Id;
-                DronesBl.Add(temp);
-
             }
 
 
