@@ -14,7 +14,7 @@ namespace IBL
         private List<DroneToList> DronesBl = new();
 
         public BL()
-        {ghfg
+        { 
             Random rand = new();
             idal = new DalObject.DalObject();
             //data lists

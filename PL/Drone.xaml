@@ -46,7 +46,7 @@
 
 
 
-        <Label  x:Name="Location" Content="Latitude:" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="24,48,0,0" Grid.Row="2"  />
+        <Label  x:Name="Location"  HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="24,48,0,0" Grid.Row="2"  />
         <Button x:Name="updateDrone" Content="Ok"  HorizontalAlignment="Left" VerticalAlignment="Center" Click="Update_Bottun" Width="50" Grid.Row="3" Margin="55,0,0,0"/>
         <Button Content="Cancel" HorizontalAlignment="Left"  VerticalAlignment="Center" Click="Button_Click" Width="50" RenderTransformOrigin="0.579,0.742" Grid.Row="3" Margin="24,0,0,0" Grid.Column="1"/>
 
