@@ -44,12 +44,7 @@ namespace PL
 
             MainGrid.RowDefinitions[2].Height = new GridLength(0);
 
-            Option_Label.Visibility = Visibility.Hidden;
-            OptionCombo.Visibility = Visibility.Hidden;
-            BatteryText.Visibility = Visibility.Hidden;
-            Battery_Label.Visibility = Visibility.Hidden;
-            Status_Label.Visibility = Visibility.Hidden;
-            StatusContenetLabel.Visibility = Visibility.Hidden;
+          
      
             /*  cmbActions.Visibility = Visibility.Hidden;
                btnGO.Visibility = Visibility.Hidden;
@@ -187,7 +182,7 @@ namespace PL
             {
                 try
                 {
-
+                    
                     addNewDrone();
 
 
@@ -265,16 +260,30 @@ namespace PL
         {
             try
             {
-                ibl.AddNewDrone(drone.Id, drone.Model, (int)drone.Weight, station);
-                MessageBoxResult mbResult = MessageBox.Show("The Drone was uploud!", "The Drone was uploud!", MessageBoxButton.OKCancel, MessageBoxImage.Information);
-                switch (mbResult)
+                if (DroneId.Text == null|| ModelText.Text == null || WeightCombo.SelectedItem == null || StationCombo.SelectedItem == null)
                 {
-                    case MessageBoxResult.OK:
-                        this.Close();
-                        break;
-                    case MessageBoxResult.Cancel:
-                        this.Close();
-                        break;
+                    MessageBoxResult mbResult = MessageBox.Show("חסר לך נתונים", "The Drone was uploud!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    switch (mbResult)
+                    {
+                        case MessageBoxResult.OK:
+                            
+                            break;
+                        
+                    }
+                }
+                else
+                {
+                    ibl.AddNewDrone(drone.Id, drone.Model, (int)drone.Weight, station);
+                    MessageBoxResult mbResult = MessageBox.Show("The Drone was uploud!", "The Drone was uploud!", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+                    switch (mbResult)
+                    {
+                        case MessageBoxResult.OK:
+                            this.Close();
+                            break;
+                        case MessageBoxResult.Cancel:
+                            this.Close();
+                            break;
+                    }
                 }
 
 

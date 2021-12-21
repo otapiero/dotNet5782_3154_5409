@@ -102,5 +102,10 @@ namespace PL
         {
             DronesListView.ItemsSource = ibl.ListDrones();
         }
+
+        private void CloseList(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
