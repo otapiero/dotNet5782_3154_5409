@@ -20,9 +20,7 @@ namespace IBL
             try
             {
                 if(model=="")
-                {
-                    throw new BO.IBException("not enought information");
-                }
+                    throw new BO.IBException("not enough information");
                 BO.DroneToList result = DronesBl.Find(x => x.Id==id);
                 if (result != null)
                 {

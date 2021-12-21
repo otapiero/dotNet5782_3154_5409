@@ -15,7 +15,7 @@ namespace IBL
         /// <returns>return the lust of all the station </returns>
         public IEnumerable<BO.BaseStationToList> ListStation()
         {
-
+            
             List<BO.BaseStationToList> allStation = new();
             foreach (IDAL.DO.Station x in idal.AllStation())
             {

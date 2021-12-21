@@ -14,7 +14,7 @@ namespace IBL
         private List<DroneToList> DronesBl = new();
 
         public BL()
-        {
+        {ghfg
             Random rand = new();
             idal = new DalObject.DalObject();
             //data lists
@@ -97,7 +97,9 @@ namespace IBL
             {
                 int randomcase = rand.Next(0, 2);
                 BO.DroneToList temp = new();
+
                 temp.Id = x.Id;
+               
                 temp.Model = x.Model;
                 temp.Weight = (BO.WeightCategories)rand.Next(3);
                 temp.ParcelId = 0;

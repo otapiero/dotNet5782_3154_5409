@@ -70,13 +70,14 @@ namespace PL
 
             StationCombo.Visibility = Visibility.Hidden;
             Station_Label.Visibility = Visibility.Hidden;
-
+            Weiht_content.Content = x.Weight;
+            WeightCombo.Visibility = Visibility.Hidden;
             Location.Content = x.CurrentLocation.ToString();
 
             StatusContenetLabel.Content = x.status;
 
 
-            BatteryText.Content = (x.Battery).ToString().Substring(0,5);
+            BatteryText.Content = x.Battery.ToString().Substring(0,5);
          
            
 
@@ -177,7 +178,7 @@ namespace PL
 
         }
 
-        private void Update_Bottun(object sender, RoutedEventArgs e)
+        private void Update_Bottun(object sender, RoutedEventArgs e) 
         {
            
             if (newDrone)
@@ -316,10 +317,7 @@ namespace PL
                 }
             }
         }
-        private void BatteryText_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
+       
 
         private void OptionCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
