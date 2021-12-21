@@ -70,13 +70,14 @@ namespace PL
 
             StationCombo.Visibility = Visibility.Hidden;
             Station_Label.Visibility = Visibility.Hidden;
-
+            Weiht_content.Content = x.Weight;
+            WeightCombo.Visibility = Visibility.Hidden;
             Location.Content = x.CurrentLocation.ToString();
 
             StatusContenetLabel.Content = x.status;
 
 
-            BatteryText.Content = (x.Battery).ToString().Substring(0,5);
+            BatteryText.Content = x.Battery.ToString().Substring(0,5);
          
            
 
@@ -180,30 +181,35 @@ namespace PL
         private void Update_Bottun(object sender, RoutedEventArgs e) 
         {
            
-            if (newDrone && drone.Model.Length > 0)
+            if (newDrone)
             {
-                try
+                if (ModelText.Text == "")
                 {
-                    
-                    addNewDrone();
-
-
-                }
-                catch (Exception x)
-                {
-                    MessageBoxResult mbResult = MessageBox.Show(x.ToString(), "Error Occurred", MessageBoxButton.OKCancel, MessageBoxImage.Error);
-                    switch (mbResult)
+                    try
                     {
-                        case MessageBoxResult.OK:
-                            if (x.ToString() == "Drone Id alredy use.")
-                                ModelText.BorderBrush = ModelText.Text.Length < 1 ? Brushes.Red : Brushes.Gray;
-                            DroneId.Foreground = Brushes.Red;
-                            break;
-                        case MessageBoxResult.Cancel:
-                            this.Close();
-                            break;
+
+                        addNewDrone();
+
+
+                    }
+                    catch (Exception x)
+                    {
+                        MessageBoxResult mbResult = MessageBox.Show(x.ToString(), "Error Occurred", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                        switch (mbResult)
+                        {
+                            case MessageBoxResult.OK:
+                                if (x.ToString() == "Drone Id alredy use.")
+                                    ModelText.BorderBrush = ModelText.Text.Length < 1 ? Brushes.Red : Brushes.Gray;
+                                DroneId.Foreground = Brushes.Red;
+                                break;
+                            case MessageBoxResult.Cancel:
+                                this.Close();
+                                break;
+                        }
                     }
                 }
+                else
+                    MessageBox.Show("not enough information", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
@@ -253,6 +259,8 @@ namespace PL
                 }
                 MessageBox.Show("Done", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 DroneId.Background = Brushes.White;
+                cancel = 1;
+                this.Close();
             }
             catch (Exception ex)
             {
@@ -309,10 +317,7 @@ namespace PL
                 }
             }
         }
-        private void BatteryText_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
+       
 
         private void OptionCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
