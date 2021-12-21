@@ -7,9 +7,7 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        
-       
-         WindowStartupLocation="CenterScreen"
+ 
         AllowsTransparency="True"
         WindowStyle="None"
        
@@ -18,7 +16,7 @@
     <Grid Name="MainGrid" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="63*"/>
-            <ColumnDefinition Width="62*"/>
+          
         </Grid.ColumnDefinitions>
 
         <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto" Grid.ColumnSpan="2" Margin="0,0,0,122" Grid.RowSpan="2">
