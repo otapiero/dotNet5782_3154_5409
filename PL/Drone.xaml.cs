@@ -253,16 +253,9 @@ namespace PL
                         break;
                 }
                 MessageBoxResult mbResult = MessageBox.Show("Done", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                cancel = 1;
+                this.Close();
                 
-                switch (mbResult)
-                {
-                    case MessageBoxResult.OK:
-                        this.Close();
-                        break;
-                    case MessageBoxResult.Cancel:
-                        this.Close();
-                        break;
-                }
             }
             catch (Exception ex)
             {
