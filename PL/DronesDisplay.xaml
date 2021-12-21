@@ -33,7 +33,7 @@ VerticalAlignment="Stretch" Width="auto">
             <Button Content="ShowAll" Click="Button_Click"   Margin="44,25,44,22"/>
 
         </Grid>
-        <ListView Grid.Row="1" x:Name="DronesListView"  Margin="63,10,63,50" MouseDoubleClick="ClickedDrone">
+        <ListView ItemsSource="{Binding}" Grid.Row="1" x:Name="DronesListView"  Margin="63,10,63,50" MouseDoubleClick="ClickedDrone">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
