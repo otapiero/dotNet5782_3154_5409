@@ -34,8 +34,8 @@
             <Label x:Name="Option_Label" Content="option:" HorizontalAlignment="Left" Margin="43,251,0,0" VerticalAlignment="Top" />
             <ComboBox SelectionChanged="OptionCombo_SelectionChanged" x:Name="OptionCombo" HorizontalAlignment="Center" Margin="0,256,0,0" VerticalAlignment="Top" Width="120" />
 
-            
-            <Label  x:Name="Location" Content="Latitude:" HorizontalAlignment="Left" Margin="43,177,0,0" VerticalAlignment="Top"  />
+
+            <Label  x:Name="Location"  HorizontalAlignment="Left" Margin="43,177,0,0" VerticalAlignment="Top"  />
             <Button x:Name="updateDrone" Content="Ok"  HorizontalAlignment="Left" Margin="64,303,0,0" VerticalAlignment="Top" Click="Update_Bottun" Width="50"/>
             <Button Content="Cancel" HorizontalAlignment="Center" Margin="0,303,0,0" VerticalAlignment="Top" Click="Button_Click" Width="50" RenderTransformOrigin="0.579,0.742"/>
 
@@ -50,8 +50,8 @@
 
         </Grid>
 
-        <Grid Margin="0,0,0,368">
-            <Label Content="Display Drone" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="42" FontWeight="Bold" FontFamily="Consolas"/>
+        <Grid Margin="0,0,0,368" HorizontalAlignment="Left" Width="480">
+            <Label Content="Display Drone" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="42" FontWeight="Bold" FontFamily="Consolas" Margin="64,0,0,0"/>
         </Grid>
 
     </Grid>

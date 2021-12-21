@@ -116,6 +116,11 @@ namespace IBL
 
             return ParcelsNotAssociated;
         }
+
+        public IEnumerable<BO.DroneToList> ListOfDrones(Predicate<BO.DroneToList> f)
+        {
+            return DronesBl.FindAll(f);
+        }
         /// <summary>
         /// list of station with availebal charge post
         /// </summary>
@@ -130,61 +135,7 @@ namespace IBL
             }
             return stationWithAvailebalChargePost;
         }
-        /// <summary>
-        /// filter the drone list by status and weight
-        /// </summary>
-        /// <param name="status">status filter </param>
-        /// <param name="weight">weight filter</param>
-        /// <returns>list of drones filtered    </returns>
-        public IEnumerable<BO.DroneToList> FilterListDrones2(BO.DroneStatuses status, BO.WeightCategories weight)
-        {
-            List<BO.DroneToList> allDrones = new();
-
-            foreach (var x in DronesBl)
-            {
-                if (x.status == status && x.Weight == weight)
-                {
-                    allDrones.Add(x);
-                }
-            }
-            return allDrones;
-        }
-        /// <summary>
-        /// filter the drone list  weight
-        /// </summary>
-        /// <param name="weight">weight filter</param>
-        /// <returns>list of drones filtered    </returns>
-        public IEnumerable<BO.DroneToList> FilterListDrones1(BO.WeightCategories weight)
-        {
-            List<BO.DroneToList> allDrones = new();
-
-            foreach (var x in DronesBl)
-            {
-                if (x.Weight == weight)
-                {
-                    allDrones.Add(x);
-                }
-            }
-            return allDrones;
-        }
-        /// <summary>
-        /// filter the drone list by status 
-        /// </summary>
-        /// <param name="status">status filter </param>
-        /// <returns>list of drones filtered    </returns>
-        public IEnumerable<BO.DroneToList> FilterListDrones(BO.DroneStatuses status)
-        {
-            List<BO.DroneToList> allDrones = new();
-
-            foreach (var x in DronesBl)
-            {
-                if (x.status == status)
-                {
-                    allDrones.Add(x);
-                }
-            }
-            return allDrones;
-        }
+       
 
     }
 }

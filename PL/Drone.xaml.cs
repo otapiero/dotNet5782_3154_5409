@@ -49,7 +49,8 @@ namespace PL
             Battery_Label.Visibility = Visibility.Hidden;
             Status_Label.Visibility = Visibility.Hidden;
             StatusContenetLabel.Visibility = Visibility.Hidden;
-     
+            DroneId.Foreground = Brushes.Red;
+
             /*  cmbActions.Visibility = Visibility.Hidden;
                btnGO.Visibility = Visibility.Hidden;
 
@@ -191,12 +192,14 @@ namespace PL
 
 
                 }
-                catch (Exception)
+                catch (Exception x)
                 {
-                    MessageBoxResult mbResult = MessageBox.Show("press OK to continue, else press Cancel", "Error Occurred", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                    MessageBoxResult mbResult = MessageBox.Show(x.ToString(), "Error Occurred", MessageBoxButton.OKCancel, MessageBoxImage.Error);
                     switch (mbResult)
                     {
                         case MessageBoxResult.OK:
+                            if (x.ToString() == "Drone Id alredy use.")
+                                DroneId.Foreground = Brushes.Red;
                             break;
                         case MessageBoxResult.Cancel:
                             this.Close();
@@ -211,9 +214,9 @@ namespace PL
                     
                     updateADrone();
                 }
-                catch (Exception)
+                catch (Exception x)
                 {
-                    MessageBox.Show("Error", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show(x.ToString(),"Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
         }
@@ -276,9 +279,9 @@ namespace PL
 
 
             }
-            catch (Exception)
+            catch (Exception x )
             {
-                MessageBoxResult mbResult = MessageBox.Show("press OK to continue, else press Cancel", "Error Occurred", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                MessageBoxResult mbResult = MessageBox.Show(x.ToString(), "Error Occurred", MessageBoxButton.OKCancel, MessageBoxImage.Error);
                 switch (mbResult)
                 {
                     case MessageBoxResult.OK:
