@@ -49,10 +49,11 @@ namespace IBL
 
             }
 
-
+            
             BO.DroneToList tempDroneToList = new();
             tempDroneToList.Id = id;
             tempDroneToList.Model = model;
+            tempDroneToList.Battery=100;
             tempDroneToList.Weight = (BO.WeightCategories)wheigt;
             IDAL.DO.Station tempStation = idal.AllStation().ToList().Find(x => x.Id == stationId);
             tempDroneToList.CurrentLocation = new(tempStation.Longitude, tempStation.Lattitude);

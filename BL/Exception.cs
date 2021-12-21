@@ -18,6 +18,11 @@ namespace IBL
             public static explicit operator string(IBException v)
             {
                 return (string)v;
+
+            }
+            public override string ToString()
+            {
+                return Message;
             }
         }
 

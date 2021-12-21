@@ -31,9 +31,9 @@ namespace IBL
         IEnumerable<BO.ParcelToList> ListParcels();
         IEnumerable<BO.ParcelToList> ListParcelsNotAssigned();
         IEnumerable<BO.BaseStationToList> StationWithAvailebalChargePost();
-        IEnumerable<BO.DroneToList> FilterListDrones(BO.DroneStatuses status);
-        IEnumerable<BO.DroneToList> FilterListDrones1(BO.WeightCategories weight);
-        IEnumerable<BO.DroneToList> FilterListDrones2(BO.DroneStatuses status, BO.WeightCategories weight);
+        
+        public IEnumerable<BO.DroneToList> ListOfDrones(Predicate<BO.DroneToList> f);
 
     }
+    
 }
