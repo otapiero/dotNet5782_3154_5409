@@ -195,6 +195,7 @@ namespace PL
         {
             try
             {
+       
                 switch (OptionCombo.SelectedIndex)
                 {
                     case -1:
