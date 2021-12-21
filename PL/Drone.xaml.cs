@@ -178,7 +178,7 @@ namespace PL
 
         }
 
-        private void Update_Bottun(object sender, RoutedEventArgs e)
+        private void Update_Bottun(object sender, RoutedEventArgs e) 
         {
            
             if (newDrone && drone.Model.Length > 0)
