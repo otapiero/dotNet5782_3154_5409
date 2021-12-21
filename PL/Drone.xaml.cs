@@ -180,30 +180,35 @@ namespace PL
         private void Update_Bottun(object sender, RoutedEventArgs e)
         {
            
-            if (newDrone && drone.Model.Length > 0)
+            if (newDrone)
             {
-                try
+                if (ModelText.Text == "")
                 {
-                    
-                    addNewDrone();
-
-
-                }
-                catch (Exception x)
-                {
-                    MessageBoxResult mbResult = MessageBox.Show(x.ToString(), "Error Occurred", MessageBoxButton.OKCancel, MessageBoxImage.Error);
-                    switch (mbResult)
+                    try
                     {
-                        case MessageBoxResult.OK:
-                            if (x.ToString() == "Drone Id alredy use.")
-                                ModelText.BorderBrush = ModelText.Text.Length < 1 ? Brushes.Red : Brushes.Gray;
-                            DroneId.Foreground = Brushes.Red;
-                            break;
-                        case MessageBoxResult.Cancel:
-                            this.Close();
-                            break;
+
+                        addNewDrone();
+
+
+                    }
+                    catch (Exception x)
+                    {
+                        MessageBoxResult mbResult = MessageBox.Show(x.ToString(), "Error Occurred", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                        switch (mbResult)
+                        {
+                            case MessageBoxResult.OK:
+                                if (x.ToString() == "Drone Id alredy use.")
+                                    ModelText.BorderBrush = ModelText.Text.Length < 1 ? Brushes.Red : Brushes.Gray;
+                                DroneId.Foreground = Brushes.Red;
+                                break;
+                            case MessageBoxResult.Cancel:
+                                this.Close();
+                                break;
+                        }
                     }
                 }
+                else
+                    MessageBox.Show("not enough information", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
