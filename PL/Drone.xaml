@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="Drone" Height="400
-        " Width="250">
+        " Width="250" Closing="Window_Closing">
     <Grid Name="MainGrid" >
 
         <Grid Name="UpGrid" Height="auto" Grid.Row="0" Width="auto">

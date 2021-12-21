@@ -22,8 +22,9 @@ namespace PL
     public partial class DronesDisplay : Window
     {
 
-        IBL.IBL ibl;
 
+        IBL.IBL ibl;
+        int cancel = 0;
         public DronesDisplay(IBL.IBL bl1)
         {
             InitializeComponent();
@@ -97,7 +98,18 @@ namespace PL
 
         private void CloseList(object sender, RoutedEventArgs e)
         {
+            this.cancel = 1;
+            this.Close();
+        }
+      
 
+        private void Window_Closing_1(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (this.cancel == 1)
+            {
+                e.Cancel = false;
+            }
+            else e.Cancel = true;
         }
     }
 }

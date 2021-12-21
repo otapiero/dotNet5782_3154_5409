@@ -21,6 +21,7 @@ namespace PL
     {
         IBL.IBL ibl;
         IBL.BO.DroneBL drone;
+        int cancel = 0;
         
         private bool newDrone;
         int station;
@@ -44,12 +45,8 @@ namespace PL
 
             MainGrid.RowDefinitions[2].Height = new GridLength(0);
 
-            Option_Label.Visibility = Visibility.Hidden;
-            OptionCombo.Visibility = Visibility.Hidden;
-            BatteryText.Visibility = Visibility.Hidden;
-            Battery_Label.Visibility = Visibility.Hidden;
-            Status_Label.Visibility = Visibility.Hidden;
-            StatusContenetLabel.Visibility = Visibility.Hidden;
+          
+     
             /*  cmbActions.Visibility = Visibility.Hidden;
                btnGO.Visibility = Visibility.Hidden;
 
@@ -134,6 +131,7 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            this.cancel = 1;
             this.Close();
         }
 
@@ -183,11 +181,11 @@ namespace PL
         private void Update_Bottun(object sender, RoutedEventArgs e)
         {
            
-            if (newDrone)
+            if (newDrone && drone.Model.Length > 0)
             {
                 try
                 {
-
+                    
                     addNewDrone();
 
 
@@ -199,7 +197,8 @@ namespace PL
                     {
                         case MessageBoxResult.OK:
                             if (x.ToString() == "Drone Id alredy use.")
-                                DroneId.Foreground = Brushes.Red;
+                                ModelText.BorderBrush = ModelText.Text.Length < 1 ? Brushes.Red : Brushes.Gray;
+                            DroneId.Foreground = Brushes.Red;
                             break;
                         case MessageBoxResult.Cancel:
                             this.Close();
@@ -211,7 +210,7 @@ namespace PL
             {
                 try
                 {
-                    
+    
                     updateADrone();
                 }
                 catch (Exception x)
@@ -274,16 +273,33 @@ namespace PL
         {
             try
             {
-                ibl.AddNewDrone(drone.Id, drone.Model, (int)drone.Weight, station);
-                MessageBoxResult mbResult = MessageBox.Show("The Drone was uploud!", "The Drone was uploud!", MessageBoxButton.OKCancel, MessageBoxImage.Information);
-                switch (mbResult)
+                if (DroneId.Text.Length < 1 || ModelText.Text.Length < 1 || WeightCombo.SelectedItem == null || StationCombo.SelectedItem == null ||drone.Model.Length<1||drone.Id.ToString().Length<1)
                 {
-                    case MessageBoxResult.OK:
-                        this.Close();
-                        break;
-                    case MessageBoxResult.Cancel:
-                        this.Close();
-                        break;
+                    MessageBoxResult mbResult = MessageBox.Show("חסר לך נתונים", "The Drone was uploud!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    switch (mbResult)
+                    {
+                        case MessageBoxResult.OK:
+                            ModelText.BorderBrush = ModelText.Text.Length < 1 ?  Brushes.Red : Brushes.Gray;
+                            DroneId.BorderBrush = DroneId.Text.Length < 1 ? Brushes.Red : Brushes.Gray;
+                            WeightCombo.BorderBrush = WeightCombo.SelectedItem == default ? Brushes.Red : Brushes.Gray;
+                            StationCombo.BorderBrush = new SolidColorBrush(Color.FromRgb(255, 0, 0));
+                            break;
+                        
+                    }
+                }
+                else
+                {
+                    ibl.AddNewDrone(drone.Id, drone.Model, (int)drone.Weight, station);
+                    MessageBoxResult mbResult = MessageBox.Show("The Drone was uploud!", "The Drone was uploud!", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+                    switch (mbResult)
+                    {
+                        case MessageBoxResult.OK:
+                            this.Close();
+                            break;
+                        case MessageBoxResult.Cancel:
+                            this.Close();
+                            break;
+                    }
                 }
 
 
@@ -296,7 +312,9 @@ namespace PL
                     case MessageBoxResult.OK:
                         break;
                     case MessageBoxResult.Cancel:
+                        
                         this.Close();
+                        
                         break;
                 }
             }
@@ -307,6 +325,17 @@ namespace PL
         {
            
 
+        }
+ 
+        
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (this.cancel == 1)
+            {
+                e.Cancel = false;
+            }
+            else e.Cancel = true;
         }
     }
 }
