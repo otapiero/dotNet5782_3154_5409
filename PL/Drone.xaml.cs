@@ -21,10 +21,18 @@ namespace PL
     {
         IBL.IBL ibl;
         IBL.BO.DroneBL drone;
-        IBL.BO.DroneToList NewDrone;
-        private int clickCount;
+        
         private bool newDrone;
         int station;
+
+        Dictionary<int, string> options = new Dictionary<int, string>(){
+             {0,  "Update Model" },
+             {1, "Assign a parcel to the drown" },
+             {2,  "Pickedup a parcel"},
+             {3, "Suplay a parcel to costumer" },
+             {4,"Send the drone to Charge " },
+             {5,"Release drown from charging" } };
+
         public Drone(IBL.IBL bl1)
         {
             newDrone = true;
@@ -38,11 +46,10 @@ namespace PL
             Option_Label.Visibility = Visibility.Hidden;
             OptionCombo.Visibility = Visibility.Hidden;
             BatteryText.Visibility = Visibility.Hidden;
-            StatusCombo.Visibility = Visibility.Hidden;
-            DeliveryText.Visibility = Visibility.Hidden;
-            Longitude.Visibility = Visibility.Hidden;
-            Latitude.Visibility = Visibility.Hidden;
-
+            Battery_Label.Visibility = Visibility.Hidden;
+            Status_Label.Visibility = Visibility.Hidden;
+            StatusContenetLabel.Visibility = Visibility.Hidden;
+     
             /*  cmbActions.Visibility = Visibility.Hidden;
                btnGO.Visibility = Visibility.Hidden;
 
@@ -56,31 +63,53 @@ namespace PL
         }
         public Drone(IBL.IBL bl1, IBL.BO.DroneToList x)
         {
+            
             newDrone = false;
             InitializeComponent();
             ibl = bl1;
             drone = new();
             WeightCombo.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
             DroneView.Items.Add(x);
-            
+
             StationCombo.Visibility = Visibility.Hidden;
-            List<string> OperationsPosebilities = new List<string>()
-                {
-                    "Update Model",
-                    "Assign a parcel to the drown",
-                    "Pickedup a parcel",
-                    "Suplay a parcel to costumer",
-                    "Send the drone to Charge ",
-                    "Release drown from charging"
-            };
-            OptionCombo.ItemsSource = OperationsPosebilities;
+            Station_Label.Visibility = Visibility.Hidden;
+
+            Location.Content = x.CurrentLocation.ToString();
+
+            StatusContenetLabel.Content = x.status;
+
+
+            BatteryText.Content = (x.Battery - x.Battery % 0.001);
+         
+           
+
+            if(x.status== DroneStatuses.Available)
+            {
+                OptionCombo.ItemsSource = from y in options
+                                          where (y.Key <= 1 || y.Key > 3)&&y.Key!=5
+                                          select new string(y.Value);
+
+            }
+            else if(x.status==DroneStatuses.Delivery)
+            {
+                OptionCombo.ItemsSource = from y in options
+                                          where y.Key != 1 && y.Key!=5
+                                          select new string(y.Value);
+            }
+            else 
+            {
+                OptionCombo.ItemsSource = from y in options
+                                          where y.Key ==0 || y.Key == 5
+                                          select new string(y.Value);
+            }
+            
+                                     
             DroneId.IsReadOnly = true;
-            BatteryText.IsReadOnly = true;
+            
             StationCombo.IsReadOnly = true;
             WeightCombo.IsReadOnly = true;
-            Longitude.IsReadOnly = true;
-            Latitude.IsReadOnly = true;
-
+           
+            
             /*DroneId.Foreground = Brushes.Gray;
             BatteryText.Foreground = Brushes.Gray;
             lblLocation.Foreground = Brushes.Gray;
@@ -94,12 +123,10 @@ namespace PL
 
             DroneId.Text = x.Id.ToString();
             ModelText.Text = x.Model;
-            DeliveryText.Text = "0";
-            Latitude.Text = x.CurrentLocation.Lattitude.ToString();
-            Longitude.Text = x.CurrentLocation.Longitude.ToString();
-            StatusCombo.SelectedItem = x.status.ToString();
+            
+        
             StationCombo.Items.Add("???");
-            BatteryText.Text = x.Battery.ToString();
+            
             WeightCombo.SelectedItem = x.Weight;
             MessageBox.Show(x.ToString());
         }
@@ -186,39 +213,40 @@ namespace PL
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Errohhr", "Errohhr", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Error", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
         }
         
         private void updateADrone()
         {
+
+            
+                    
             try
             {
-       
-                switch (OptionCombo.SelectedIndex)
+                switch (OptionCombo.SelectedValue)
                 {
                     case -1:
                         MessageBox.Show("Choose Action", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                         break;
-                    case 0: // update
+                    case "Update Model": // update
                         ibl.UpdateDroneModel(int.Parse(DroneId.Text), ModelText.Text.ToString());
                         break;
-                    case 1: // Assign a parcel to a drown
+                    case "Assign a parcel to the drown": // Assign a parcel to a drown
                         ibl.AssignPackageToDrone(Convert.ToInt32(DroneId.Text));
                         break;
-                    case 2: // Pickup a parcel
-
+                    case "Pickedup a parcel": // Pickup a parcel
                         ibl.CollectPackage(Convert.ToInt32(DroneId.Text));
-                        MessageBox.Show("Err", "Err", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        
                         break;
-                    case 3: // Suplay a parcel to costumer 
+                    case "Suplay a parcel to costumer": // Suplay a parcel to costumer 
                         ibl.DeliverPackage(Convert.ToInt32(DroneId.Text));
                         break;
-                    case 4: // Charge drown
+                    case "Send the drone to Charge ": // Charge drown
                         ibl.SendDroneToCharge(Convert.ToInt32(DroneId.Text));
                         break;
-                    case 5: // Release drown from station
+                    case "Release drown from charging": // Release drown from station
                         ibl.RelesaeDroneFromCharge(Convert.ToInt32(DroneId.Text), 12);
                         break;
                 }

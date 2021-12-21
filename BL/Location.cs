@@ -21,9 +21,9 @@ namespace IBL
 
             public override string ToString()
             {
-                return "\nLongitude: " +
+                return "\nLongitude:    " +
                     DalObject.Cordinates.LongitudeDoubleToString(Longitude) +
-                    "\nLattitude: " + DalObject.Cordinates.LatitudeDoubleToString(Lattitude);
+                    "\nLattitude:    " + DalObject.Cordinates.LatitudeDoubleToString(Lattitude);
             }
         }
     }
