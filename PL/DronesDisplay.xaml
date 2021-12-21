@@ -7,25 +7,26 @@
         xmlns:local="clr-namespace:PL"
         
     mc:Ignorable="d"
-        Title="DronesDisplay" Height="640" Width="800">
+        Title="DronesDisplay" Height="640" Width="800" Closing="Window_Closing_1">
     <Grid Name="MainGrid">
         <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
 VerticalAlignment="Stretch" Width="auto">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="79*"/>
+                <ColumnDefinition Width="21*"/>
+                <ColumnDefinition Width="100*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox   SelectionChanged="ComboBox_SelectionChanged" Name="WeightSelector" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Grid.Column="2" Margin="26,34,0,0"/>
-            <ComboBox   SelectionChanged="ComboBox_SelectionChanged"  Name="StatusSelector" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Grid.Column="1" Margin="20,35,0,0"/>
+            <ComboBox   SelectionChanged="ComboBox_SelectionChanged" Name="WeightSelector" HorizontalAlignment="Center" VerticalAlignment="Top" Width="136" Grid.Column="2" Margin="0,34,0,0"/>
+            <ComboBox   SelectionChanged="ComboBox_SelectionChanged"  Name="StatusSelector" HorizontalAlignment="Left" VerticalAlignment="Top" Width="130" Grid.Column="1" Margin="10,35,0,0"/>
             <Label Grid.Column="0"/>
-            <Button Click="AddDroneButton_Click" Content="Add Drone" Grid.Column="3" HorizontalAlignment="Center" Margin="0,21,0,0" VerticalAlignment="Top" Width="83" Opacity="0.935"/>
-            <Button Click="CloseList" Content="X" Grid.Column="3" Margin="177,0,0,0" VerticalAlignment="Top" Height="16"/>
+            <Button Click="AddDroneButton_Click" Content="Add Drone" Grid.Column="4" HorizontalAlignment="Center" Margin="0,21,0,0" VerticalAlignment="Top" Width="84" Opacity="0.935"/>
+            <Button Click="CloseList" Content="X" Grid.Column="4" Margin="168,0,0,0" VerticalAlignment="Top" Height="25"/>
             <Label Content="Filter by status:" Grid.Column="1" HorizontalAlignment="Center" Margin="0,8,0,0" VerticalAlignment="Top" Width="96"/>
-            <Label Content="Filter by weight:" Grid.Column="2" HorizontalAlignment="Center" Margin="0,8,0,0" VerticalAlignment="Top"/>
-            <Button Content="Clear" Click="ClearStatusButton_Click" Margin="145,35,24,14" Grid.Column="1"/>
-            <Button Content="Clear" Click="ClearWeightButton_Click" Margin="151,35,18,14" Grid.Column="2"/>
+            <Label Content="Filter by weight:" Grid.Column="2" HorizontalAlignment="Left" Margin="53,8,0,0" VerticalAlignment="Top"/>
+            <Button Content="Clear" Click="ClearStatusButton_Click" Margin="145,35,10,14" Grid.Column="1"/>
+            <Button Content="Clear" Click="ClearWeightButton_Click" Margin="151,35,10,14" Grid.Column="2" Grid.ColumnSpan="2"/>
             <Button Content="ShowAll" Click="Button_Click"   Margin="44,25,44,22"/>
 
         </Grid>

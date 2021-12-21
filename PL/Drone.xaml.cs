@@ -21,6 +21,7 @@ namespace PL
     {
         IBL.IBL ibl;
         IBL.BO.DroneBL drone;
+        int cancel = 0;
         
         private bool newDrone;
         int station;
@@ -129,6 +130,7 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            this.cancel = 1;
             this.Close();
         }
 
@@ -178,7 +180,7 @@ namespace PL
         private void Update_Bottun(object sender, RoutedEventArgs e)
         {
            
-            if (newDrone)
+            if (newDrone && drone.Model.Length > 0)
             {
                 try
                 {
@@ -194,7 +196,8 @@ namespace PL
                     {
                         case MessageBoxResult.OK:
                             if (x.ToString() == "Drone Id alredy use.")
-                                DroneId.Foreground = Brushes.Red;
+                                ModelText.BorderBrush = ModelText.Text.Length < 1 ? Brushes.Red : Brushes.Gray;
+                            DroneId.Foreground = Brushes.Red;
                             break;
                         case MessageBoxResult.Cancel:
                             this.Close();
@@ -206,7 +209,7 @@ namespace PL
             {
                 try
                 {
-                    
+    
                     updateADrone();
                 }
                 catch (Exception x)
@@ -260,13 +263,16 @@ namespace PL
         {
             try
             {
-                if (DroneId.Text == null|| ModelText.Text == null || WeightCombo.SelectedItem == null || StationCombo.SelectedItem == null)
+                if (DroneId.Text.Length < 1 || ModelText.Text.Length < 1 || WeightCombo.SelectedItem == null || StationCombo.SelectedItem == null ||drone.Model.Length<1||drone.Id.ToString().Length<1)
                 {
                     MessageBoxResult mbResult = MessageBox.Show("חסר לך נתונים", "The Drone was uploud!", MessageBoxButton.OK, MessageBoxImage.Error);
                     switch (mbResult)
                     {
                         case MessageBoxResult.OK:
-                            
+                            ModelText.BorderBrush = ModelText.Text.Length < 1 ?  Brushes.Red : Brushes.Gray;
+                            DroneId.BorderBrush = DroneId.Text.Length < 1 ? Brushes.Red : Brushes.Gray;
+                            WeightCombo.BorderBrush = WeightCombo.SelectedItem == default ? Brushes.Red : Brushes.Gray;
+                            StationCombo.BorderBrush = new SolidColorBrush(Color.FromRgb(255, 0, 0));
                             break;
                         
                     }
@@ -296,7 +302,9 @@ namespace PL
                     case MessageBoxResult.OK:
                         break;
                     case MessageBoxResult.Cancel:
+                        
                         this.Close();
+                        
                         break;
                 }
             }
@@ -310,6 +318,17 @@ namespace PL
         {
            
 
+        }
+ 
+        
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (this.cancel == 1)
+            {
+                e.Cancel = false;
+            }
+            else e.Cancel = true;
         }
     }
 }
