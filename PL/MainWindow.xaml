@@ -4,10 +4,25 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
-        ResizeMode="NoResize" WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" 
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        AllowsTransparency="True"
+        WindowStyle="None"
+        Title="MainWindow" Height="350" Width="300" RenderTransformOrigin="0.5,0.5" BorderBrush="Black" OpacityMask="Black">
+    <Window.Background>
+        <ImageBrush ImageSource="/drone.jpg" Stretch="Fill" TileMode="Tile" Opacity="1">
+            <ImageBrush.RelativeTransform>
+                <TransformGroup>
+                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                    <RotateTransform CenterY="0.5" CenterX="0.5"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ImageBrush.RelativeTransform>
+        </ImageBrush>
+    </Window.Background>
     <Grid>
-        <Button Content="Show Drones" HorizontalAlignment="Left" Margin="32,113,0,0" VerticalAlignment="Top" Click="ShowDronesButton_Click" Height="36" Width="115" RenderTransformOrigin="-0.685,0.427"/>
+        <Button Content="Show Drones" HorizontalAlignment="Center" Margin="0,260,0,0" VerticalAlignment="Top" Click="ShowDronesButton_Click" Height="36" Width="114" RenderTransformOrigin="-0.685,0.427"/>
+        <Button x:Name="x" Content="x" HorizontalAlignment="Left" Margin="282,0,0,0" VerticalAlignment="Top" Click="Button_Click" Background="#FF144D74" BorderBrush="White" Foreground="White" Height="22" Width="18"/>
     </Grid>
 </Window>

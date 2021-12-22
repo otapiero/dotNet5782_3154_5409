@@ -42,6 +42,7 @@ namespace PL
         private void AddDroneButton_Click(object sender, RoutedEventArgs e)
         {
             new Drone(ibl).ShowDialog();
+            DataContext = ibl.ListDrones();
         }
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -97,7 +98,8 @@ namespace PL
             var item = DronesListView.SelectedItem;
 
             new Drone(ibl, (IBL.BO.DroneToList)item).ShowDialog();
-           
+            DataContext = ibl.ListDrones();
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -33,10 +33,17 @@ VerticalAlignment="Stretch" Width="auto">
             <Button Content="ShowAll" Click="Button_Click"   Margin="44,25,44,22"/>
 
         </Grid>
-        <ListView ItemsSource="{Binding}" Grid.Row="1" x:Name="DronesListView"  Margin="63,10,63,50" MouseDoubleClick="ClickedDrone">
+        <ListView ItemsSource="{Binding}" Grid.Row="1" x:Name="DronesListView"  Margin="63,10,63,50" MouseDoubleClick="ClickedDrone" >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="Drone ID" Width="60" DisplayMemberBinding="{Binding Path=Id}" />
+                    <GridViewColumn Header="Model" Width="80" DisplayMemberBinding="{Binding Path=Model}" />
+                    <GridViewColumn Header="Weight" Width="90" DisplayMemberBinding="{Binding Path=Weight}" />
+                    <GridViewColumn Header="Battery" Width="70" DisplayMemberBinding="{Binding Path=Battery}" />
+                    <GridViewColumn Header="Status" Width="100" DisplayMemberBinding="{Binding Path=status}" />
+                    <GridViewColumn Header="Parcel ID" Width="60" DisplayMemberBinding="{Binding Path=ParcelId}" />
+                    <GridViewColumn Header="Location Lattitude" Width="130" DisplayMemberBinding="{Binding Path=CurrentLocation.Lattitude}" />
+                    <GridViewColumn Header="Location.Longitude" Width="130" DisplayMemberBinding="{Binding Path=CurrentLocation.Longitude}" />
                 </GridView>
             </ListView.View>
         </ListView>

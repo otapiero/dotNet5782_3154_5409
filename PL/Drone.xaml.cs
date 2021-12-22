@@ -77,7 +77,7 @@ namespace PL
             StatusContenetLabel.Content = x.status;
 
 
-            BatteryText.Content = x.Battery.ToString().Substring(0,5);
+            BatteryText.Content = x.Battery.ToString().Length < 5 ? x.Battery.ToString() : x.Battery.ToString().Substring(0, 5);
          
            
 
@@ -183,28 +183,29 @@ namespace PL
            
             if (newDrone)
             {
-                if (ModelText.Text == "")
+                if (ModelText.Text != "")
                 {
                     try
                     {
-
                         addNewDrone();
-
-
                     }
                     catch (Exception x)
                     {
-                        MessageBoxResult mbResult = MessageBox.Show(x.ToString(), "Error Occurred", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                        MessageBoxResult mbResult = MessageBox.Show(x.ToString(), "Error Occurred", MessageBoxButton.OK, MessageBoxImage.Error);
                         switch (mbResult)
                         {
                             case MessageBoxResult.OK:
                                 if (x.ToString() == "Drone Id alredy use.")
+                                {
                                     ModelText.BorderBrush = ModelText.Text.Length < 1 ? Brushes.Red : Brushes.Gray;
+                                }
+                                else {
+                                    cancel = 1;
+                                    this.Close();
+                                }
                                 DroneId.Foreground = Brushes.Red;
                                 break;
-                            case MessageBoxResult.Cancel:
-                                this.Close();
-                                break;
+                       
                         }
                     }
                 }
@@ -226,41 +227,44 @@ namespace PL
         }
         
         private void updateADrone()
-        {
-
-            
-                    
+        {            
             try
             {
-                switch (OptionCombo.SelectedValue)
+                if (OptionCombo.SelectedValue == null)
                 {
-                    case null:
-                        MessageBox.Show("Choose Action", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                        break;
-                    case "Update Model": // update
-                        ibl.UpdateDroneModel(int.Parse(DroneId.Text), ModelText.Text.ToString());
-                        break;
-                    case "Assign a parcel to the drown": // Assign a parcel to a drown
-                        ibl.AssignPackageToDrone(Convert.ToInt32(DroneId.Text));
-                        break;
-                    case "Pickedup a parcel": // Pickup a parcel
-                        ibl.CollectPackage(Convert.ToInt32(DroneId.Text));
-                        
-                        break;
-                    case "Suplay a parcel to costumer": // Suplay a parcel to costumer 
-                        ibl.DeliverPackage(Convert.ToInt32(DroneId.Text));
-                        break;
-                    case "Send the drone to Charge ": // Charge drown
-                        ibl.SendDroneToCharge(Convert.ToInt32(DroneId.Text));
-                        break;
-                    case "Release drown from charging": // Release drown from station
-                        ibl.RelesaeDroneFromCharge(Convert.ToInt32(DroneId.Text), 12);
-                        break;
+                   
+                    MessageBox.Show("Choose Action", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
-                MessageBox.Show("Done", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                DroneId.Background = Brushes.White;
-                cancel = 1;
-                this.Close();
+                else
+                {
+                    switch (OptionCombo.SelectedValue)
+                    {
+                        
+                        case "Update Model": // update
+                            ibl.UpdateDroneModel(int.Parse(DroneId.Text), ModelText.Text.ToString());
+                            break;
+                        case "Assign a parcel to the drown": // Assign a parcel to a drown
+                            ibl.AssignPackageToDrone(Convert.ToInt32(DroneId.Text));
+                            break;
+                        case "Pickedup a parcel": // Pickup a parcel
+                            ibl.CollectPackage(Convert.ToInt32(DroneId.Text));
+
+                            break;
+                        case "Suplay a parcel to costumer": // Suplay a parcel to costumer 
+                            ibl.DeliverPackage(Convert.ToInt32(DroneId.Text));
+                            break;
+                        case "Send the drone to Charge ": // Charge drown
+                            ibl.SendDroneToCharge(Convert.ToInt32(DroneId.Text));
+                            break;
+                        case "Release drown from charging": // Release drown from station
+                            ibl.RelesaeDroneFromCharge(Convert.ToInt32(DroneId.Text), 12);
+                            break;
+                    }
+                    MessageBox.Show("Done", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                    DroneId.Background = Brushes.White;
+                    cancel = 1;
+                    this.Close();
+                }
             }
             catch (Exception ex)
             {
@@ -288,15 +292,14 @@ namespace PL
                 else
                 {
                     ibl.AddNewDrone(drone.Id, drone.Model, (int)drone.Weight, station);
-                    MessageBoxResult mbResult = MessageBox.Show("The Drone was uploud!", "The Drone was uploud!", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+                    MessageBoxResult mbResult = MessageBox.Show("The Drone was uploud!", "The Drone was uploud!", MessageBoxButton.OK, MessageBoxImage.Information);
                     switch (mbResult)
                     {
                         case MessageBoxResult.OK:
+                            cancel = 1;
                             this.Close();
                             break;
-                        case MessageBoxResult.Cancel:
-                            this.Close();
-                            break;
+                       
                     }
                 }
 

@@ -7,7 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="djpeg.jpeg" />
+    <None Remove="drone.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="djpeg.jpeg" />
+    <Resource Include="drone.jpg" />
   </ItemGroup>
 
 </Project>

@@ -32,7 +32,12 @@ namespace PL
 
         private void ShowDronesButton_Click(object sender, RoutedEventArgs e)
         {
-            new DronesDisplay(Ibl).Show();
+            new DronesDisplay(Ibl).ShowDialog();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
