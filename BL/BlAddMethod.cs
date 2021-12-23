@@ -49,7 +49,7 @@ namespace IBL
 
             }
 
-            
+
             BO.DroneToList tempDroneToList = new();
             tempDroneToList.Id = id;
             tempDroneToList.Model = model;

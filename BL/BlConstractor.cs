@@ -14,7 +14,7 @@ namespace IBL
         private List<DroneToList> DronesBl = new();
 
         public BL()
-        { 
+        {
             Random rand = new();
             idal = new DalObject.DalObject();
             //data lists
@@ -87,10 +87,10 @@ namespace IBL
 
 
             List<IDAL.DO.Drone> freeDrones = (from t in dronesData
-                                                                   where (false == parcelsNotDelivred.Exists(y => y.DroneId == t.Id))
-                                                                   select t).ToList();
-            
-            List<IDAL.DO.Parcel> parcelsDelivred = idal.ListOfParcels(x=>x.DroneId != 0 && x.Delivered != null).ToList();
+                                              where (false == parcelsNotDelivred.Exists(y => y.DroneId == t.Id))
+                                              select t).ToList();
+
+            List<IDAL.DO.Parcel> parcelsDelivred = idal.ListOfParcels(x => x.DroneId != 0 && x.Delivered != null).ToList();
 
 
             foreach (var x in freeDrones)
@@ -99,7 +99,7 @@ namespace IBL
                 BO.DroneToList temp = new();
 
                 temp.Id = x.Id;
-               
+
                 temp.Model = x.Model;
                 temp.Weight = (BO.WeightCategories)rand.Next(3);
                 temp.ParcelId = 0;

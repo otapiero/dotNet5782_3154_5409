@@ -22,12 +22,12 @@ namespace PL
     /// </summary>
     public partial class DronesDisplay : Window
     {
-        
+
 
 
         IBL.IBL ibl;
         int cancel = 0;
-       
+
         public DronesDisplay(IBL.IBL bl1)
         {
             InitializeComponent();
@@ -36,7 +36,7 @@ namespace PL
             //DronesListView.ItemsSource = ibl.ListDrones();
             StatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-           
+
 
         }
         private void AddDroneButton_Click(object sender, RoutedEventArgs e)
@@ -47,20 +47,20 @@ namespace PL
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            if (WeightSelector.SelectedItem == null&& StatusSelector.SelectedItem == null)
+            if (WeightSelector.SelectedItem == null && StatusSelector.SelectedItem == null)
             {
 
                 DronesListView.ItemsSource = ibl.ListOfDrones(x => 0 == 0);
             }
-            else if(WeightSelector.SelectedItem == null)
+            else if (WeightSelector.SelectedItem == null)
             {
 
-                DronesListView.ItemsSource = ibl.ListOfDrones(x=> x.status == (DroneStatuses)StatusSelector.SelectedItem);
+                DronesListView.ItemsSource = ibl.ListOfDrones(x => x.status == (DroneStatuses)StatusSelector.SelectedItem);
             }
             else if (StatusSelector.SelectedItem == null)
             {
 
-                DronesListView.ItemsSource = ibl.ListOfDrones(x =>  x.Weight == (WeightCategories)WeightSelector.SelectedItem);
+                DronesListView.ItemsSource = ibl.ListOfDrones(x => x.Weight == (WeightCategories)WeightSelector.SelectedItem);
             }
             else
             {
@@ -76,7 +76,7 @@ namespace PL
             StatusSelector.SelectedItem = null;
             if (WeightSelector.SelectedItem != null)
             {
-                DronesListView.ItemsSource = ibl.ListOfDrones(x=>x.Weight==(WeightCategories)WeightSelector.SelectedItem);
+                DronesListView.ItemsSource = ibl.ListOfDrones(x => x.Weight == (WeightCategories)WeightSelector.SelectedItem);
             }
             else DronesListView.ItemsSource = ibl.ListDrones();
 
@@ -87,7 +87,7 @@ namespace PL
             WeightSelector.SelectedItem = null;
             if (StatusSelector.SelectedItem != null)
             {
-                DronesListView.ItemsSource = ibl.ListOfDrones(x=>x.status==(DroneStatuses)StatusSelector.SelectedItem);
+                DronesListView.ItemsSource = ibl.ListOfDrones(x => x.status == (DroneStatuses)StatusSelector.SelectedItem);
             }
             else DronesListView.ItemsSource = ibl.ListDrones();
 
@@ -96,9 +96,12 @@ namespace PL
         private void ClickedDrone(object sender, MouseButtonEventArgs e)
         {
             var item = DronesListView.SelectedItem;
-
-            new Drone(ibl, (IBL.BO.DroneToList)item).ShowDialog();
-            DataContext = ibl.ListDrones();
+           
+            if (DronesListView.SelectedIndex > -1)
+            {
+                new Drone(ibl, (IBL.BO.DroneToList)item).ShowDialog();
+                DataContext = ibl.ListDrones();
+            }
 
         }
 
@@ -114,7 +117,7 @@ namespace PL
             this.cancel = 1;
             this.Close();
         }
-      
+
 
         private void Window_Closing_1(object sender, System.ComponentModel.CancelEventArgs e)
         {

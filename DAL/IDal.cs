@@ -33,8 +33,8 @@ namespace IDAL
         IEnumerable<IDAL.DO.Costumer> AllCustomers();
         IEnumerable<IDAL.DO.Parcel> AllParcels();
         public IEnumerable<IDAL.DO.DroneCharge> AllDronesIncharge();
-       
-    
+
+
 
         public IEnumerable<IDAL.DO.Parcel> ListOfParcels(Predicate<IDAL.DO.Parcel> f);
         public IEnumerable<IDAL.DO.Costumer> ListOfCostumers(Predicate<IDAL.DO.Costumer> f);

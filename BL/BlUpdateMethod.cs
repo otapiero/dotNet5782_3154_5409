@@ -19,7 +19,7 @@ namespace IBL
 
             try
             {
-                if(model=="")
+                if (model=="")
                     throw new BO.IBException("not enough information");
                 BO.DroneToList result = DronesBl.Find(x => x.Id==id);
                 if (result != null)
@@ -50,17 +50,17 @@ namespace IBL
         {
             try
             {
-                 if(idal.AllStation().ToList().Exists(x=>x.Id==id))
-                 {
-                    
-                        int numOfDronesInCharge = idal.ListOfDronesInCharge(w => w.StationId==id).Count();
-                        if (chargeSlots >= numOfDronesInCharge)
-                        {
-                            idal.UpdateStation(id, name,chargeSlots);
-                      
-                        }
-                        throw new BO.IBException("chargeSlots lees than numOfDronesInCharge");
-                    
+                if (idal.AllStation().ToList().Exists(x => x.Id==id))
+                {
+
+                    int numOfDronesInCharge = idal.ListOfDronesInCharge(w => w.StationId==id).Count();
+                    if (chargeSlots >= numOfDronesInCharge)
+                    {
+                        idal.UpdateStation(id, name, chargeSlots);
+
+                    }
+                    throw new BO.IBException("chargeSlots lees than numOfDronesInCharge");
+
 
 
                 }
@@ -108,8 +108,8 @@ namespace IBL
 
                 if (DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Available))
                 {
-                    List<IDAL.DO.Station> stationData = idal.ListOfStations(x=>x.ChargeSlots > 0).ToList();
-                    
+                    List<IDAL.DO.Station> stationData = idal.ListOfStations(x => x.ChargeSlots > 0).ToList();
+
                     if (stationData.Count > 0)
                     {
                         DroneToList temp = DronesBl.Find(x => x.Id==id);
@@ -180,7 +180,7 @@ namespace IBL
             {
                 if (DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Available))
                 {
-                    
+
                     DroneToList temp = DronesBl.Find(x => x.Id==id);
                     var parcelsData = idal.ListOfParcels(x => x.DroneId==0 && x.Wheight <= (IDAL.DO.WeightCategories)temp.Weight).ToList();
                     parcelsData=parcelsData.OrderBy(x => (int)x.Priority).ToList();
@@ -206,7 +206,7 @@ namespace IBL
                     List<IDAL.DO.Station> stationData = idal.ListOfStations(x => x.ChargeSlots > 0).ToList();
 
                     if (stationData.Count()<1) throw new BO.IBException("no free empty");
-                    BO.Location closeStation = FindTheClosestStation(new(target.Longitude,target.Lattitude), stationData);
+                    BO.Location closeStation = FindTheClosestStation(new(target.Longitude, target.Lattitude), stationData);
                     double fullDis = DistanceLocation(temp.CurrentLocation, parcelLocation)+DistanceLocation(parcelLocation, new(target.Longitude, target.Lattitude))+DistanceLocation(closeStation, new(target.Longitude, target.Lattitude));
                     Double[] vs = idal.ElectricityUse();
                     double Rate = vs[0];
@@ -218,10 +218,10 @@ namespace IBL
                         idal.AssignPackageToDrone(parcelId, temp.Id);
                     }
                     else
-                    throw new BO.IBException("Not enough battery");
+                        throw new BO.IBException("Not enough battery");
                 }
                 else
-                throw new BO.IBException("the drone isnt in avilable");
+                    throw new BO.IBException("the drone isnt in avilable");
 
             }
             catch (Exception x)
@@ -277,7 +277,7 @@ namespace IBL
                     DroneToList temp = DronesBl.Find(x => x.Id==id);
                     var parcelsData = idal.AllParcels().ToList();
                     var parcel = parcelsData.Find(x => x.Id==temp.ParcelId);
-                    if(parcel.PickedUp==null)
+                    if (parcel.PickedUp==null)
                     {
                         throw new BO.IBException("the parcel is not pickedup!");
                     }
@@ -291,8 +291,8 @@ namespace IBL
                         temp.CurrentLocation=new BO.Location(person.Longitude, person.Lattitude);
                         temp.status=DroneStatuses.Available;
                         temp.ParcelId=0;
-                        
-                        
+
+
                         parcel.Delivered=DateTime.Now;
 
                     }

@@ -28,7 +28,7 @@ namespace DalObject
             for (int i = 0; i < numDrones; i++)
             {
                 IDAL.DO.Drone newDrone = new();
-                
+
                 newDrone.Id = Config.idDrone++;
                 newDrone.Model = GetModelName();
 
@@ -40,7 +40,7 @@ namespace DalObject
             {
 
                 IDAL.DO.Costumer newCustomer = new();
-               
+
                 newCustomer.Id = Config.IdCustomer++;
                 newCustomer.Name = GetRandomName();
                 newCustomer.Phone = GetRandomPhone();
@@ -148,7 +148,7 @@ namespace DalObject
             }
             static string GetModelName()
             {
-                
+
 
                 return Config.models[r.Next(5)];
             }
@@ -156,10 +156,10 @@ namespace DalObject
         //static var for initialize
         internal class Config
         {
-          
 
-            
-            
+
+
+
             public static int idParcel = 1;
             public static int idDrone = 1;
             public static int IdStation = 1;
@@ -174,7 +174,7 @@ namespace DalObject
 
 
             public static string[] models = new string[] { "Alpha", "beta", "gema", "delta", "omicorion" };
-           
+
         }
     }
 }

@@ -242,7 +242,7 @@ namespace ConsoleUI
                     break;
                 case "e":
                     Console.WriteLine("Not associated parcels:");
-                    List<IDAL.DO.Parcel> notAssociatedParcels = options.ListOfParcels(t=>t.DroneId == 0).ToList();
+                    List<IDAL.DO.Parcel> notAssociatedParcels = options.ListOfParcels(t => t.DroneId == 0).ToList();
                     foreach (var t in notAssociatedParcels)
                     {
                         Console.WriteLine(t.ToString());
@@ -250,12 +250,12 @@ namespace ConsoleUI
                     break;
                 case "f":
                     Console.WriteLine("list of station with available charging stations:");
-                    List<IDAL.DO.Station> PartOfStations = (List<IDAL.DO.Station>)options.ListOfStations(t=>t.ChargeSlots > 0);
-                        foreach (var t in PartOfStations)
-                        {
-                            Console.WriteLine(t.ToString());
-                        }
-                        break;
+                    List<IDAL.DO.Station> PartOfStations = (List<IDAL.DO.Station>)options.ListOfStations(t => t.ChargeSlots > 0);
+                    foreach (var t in PartOfStations)
+                    {
+                        Console.WriteLine(t.ToString());
+                    }
+                    break;
                 case "g":
                     ; break;
 

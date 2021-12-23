@@ -7,15 +7,15 @@ using IBL.BO;
 using IDAL.DO;
 namespace IBL
 {
-   
+
 
     public partial class BL
     {
-     /// <summary>
-     /// search a station
-     /// </summary>
-     /// <param name="id"> searche the station by id</param>
-     /// <returns>return the station if exsist </returns>
+        /// <summary>
+        /// search a station
+        /// </summary>
+        /// <param name="id"> searche the station by id</param>
+        /// <returns>return the station if exsist </returns>
         public BO.BaseStation SearchStation(int id)
         {
             BO.BaseStation temp = new();
@@ -26,8 +26,8 @@ namespace IBL
                 temp.Name = y.Name;
                 temp.Id = y.Id;
                 temp.NumAvilableChargeStation = y.ChargeSlots;//
-                IEnumerable<IDAL.DO.DroneCharge> ListDrones = idal.ListOfDronesInCharge(x=>x.StationId == id);
-               
+                IEnumerable<IDAL.DO.DroneCharge> ListDrones = idal.ListOfDronesInCharge(x => x.StationId == id);
+
                 IEnumerable<IDAL.DO.Drone> DronesIncharge = idal.AllDrones();
                 DronesIncharge = from x in DronesIncharge
                                  where ListDrones.ToList().Exists(z => z.DroneId == x.Id)

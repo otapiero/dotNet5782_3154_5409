@@ -22,7 +22,7 @@ namespace PL
         IBL.IBL ibl;
         IBL.BO.DroneBL drone;
         int cancel = 0;
-        
+
         private bool newDrone;
         int station;
 
@@ -45,8 +45,8 @@ namespace PL
 
             MainGrid.RowDefinitions[2].Height = new GridLength(0);
 
-          
-     
+
+
             /*  cmbActions.Visibility = Visibility.Hidden;
                btnGO.Visibility = Visibility.Hidden;
 
@@ -60,13 +60,13 @@ namespace PL
         }
         public Drone(IBL.IBL bl1, IBL.BO.DroneToList x)
         {
-            
+
             newDrone = false;
             InitializeComponent();
             ibl = bl1;
             drone = new();
             WeightCombo.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
-            
+
 
             StationCombo.Visibility = Visibility.Hidden;
             Station_Label.Visibility = Visibility.Hidden;
@@ -78,36 +78,36 @@ namespace PL
 
 
             BatteryText.Content = x.Battery.ToString().Length < 5 ? x.Battery.ToString() : x.Battery.ToString().Substring(0, 5);
-         
-           
 
-            if(x.status== DroneStatuses.Available)
+
+
+            if (x.status == DroneStatuses.Available)
             {
                 OptionCombo.ItemsSource = from y in options
-                                          where (y.Key <= 1 || y.Key > 3)&&y.Key!=5
+                                          where (y.Key <= 1 || y.Key > 3) && y.Key != 5
                                           select new string(y.Value);
 
             }
-            else if(x.status==DroneStatuses.Delivery)
+            else if (x.status == DroneStatuses.Delivery)
             {
                 OptionCombo.ItemsSource = from y in options
-                                          where y.Key != 1 && y.Key!=5
+                                          where y.Key != 1 && y.Key != 5
                                           select new string(y.Value);
             }
-            else 
+            else
             {
                 OptionCombo.ItemsSource = from y in options
-                                          where y.Key ==0 || y.Key == 5
+                                          where y.Key == 0 || y.Key == 5
                                           select new string(y.Value);
             }
-            
-                                     
+
+
             DroneId.IsReadOnly = true;
-            
+
             StationCombo.IsReadOnly = true;
             WeightCombo.IsReadOnly = true;
-           
-            
+
+
             /*DroneId.Foreground = Brushes.Gray;
             BatteryText.Foreground = Brushes.Gray;
             lblLocation.Foreground = Brushes.Gray;
@@ -121,12 +121,12 @@ namespace PL
 
             DroneId.Text = x.Id.ToString();
             ModelText.Text = x.Model;
-            
-        
+
+
             StationCombo.Items.Add("???");
-            
+
             WeightCombo.SelectedItem = x.Weight;
-          
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -138,7 +138,7 @@ namespace PL
         private void WeightCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             drone.Weight = (WeightCategories)WeightCombo.SelectedItem;
-           // NewDrone.Weight = (WeightCategories)WeightCombo.SelectedItem;
+            // NewDrone.Weight = (WeightCategories)WeightCombo.SelectedItem;
         }
 
         private void StationCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -178,9 +178,9 @@ namespace PL
 
         }
 
-        private void Update_Bottun(object sender, RoutedEventArgs e) 
+        private void Update_Bottun(object sender, RoutedEventArgs e)
         {
-           
+
             if (newDrone)
             {
                 if (ModelText.Text != "")
@@ -199,13 +199,14 @@ namespace PL
                                 {
                                     ModelText.BorderBrush = ModelText.Text.Length < 1 ? Brushes.Red : Brushes.Gray;
                                 }
-                                else {
+                                else
+                                {
                                     cancel = 1;
                                     this.Close();
                                 }
                                 DroneId.Foreground = Brushes.Red;
                                 break;
-                       
+
                         }
                     }
                 }
@@ -216,30 +217,30 @@ namespace PL
             {
                 try
                 {
-    
+
                     updateADrone();
                 }
                 catch (Exception x)
                 {
-                    MessageBox.Show(x.ToString(),"Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show(x.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
         }
-        
+
         private void updateADrone()
-        {            
+        {
             try
             {
                 if (OptionCombo.SelectedValue == null)
                 {
-                   
+
                     MessageBox.Show("Choose Action", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else
                 {
                     switch (OptionCombo.SelectedValue)
                     {
-                        
+
                         case "Update Model": // update
                             ibl.UpdateDroneModel(int.Parse(DroneId.Text), ModelText.Text.ToString());
                             break;
@@ -275,18 +276,18 @@ namespace PL
         {
             try
             {
-                if (DroneId.Text.Length < 1 || ModelText.Text.Length < 1 || WeightCombo.SelectedItem == null || StationCombo.SelectedItem == null ||drone.Model.Length<1||drone.Id.ToString().Length<1)
+                if (DroneId.Text.Length < 1 || ModelText.Text.Length < 1 || WeightCombo.SelectedItem == null || StationCombo.SelectedItem == null || drone.Model.Length < 1 || drone.Id.ToString().Length < 1)
                 {
                     MessageBoxResult mbResult = MessageBox.Show("חסר לך נתונים", "The Drone was uploud!", MessageBoxButton.OK, MessageBoxImage.Error);
                     switch (mbResult)
                     {
                         case MessageBoxResult.OK:
-                            ModelText.BorderBrush = ModelText.Text.Length < 1 ?  Brushes.Red : Brushes.Gray;
+                            ModelText.BorderBrush = ModelText.Text.Length < 1 ? Brushes.Red : Brushes.Gray;
                             DroneId.BorderBrush = DroneId.Text.Length < 1 ? Brushes.Red : Brushes.Gray;
                             WeightCombo.BorderBrush = WeightCombo.SelectedItem == default ? Brushes.Red : Brushes.Gray;
                             StationCombo.BorderBrush = new SolidColorBrush(Color.FromRgb(255, 0, 0));
                             break;
-                        
+
                     }
                 }
                 else
@@ -299,13 +300,13 @@ namespace PL
                             cancel = 1;
                             this.Close();
                             break;
-                       
+
                     }
                 }
 
 
             }
-            catch (Exception x )
+            catch (Exception x)
             {
                 MessageBoxResult mbResult = MessageBox.Show(x.ToString(), "Error Occurred", MessageBoxButton.OKCancel, MessageBoxImage.Error);
                 switch (mbResult)
@@ -313,22 +314,22 @@ namespace PL
                     case MessageBoxResult.OK:
                         break;
                     case MessageBoxResult.Cancel:
-                        
+
                         this.Close();
-                        
+
                         break;
                 }
             }
         }
-       
+
 
         private void OptionCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           
+
 
         }
- 
-        
+
+
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {

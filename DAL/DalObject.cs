@@ -331,7 +331,7 @@ namespace DalObject
         }
         ///<summary>List - copy list of station for the main program</summary>
         ///<returns>list of all stations</returns>
-        public IEnumerable<IDAL.DO.Station> AllStation( )
+        public IEnumerable<IDAL.DO.Station> AllStation()
         {
             List<IDAL.DO.Station> allStations = new List<IDAL.DO.Station>();
             foreach (var t in DataSource.stations)
@@ -382,10 +382,10 @@ namespace DalObject
             }
             return allDronesIncharge;
         }
-        
-        
-       
-        
+
+
+
+
         public double[] ElectricityUse()
         {
             double[] arr = new double[5];
