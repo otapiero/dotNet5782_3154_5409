@@ -180,15 +180,16 @@ namespace IBL
             {
                 if (DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Available))
                 {
+                    
                     DroneToList temp = DronesBl.Find(x => x.Id==id);
                     var parcelsData = idal.ListOfParcels(x => x.DroneId==0 && x.Wheight <= (IDAL.DO.WeightCategories)temp.Weight).ToList();
-
-                    parcelsData=parcelsData.OrderBy(x=> (int)x.Priority).ToList();
+                    parcelsData=parcelsData.OrderBy(x => (int)x.Priority).ToList();
                     var person = idal.SearchCostumer(parcelsData[0].Sender);
-                    double tempDistance, dis = DistanceLocation(temp.CurrentLocation, new BO.Location(person.Longitude, person.Lattitude));
                     BO.Location parcelLocation = new(person.Longitude, person.Lattitude);
-                    int parcelTarget = 0;
-                    int parcelId = 0;
+
+                    double tempDistance, dis = DistanceLocation(temp.CurrentLocation, parcelLocation);
+                    int parcelTarget = parcelsData[0].TargetId;
+                    int parcelId = parcelsData[0].Id;
                     foreach (var y in parcelsData)
                     {
                         var personT = idal.SearchCostumer(parcelsData[0].Sender);
@@ -201,12 +202,12 @@ namespace IBL
                             parcelId= y.Id;
                         }
                     }
-                    DroneToList targetId = DronesBl.Find(x => x.Id==parcelTarget);
-                    List<IDAL.DO.Station> stationData =idal.ListOfStations(x=>x.ChargeSlots > 0).ToList();
-                  ;
-                   if (stationData.Count()<1) throw new BO.IBException("no free empty"); 
-                    BO.Location closeStation = FindTheClosestStation(targetId.CurrentLocation, stationData);
-                    double fullDis = DistanceLocation(temp.CurrentLocation, parcelLocation)+DistanceLocation(parcelLocation, targetId.CurrentLocation)+DistanceLocation(closeStation, targetId.CurrentLocation);
+                    var target = idal.SearchCostumer(parcelTarget);
+                    List<IDAL.DO.Station> stationData = idal.ListOfStations(x => x.ChargeSlots > 0).ToList();
+
+                    if (stationData.Count()<1) throw new BO.IBException("no free empty");
+                    BO.Location closeStation = FindTheClosestStation(new(target.Longitude,target.Lattitude), stationData);
+                    double fullDis = DistanceLocation(temp.CurrentLocation, parcelLocation)+DistanceLocation(parcelLocation, new(target.Longitude, target.Lattitude))+DistanceLocation(closeStation, new(target.Longitude, target.Lattitude));
                     Double[] vs = idal.ElectricityUse();
                     double Rate = vs[0];
 
@@ -216,9 +217,11 @@ namespace IBL
                         temp.ParcelId= parcelId;
                         idal.AssignPackageToDrone(parcelId, temp.Id);
                     }
-                    else throw new BO.IBException("Not enough battery");
+                    else
+                    throw new BO.IBException("Not enough battery");
                 }
-                else throw new BO.IBException("the drone isnt in avilable");
+                else
+                throw new BO.IBException("the drone isnt in avilable");
 
             }
             catch (Exception x)
