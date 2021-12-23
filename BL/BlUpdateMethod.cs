@@ -243,7 +243,7 @@ namespace IBL
                     DroneToList temp = DronesBl.Find(x => x.Id==id);
                     var parcelsData = idal.AllParcels().ToList();
                     var parcel = parcelsData.Find(x => x.Id==temp.ParcelId);
-                    if (parcel.PickedUp== new DateTime())
+                    if (parcel.PickedUp== null)
                     {
                         var person = idal.SearchCostumer(parcel.Sender);
                         double fullDis = DistanceLocation(temp.CurrentLocation, new BO.Location(person.Longitude, person.Lattitude));
@@ -277,15 +277,24 @@ namespace IBL
                     DroneToList temp = DronesBl.Find(x => x.Id==id);
                     var parcelsData = idal.AllParcels().ToList();
                     var parcel = parcelsData.Find(x => x.Id==temp.ParcelId);
+                    if(parcel.PickedUp==null)
+                    {
+                        throw new BO.IBException("the parcel is not pickedup!");
+                    }
                     if (parcel.Delivered == null)
                     {
+                        idal.DeliverPackage(parcel.Id);
                         var person = idal.SearchCostumer(parcel.TargetId);
                         double fullDis = DistanceLocation(temp.CurrentLocation, new BO.Location(person.Longitude, person.Lattitude));
                         Double[] vs = idal.ElectricityUse();
                         temp.Battery-=fullDis*vs[(int)parcel.Wheight+1];
                         temp.CurrentLocation=new BO.Location(person.Longitude, person.Lattitude);
                         temp.status=DroneStatuses.Available;
-                        idal.DeliverPackage(parcel.Id);
+                        temp.ParcelId=0;
+                        
+                        
+                        parcel.Delivered=DateTime.Now;
+
                     }
                     else throw new BO.IBException("the parcel was delivered");
                     //else throw ..."the parcel was delivered"
