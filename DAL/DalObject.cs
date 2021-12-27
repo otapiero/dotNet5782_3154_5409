@@ -8,13 +8,18 @@ using System.Threading.Tasks;
 namespace DalObject
 {
     ///<summary>Class <c>DalObject</c></summary>
-    public class DalObject : IDAL.IDal
+    internal class DalObject : DalApi.IDal
     {
+        #region singelton
+        static readonly DalObject instance=new DalObject();
+
+        #endregion
         ///<summary>method <c>DalObject</c> initialize the data</summary>
         public DalObject()
         {
             DataSource.Initialize();
         }
+        internal static DalApi.IDal Instance { get { return instance; } }
         ///<summary>method <c>SearchCustomer</c> </summary>
         ///<param name="id"> searche the customer by id</param>
         public DO.Costumer SearchCostumer(int id)

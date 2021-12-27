@@ -1,4 +1,4 @@
-﻿using IBL.BO;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +10,13 @@ namespace IBL
 
     public partial class BL : IBL
     {
-        private IDAL.IDal idal;
-        private List<DroneToList> DronesBl = new();
+        private DalApi.IDal idal;
+        private List<BO.DroneToList> DronesBl = new();
 
         public BL()
         {
             Random rand = new();
-            idal = IDAL.FactoeySingletonDl.GetDal();
+            idal = DalApi.DalFactory.GetDal();
             //data lists
             List<DO.Drone> dronesData = (List<DO.Drone>)idal.AllDrones();
             List<DO.Parcel> parcelsData = (List<DO.Parcel>)idal.AllParcels();

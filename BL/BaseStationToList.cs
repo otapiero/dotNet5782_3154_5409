@@ -4,30 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IBL
+
+namespace BO
 {
-    namespace BO
+    public class BaseStationToList
     {
-        public class BaseStationToList
+        public int Id { get; set; }
+        public string Name { get; set; }
+
+        public int NumAvilableChargeStation { get; set; }
+        public int NumNotAvilableChargeStation { get; set; }
+        public BaseStationToList(int id, string name, int numAvaiable, int numNotAvailable)
         {
-            public int Id { get; set; }
-            public string Name { get; set; }
+            Id=id;
+            Name=name;
+            NumAvilableChargeStation=numAvaiable;
+            NumNotAvilableChargeStation=numNotAvailable;
+        }
 
-            public int NumAvilableChargeStation { get; set; }
-            public int NumNotAvilableChargeStation { get; set; }
-            public BaseStationToList(int id, string name, int numAvaiable, int numNotAvailable)
-            {
-                Id=id;
-                Name=name;
-                NumAvilableChargeStation=numAvaiable;
-                NumNotAvilableChargeStation=numNotAvailable;
-            }
-
-            public override string ToString()
-            {
-                return "Id: " +Id+"\nName: "+Name+"\nnumber of avilabl charge spolts: "+NumAvilableChargeStation+
-                    "\nnumber of not avilable charge spolts: "+NumNotAvilableChargeStation+"\n";
-            }
+        public override string ToString()
+        {
+            return "Id: " +Id+"\nName: "+Name+"\nnumber of avilabl charge spolts: "+NumAvilableChargeStation+
+                "\nnumber of not avilable charge spolts: "+NumNotAvilableChargeStation+"\n";
         }
     }
 }

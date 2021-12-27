@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using IBL.BO;
+using BO;
 namespace PL
 {
     /// <summary>
@@ -20,7 +20,7 @@ namespace PL
     public partial class Drone : Window
     {
         IBL.IBL ibl;
-        IBL.BO.DroneBL drone;
+        BO.DroneBL drone;
         int cancel = 0;
 
         private bool newDrone;
@@ -38,9 +38,9 @@ namespace PL
         {
             newDrone = true;
             ibl = bl1;
-            drone = new IBL.BO.DroneBL();
+            drone = new BO.DroneBL();
             InitializeComponent();
-            WeightCombo.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
+            WeightCombo.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
             StationCombo.ItemsSource = ibl.ListStation();
 
             MainGrid.RowDefinitions[2].Height = new GridLength(0);
@@ -58,14 +58,14 @@ namespace PL
             */
 
         }
-        public Drone(IBL.IBL bl1, IBL.BO.DroneToList x)
+        public Drone(IBL.IBL bl1, BO.DroneToList x)
         {
 
             newDrone = false;
             InitializeComponent();
             ibl = bl1;
             drone = new();
-            WeightCombo.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
+            WeightCombo.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
 
 
             StationCombo.Visibility = Visibility.Hidden;
@@ -145,7 +145,7 @@ namespace PL
         {
 
             var item = StationCombo.SelectedItem;
-            var x = (IBL.BO.BaseStationToList)item;
+            var x = (BO.BaseStationToList)item;
             station = x.Id;
         }
 

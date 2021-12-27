@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IBL.BO;
+
 
 namespace IBL
 {
@@ -112,7 +112,7 @@ namespace IBL
 
                     if (stationData.Count > 0)
                     {
-                        DroneToList temp = DronesBl.Find(x => x.Id==id);
+                        BO.DroneToList temp = DronesBl.Find(x => x.Id==id);
                         BO.Location closeStation = FindTheClosestStation(temp.CurrentLocation, stationData);
                         double dis = DistanceLocation(temp.CurrentLocation, closeStation);
                         DO.Station chooseStation = stationData.Find(x => x.Longitude == closeStation.Longitude && x.Lattitude==closeStation.Lattitude);
@@ -122,7 +122,7 @@ namespace IBL
                         {
                             temp.Battery = temp.Battery - (dis*Rate);
                             temp.CurrentLocation = closeStation;
-                            temp.status = DroneStatuses.Maintenace;
+                            temp.status = BO.DroneStatuses.Maintenace;
 
                             idal.SendDroneToCharge(id, chooseStation.Id);
                         }
@@ -152,12 +152,12 @@ namespace IBL
             {
                 if (DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Maintenace))
                 {
-                    DroneToList temp = DronesBl.Find(x => x.Id==id);
+                    BO.DroneToList temp = DronesBl.Find(x => x.Id==id);
                     Double[] vs = idal.ElectricityUse();
                     double chargingRate = vs[4];
                     temp.Battery+= time*chargingRate;
                     temp.Battery = temp.Battery > 1000 ? temp.Battery=100 : temp.Battery;
-                    temp.status =  DroneStatuses.Available;
+                    temp.status =  BO.DroneStatuses.Available;
                     idal.ReleseDroneFromCharge(id);
 
                 }
@@ -181,7 +181,7 @@ namespace IBL
                 if (DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Available))
                 {
 
-                    DroneToList temp = DronesBl.Find(x => x.Id==id);
+                    BO.DroneToList temp = DronesBl.Find(x => x.Id==id);
                     var parcelsData = idal.ListOfParcels(x => x.DroneId==0 && x.Wheight <= (DO.WeightCategories)temp.Weight).ToList();
                     parcelsData=parcelsData.OrderBy(x => (int)x.Priority).ToList();
                     var person = idal.SearchCostumer(parcelsData[0].Sender);
@@ -213,7 +213,7 @@ namespace IBL
 
                     if (temp.Battery-Rate*fullDis>0)
                     {
-                        temp.status=DroneStatuses.Delivery;
+                        temp.status=BO.DroneStatuses.Delivery;
                         temp.ParcelId= parcelId;
                         idal.AssignPackageToDrone(parcelId, temp.Id);
                     }
@@ -240,7 +240,7 @@ namespace IBL
             {
                 if (DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Delivery))
                 {
-                    DroneToList temp = DronesBl.Find(x => x.Id==id);
+                    BO.DroneToList temp = DronesBl.Find(x => x.Id==id);
                     var parcelsData = idal.AllParcels().ToList();
                     var parcel = parcelsData.Find(x => x.Id==temp.ParcelId);
                     if (parcel.PickedUp== null)
@@ -274,7 +274,7 @@ namespace IBL
             {
                 if (DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Delivery))
                 {
-                    DroneToList temp = DronesBl.Find(x => x.Id==id);
+                    BO.DroneToList temp = DronesBl.Find(x => x.Id==id);
                     var parcelsData = idal.AllParcels().ToList();
                     var parcel = parcelsData.Find(x => x.Id==temp.ParcelId);
                     if (parcel.PickedUp==null)
@@ -289,7 +289,7 @@ namespace IBL
                         Double[] vs = idal.ElectricityUse();
                         temp.Battery-=fullDis*vs[(int)parcel.Wheight+1];
                         temp.CurrentLocation=new BO.Location(person.Longitude, person.Lattitude);
-                        temp.status=DroneStatuses.Available;
+                        temp.status=BO.DroneStatuses.Available;
                         temp.ParcelId=0;
 
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IBL.BO;
+
 
 namespace ConsoleUI_BL
 {
@@ -36,7 +36,7 @@ namespace ConsoleUI_BL
                         {
                             AddMenu();
                         }
-                        catch (IBL.BO.IBException x)
+                        catch (BO.IBException x)
                         {
                             Console.WriteLine(x);
                         }
@@ -46,7 +46,7 @@ namespace ConsoleUI_BL
                         {
                             UpdateMenu();
                         }
-                        catch (IBL.BO.IBException x)
+                        catch (BO.IBException x)
                         {
                             Console.WriteLine(x);
                         }
@@ -56,7 +56,7 @@ namespace ConsoleUI_BL
                         {
                             DisplayMenu();
                         }
-                        catch (IBL.BO.IBException x)
+                        catch (BO.IBException x)
                         {
                             Console.WriteLine(x);
                         }
@@ -67,7 +67,7 @@ namespace ConsoleUI_BL
                         try
                         {
                         }
-                        catch (IBL.BO.IBException x)
+                        catch (BO.IBException x)
                         {
                             Console.WriteLine(x);
                         }
@@ -105,7 +105,7 @@ namespace ConsoleUI_BL
                         options.AddNewStation(id, name, longattitude, lattitude, chargeSlot);
 
                     }
-                    catch (IBL.BO.IBException x)
+                    catch (BO.IBException x)
                     {
                         Console.WriteLine(x);
                     }
@@ -123,7 +123,7 @@ namespace ConsoleUI_BL
                         options.AddNewDrone(id, model, wheigt, idStation);
 
                     }
-                    catch (IBL.BO.IBException x)
+                    catch (BO.IBException x)
                     {
                         Console.WriteLine(x);
                     }
@@ -140,7 +140,7 @@ namespace ConsoleUI_BL
                         options.AddNewCustomer(id, stringName, phone, longattitude, lattitude);
 
                     }
-                    catch (IBL.BO.IBException x)
+                    catch (BO.IBException x)
                     {
                         Console.WriteLine(x);
                     }
@@ -155,7 +155,7 @@ namespace ConsoleUI_BL
                     {
                         options.AddNewParcel(senderId, targetId, wheigt, Priority);
                     }
-                    catch (IBL.BO.IBException x)
+                    catch (BO.IBException x)
                     {
                         Console.WriteLine(x);
                     }
@@ -196,7 +196,7 @@ namespace ConsoleUI_BL
                     {
                         options.UpdateDroneModel(id, model);
                     }
-                    catch (IBL.BO.IBException x)
+                    catch (BO.IBException x)
                     {
                         Console.WriteLine(x);
                     }
@@ -212,7 +212,7 @@ namespace ConsoleUI_BL
                     {
                         options.UpdateStation(id, name, chargeSlots);
                     }
-                    catch (IBL.BO.IBException x)
+                    catch (BO.IBException x)
                     {
                         Console.WriteLine(x);
                     }
@@ -228,7 +228,7 @@ namespace ConsoleUI_BL
                     {
                         options.UpdateCostumer(id, name, phone);
                     }
-                    catch (IBL.BO.IBException x)
+                    catch (BO.IBException x)
                     {
                         Console.WriteLine(x);
                     }
@@ -244,7 +244,7 @@ namespace ConsoleUI_BL
                         options.SendDroneToCharge(id);
 
                     }
-                    catch (IBL.BO.IBException x)
+                    catch (BO.IBException x)
                     {
                         Console.WriteLine(x);
                     }
@@ -260,7 +260,7 @@ namespace ConsoleUI_BL
                     {
                         options.RelesaeDroneFromCharge(id, time);
                     }
-                    catch (IBL.BO.IBException x)
+                    catch (BO.IBException x)
                     {
                         Console.WriteLine(x);
                     }
@@ -272,7 +272,7 @@ namespace ConsoleUI_BL
                     {
                         options.AssignPackageToDrone(id);
                     }
-                    catch (IBL.BO.IBException x)
+                    catch (BO.IBException x)
                     {
                         Console.WriteLine(x);
                     }
@@ -285,7 +285,7 @@ namespace ConsoleUI_BL
                     {
                         options.CollectPackage(id);
                     }
-                    catch (IBL.BO.IBException x)
+                    catch (BO.IBException x)
                     {
                         Console.WriteLine(x);
                     }
@@ -297,7 +297,7 @@ namespace ConsoleUI_BL
                     {
                         options.DeliverPackage(id);
                     }
-                    catch (IBL.BO.IBException x)
+                    catch (BO.IBException x)
                     {
                         Console.WriteLine(x);
                     }
@@ -324,11 +324,11 @@ namespace ConsoleUI_BL
                     if (int.TryParse(Console.ReadLine(), out id) == false) { Console.WriteLine("wrong format of input"); break; };
                     try
                     {
-                        IBL.BO.BaseStation station = options.SearchStation(id);
+                        BO.BaseStation station = options.SearchStation(id);
                         Console.WriteLine(station.ToString());
 
                     }
-                    catch (IBL.BO.IBException x)
+                    catch (BO.IBException x)
                     {
                         Console.WriteLine(x);
                     }
@@ -338,10 +338,10 @@ namespace ConsoleUI_BL
                     if (int.TryParse(Console.ReadLine(), out id) == false) { Console.WriteLine("wrong format of input"); break; };
                     try
                     {
-                        IBL.BO.DroneBL drone = options.SearchDrone(id);
+                        BO.DroneBL drone = options.SearchDrone(id);
                         Console.WriteLine(drone);
                     }
-                    catch (IBL.BO.IBException x)
+                    catch (BO.IBException x)
                     {
                         Console.WriteLine(x);
                     }
@@ -351,10 +351,10 @@ namespace ConsoleUI_BL
                     if (int.TryParse(Console.ReadLine(), out id) == false) { Console.WriteLine("wrong format of input"); break; };
                     try
                     {
-                        IBL.BO.CustomerBl costumer = options.SearchCostumer(id);
+                        BO.CustomerBl costumer = options.SearchCostumer(id);
                         Console.WriteLine(costumer);
                     }
-                    catch (IBL.BO.IBException x)
+                    catch (BO.IBException x)
                     {
                         Console.WriteLine(x);
                     }
@@ -368,10 +368,10 @@ namespace ConsoleUI_BL
                     };
                     try
                     {
-                        IBL.BO.ParcelBl parcel = options.SearchParcel(id);
+                        BO.ParcelBl parcel = options.SearchParcel(id);
                         Console.WriteLine(parcel);
                     }
-                    catch (IBL.BO.IBException x)
+                    catch (BO.IBException x)
                     {
                         Console.WriteLine(x);
                     }
@@ -400,7 +400,7 @@ namespace ConsoleUI_BL
 
                 case "a":
                     Console.WriteLine("All the stations:");
-                    IEnumerable<IBL.BO.BaseStationToList> lst = options.ListStation();
+                    IEnumerable<BO.BaseStationToList> lst = options.ListStation();
 
                     foreach (var x in lst)
                     {
