@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IDAL
-{
+
+
     namespace DO
     {
         ///<summary>struct of Station</summary>
@@ -38,4 +38,4 @@ namespace IDAL
         }
 
     }
-}
+

@@ -133,7 +133,7 @@ namespace ConsoleUI
                     int.TryParse(Console.ReadLine(), out id);
                     Console.WriteLine("chose a stations from the list by the Id.");
                     Console.WriteLine("All the stations:");
-                    List<IDAL.DO.Station> stations = (List<IDAL.DO.Station>)options.AllStation();
+                    List<DO.Station> stations = (List<DO.Station>)options.AllStation();
                     foreach (var t in stations)
                     {
                         Console.WriteLine(t.ToString());
@@ -167,25 +167,25 @@ namespace ConsoleUI
                 case "a":
                     Console.WriteLine("Enter station id.");
                     int.TryParse(Console.ReadLine(), out id);
-                    IDAL.DO.Station station = options.SearchStation(id);
+                    DO.Station station = options.SearchStation(id);
                     Console.WriteLine(station.ToString());
                     break;
                 case "b":
                     Console.WriteLine("Enter drone id.");
                     int.TryParse(Console.ReadLine(), out id);
-                    IDAL.DO.Drone drone = options.SearchDrone(id);
+                    DO.Drone drone = options.SearchDrone(id);
                     Console.WriteLine(drone.ToString());
                     break;
                 case "c":
                     Console.WriteLine("Enter customer id.");
                     int.TryParse(Console.ReadLine(), out id);
-                    IDAL.DO.Costumer customer = options.SearchCostumer(id);
+                    DO.Costumer customer = options.SearchCostumer(id);
                     Console.WriteLine(customer.ToString());
                     break;
                 case "d":
                     Console.WriteLine("Enter parcel id.");
                     int.TryParse(Console.ReadLine(), out id);
-                    IDAL.DO.Parcel parcel = options.SearchParcel(id);
+                    DO.Parcel parcel = options.SearchParcel(id);
                     Console.WriteLine(parcel.ToString());
                     break;
                 case "e":
@@ -210,7 +210,7 @@ namespace ConsoleUI
 
                 case "a":
                     Console.WriteLine("All the stations:");
-                    List<IDAL.DO.Station> stations = (List<IDAL.DO.Station>)options.AllStation();
+                    List<DO.Station> stations = (List<DO.Station>)options.AllStation();
                     foreach (var t in stations)
                     {
                         Console.WriteLine(t);
@@ -218,7 +218,7 @@ namespace ConsoleUI
                     break;
                 case "b":
                     Console.WriteLine("All the drones:");
-                    List<IDAL.DO.Drone> drones = (List<IDAL.DO.Drone>)options.AllDrones();
+                    List<DO.Drone> drones = (List<DO.Drone>)options.AllDrones();
                     foreach (var t in drones)
                     {
                         Console.WriteLine(t.ToString());
@@ -226,7 +226,7 @@ namespace ConsoleUI
                     break;
                 case "c":
                     Console.WriteLine("All the customers:");
-                    List<IDAL.DO.Costumer> customers = (List<IDAL.DO.Costumer>)options.AllCustomers();
+                    List<DO.Costumer> customers = (List<DO.Costumer>)options.AllCustomers();
                     foreach (var t in customers)
                     {
                         Console.WriteLine(t.ToString());
@@ -234,7 +234,7 @@ namespace ConsoleUI
                     break;
                 case "d":
                     Console.WriteLine("All the parcels:");
-                    List<IDAL.DO.Parcel> parcels = (List<IDAL.DO.Parcel>)options.AllParcels();
+                    List<DO.Parcel> parcels = (List<DO.Parcel>)options.AllParcels();
                     foreach (var t in parcels)
                     {
                         Console.WriteLine(t.ToString());
@@ -242,7 +242,7 @@ namespace ConsoleUI
                     break;
                 case "e":
                     Console.WriteLine("Not associated parcels:");
-                    List<IDAL.DO.Parcel> notAssociatedParcels = options.ListOfParcels(t => t.DroneId == 0).ToList();
+                    List<DO.Parcel> notAssociatedParcels = options.ListOfParcels(t => t.DroneId == 0).ToList();
                     foreach (var t in notAssociatedParcels)
                     {
                         Console.WriteLine(t.ToString());
@@ -250,7 +250,7 @@ namespace ConsoleUI
                     break;
                 case "f":
                     Console.WriteLine("list of station with available charging stations:");
-                    List<IDAL.DO.Station> PartOfStations = (List<IDAL.DO.Station>)options.ListOfStations(t => t.ChargeSlots > 0);
+                    List<DO.Station> PartOfStations = (List<DO.Station>)options.ListOfStations(t => t.ChargeSlots > 0);
                     foreach (var t in PartOfStations)
                     {
                         Console.WriteLine(t.ToString());

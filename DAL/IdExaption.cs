@@ -4,9 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IDAL
-{
-    namespace DO
+  namespace DO
     {
         [Serializable]
         public class IdExaption : Exception
@@ -29,4 +27,4 @@ namespace IDAL
 
         }
     }
-}
+

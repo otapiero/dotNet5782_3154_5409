@@ -55,7 +55,7 @@ namespace IBL
             tempDroneToList.Model = model;
             tempDroneToList.Battery=100;
             tempDroneToList.Weight = (BO.WeightCategories)wheigt;
-            IDAL.DO.Station tempStation = idal.AllStation().ToList().Find(x => x.Id == stationId);
+            DO.Station tempStation = idal.AllStation().ToList().Find(x => x.Id == stationId);
             tempDroneToList.CurrentLocation = new(tempStation.Longitude, tempStation.Lattitude);
             DronesBl.Add(tempDroneToList);
         }
@@ -74,12 +74,12 @@ namespace IBL
 
         public void AddNewParcel(int senderId, int targetId, int wheigt, int Priority)
         {
-            if (idal.SearchCostumer(senderId).Equals(new IDAL.DO.Costumer()))
+            if (idal.SearchCostumer(senderId).Equals(new DO.Costumer()))
             {
                 throw new BO.IBException("customer not found");
 
             }
-            if (idal.SearchCostumer(targetId).Equals(new IDAL.DO.Costumer()))
+            if (idal.SearchCostumer(targetId).Equals(new DO.Costumer()))
             {
                 throw new BO.IBException("customer not found");
             }

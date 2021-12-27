@@ -108,14 +108,14 @@ namespace IBL
 
                 if (DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Available))
                 {
-                    List<IDAL.DO.Station> stationData = idal.ListOfStations(x => x.ChargeSlots > 0).ToList();
+                    List<DO.Station> stationData = idal.ListOfStations(x => x.ChargeSlots > 0).ToList();
 
                     if (stationData.Count > 0)
                     {
                         DroneToList temp = DronesBl.Find(x => x.Id==id);
                         BO.Location closeStation = FindTheClosestStation(temp.CurrentLocation, stationData);
                         double dis = DistanceLocation(temp.CurrentLocation, closeStation);
-                        IDAL.DO.Station chooseStation = stationData.Find(x => x.Longitude == closeStation.Longitude && x.Lattitude==closeStation.Lattitude);
+                        DO.Station chooseStation = stationData.Find(x => x.Longitude == closeStation.Longitude && x.Lattitude==closeStation.Lattitude);
                         Double[] vs = idal.ElectricityUse();
                         double Rate = vs[0];
                         if (temp.Battery - dis*Rate > 0)
@@ -182,7 +182,7 @@ namespace IBL
                 {
 
                     DroneToList temp = DronesBl.Find(x => x.Id==id);
-                    var parcelsData = idal.ListOfParcels(x => x.DroneId==0 && x.Wheight <= (IDAL.DO.WeightCategories)temp.Weight).ToList();
+                    var parcelsData = idal.ListOfParcels(x => x.DroneId==0 && x.Wheight <= (DO.WeightCategories)temp.Weight).ToList();
                     parcelsData=parcelsData.OrderBy(x => (int)x.Priority).ToList();
                     var person = idal.SearchCostumer(parcelsData[0].Sender);
                     BO.Location parcelLocation = new(person.Longitude, person.Lattitude);
@@ -203,7 +203,7 @@ namespace IBL
                         }
                     }
                     var target = idal.SearchCostumer(parcelTarget);
-                    List<IDAL.DO.Station> stationData = idal.ListOfStations(x => x.ChargeSlots > 0).ToList();
+                    List<DO.Station> stationData = idal.ListOfStations(x => x.ChargeSlots > 0).ToList();
 
                     if (stationData.Count()<1) throw new BO.IBException("no free empty");
                     BO.Location closeStation = FindTheClosestStation(new(target.Longitude, target.Lattitude), stationData);

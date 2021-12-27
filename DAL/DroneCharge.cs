@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-namespace IDAL
-{
     namespace DO
     {
         ///<summary>struct of DroneCharge </summary>
@@ -27,4 +24,4 @@ namespace IDAL
             }
         }
     }
-}
+

@@ -9,10 +9,10 @@ namespace IDAL
 {
     public interface IDal
     {
-        IDAL.DO.Costumer SearchCostumer(int id);
-        IDAL.DO.Drone SearchDrone(int id);
-        IDAL.DO.Parcel SearchParcel(int id);
-        IDAL.DO.Station SearchStation(int id);
+        DO.Costumer SearchCostumer(int id);
+        DO.Drone SearchDrone(int id);
+        DO.Parcel SearchParcel(int id);
+        DO.Station SearchStation(int id);
         void AddNewDrone(int id, string _model);
         void AddNewStation(int id, string _name, double _Longitude, double _Lattitude, int _chargeSlots);
         void AddNewCustomer(int _id, string _Name, string _Phone, double _Longitude, double _Lattitude);
@@ -28,19 +28,19 @@ namespace IDAL
         void UpdateDroneModel(int id, string model);
         void UpdateStation(int id, string name, int chargeSlots);
         void UpdateCostumer(int id, string name, string phone);
-        IEnumerable<IDAL.DO.Station> AllStation();
-        IEnumerable<IDAL.DO.Drone> AllDrones();
-        IEnumerable<IDAL.DO.Costumer> AllCustomers();
-        IEnumerable<IDAL.DO.Parcel> AllParcels();
-        public IEnumerable<IDAL.DO.DroneCharge> AllDronesIncharge();
+        IEnumerable<DO.Station> AllStation();
+        IEnumerable<DO.Drone> AllDrones();
+        IEnumerable<DO.Costumer> AllCustomers();
+        IEnumerable<DO.Parcel> AllParcels();
+        public IEnumerable<DO.DroneCharge> AllDronesIncharge();
 
 
 
-        public IEnumerable<IDAL.DO.Parcel> ListOfParcels(Predicate<IDAL.DO.Parcel> f);
-        public IEnumerable<IDAL.DO.Costumer> ListOfCostumers(Predicate<IDAL.DO.Costumer> f);
-        public IEnumerable<IDAL.DO.DroneCharge> ListOfDronesInCharge(Predicate<IDAL.DO.DroneCharge> f);
-        public IEnumerable<IDAL.DO.Station> ListOfStations(Predicate<IDAL.DO.Station> f);
-        public IEnumerable<IDAL.DO.Drone> ListOfDrones(Predicate<IDAL.DO.Drone> f);
+        public IEnumerable<DO.Parcel> ListOfParcels(Predicate<DO.Parcel> f);
+        public IEnumerable<DO.Costumer> ListOfCostumers(Predicate<DO.Costumer> f);
+        public IEnumerable<DO.DroneCharge> ListOfDronesInCharge(Predicate<DO.DroneCharge> f);
+        public IEnumerable<DO.Station> ListOfStations(Predicate<DO.Station> f);
+        public IEnumerable<DO.Drone> ListOfDrones(Predicate<DO.Drone> f);
 
 
 

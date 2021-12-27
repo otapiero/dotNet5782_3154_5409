@@ -16,12 +16,12 @@ namespace IBL
         public BL()
         {
             Random rand = new();
-            idal = new DalObject.DalObject();
+            idal = IDAL.FactoeySingletonDl.GetDal();
             //data lists
-            List<IDAL.DO.Drone> dronesData = (List<IDAL.DO.Drone>)idal.AllDrones();
-            List<IDAL.DO.Parcel> parcelsData = (List<IDAL.DO.Parcel>)idal.AllParcels();
-            List<IDAL.DO.Costumer> costumerData = (List<IDAL.DO.Costumer>)idal.AllCustomers();
-            List<IDAL.DO.Station> stationData = (List<IDAL.DO.Station>)idal.AllStation();
+            List<DO.Drone> dronesData = (List<DO.Drone>)idal.AllDrones();
+            List<DO.Parcel> parcelsData = (List<DO.Parcel>)idal.AllParcels();
+            List<DO.Costumer> costumerData = (List<DO.Costumer>)idal.AllCustomers();
+            List<DO.Station> stationData = (List<DO.Station>)idal.AllStation();
 
             ;
             Double[] vs = idal.ElectricityUse();
@@ -33,16 +33,16 @@ namespace IBL
             ; //Filter parcel
 
 
-            List<IDAL.DO.Parcel> parcelsNotDelivred = idal.ListOfParcels(x => ((x.DroneId != 0) &&(x.Delivered==null))).ToList();
+            List<DO.Parcel> parcelsNotDelivred = idal.ListOfParcels(x => ((x.DroneId != 0) &&(x.Delivered==null))).ToList();
 
             foreach (var x in parcelsNotDelivred)
             {
 
-                IDAL.DO.Drone tempDlDrone = dronesData.Find(z => z.Id.Equals(x.DroneId));
+                DO.Drone tempDlDrone = dronesData.Find(z => z.Id.Equals(x.DroneId));
                 if (tempDlDrone.Id!=0)
                 {
-                    IDAL.DO.Costumer senderCostumer = idal.SearchCostumer(x.Sender);
-                    IDAL.DO.Costumer targetCostumer = idal.SearchCostumer(x.TargetId);
+                    DO.Costumer senderCostumer = idal.SearchCostumer(x.Sender);
+                    DO.Costumer targetCostumer = idal.SearchCostumer(x.TargetId);
                     BO.Location senderLocation = new(senderCostumer.Longitude, senderCostumer.Lattitude);
                     BO.Location targetLocation = new(targetCostumer.Longitude, targetCostumer.Lattitude);
                     BO.DroneToList temp = new();
@@ -86,11 +86,11 @@ namespace IBL
             }
 
 
-            List<IDAL.DO.Drone> freeDrones = (from t in dronesData
+            List<DO.Drone> freeDrones = (from t in dronesData
                                               where (false == parcelsNotDelivred.Exists(y => y.DroneId == t.Id))
                                               select t).ToList();
 
-            List<IDAL.DO.Parcel> parcelsDelivred = idal.ListOfParcels(x => x.DroneId != 0 && x.Delivered != null).ToList();
+            List<DO.Parcel> parcelsDelivred = idal.ListOfParcels(x => x.DroneId != 0 && x.Delivered != null).ToList();
 
 
             foreach (var x in freeDrones)
@@ -116,7 +116,7 @@ namespace IBL
 
                     temp.status = BO.DroneStatuses.Available;
                     int i = rand.Next(parcelsDelivred.Count());
-                    IDAL.DO.Costumer targetCostumer = idal.SearchCostumer(parcelsDelivred[i].TargetId);
+                    DO.Costumer targetCostumer = idal.SearchCostumer(parcelsDelivred[i].TargetId);
 
                     temp.CurrentLocation = new(targetCostumer.Longitude, targetCostumer.Lattitude);
                     double min = DistanceLocation(temp.CurrentLocation, FindTheClosestStation(temp.CurrentLocation, stationData))* Avilable;
@@ -137,7 +137,7 @@ namespace IBL
             return dis;
         }
 
-        private static BO.Location FindTheClosestStation(BO.Location x, List<IDAL.DO.Station> stations)
+        private static BO.Location FindTheClosestStation(BO.Location x, List<DO.Station> stations)
         {
             double tempDistance, dis = DistanceLocation(x, new BO.Location(stations[0].Longitude, stations[0].Lattitude));
             BO.Location stationlocation = new(stations[0].Longitude, stations[0].Lattitude);

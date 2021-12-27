@@ -27,7 +27,7 @@ namespace PL
         public MainWindow()
         {
             InitializeComponent();
-            Ibl = new IBL.BL();
+            Ibl = IBL.FactoeySingletonBl.GetBl();
         }
 
         private void ShowDronesButton_Click(object sender, RoutedEventArgs e)

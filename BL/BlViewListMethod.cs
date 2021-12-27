@@ -17,7 +17,7 @@ namespace IBL
         {
 
             List<BO.BaseStationToList> allStation = new();
-            foreach (IDAL.DO.Station x in idal.AllStation())
+            foreach (DO.Station x in idal.AllStation())
             {
                 int numOfDronesInCharge = idal.AllDronesIncharge().Count(w => w.StationId==x.Id);
                 allStation.Add(new(x.Id, x.Name, x.ChargeSlots, numOfDronesInCharge));
@@ -128,7 +128,7 @@ namespace IBL
         public IEnumerable<BO.BaseStationToList> StationWithAvailebalChargePost()
         {
             List<BO.BaseStationToList> stationWithAvailebalChargePost = new();
-            foreach (IDAL.DO.Station x in idal.ListOfStations(t => t.ChargeSlots > 0))
+            foreach (DO.Station x in idal.ListOfStations(t => t.ChargeSlots > 0))
             {
                 int numOfDronesInCharge = idal.AllDronesIncharge().Count(w => w.StationId==x.Id);
                 stationWithAvailebalChargePost.Add(new(x.Id, x.Name, x.ChargeSlots, numOfDronesInCharge));

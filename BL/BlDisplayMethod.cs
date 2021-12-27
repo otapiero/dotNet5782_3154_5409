@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IBL.BO;
-using IDAL.DO;
+using DO;
 namespace IBL
 {
 
@@ -21,14 +21,14 @@ namespace IBL
             BO.BaseStation temp = new();
             try
             {
-                IDAL.DO.Station y = idal.SearchStation(id);
+                DO.Station y = idal.SearchStation(id);
                 temp.Location = new(y.Longitude, y.Lattitude);
                 temp.Name = y.Name;
                 temp.Id = y.Id;
                 temp.NumAvilableChargeStation = y.ChargeSlots;//
-                IEnumerable<IDAL.DO.DroneCharge> ListDrones = idal.ListOfDronesInCharge(x => x.StationId == id);
+                IEnumerable<DO.DroneCharge> ListDrones = idal.ListOfDronesInCharge(x => x.StationId == id);
 
-                IEnumerable<IDAL.DO.Drone> DronesIncharge = idal.AllDrones();
+                IEnumerable<DO.Drone> DronesIncharge = idal.AllDrones();
                 DronesIncharge = from x in DronesIncharge
                                  where ListDrones.ToList().Exists(z => z.DroneId == x.Id)
                                  select x;
@@ -63,7 +63,7 @@ namespace IBL
 
             try
             {
-                IDAL.DO.Costumer x = idal.SearchCostumer(id);
+                DO.Costumer x = idal.SearchCostumer(id);
                 temp.Id = x.Id;
                 temp.name = x.Name;
                 temp.numberPhone = x.Phone;
