@@ -19,7 +19,7 @@ namespace PL
     /// </summary>
     public partial class Drone : Window
     {
-        IBL.IBL ibl;
+        BlApi.IBL ibl;
         BO.DroneBL drone;
         int cancel = 0;
 
@@ -34,7 +34,7 @@ namespace PL
              {4,"Send the drone to Charge " },
              {5,"Release drown from charging" } };
 
-        public Drone(IBL.IBL bl1)
+        public Drone(BlApi.IBL bl1)
         {
             newDrone = true;
             ibl = bl1;
@@ -58,7 +58,7 @@ namespace PL
             */
 
         }
-        public Drone(IBL.IBL bl1, BO.DroneToList x)
+        public Drone(BlApi.IBL bl1, BO.DroneToList x)
         {
 
             newDrone = false;

@@ -25,10 +25,10 @@ namespace PL
 
 
 
-        IBL.IBL ibl;
+        BlApi.IBL ibl;
         int cancel = 0;
 
-        public DronesDisplay(IBL.IBL bl1)
+        public DronesDisplay(BlApi.IBL bl1)
         {
             InitializeComponent();
             ibl = bl1;

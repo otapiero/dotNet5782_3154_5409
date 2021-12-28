@@ -9,7 +9,7 @@ namespace ConsoleUI_BL
 {
     class ConsoleUI_BL
     {
-        static IBL.IBL options = new IBL.BL();
+        static BlApi.IBL options =BlApi.BlFactory.GetBl();
         static void Main(string[] args)
         {
 

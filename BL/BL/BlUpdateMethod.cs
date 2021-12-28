@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace IBL
+namespace BL
 {
     public partial class BL
     {
@@ -50,7 +50,7 @@ namespace IBL
         {
             try
             {
-                if (idal.AllStation().ToList().Exists(x => x.Id==id))
+                if ((idal.AllStation() as List<DO.Station>).Exists(x => x.Id==id))
                 {
 
                     int numOfDronesInCharge = idal.ListOfDronesInCharge(w => w.StationId==id).Count();
@@ -85,7 +85,7 @@ namespace IBL
             try
             {
 
-                if (idal.AllCustomers().ToList().Exists(x => x.Id==id))
+                if ((idal.AllCustomers() as List<DO.Costumer>).Exists(x => x.Id==id))
                 {
                     idal.UpdateCostumer(id, name, phone);
                 }
@@ -108,14 +108,14 @@ namespace IBL
 
                 if (DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Available))
                 {
-                    List<DO.Station> stationData = idal.ListOfStations(x => x.ChargeSlots > 0).ToList();
+                    IEnumerable<DO.Station> stationData = idal.ListOfStations(x => x.ChargeSlots > 0);
 
-                    if (stationData.Count > 0)
+                    if ((stationData as List<DO.Station>).Count > 0)
                     {
                         BO.DroneToList temp = DronesBl.Find(x => x.Id==id);
                         BO.Location closeStation = FindTheClosestStation(temp.CurrentLocation, stationData);
                         double dis = DistanceLocation(temp.CurrentLocation, closeStation);
-                        DO.Station chooseStation = stationData.Find(x => x.Longitude == closeStation.Longitude && x.Lattitude==closeStation.Lattitude);
+                        DO.Station chooseStation = (stationData as List<DO.Station>).Find(x => x.Longitude == closeStation.Longitude && x.Lattitude==closeStation.Lattitude);
                         Double[] vs = idal.ElectricityUse();
                         double Rate = vs[0];
                         if (temp.Battery - dis*Rate > 0)
@@ -182,17 +182,17 @@ namespace IBL
                 {
 
                     BO.DroneToList temp = DronesBl.Find(x => x.Id==id);
-                    var parcelsData = idal.ListOfParcels(x => x.DroneId==0 && x.Wheight <= (DO.WeightCategories)temp.Weight).ToList();
-                    parcelsData=parcelsData.OrderBy(x => (int)x.Priority).ToList();
-                    var person = idal.SearchCostumer(parcelsData[0].Sender);
+                    var parcelsData = idal.ListOfParcels(x => x.DroneId==0 && x.Wheight <= (DO.WeightCategories)temp.Weight);
+                    parcelsData=parcelsData.OrderBy(x => (int)x.Priority);
+                    var person = idal.SearchCostumer((parcelsData as List<DO.Parcel>)[0].Sender);
                     BO.Location parcelLocation = new(person.Longitude, person.Lattitude);
 
                     double tempDistance, dis = DistanceLocation(temp.CurrentLocation, parcelLocation);
-                    int parcelTarget = parcelsData[0].TargetId;
-                    int parcelId = parcelsData[0].Id;
+                    int parcelTarget = (parcelsData as List<DO.Parcel>)[0].TargetId;
+                    int parcelId = (parcelsData as List<DO.Parcel>)[0].Id;
                     foreach (var y in parcelsData)
                     {
-                        var personT = idal.SearchCostumer(parcelsData[0].Sender);
+                        var personT = idal.SearchCostumer((parcelsData as List<DO.Parcel>)[0].Sender);
                         tempDistance= DistanceLocation(temp.CurrentLocation, new BO.Location(personT.Longitude, personT.Lattitude));
                         if (tempDistance<dis)
                         {
@@ -241,8 +241,8 @@ namespace IBL
                 if (DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Delivery))
                 {
                     BO.DroneToList temp = DronesBl.Find(x => x.Id==id);
-                    var parcelsData = idal.AllParcels().ToList();
-                    var parcel = parcelsData.Find(x => x.Id==temp.ParcelId);
+                    var parcelsData = idal.AllParcels();
+                    var parcel = (parcelsData as List<DO.Parcel>).Find(x => x.Id==temp.ParcelId);
                     if (parcel.PickedUp== null)
                     {
                         var person = idal.SearchCostumer(parcel.Sender);
@@ -275,8 +275,8 @@ namespace IBL
                 if (DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Delivery))
                 {
                     BO.DroneToList temp = DronesBl.Find(x => x.Id==id);
-                    var parcelsData = idal.AllParcels().ToList();
-                    var parcel = parcelsData.Find(x => x.Id==temp.ParcelId);
+                    var parcelsData = idal.AllParcels();
+                    var parcel = (parcelsData as List<DO.Parcel>).Find(x => x.Id==temp.ParcelId);
                     if (parcel.PickedUp==null)
                     {
                         throw new BO.IBException("the parcel is not pickedup!");

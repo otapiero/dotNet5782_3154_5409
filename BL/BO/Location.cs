@@ -19,8 +19,8 @@ namespace BO
         public override string ToString()
         {
             return "\nLongitude:    " +
-                DalObject.Cordinates.LongitudeDoubleToString(Longitude) +
-                "\nLattitude:     " + DalObject.Cordinates.LatitudeDoubleToString(Lattitude);
+                DAL.Cordinates.LongitudeDoubleToString(Longitude) +
+                "\nLattitude:     " + DAL.Cordinates.LatitudeDoubleToString(Lattitude);
         }
     }
 }

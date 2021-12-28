@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using DO;
-namespace IBL
+namespace BL
 {
 
 
@@ -30,7 +30,7 @@ namespace IBL
 
                 IEnumerable<DO.Drone> DronesIncharge = idal.AllDrones();
                 DronesIncharge = from x in DronesIncharge
-                                 where ListDrones.ToList().Exists(z => z.DroneId == x.Id)
+                                 where (ListDrones as List<DO.DroneCharge>).Exists(z => z.DroneId == x.Id)
                                  select x;
 
                 temp.dronesInCharges = new();

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DalObject
+namespace DAL
 {
     ///<summary>Class - initialize class for the program</summary>
     internal static class DataSource

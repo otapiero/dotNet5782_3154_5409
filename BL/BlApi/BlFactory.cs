@@ -4,19 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IBL
+namespace BlApi
 {
-   public class FactoeySingletonBl
+   public class BlFactory
     {
-        static BL Instance = null;
-        private FactoeySingletonBl()
+        static IBL Instance = null;
+        private BlFactory()
         {
 
         }
-        public static BL GetBl()
+        public static IBL GetBl()
         {
             if (Instance == null)
-                Instance = new BL();
+                Instance = new BL.BL();
 
             return Instance;
         }

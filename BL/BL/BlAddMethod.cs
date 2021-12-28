@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 
 
-namespace IBL
+namespace BL
 {
 
     public partial class BL
@@ -31,7 +31,7 @@ namespace IBL
         }
         public void AddNewDrone(int id, string model, int wheigt, int stationId)
         {
-            if (!idal.AllStation().ToList().Exists(x => x.Id==stationId))
+            if (!( idal.AllStation() as List<DO.Station>).Exists(x => x.Id==stationId))
             {
                 throw new BO.IBException("not found station");
             }
@@ -55,7 +55,7 @@ namespace IBL
             tempDroneToList.Model = model;
             tempDroneToList.Battery=100;
             tempDroneToList.Weight = (BO.WeightCategories)wheigt;
-            DO.Station tempStation = idal.AllStation().ToList().Find(x => x.Id == stationId);
+            DO.Station tempStation = (idal.AllStation() as List<DO.Station>).Find(x => x.Id == stationId);
             tempDroneToList.CurrentLocation = new(tempStation.Longitude, tempStation.Lattitude);
             DronesBl.Add(tempDroneToList);
         }

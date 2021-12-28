@@ -5,21 +5,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DalObject
+namespace DAL
 {
     ///<summary>Class <c>DalObject</c></summary>
-    internal class DalObject : DalApi.IDal
+    internal sealed class DalObject : DalApi.IDal
     {
         #region singelton
         static readonly DalObject instance=new DalObject();
 
         #endregion
         ///<summary>method <c>DalObject</c> initialize the data</summary>
-        public DalObject()
+        static DalObject()
         {
             DataSource.Initialize();
         }
-        internal static DalApi.IDal Instance { get { return instance; } }
+        DalObject() { }
+        public static DalApi.IDal Instance { get { return instance; } }
         ///<summary>method <c>SearchCustomer</c> </summary>
         ///<param name="id"> searche the customer by id</param>
         public DO.Costumer SearchCostumer(int id)

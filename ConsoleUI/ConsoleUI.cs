@@ -8,7 +8,7 @@ namespace ConsoleUI
     /// <summary>Class main program - Management of a skimmer delivery company  </summary>
     class Program
     {
-        static public DalApi.IDal options = new DalObject.DalObject();
+        static public DalApi.IDal options = DalApi.DalFactory.GetDal();
         /// <summary>method main program - Management of a skimmer delivery company  
         /// the program running until the user return "e" to exit</summary>
         static void Main(string[] args)

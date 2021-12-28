@@ -18,8 +18,8 @@
             {
                 //The function print detail of the object
                 return "Id: " + Id + "\nName: " + Name + "\nPhone: " + Phone +
-                    "\nLongitude: " + DalObject.Cordinates.LongitudeDoubleToString(Longitude) +
-                    "\nLattitude: " + DalObject.Cordinates.LatitudeDoubleToString(Lattitude);
+                    "\nLongitude: " + DAL.Cordinates.LongitudeDoubleToString(Longitude) +
+                    "\nLattitude: " + DAL.Cordinates.LatitudeDoubleToString(Lattitude);
             }
 
 

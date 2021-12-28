@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IBL
+namespace BL
 {
 
-    public partial class BL : IBL
+    public partial class BL : BlApi.IBL
     {
         private DalApi.IDal idal;
         private List<BO.DroneToList> DronesBl = new();
@@ -18,10 +18,10 @@ namespace IBL
             Random rand = new();
             idal = DalApi.DalFactory.GetDal();
             //data lists
-            List<DO.Drone> dronesData = (List<DO.Drone>)idal.AllDrones();
-            List<DO.Parcel> parcelsData = (List<DO.Parcel>)idal.AllParcels();
-            List<DO.Costumer> costumerData = (List<DO.Costumer>)idal.AllCustomers();
-            List<DO.Station> stationData = (List<DO.Station>)idal.AllStation();
+            IEnumerable<DO.Drone> dronesData = idal.AllDrones();
+            IEnumerable<DO.Parcel> parcelsData = idal.AllParcels();
+            IEnumerable<DO.Costumer> costumerData = idal.AllCustomers();
+            IEnumerable<DO.Station> stationData = idal.AllStation();
 
             ;
             Double[] vs = idal.ElectricityUse();
@@ -38,7 +38,7 @@ namespace IBL
             foreach (var x in parcelsNotDelivred)
             {
 
-                DO.Drone tempDlDrone = dronesData.Find(z => z.Id.Equals(x.DroneId));
+                DO.Drone tempDlDrone =( dronesData as List<DO.Drone>).Find(z => z.Id.Equals(x.DroneId));
                 if (tempDlDrone.Id!=0)
                 {
                     DO.Costumer senderCostumer = idal.SearchCostumer(x.Sender);
@@ -108,7 +108,7 @@ namespace IBL
                 {
                     temp.status = BO.DroneStatuses.Maintenace;
                     int i = rand.Next(stationData.Count());
-                    temp.CurrentLocation = new(stationData[i].Longitude, stationData[i].Lattitude);
+                    temp.CurrentLocation = new((stationData as List<DO.Station>)[i].Longitude, (stationData as List<DO.Station>)[i].Lattitude);
                     temp.Battery = rand.NextDouble() * 20;
                 }
                 else
@@ -137,10 +137,10 @@ namespace IBL
             return dis;
         }
 
-        private static BO.Location FindTheClosestStation(BO.Location x, List<DO.Station> stations)
+        private static BO.Location FindTheClosestStation(BO.Location x, IEnumerable<DO.Station> stations)
         {
-            double tempDistance, dis = DistanceLocation(x, new BO.Location(stations[0].Longitude, stations[0].Lattitude));
-            BO.Location stationlocation = new(stations[0].Longitude, stations[0].Lattitude);
+            double tempDistance, dis = DistanceLocation(x, new BO.Location((stations as List<DO.Station>)[0].Longitude, (stations as List<DO.Station>)[0].Lattitude));
+            BO.Location stationlocation = new((stations as List<DO.Station>)[0].Longitude, (stations as List<DO.Station>)[0].Lattitude);
             foreach (var y in stations)
             {
                 tempDistance= DistanceLocation(x, new BO.Location(y.Longitude, y.Lattitude));

@@ -22,12 +22,12 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-        public IBL.IBL Ibl;
+        public BlApi.IBL Ibl;
 
         public MainWindow()
         {
             InitializeComponent();
-            Ibl = IBL.FactoeySingletonBl.GetBl();
+            Ibl = BlApi.BlFactory.GetBl();
         }
 
         private void ShowDronesButton_Click(object sender, RoutedEventArgs e)
