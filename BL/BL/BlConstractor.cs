@@ -21,16 +21,16 @@ namespace BL
             IEnumerable<DO.Drone> dronesData = idal.AllDrones();
             IEnumerable<DO.Parcel> parcelsData = idal.AllParcels();
             IEnumerable<DO.Costumer> costumerData = idal.AllCustomers();
-            IEnumerable<DO.Station> stationData = idal.AllStation();
+            List<DO.Station> stationData = idal.AllStation().ToList();
 
-            ;
+            
             Double[] vs = idal.ElectricityUse();
             double Avilable = vs[0];
             double Light = vs[1];
             double Intermidiate = vs[2];
             double Heavy = vs[3];
             double chargingRate = vs[4];
-            ; //Filter parcel
+             //Filter parcel
 
 
             List<DO.Parcel> parcelsNotDelivred = idal.ListOfParcels(x => ((x.DroneId != 0) &&(x.Delivered==null))).ToList();
@@ -104,12 +104,12 @@ namespace BL
                 temp.Model = x.Model;
                 temp.Weight = (BO.WeightCategories)rand.Next(3);
                 temp.ParcelId = 0;
-
+                
                 if (randomcase==0)
                 {
                     temp.status = BO.DroneStatuses.Maintenace;
                     int i = rand.Next(stationData.Count());
-                    temp.CurrentLocation = new((stationData as List<DO.Station>)[i].Longitude, (stationData as List<DO.Station>)[i].Lattitude);
+                    temp.CurrentLocation = new((stationData)[i].Longitude, (stationData )[i].Lattitude);
                     temp.Battery = rand.NextDouble() * 20;
                 }
                 else

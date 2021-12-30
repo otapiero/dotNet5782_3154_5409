@@ -351,43 +351,24 @@ namespace DAL
         ///<returns>list of all drones</returns>
         public IEnumerable<DO.Drone> AllDrones()
         {
-            List<DO.Drone> allDrones = new List<DO.Drone>();
-            foreach (var t in DataSource.drones)
-            {
-                allDrones.Add(t);
-            }
-            return allDrones;
+          
+            return DataSource.drones.Select(item=>item);
         }
         ///<summary>List - copy list of customers for the main program</summary>
         ///<returns>list of all costomers</returns>
         public IEnumerable<DO.Costumer> AllCustomers()
         {
-            List<DO.Costumer> allCustomers = new List<DO.Costumer>();
-            foreach (var t in DataSource.customers)
-            {
-                allCustomers.Add(t);
-            }
-            return allCustomers;
+            return DataSource.customers.Select(item => item);
         }
         ///<summary>List - copy list of parcels for the main program</summary>
         ///<returns>list of all parcels</returns>
         public IEnumerable<DO.Parcel> AllParcels()
         {
-            List<DO.Parcel> allParcels = new();
-            foreach (var t in DataSource.parcels)
-            {
-                allParcels.Add(t);
-            }
-            return allParcels;
+            return DataSource.parcels.Select(item => item);
         }
         public IEnumerable<DO.DroneCharge> AllDronesIncharge()
         {
-            List<DO.DroneCharge> allDronesIncharge = new();
-            foreach (var t in DataSource.DroneCharges)
-            {
-                allDronesIncharge.Add(t);
-            }
-            return allDronesIncharge;
+            return DataSource.DroneCharges.Select(item => item);
         }
 
 
