@@ -19,8 +19,8 @@ namespace PL.MCustomers
     /// </summary>
     public partial class Customer : Window
     {
-        IBL.IBL ibl;
-        IBL.BO.BaseStation station;
+        BlApi.IBL ibl;
+        BO.BaseStation station;
         int cancel = 0;
         public Customer()
         {

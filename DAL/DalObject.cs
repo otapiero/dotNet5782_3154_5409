@@ -42,8 +42,8 @@ namespace DAL
             {
                 throw new DO.IdExaption("Id not found.");
             }
-            return  DataSource.drones.Find(x => x.Id.Equals(id));
-            
+            DO.Drone found = DataSource.drones.Find(x => x.Id.Equals(id));
+            return found;
         }
         ///<summary>method <c>SearchStation</c> </summary>
         ///<param name="id"> searche the Station by id</param>
@@ -54,9 +54,8 @@ namespace DAL
             {
                 throw new DO.IdExaption("Id not found.");
             }
-
-
-            return DataSource.stations.Find(x => x.Id.Equals(id));
+            DO.Station find = DataSource.stations.Find(x => x.Id.Equals(id));
+            return find;
 
         }
         /// <summary>method <c> SearchParcel</c> </summary>
@@ -68,8 +67,9 @@ namespace DAL
             {
                 throw new DO.IdExaption("Id not found.");
             }
-            return DataSource.parcels.Find(x => x.Id.Equals(id));
-            
+            DO.Parcel found = DataSource.parcels.Find(x => x.Id.Equals(id));
+            return found;
+
         }
         /// <summary>method AddNewDrone </summary>
         /// <param name="_model"> model of drone</param>
@@ -152,10 +152,9 @@ namespace DAL
             temp.Wheight = (DO.WeightCategories)_Wheight;
             temp.Priority = (DO.Priorities)_Priority;
             temp.Requsted = DateTime.Now;
-            temp.Scheduled = null;
-            temp.PickedUp = null;
-            temp.Delivered = null;
-
+            temp.Scheduled = new DateTime();
+            temp.PickedUp = new DateTime();
+            temp.Delivered = new DateTime();
             DataSource.parcels.Add(temp);
         }
         /// <summary>method ConnectParcelToDrone - the function get parcel and connect a avilable drone </summary>
@@ -341,35 +340,54 @@ namespace DAL
         ///<returns>list of all stations</returns>
         public IEnumerable<DO.Station> AllStation()
         {
-            
-           
-            return from item in DataSource.stations select item;
+            List<DO.Station> allStations = new List<DO.Station>();
+            foreach (var t in DataSource.stations)
+            {
+                allStations.Add(t);
+            }
+            return allStations;
         }
         ///<summary>List - copy list of drones for the main program</summary>
         ///<returns>list of all drones</returns>
         public IEnumerable<DO.Drone> AllDrones()
         {
-
-            return from item in DataSource.drones select item;
+            List<DO.Drone> allDrones = new List<DO.Drone>();
+            foreach (var t in DataSource.drones)
+            {
+                allDrones.Add(t);
+            }
+            return allDrones;
         }
         ///<summary>List - copy list of customers for the main program</summary>
         ///<returns>list of all costomers</returns>
         public IEnumerable<DO.Costumer> AllCustomers()
         {
-
-            return from item in DataSource.customers select item;
+            List<DO.Costumer> allCustomers = new List<DO.Costumer>();
+            foreach (var t in DataSource.customers)
+            {
+                allCustomers.Add(t);
+            }
+            return allCustomers;
         }
         ///<summary>List - copy list of parcels for the main program</summary>
         ///<returns>list of all parcels</returns>
         public IEnumerable<DO.Parcel> AllParcels()
         {
-
-            return from item in DataSource.parcels select item;
+            List<DO.Parcel> allParcels = new();
+            foreach (var t in DataSource.parcels)
+            {
+                allParcels.Add(t);
+            }
+            return allParcels;
         }
         public IEnumerable<DO.DroneCharge> AllDronesIncharge()
         {
-
-            return from item in DataSource.DroneCharges select item;
+            List<DO.DroneCharge> allDronesIncharge = new();
+            foreach (var t in DataSource.DroneCharges)
+            {
+                allDronesIncharge.Add(t);
+            }
+            return allDronesIncharge;
         }
 
 

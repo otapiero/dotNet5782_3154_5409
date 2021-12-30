@@ -24,14 +24,14 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-        public IBL.IBL Ibl;
+        public BlApi.IBL Ibl;
         private bool _hidden;
         public MainWindow()
         {
             var lp = new LoginPage();
             lp.ShowDialog();
             InitializeComponent();
-            Ibl = new IBL.BL();
+            Ibl = BlApi.BlFactory.GetBl();
             //_simulationPage = new SimulationPage(_bl);
         }
 

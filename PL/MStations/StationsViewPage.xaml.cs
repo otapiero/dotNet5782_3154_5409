@@ -20,10 +20,10 @@ namespace PL.MStations
     /// </summary>
     public partial class StationsViewPage : Page
     {
-        IBL.IBL ibl;
+        BlApi.IBL ibl;
         int cancel = 0;
         private readonly MainWindow _wnd = (MainWindow)Application.Current.MainWindow;
-        public StationsViewPage(IBL.IBL bl1)
+        public StationsViewPage(BlApi.IBL bl1)
         {
             InitializeComponent();
             ibl = bl1;

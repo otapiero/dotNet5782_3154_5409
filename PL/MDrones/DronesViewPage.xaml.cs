@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using IBL.BO;
-
+using BO;
 namespace PL.MDrones
 {
     /// <summary>
@@ -21,10 +21,10 @@ namespace PL.MDrones
     /// </summary>
     public partial class DronesViewPage : Page
     {
-        IBL.IBL ibl;
+        BlApi.IBL ibl;
         int cancel = 0;
         private readonly MainWindow _wnd = (MainWindow)Application.Current.MainWindow;
-        public DronesViewPage(IBL.IBL bl1)
+        public DronesViewPage(BlApi.IBL bl1)
         {
             InitializeComponent();
             ibl = bl1;
@@ -106,7 +106,7 @@ namespace PL.MDrones
 
             if (DronesDataGrid.SelectedIndex > -1)
             {
-                new Drone(ibl, (IBL.BO.DroneToList)item).ShowDialog();
+                new Drone(ibl, (BO.DroneToList)item).ShowDialog();
                 Refresh();
             }
         }

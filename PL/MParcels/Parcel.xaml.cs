@@ -19,8 +19,8 @@ namespace PL.MParcels
     /// </summary>
     public partial class Parcel : Window
     {
-        IBL.IBL ibl;
-        IBL.BO.BaseStation station;
+        BlApi.IBL ibl;
+        BO.BaseStation station;
         int cancel = 0;
         public Parcel()
         {
