@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace BL
 {
 
-    public partial class BL
+    partial class BL
     {
         public void AddNewStation(int id, string name, double longattitude, double lattitude, int numChargeSlot)
         {

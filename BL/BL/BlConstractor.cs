@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace BL
 {
 
-    public partial class BL : BlApi.IBL
+    partial class BL : BlApi.IBL
     {
         private DalApi.IDal idal;
         private List<BO.DroneToList> DronesBl = new();
@@ -52,6 +52,7 @@ namespace BL
                     temp.Weight = (BO.WeightCategories)x.Wheight;
 
                     temp.status = BO.DroneStatuses.Delivery;
+                    temp.Battery=50;
                     if (x.PickedUp == new DateTime())
                     {
                         temp.CurrentLocation = FindTheClosestStation(senderLocation, stationData);

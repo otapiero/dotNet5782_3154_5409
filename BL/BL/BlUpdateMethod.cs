@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public partial class BL
+    partial class BL
     {
         /// <summary>
         /// uptate the drone model

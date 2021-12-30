@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace BlApi
 {
-   public class BlFactory
+   public static class BlFactory
     {
         static IBL Instance = null;
-        private BlFactory()
-        {
-
-        }
+        
         public static IBL GetBl()
         {
             if (Instance == null)

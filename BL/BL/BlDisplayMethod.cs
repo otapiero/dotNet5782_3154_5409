@@ -9,7 +9,7 @@ namespace BL
 {
 
 
-    public partial class BL
+    partial class BL
     {
         /// <summary>
         /// search a station

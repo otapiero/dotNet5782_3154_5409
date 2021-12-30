@@ -42,8 +42,8 @@ namespace DAL
             {
                 throw new DO.IdExaption("Id not found.");
             }
-            DO.Drone found = DataSource.drones.Find(x => x.Id.Equals(id));
-            return found;
+            return  DataSource.drones.Find(x => x.Id.Equals(id));
+            
         }
         ///<summary>method <c>SearchStation</c> </summary>
         ///<param name="id"> searche the Station by id</param>
@@ -54,8 +54,10 @@ namespace DAL
             {
                 throw new DO.IdExaption("Id not found.");
             }
-            DO.Station find = DataSource.stations.Find(x => x.Id.Equals(id));
-            return find;
+
+
+            return DataSource.stations.Find(x => x.Id.Equals(id));
+
         }
         /// <summary>method <c> SearchParcel</c> </summary>
         /// <param name="id"> searche the parcel by id</param>
@@ -66,8 +68,8 @@ namespace DAL
             {
                 throw new DO.IdExaption("Id not found.");
             }
-            DO.Parcel found = DataSource.parcels.Find(x => x.Id.Equals(id));
-            return found;
+            return DataSource.parcels.Find(x => x.Id.Equals(id));
+            
         }
         /// <summary>method AddNewDrone </summary>
         /// <param name="_model"> model of drone</param>
@@ -150,9 +152,9 @@ namespace DAL
             temp.Wheight = (DO.WeightCategories)_Wheight;
             temp.Priority = (DO.Priorities)_Priority;
             temp.Requsted = DateTime.Now;
-            temp.Scheduled = new DateTime();
-            temp.PickedUp = new DateTime();
-            temp.Delivered = new DateTime();
+            temp.Scheduled = null;
+            temp.PickedUp = null;
+            temp.Delivered = null;
 
             DataSource.parcels.Add(temp);
         }
@@ -339,54 +341,35 @@ namespace DAL
         ///<returns>list of all stations</returns>
         public IEnumerable<DO.Station> AllStation()
         {
-            List<DO.Station> allStations = new List<DO.Station>();
-            foreach (var t in DataSource.stations)
-            {
-                allStations.Add(t);
-            }
-            return allStations;
+            
+           
+            return from item in DataSource.stations select item;
         }
         ///<summary>List - copy list of drones for the main program</summary>
         ///<returns>list of all drones</returns>
         public IEnumerable<DO.Drone> AllDrones()
         {
-            List<DO.Drone> allDrones = new List<DO.Drone>();
-            foreach (var t in DataSource.drones)
-            {
-                allDrones.Add(t);
-            }
-            return allDrones;
+
+            return from item in DataSource.drones select item;
         }
         ///<summary>List - copy list of customers for the main program</summary>
         ///<returns>list of all costomers</returns>
         public IEnumerable<DO.Costumer> AllCustomers()
         {
-            List<DO.Costumer> allCustomers = new List<DO.Costumer>();
-            foreach (var t in DataSource.customers)
-            {
-                allCustomers.Add(t);
-            }
-            return allCustomers;
+
+            return from item in DataSource.customers select item;
         }
         ///<summary>List - copy list of parcels for the main program</summary>
         ///<returns>list of all parcels</returns>
         public IEnumerable<DO.Parcel> AllParcels()
         {
-            List<DO.Parcel> allParcels = new();
-            foreach (var t in DataSource.parcels)
-            {
-                allParcels.Add(t);
-            }
-            return allParcels;
+
+            return from item in DataSource.parcels select item;
         }
         public IEnumerable<DO.DroneCharge> AllDronesIncharge()
         {
-            List<DO.DroneCharge> allDronesIncharge = new();
-            foreach (var t in DataSource.DroneCharges)
-            {
-                allDronesIncharge.Add(t);
-            }
-            return allDronesIncharge;
+
+            return from item in DataSource.DroneCharges select item;
         }
 
 
