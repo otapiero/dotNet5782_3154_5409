@@ -152,9 +152,9 @@ namespace DAL
             temp.Wheight = (DO.WeightCategories)_Wheight;
             temp.Priority = (DO.Priorities)_Priority;
             temp.Requsted = DateTime.Now;
-            temp.Scheduled = new DateTime();
-            temp.PickedUp = new DateTime();
-            temp.Delivered = new DateTime();
+            temp.Scheduled = null;
+            temp.PickedUp = null;
+            temp.Delivered = null;
             DataSource.parcels.Add(temp);
         }
         /// <summary>method ConnectParcelToDrone - the function get parcel and connect a avilable drone </summary>

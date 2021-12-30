@@ -38,7 +38,7 @@ namespace BL
             foreach (var x in parcelsNotDelivred)
             {
 
-                DO.Drone tempDlDrone =( dronesData as List<DO.Drone>).Find(z => z.Id.Equals(x.DroneId));
+                DO.Drone tempDlDrone =dronesData.FirstOrDefault(z => z.Id.Equals(x.DroneId));
                 if (tempDlDrone.Id!=0)
                 {
                     DO.Costumer senderCostumer = idal.SearchCostumer(x.Sender);

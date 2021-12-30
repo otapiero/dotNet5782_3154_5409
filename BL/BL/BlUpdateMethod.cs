@@ -184,15 +184,15 @@ namespace BL
                     BO.DroneToList temp = DronesBl.Find(x => x.Id==id);
                     var parcelsData = idal.ListOfParcels(x => x.DroneId==0 && x.Wheight <= (DO.WeightCategories)temp.Weight);
                     parcelsData=parcelsData.OrderBy(x => (int)x.Priority);
-                    var person = idal.SearchCostumer((parcelsData as List<DO.Parcel>)[0].Sender);
+                    var person = idal.SearchCostumer((parcelsData ).First().Sender);
                     BO.Location parcelLocation = new(person.Longitude, person.Lattitude);
 
                     double tempDistance, dis = DistanceLocation(temp.CurrentLocation, parcelLocation);
-                    int parcelTarget = (parcelsData as List<DO.Parcel>)[0].TargetId;
-                    int parcelId = (parcelsData as List<DO.Parcel>)[0].Id;
+                    int parcelTarget = (parcelsData ).First().TargetId;
+                    int parcelId = (parcelsData).First().Id;
                     foreach (var y in parcelsData)
                     {
-                        var personT = idal.SearchCostumer((parcelsData as List<DO.Parcel>)[0].Sender);
+                        var personT = idal.SearchCostumer((parcelsData).First().Sender);
                         tempDistance= DistanceLocation(temp.CurrentLocation, new BO.Location(personT.Longitude, personT.Lattitude));
                         if (tempDistance<dis)
                         {
