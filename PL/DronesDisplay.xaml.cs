@@ -127,5 +127,10 @@ namespace PL
             }
             else e.Cancel = true;
         }
+
+        private void DronesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

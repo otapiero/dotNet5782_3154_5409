@@ -43,7 +43,11 @@ namespace PL
             WeightCombo.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
             StationCombo.ItemsSource = ibl.ListStation();
 
-            MainGrid.RowDefinitions[2].Height = new GridLength(0);
+            MainGrid.RowDefinitions[4].Height = new GridLength(0);
+            MainGrid.RowDefinitions[5].Height = new GridLength(0);
+            MainGrid.RowDefinitions[6].Height = new GridLength(0);
+            MainGrid.RowDefinitions[7].Height = new GridLength(0);
+            Weiht_content.Visibility = Visibility.Hidden;
 
 
 
@@ -67,7 +71,7 @@ namespace PL
             drone = new();
             WeightCombo.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
 
-
+            MainGrid.RowDefinitions[3].Height = new GridLength(0);
             StationCombo.Visibility = Visibility.Hidden;
             Station_Label.Visibility = Visibility.Hidden;
             Weiht_content.Content = x.Weight;
@@ -255,6 +259,7 @@ namespace PL
                             ibl.DeliverPackage(Convert.ToInt32(DroneId.Text));
                             break;
                         case "Send the drone to Charge ": // Charge drown
+                           
                             ibl.SendDroneToCharge(Convert.ToInt32(DroneId.Text));
                             break;
                         case "Release drown from charging": // Release drown from station

@@ -8,7 +8,11 @@
 
   <ItemGroup>
     <None Remove="djpeg.jpeg" />
-    <None Remove="drone.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignColors" Version="2.0.4" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -16,8 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="djpeg.jpeg" />
-    <Resource Include="drone.jpg" />
+    <Resource Include="Items\djpeg.jpeg" />
+    <Resource Include="Items\drone.jpg" />
   </ItemGroup>
 
 </Project>

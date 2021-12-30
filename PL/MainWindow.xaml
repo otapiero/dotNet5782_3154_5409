@@ -3,26 +3,341 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL"
-        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" 
         mc:Ignorable="d"
-        AllowsTransparency="True"
+        Title="MainWindow"
         WindowStyle="None"
-        Title="MainWindow" Height="350" Width="300" RenderTransformOrigin="0.5,0.5" BorderBrush="Black" OpacityMask="Black">
-    <Window.Background>
-        <ImageBrush ImageSource="/drone.jpg" Stretch="Fill" TileMode="Tile" Opacity="1">
-            <ImageBrush.RelativeTransform>
-                <TransformGroup>
-                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                    <RotateTransform CenterY="0.5" CenterX="0.5"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </ImageBrush.RelativeTransform>
-        </ImageBrush>
-    </Window.Background>
-    <Grid>
-        <Button Content="Show Drones" HorizontalAlignment="Center" Margin="0,260,0,0" VerticalAlignment="Top" Click="ShowDronesButton_Click" Height="36" Width="114" RenderTransformOrigin="-0.685,0.427"/>
-        <Button x:Name="x" Content="x" HorizontalAlignment="Left" Margin="282,0,0,0" VerticalAlignment="Top" Click="Button_Click" Background="#FF144D74" BorderBrush="White" Foreground="White" Height="22" Width="18"/>
+    
+        Height="600"
+        Width="1000"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+
+      
+        >
+
+    <Window.Resources>
+
+        <Storyboard x:Key="OpenMenu">
+
+            <ThicknessAnimation
+                Storyboard.TargetProperty="Margin" 
+                From="-210,0,0,0" 
+                To="0,0,0,0" 
+                DecelerationRatio="0.9" 
+                Duration="0:0:0.15"/>
+
+        </Storyboard>
+
+        <Storyboard x:Key="CloseMenu">
+
+            <ThicknessAnimation 
+                Storyboard.TargetProperty="Margin" 
+                From="0,0,0,0" 
+                To="-180,0,0,0" 
+                DecelerationRatio="0.9"
+                Duration="0:0:0.15"/>
+
+        </Storyboard>
+
+    </Window.Resources>
+
+
+    <Grid
+        Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Frame
+            x:Name="DataDisplay"
+            Grid.Column="1"
+            Grid.Row="1"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Margin="10,0,10,10"
+            NavigationUIVisibility="Hidden"
+        />
+        
+
+        <Border
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Grid.Row="0"
+            Background="#FF177ECF"
+            Height="35"
+            VerticalAlignment="Top"
+            MouseDown="UIElement_OnMouseDown">
+
+            <TextBlock x:Name="MainTimerTextBlock"
+                   FontSize="20"
+                   Margin="0,0,80,0"
+                   Foreground="White"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Center"
+                   />
+
+        </Border>
+
+        <!--Exit button-->
+        <Border
+            Grid.Column="1"
+            Grid.Row="0"
+            Name="Exit"
+            Width="30"
+            Height="30"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Background="#FFD62525"
+            BorderBrush="Transparent"
+            MouseEnter="Exit_OnMouseEnter"
+            MouseLeave="Exit_OnMouseLeave"
+            MouseDown="Exit_OnMouseDown" CornerRadius="15,15,15,15" Margin="0,2,2,0">
+
+            <materialDesign:PackIcon
+                Kind="Close"
+                Foreground="White"
+                Height="27"
+                Width="27"  VerticalAlignment="Center" RenderTransformOrigin="-1.175,1.325" HorizontalAlignment="Center"
+                />
+
+        </Border>
+
+        <!--Side panel-->
+        <Grid
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Name="SideBar"
+            Background="#FF0D3251"
+            Width="250"
+            HorizontalAlignment="Left"
+            >
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--Open close Button-->
+            <Button
+            Grid.Row="0"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Right"
+            Background="Transparent"
+            Width="70"
+            Height="60"
+            BorderBrush="Transparent"
+            Click="ButtonBase_OnClick">
+
+                <materialDesign:PackIcon
+                    Name="OpenCloseButtonIcon"
+                    Foreground="White"
+                    Kind="MenuOpen"
+                    Height="30"
+                    Width="30"
+                    />
+
+            </Button>
+
+
+            <Button
+                Name="DronesSidePanel"
+                Grid.Row="1"
+                Background="#FF0D3251"
+                BorderBrush="Transparent"
+                Height="70"
+                Margin="0,0,0,0"
+                MouseEnter="DronesSidePanel_OnMouseEnter"
+                MouseLeave="DronesSidePanel_OnMouseLeave"
+                Click="DronesSidePanel_OnClick"
+                >
+
+                <StackPanel Orientation="Horizontal">
+
+                    <TextBlock
+                        Name="Drones"
+                        Text="Drones"
+                        FontSize="20"
+                        Foreground="White"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Margin="5,0,0,0"/>
+
+                    <materialDesign:PackIcon
+                        Foreground="White"
+                        Kind="Drone"
+                        ToolTip="Drone"
+                        Height="30"
+                        Width="30"
+                        Margin="110,0,0,0"
+                        />
+
+                </StackPanel>
+
+            </Button>
+
+            <Button
+                Name="StationsSidePanel"
+                Grid.Row="2"
+                Background="#FF0D3251"
+                BorderBrush="Transparent"
+                Height="70"
+                Margin="0,0,0,0"
+                MouseEnter="StationsSidePanel_OnMouseEnter"
+                MouseLeave="StationsSidePanel_OnMouseLeave"
+                Click="StationsSidePanel_OnClick">
+
+                <StackPanel Orientation="Horizontal">
+
+                    <TextBlock
+                        Name="Stations"
+                        Text="Stations"
+                        FontSize="20"
+                        Foreground="White"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Margin="5,0,0,0"/>
+
+                    <materialDesign:PackIcon
+                        Foreground="White"
+                        Kind="EvStation"
+                        Height="30"
+                        Width="30"
+                        Margin="105,0,0,0"
+                    />
+
+                </StackPanel>
+
+            </Button>
+
+            <Button
+                Name="CustomersSidePanel"
+                Grid.Row="3"
+                Background="#FF0D3251"
+                BorderBrush="Transparent"
+                Height="70"
+                Margin="0,0,0,0"
+                MouseEnter="CustomersSidePanel_OnMouseEnter"
+                MouseLeave="CustomersSidePanel_OnMouseLeave"
+                Click="CustomersSidePanel_OnClick">
+
+                <StackPanel Orientation="Horizontal">
+
+                    <TextBlock
+                        Name="Customers"
+                        Text="Customers"
+                        FontSize="20"
+                        Foreground="White"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Margin="5,0,0,0"/>
+
+                    <materialDesign:PackIcon
+                        Foreground="White"
+                        Kind="UserGroup"
+                        Height="30"
+                        Width="30"
+                        Margin="80,0,0,0"
+                    />
+
+                </StackPanel>
+
+            </Button>
+
+            <Button
+                Name="ParcelsSidePanel"
+                Grid.Row="4"
+                Background="#FF0D3251"
+                BorderBrush="Transparent"
+                Height="70"
+                Margin="0,0,0,0"
+                MouseEnter="ParcelsSidePanel_OnMouseEnter"
+                MouseLeave="ParcelsSidePanel_OnMouseLeave"
+                Click="ParcelsSidePanel_OnClick">
+
+                <StackPanel Orientation="Horizontal">
+
+                    <TextBlock
+                        x:Name="Parcels"
+                        FontSize="20"
+                        Foreground="White"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Width="175"
+                        Margin="5,0,0,0"><Run Text="Parcels"/></TextBlock>
+
+                    <materialDesign:PackIcon
+                        Foreground="White"
+                        Kind="PackageVariant"
+                        Height="30"
+                        Width="30"
+                        Margin="5,0,0,0"
+                    />
+
+                </StackPanel>
+
+            </Button>
+
+            <Button
+                Name="SimulatorSidePanel"
+                Grid.Row="5"
+                Background="#FF0D3251"
+                BorderBrush="Transparent"
+                Height="70"
+                Margin="0,0,0,0"
+                MouseEnter="SimulatorSidePanel_OnMouseEnter"
+                MouseLeave="SimulatorSidePanel_OnMouseLeave"
+                Click="SimulatorSidePanel_OnClick">
+
+                <StackPanel Orientation="Horizontal">
+
+                    <TextBlock
+                        x:Name="Simulator"
+                        FontSize="20"
+                        Foreground="White"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Width="175"
+                        Margin="5,0,0,0"
+                        Text="Simulator">
+
+                    </TextBlock>
+
+                    <materialDesign:PackIcon
+                        Foreground="White"
+                        Kind="PlayCircle"
+                        Height="30"
+                        Width="30"
+                        Margin="5,0,0,0"
+                    />
+
+                </StackPanel>
+
+            </Button>
+
+        </Grid>
+
     </Grid>
+
 </Window>
