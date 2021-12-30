@@ -5,63 +5,71 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DalObject
+namespace DAL
 {
     ///<summary>Class <c>DalObject</c></summary>
-    public class DalObject : IDAL.IDal
+    internal sealed class DalObject : DalApi.IDal
     {
+        #region singelton
+        static readonly DalObject instance=new DalObject();
+
+        #endregion
         ///<summary>method <c>DalObject</c> initialize the data</summary>
-        public DalObject()
+        static DalObject()
         {
             DataSource.Initialize();
         }
+        DalObject() { }
+        public static DalApi.IDal Instance { get { return instance; } }
         ///<summary>method <c>SearchCustomer</c> </summary>
         ///<param name="id"> searche the customer by id</param>
-        public IDAL.DO.Costumer SearchCostumer(int id)
+        public DO.Costumer SearchCostumer(int id)
         {
             if (!DataSource.customers.Exists(x => x.Id.Equals(id)))
             {
-                throw new IDAL.DO.IdExaption("Id not found.");
+                throw new DO.IdExaption("Id not found.");
             }
-            IDAL.DO.Costumer find = DataSource.customers.Find(x => x.Id.Equals(id));
+            DO.Costumer find = DataSource.customers.Find(x => x.Id.Equals(id));
             return find;
         }
 
         /// <summary>method <c>SearchDrone</c> </summary>
         /// <param name="id"> searche the drone by id</param>
         /// <returns>the drone if exsist</returns>
-        public IDAL.DO.Drone SearchDrone(int id)
+        public DO.Drone SearchDrone(int id)
         {
             if (!DataSource.drones.Exists(x => x.Id.Equals(id)))
             {
-                throw new IDAL.DO.IdExaption("Id not found.");
+                throw new DO.IdExaption("Id not found.");
             }
-            IDAL.DO.Drone found = DataSource.drones.Find(x => x.Id.Equals(id));
-            return found;
+            return  DataSource.drones.Find(x => x.Id.Equals(id));
+            
         }
         ///<summary>method <c>SearchStation</c> </summary>
         ///<param name="id"> searche the Station by id</param>
-        public IDAL.DO.Station SearchStation(int id)
+        public DO.Station SearchStation(int id)
         {
 
             if (!DataSource.stations.Exists(x => x.Id.Equals(id)))
             {
-                throw new IDAL.DO.IdExaption("Id not found.");
+                throw new DO.IdExaption("Id not found.");
             }
-            IDAL.DO.Station find = DataSource.stations.Find(x => x.Id.Equals(id));
-            return find;
+
+
+            return DataSource.stations.Find(x => x.Id.Equals(id));
+
         }
         /// <summary>method <c> SearchParcel</c> </summary>
         /// <param name="id"> searche the parcel by id</param>
         /// <returns>return the parcel if exsist</returns>
-        public IDAL.DO.Parcel SearchParcel(int id)
+        public DO.Parcel SearchParcel(int id)
         {
             if (!DataSource.parcels.Exists(x => x.Id.Equals(id)))
             {
-                throw new IDAL.DO.IdExaption("Id not found.");
+                throw new DO.IdExaption("Id not found.");
             }
-            IDAL.DO.Parcel found = DataSource.parcels.Find(x => x.Id.Equals(id));
-            return found;
+            return DataSource.parcels.Find(x => x.Id.Equals(id));
+            
         }
         /// <summary>method AddNewDrone </summary>
         /// <param name="_model"> model of drone</param>
@@ -73,9 +81,9 @@ namespace DalObject
         {
             if (DataSource.drones.Exists(x => x.Id.Equals(id)))
             {
-                throw new IDAL.DO.IdExaption("Drone Id alredy use.");
+                throw new DO.IdExaption("Drone Id alredy use.");
             }
-            IDAL.DO.Drone temp = new();
+            DO.Drone temp = new();
             temp.Id = id;
             temp.Model = _model;
             DataSource.drones.Add(temp);
@@ -89,9 +97,9 @@ namespace DalObject
         {
             if (DataSource.stations.Exists(x => x.Id == id))
             {
-                throw new IDAL.DO.IdExaption("Id alredy use.");
+                throw new DO.IdExaption("Id alredy use.");
             }
-            IDAL.DO.Station temp = new();
+            DO.Station temp = new();
             temp.Id = id;
             temp.Name = _name;
             temp.Longitude = _Longitude;
@@ -110,9 +118,9 @@ namespace DalObject
 
             if (DataSource.customers.Exists(x => x.Id == _id))
             {
-                throw new IDAL.DO.IdExaption("Id alredy use.");
+                throw new DO.IdExaption("Id alredy use.");
             }
-            IDAL.DO.Costumer temp = new();
+            DO.Costumer temp = new();
             temp.Id = _id;
             temp.Name = _Name;
             temp.Phone = _Phone;
@@ -130,23 +138,23 @@ namespace DalObject
         {
             if (!DataSource.customers.Exists(x => x.Id.Equals(_Sender)))
             {
-                throw new IDAL.DO.IdExaption("Id of sender dose not found.");
+                throw new DO.IdExaption("Id of sender dose not found.");
             }
             if (!DataSource.customers.Exists(x => x.Id.Equals(_TargetId)))
             {
-                throw new IDAL.DO.IdExaption("Id of target dose not found.");
+                throw new DO.IdExaption("Id of target dose not found.");
             }
 
-            IDAL.DO.Parcel temp = new();
+            DO.Parcel temp = new();
             temp.Id = DataSource.Config.idParcel++;
             temp.Sender = _Sender;
             temp.TargetId = _TargetId;
-            temp.Wheight = (IDAL.DO.WeightCategories)_Wheight;
-            temp.Priority = (IDAL.DO.Priorities)_Priority;
+            temp.Wheight = (DO.WeightCategories)_Wheight;
+            temp.Priority = (DO.Priorities)_Priority;
             temp.Requsted = DateTime.Now;
-            temp.Scheduled = new DateTime();
-            temp.PickedUp = new DateTime();
-            temp.Delivered = new DateTime();
+            temp.Scheduled = null;
+            temp.PickedUp = null;
+            temp.Delivered = null;
 
             DataSource.parcels.Add(temp);
         }
@@ -156,12 +164,12 @@ namespace DalObject
         {
             try
             {
-                IDAL.DO.Drone find = DataSource.drones.Find(x => x.Id > 0);
-                IDAL.DO.Drone temp = find;
+                DO.Drone find = DataSource.drones.Find(x => x.Id > 0);
+                DO.Drone temp = find;
                 DataSource.drones.Remove(find);
                 DataSource.drones.Add(temp);
-                IDAL.DO.Parcel pocket = SearchParcel(idParcel);
-                IDAL.DO.Parcel tempParcel = pocket;
+                DO.Parcel pocket = SearchParcel(idParcel);
+                DO.Parcel tempParcel = pocket;
                 tempParcel.DroneId = find.Id;
                 DataSource.parcels.Remove(pocket);
                 DataSource.parcels.Add(tempParcel);
@@ -176,12 +184,12 @@ namespace DalObject
         /// <param name="idParcel"> id parcel pickedup</param>
         public void ParceCollectionByDrone(int idParcel)
         {
-            IDAL.DO.Parcel pocket = SearchParcel(idParcel);
+            DO.Parcel pocket = SearchParcel(idParcel);
             //if the parcel exsist
             if (pocket.Id > 0)
             {
                 //update picked up time on the parcel lists
-                IDAL.DO.Parcel tempPocket = pocket;
+                DO.Parcel tempPocket = pocket;
                 tempPocket.PickedUp = DateTime.Now;
                 DataSource.parcels.Remove(pocket);
                 DataSource.parcels.Add(tempPocket);
@@ -192,13 +200,13 @@ namespace DalObject
         /// <param name="idParcel"> id parcel delivery</param>
         public void DeliveryParcelToCustomer(int idParcel)
         {
-            IDAL.DO.Parcel pocket = SearchParcel(idParcel);
+            DO.Parcel pocket = SearchParcel(idParcel);
             //if the parcel exsist
             if (pocket.Id > 0)
             {
-                IDAL.DO.Parcel tempParcel = pocket;
-                IDAL.DO.Drone found = SearchDrone(pocket.Id);
-                IDAL.DO.Drone tempDrone = found;
+                DO.Parcel tempParcel = pocket;
+                DO.Drone found = SearchDrone(pocket.Id);
+                DO.Drone tempDrone = found;
                 tempParcel.Delivered = DateTime.Now;
                 DataSource.parcels.Remove(pocket);
                 DataSource.parcels.Add(tempParcel);
@@ -214,12 +222,12 @@ namespace DalObject
             try
             {
 
-                IDAL.DO.Station foundS = SearchStation(idStation);
-                IDAL.DO.Station tempS = foundS;
+                DO.Station foundS = SearchStation(idStation);
+                DO.Station tempS = foundS;
                 tempS.ChargeSlots -= 1;
                 DataSource.stations.Remove(foundS);
                 DataSource.stations.Add(tempS);
-                DataSource.DroneCharges.Add(new IDAL.DO.DroneCharge(idDrone, idStation));
+                DataSource.DroneCharges.Add(new DO.DroneCharge(idDrone, idStation));
 
             }
             catch { }
@@ -231,9 +239,9 @@ namespace DalObject
             try
             {
 
-                IDAL.DO.DroneCharge relese = DataSource.DroneCharges.Find(x => x.DroneId.Equals(id));
-                IDAL.DO.Station foundS = SearchStation(relese.StationId);
-                IDAL.DO.Station tempS = foundS;
+                DO.DroneCharge relese = DataSource.DroneCharges.Find(x => x.DroneId.Equals(id));
+                DO.Station foundS = SearchStation(relese.StationId);
+                DO.Station tempS = foundS;
                 tempS.ChargeSlots += 1;
                 DataSource.stations.Remove(foundS);
                 DataSource.stations.Add(tempS);
@@ -246,8 +254,8 @@ namespace DalObject
         {
             try
             {
-                IDAL.DO.Drone found = DataSource.drones.First(w => w.Id == id);
-                IDAL.DO.Drone temp = found;
+                DO.Drone found = DataSource.drones.First(w => w.Id == id);
+                DO.Drone temp = found;
                 temp.Model = model;
                 DataSource.drones.Remove(found);
                 DataSource.drones.Add(temp);
@@ -255,14 +263,14 @@ namespace DalObject
             catch (Exception)
             {
 
-                throw new IDAL.DO.IdExaption("Id not found."); ;
+                throw new DO.IdExaption("Id not found."); ;
             }
 
         }
         public void AssignPackageToDrone(int idParcel, int idDrone)
         {
-            IDAL.DO.Parcel found = DataSource.parcels.Find(x => x.Id == idParcel);
-            IDAL.DO.Parcel temp = found;
+            DO.Parcel found = DataSource.parcels.Find(x => x.Id == idParcel);
+            DO.Parcel temp = found;
             temp.DroneId = idDrone;
             temp.Scheduled = DateTime.Now;
             DataSource.parcels.Remove(found);
@@ -270,24 +278,24 @@ namespace DalObject
         }
         public void CollectPackage(int idParcel)
         {
-            IDAL.DO.Parcel found = DataSource.parcels.Find(x => x.Id == idParcel);
-            IDAL.DO.Parcel temp = found;
+            DO.Parcel found = DataSource.parcels.Find(x => x.Id == idParcel);
+            DO.Parcel temp = found;
             temp.PickedUp = DateTime.Now;
             DataSource.parcels.Remove(found);
             DataSource.parcels.Add(temp);
         }
         public void DeliverPackage(int idParcel)
         {
-            IDAL.DO.Parcel found = DataSource.parcels.Find(x => x.Id == idParcel);
-            IDAL.DO.Parcel temp = found;
+            DO.Parcel found = DataSource.parcels.Find(x => x.Id == idParcel);
+            DO.Parcel temp = found;
             temp.Delivered = DateTime.Now;
             DataSource.parcels.Remove(found);
             DataSource.parcels.Add(temp);
         }
         public void UpdateStation(int id, string name, int chargeSlots)
         {
-            IDAL.DO.Station found = DataSource.stations.First(w => w.Id == id);
-            IDAL.DO.Station temp = found;
+            DO.Station found = DataSource.stations.First(w => w.Id == id);
+            DO.Station temp = found;
             name = name.Length > 0 ? name : found.Name;
             chargeSlots = chargeSlots.ToString().Length > 0 ? chargeSlots : found.ChargeSlots;
             temp.Name = name;
@@ -297,8 +305,8 @@ namespace DalObject
         }
         public void UpdateCostumer(int id, string name, string phone)
         {
-            IDAL.DO.Costumer found = DataSource.customers.First(w => w.Id == id);
-            IDAL.DO.Costumer temp = found;
+            DO.Costumer found = DataSource.customers.First(w => w.Id == id);
+            DO.Costumer temp = found;
             name = name.Length > 0 ? name : found.Name;
             phone = phone.Length > 0 ? phone : found.Name;
             temp.Name = name;
@@ -309,78 +317,59 @@ namespace DalObject
 
 
 
-        public IEnumerable<IDAL.DO.Station> ListOfStations(Predicate<IDAL.DO.Station> f)
+        public IEnumerable<DO.Station> ListOfStations(Predicate<DO.Station> f)
         {
             return DataSource.stations.FindAll(f);
         }
-        public IEnumerable<IDAL.DO.Drone> ListOfDrones(Predicate<IDAL.DO.Drone> f)
+        public IEnumerable<DO.Drone> ListOfDrones(Predicate<DO.Drone> f)
         {
             return DataSource.drones.FindAll(f);
         }
-        public IEnumerable<IDAL.DO.Costumer> ListOfCostumers(Predicate<IDAL.DO.Costumer> f)
+        public IEnumerable<DO.Costumer> ListOfCostumers(Predicate<DO.Costumer> f)
         {
             return DataSource.customers.FindAll(f);
         }
-        public IEnumerable<IDAL.DO.Parcel> ListOfParcels(Predicate<IDAL.DO.Parcel> f)
+        public IEnumerable<DO.Parcel> ListOfParcels(Predicate<DO.Parcel> f)
         {
             return DataSource.parcels.FindAll(f);
         }
-        public IEnumerable<IDAL.DO.DroneCharge> ListOfDronesInCharge(Predicate<IDAL.DO.DroneCharge> f)
+        public IEnumerable<DO.DroneCharge> ListOfDronesInCharge(Predicate<DO.DroneCharge> f)
         {
             return DataSource.DroneCharges.FindAll(f);
         }
         ///<summary>List - copy list of station for the main program</summary>
         ///<returns>list of all stations</returns>
-        public IEnumerable<IDAL.DO.Station> AllStation()
+        public IEnumerable<DO.Station> AllStation()
         {
-            List<IDAL.DO.Station> allStations = new List<IDAL.DO.Station>();
-            foreach (var t in DataSource.stations)
-            {
-                allStations.Add(t);
-            }
-            return allStations;
+            
+           
+            return from item in DataSource.stations select item;
         }
         ///<summary>List - copy list of drones for the main program</summary>
         ///<returns>list of all drones</returns>
-        public IEnumerable<IDAL.DO.Drone> AllDrones()
+        public IEnumerable<DO.Drone> AllDrones()
         {
-            List<IDAL.DO.Drone> allDrones = new List<IDAL.DO.Drone>();
-            foreach (var t in DataSource.drones)
-            {
-                allDrones.Add(t);
-            }
-            return allDrones;
+
+            return from item in DataSource.drones select item;
         }
         ///<summary>List - copy list of customers for the main program</summary>
         ///<returns>list of all costomers</returns>
-        public IEnumerable<IDAL.DO.Costumer> AllCustomers()
+        public IEnumerable<DO.Costumer> AllCustomers()
         {
-            List<IDAL.DO.Costumer> allCustomers = new List<IDAL.DO.Costumer>();
-            foreach (var t in DataSource.customers)
-            {
-                allCustomers.Add(t);
-            }
-            return allCustomers;
+
+            return from item in DataSource.customers select item;
         }
         ///<summary>List - copy list of parcels for the main program</summary>
         ///<returns>list of all parcels</returns>
-        public IEnumerable<IDAL.DO.Parcel> AllParcels()
+        public IEnumerable<DO.Parcel> AllParcels()
         {
-            List<IDAL.DO.Parcel> allParcels = new();
-            foreach (var t in DataSource.parcels)
-            {
-                allParcels.Add(t);
-            }
-            return allParcels;
+
+            return from item in DataSource.parcels select item;
         }
-        public IEnumerable<IDAL.DO.DroneCharge> AllDronesIncharge()
+        public IEnumerable<DO.DroneCharge> AllDronesIncharge()
         {
-            List<IDAL.DO.DroneCharge> allDronesIncharge = new();
-            foreach (var t in DataSource.DroneCharges)
-            {
-                allDronesIncharge.Add(t);
-            }
-            return allDronesIncharge;
+
+            return from item in DataSource.DroneCharges select item;
         }
 
 

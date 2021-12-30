@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
-using IBL.BO;
+using BO;
 
 
 namespace PL
@@ -25,10 +25,10 @@ namespace PL
 
 
 
-        IBL.IBL ibl;
+        BlApi.IBL ibl;
         int cancel = 0;
 
-        public DronesDisplay(IBL.IBL bl1)
+        public DronesDisplay(BlApi.IBL bl1)
         {
             InitializeComponent();
             ibl = bl1;
@@ -99,7 +99,7 @@ namespace PL
            
             if (DronesListView.SelectedIndex > -1)
             {
-                new Drone(ibl, (IBL.BO.DroneToList)item).ShowDialog();
+                new Drone(ibl, (BO.DroneToList)item).ShowDialog();
                 DataContext = ibl.ListDrones();
             }
 

@@ -1,33 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DalObject
+namespace DAL
 {
     ///<summary>Class - initialize class for the program</summary>
     internal static class DataSource
     {
 
         ///<summary>list of data for the programing<summary>
-        internal static List<IDAL.DO.DroneCharge> drone = new List<IDAL.DO.DroneCharge>();
-        internal static List<IDAL.DO.Drone> drones = new List<IDAL.DO.Drone>();
-        internal static List<IDAL.DO.Station> stations = new List<IDAL.DO.Station>();
-        internal static List<IDAL.DO.Costumer> customers = new List<IDAL.DO.Costumer>();
-        internal static List<IDAL.DO.Parcel> parcels = new List<IDAL.DO.Parcel>();
-        internal static List<IDAL.DO.DroneCharge> DroneCharges = new List<IDAL.DO.DroneCharge>();
+        internal static List<DO.DroneCharge> drone = new List<DO.DroneCharge>();
+        internal static List<DO.Drone> drones = new List<DO.Drone>();
+        internal static List<DO.Station> stations = new List<DO.Station>();
+        internal static List<DO.Costumer> customers = new List<DO.Costumer>();
+        internal static List<DO.Parcel> parcels = new List<DO.Parcel>();
+        internal static List<DO.DroneCharge> DroneCharges = new List<DO.DroneCharge>();
         //var random for initialize function
         static Random r = new();
         //Initialize function
         internal static void Initialize()
         {
             //Set quantity of var 
-            int numDrones = r.Next(5, 25);
-            int numCustomers = r.Next(10, 100);
-            int numParcels = r.Next(10, 1000);
+            int numDrones = r.Next(5, 10);
+            int numCustomers = r.Next(10,20);
+            int numParcels = r.Next(10, 300);
             int numStations = r.Next(2, 5);
             //Initialize random drones
             for (int i = 0; i < numDrones; i++)
             {
-                IDAL.DO.Drone newDrone = new();
+                DO.Drone newDrone = new();
 
                 newDrone.Id = Config.idDrone++;
                 newDrone.Model = GetModelName();
@@ -39,7 +39,7 @@ namespace DalObject
             for (int i = 0; i < numCustomers; i++)
             {
 
-                IDAL.DO.Costumer newCustomer = new();
+                DO.Costumer newCustomer = new();
 
                 newCustomer.Id = Config.IdCustomer++;
                 newCustomer.Name = GetRandomName();
@@ -54,12 +54,12 @@ namespace DalObject
             for (int i = 0; i < numParcels; i++)
             {
                 randomCase = r.Next(5);
-                IDAL.DO.Parcel newParcel = new IDAL.DO.Parcel();
+                DO.Parcel newParcel = new DO.Parcel();
                 newParcel.Id = Config.idParcel++;
                 newParcel.Sender = r.Next(1, numCustomers);
                 newParcel.TargetId = r.Next(1, numCustomers);
-                newParcel.Wheight = (IDAL.DO.WeightCategories)r.Next(0, 3);
-                newParcel.Priority = (IDAL.DO.Priorities)r.Next(0, 3);
+                newParcel.Wheight = (DO.WeightCategories)r.Next(0, 3);
+                newParcel.Priority = (DO.Priorities)r.Next(0, 3);
                 newParcel.Requsted = DateTime.Now;
                 if (Config.idDrone == 0)
                 {
@@ -109,7 +109,7 @@ namespace DalObject
            ; //Initialize random station
             for (int i = 0; i < numStations; i++)
             {
-                IDAL.DO.Station newStation = new IDAL.DO.Station();
+                DO.Station newStation = new DO.Station();
                 newStation.Id = Config.IdStation++;
                 newStation.Name = GetRandomName();
                 ; newStation.Longitude = r.NextDouble() * 60;

@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>DAL</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -11,8 +11,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DalApi\DalFacade.csproj" />
-    <ProjectReference Include="..\DalXml\DalXml.csproj" />
-    <ProjectReference Include="..\DAL\DalObject.csproj" />
   </ItemGroup>
 
 </Project>
