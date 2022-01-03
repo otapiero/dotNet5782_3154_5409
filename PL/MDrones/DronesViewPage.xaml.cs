@@ -22,6 +22,8 @@ namespace PL.MDrones
     public partial class DronesViewPage : Page
     {
         BlApi.IBL ibl;
+        bool boStatus = true;
+        bool boWeight = true;
         int cancel = 0;
         private readonly MainWindow _wnd = (MainWindow)Application.Current.MainWindow;
         public DronesViewPage(BlApi.IBL bl1)
@@ -173,12 +175,37 @@ namespace PL.MDrones
             {
                 WeightSelector.SelectedItem = null;
                 StatusSelector.SelectedItem = null;
+                GroupBy.SelectedItem = null;
+                boWeight = true;
+                boStatus = true;
                 DronesDataGrid.DataContext = ibl.ListDrones();
                
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Drones Loading Error!");
+            }
+        }
+
+        private void GroupBy_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var group = GroupBy.SelectedIndex.ToString();
+            if (group == "1" && boStatus)
+            {
+                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(DronesDataGrid.ItemsSource);
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("status");
+                view.GroupDescriptions.Add(groupDescription);
+                boStatus = false;
+
+
+            }
+            if (group == "0" && boWeight)
+            {
+                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(DronesDataGrid.ItemsSource);
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("Weight");
+                view.GroupDescriptions.Add(groupDescription);
+                boWeight = false;
+
             }
         }
     }
