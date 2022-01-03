@@ -29,8 +29,36 @@ namespace BO
     {
         int numOfCharge;
         public int NumOfCharge { get => numOfCharge;  }
-        public NumOfChargeSlots(string message, int _numOfCharge) : base(message) => numOfCharge=_numOfCharge;
+        public NumOfChargeSlots( int _numOfCharge) : base("not enough charge slots for a station") => numOfCharge=_numOfCharge;
+        public NumOfChargeSlots(string message, int _numOfCharge) : base(message+$"need at least {_numOfCharge} charge slots") => numOfCharge=_numOfCharge;
         public static explicit operator string(NumOfChargeSlots v)
+        {
+            return (string)v;
+        }
+        public override string ToString()
+        {
+            return Message;
+        }
+    }
+    [Serializable]
+    public class TheNameModelNotValid : Exception
+    {
+        
+        public TheNameModelNotValid() : base("The name model are invalid, please enter a valid name") { }
+        public static explicit operator string(TheNameModelNotValid v)
+        {
+            return (string)v;
+        }
+        public override string ToString()
+        {
+            return Message;
+        }
+    }
+    public class thePhoneAndNameInputAreIncorrect : Exception
+    {
+
+        public thePhoneAndNameInputAreIncorrect() : base("Invalid input ,need any input for atleastg one of name and phone.") { }
+        public static explicit operator string(thePhoneAndNameInputAreIncorrect v)
         {
             return (string)v;
         }
@@ -44,7 +72,7 @@ namespace BO
     {
         int num;
         public int Num { get => num; }
-        public WrongInputPriorities( int _num) : base($"The input for Priorities must be beetween 0-2 the number {_num} is invalide") => num=_num;
+        public WrongInputPriorities( int _num) : base($"The input for Priorities must be beetween 0-2 ,the number {_num} is invalide") => num=_num;
         
         public override string ToString()
         {
@@ -56,7 +84,7 @@ namespace BO
     {
         int num;
         public int Num { get => num; }
-        public WrongInputWheigt(int _num) : base($"The input for wheigt must be beetween 0-2 the number {_num} is invalide") => num=_num;
+        public WrongInputWheigt(int _num) : base($"The input for wheigt must be beetween 0-2 ,the number {_num} is invalide") => num=_num;
 
         public override string ToString()
         {
@@ -72,7 +100,7 @@ namespace BO
         public string ObjectType { get => objectType; }
         public int Id { get => id; }
 
-        public IdDoseNotExist(string message, string _objectType, int _id, Exception innerExeptiont) : base(message, innerExeptiont)
+        public IdDoseNotExist( string _objectType, int _id, Exception innerExeptiont) : base(innerExeptiont.Message, innerExeptiont)
         { 
             id = _id;  
             objectType = _objectType;
@@ -99,7 +127,7 @@ namespace BO
             id = _id;
             objectType = _objectType;
         }
-        public IdAlredyExist(string message, string _objectType, int _id, Exception innerExeptiont) : base(message,innerExeptiont)
+        public IdAlredyExist(string _objectType, int _id, Exception innerExeptiont) : base(innerExeptiont.Message, innerExeptiont)
         {
             id = _id;
             objectType = _objectType;

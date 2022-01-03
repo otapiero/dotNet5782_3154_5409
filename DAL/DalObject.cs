@@ -354,7 +354,7 @@ namespace DAL
                 DO.Costumer found = SearchCostumer(id);
                 DO.Costumer temp = found;
                 name = name.Length > 0 ? name : found.Name;
-                phone = phone.Length > 0 ? phone : found.Name;
+                phone = (phone.Length > 7)? phone : found.Name;
                 temp.Name = name;
                 temp.Phone = phone;
                 DataSource.customers.Remove(found);

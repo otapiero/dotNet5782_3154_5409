@@ -19,8 +19,7 @@ namespace PL.MStations
     /// </summary>
     public partial class Stations : Window
     {
-        BlApi.IBL ibl;
-        BO.BaseStation station;
+       
         int cancel = 0;
         public Stations()
         {

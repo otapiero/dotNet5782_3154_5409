@@ -45,7 +45,7 @@ namespace BL
             }
             catch (DO.IdDoseNotExist x)
             {
-                throw new BO.IdDoseNotExist(x.Message, x.ObjectType, x.Id, x);
+                throw new BO.IdDoseNotExist( x.ObjectType, x.Id, x);
             }
 
             return temp;
@@ -94,7 +94,7 @@ namespace BL
             }
             catch (DO.IdDoseNotExist x)
             {
-                throw new BO.IdDoseNotExist(x.Message, x.ObjectType, x.Id,x);
+                throw new BO.IdDoseNotExist( x.ObjectType, x.Id,x);
             }
 
             return temp;
@@ -106,9 +106,9 @@ namespace BL
         /// <returns>return the drone if exsist or default drone</returns>
         public BO.DroneBL SearchDrone(int id)
         {
-            if (DronesBl.Exists(y => y.Id==id))
+            if (!DronesBl.Exists(y => y.Id==id))
             {
-                throw new BO.IdDoseNotExist("id not esist","droe",id);
+                throw new BO.IdDoseNotExist("id dose not exsist","drone",id);
             }
             var x = DronesBl.Find(x => x.Id == id);
 
@@ -123,14 +123,14 @@ namespace BL
             {
                 try
                 {
-                    var y = SearchParcel(x.ParcelId);
+                    var y = idal.SearchParcel(x.ParcelId);
                     BO.ParcelInDelivrery z = new();
                     z.Id = y.Id;
                     z.statusDelivrery = true;
-                    z.weight = y.weight;
-                    z.Priorities = y.priorities;
-                    var sender = SearchCostumer(y.Sender.Id);
-                    var getter = SearchCostumer(y.Getter.Id);
+                    z.weight =(BO.WeightCategories) y.Wheight;
+                    z.Priorities =(BO.Priorities) y.Priority;
+                    var sender = SearchCostumer(y.Sender);
+                    var getter = SearchCostumer(y.TargetId);
                     z.CollectionLocation = sender.location;
 
                     z.Sender = new(sender.Id, sender.name);
@@ -138,9 +138,9 @@ namespace BL
                     z.DistanceDelivrery = DistanceLocation(temp.CurrentLocation, getter.location);
                     temp.parcel = z;
                 }
-                catch(DO.IdDoseNotExist y)
+                catch(DO.IdDoseNotExist ex)
                 {
-                    Console.WriteLine("error");
+                    throw new BO.IdDoseNotExist(ex.ObjectType, ex.Id, ex);
 
                 }
 
@@ -173,9 +173,9 @@ namespace BL
                 temp.Getter = new(getter.Id, getter.name);
                 temp.weight =(BO.WeightCategories)x.Wheight;
             }
-            catch (Exception x)
+            catch (BO.IdDoseNotExist x)
             {
-                throw new BO.IBException(x.Message); ;
+                throw new BO.IdDoseNotExist(x.ObjectType, x.Id, x);
 
             }
             return temp;
