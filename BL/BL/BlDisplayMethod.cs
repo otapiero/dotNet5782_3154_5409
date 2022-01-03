@@ -106,7 +106,7 @@ namespace BL
         /// <returns>return the drone if exsist or default drone</returns>
         public BO.DroneBL SearchDrone(int id)
         {
-            if (DronesBl.Exists(y => y.Id==id))
+            if (!DronesBl.Exists(y => y.Id==id))
             {
                 throw new BO.IdDoseNotExist("id not esist","droe",id);
             }
@@ -159,7 +159,6 @@ namespace BL
             try
             {
                 var x = idal.SearchParcel(id);
-
                 var drone = SearchDrone(x.DroneId);
                 temp.drone = new();
                 temp.drone.Battery = drone.Battery;

@@ -62,7 +62,7 @@ namespace PL
             */
 
         }
-        public Drone(BlApi.IBL bl1, BO.DroneToList x)
+        public Drone(BlApi.IBL bl1, BO.DroneBL x)
         {
 
             newDrone = false;
