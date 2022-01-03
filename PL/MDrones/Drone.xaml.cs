@@ -82,8 +82,7 @@ namespace PL
 
 
             BatteryText.Content = x.Battery.ToString().Length < 5 ? x.Battery.ToString() : x.Battery.ToString().Substring(0, 5);
-
-
+            
 
             if (x.status == DroneStatuses.Available)
             {

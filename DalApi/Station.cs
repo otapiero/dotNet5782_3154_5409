@@ -31,8 +31,8 @@ using System.Threading.Tasks;
             {
                 //The function print detail of the object
                 return "Id: " + Id + "\nName: " + Name + "\nLongitude: " +
-                    DAL.Cordinates.LongitudeDoubleToString(Longitude) +
-                    "\nLattitude: " + DAL.Cordinates.LatitudeDoubleToString(Lattitude) +
+                    DO.Cordinates.LongitudeDoubleToString(Longitude) +
+                    "\nLattitude: " + DO.Cordinates.LatitudeDoubleToString(Lattitude) +
                     "\nChargeSlots: " + ChargeSlots + "\n";
             }
         }

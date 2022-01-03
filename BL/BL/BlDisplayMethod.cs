@@ -43,10 +43,9 @@ namespace BL
                 }
 
             }
-            catch (Exception x)
+            catch (DO.IdDoseNotExist x)
             {
-                throw new BO.IBException(x.Message); ;
-
+                throw new BO.IdDoseNotExist(x.Message, x.ObjectType, x.Id, x);
             }
 
             return temp;
@@ -84,8 +83,8 @@ namespace BL
                     }
                     else status=BO.ParcelStatus.Delivred;
 
-                    if (y.Sender==id)
-                        temp.toCustomers.Add(new(y.DroneId, (BO.WeightCategories)y.Wheight, (BO.Priorities)y.Priority, status, new(t.Id, t.Name)));
+                    if (y.TargetId==id)
+                        temp.fromCustomer.Add(new(y.DroneId, (BO.WeightCategories)y.Wheight, (BO.Priorities)y.Priority, status, new(t.Id, t.Name)));
 
 
                     if (y.Sender==id)
@@ -93,10 +92,9 @@ namespace BL
 
                 }
             }
-            catch (Exception x)
+            catch (DO.IdDoseNotExist x)
             {
-                throw new BO.IBException(x.Message); ;
-
+                throw new BO.IdDoseNotExist(x.Message, x.ObjectType, x.Id,x);
             }
 
             return temp;
@@ -110,7 +108,7 @@ namespace BL
         {
             if (DronesBl.Exists(y => y.Id==id))
             {
-                throw new BO.IBException("id not esist");
+                throw new BO.IdDoseNotExist("id not esist","droe",id);
             }
             var x = DronesBl.Find(x => x.Id == id);
 
@@ -140,7 +138,7 @@ namespace BL
                     z.DistanceDelivrery = DistanceLocation(temp.CurrentLocation, getter.location);
                     temp.parcel = z;
                 }
-                catch
+                catch(DO.IdDoseNotExist y)
                 {
                     Console.WriteLine("error");
 

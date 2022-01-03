@@ -15,6 +15,7 @@ namespace BL
 
         public BL()
         {
+            
             Random rand = new();
             idal = DalApi.DalFactory.GetDal();
             //data lists
@@ -87,9 +88,9 @@ namespace BL
             }
 
 
-            List<DO.Drone> freeDrones = (from t in dronesData
-                                              where (false == parcelsNotDelivred.Exists(y => y.DroneId == t.Id))
-                                              select t).ToList();
+            IEnumerable<DO.Drone> freeDrones = (from t in dronesData
+                                                where (false == parcelsNotDelivred.Exists(y => y.DroneId == t.Id))
+                                                select t);
 
             List<DO.Parcel> parcelsDelivred = idal.ListOfParcels(x => x.DroneId != 0 && x.Delivered != null).ToList();
 
@@ -140,8 +141,8 @@ namespace BL
 
         private static BO.Location FindTheClosestStation(BO.Location x, IEnumerable<DO.Station> stations)
         {
-            double tempDistance, dis = DistanceLocation(x, new BO.Location((stations as List<DO.Station>)[0].Longitude, (stations as List<DO.Station>)[0].Lattitude));
-            BO.Location stationlocation = new((stations as List<DO.Station>)[0].Longitude, (stations as List<DO.Station>)[0].Lattitude);
+            double tempDistance, dis = DistanceLocation(x, new BO.Location(stations.First().Longitude, stations.First().Lattitude));
+            BO.Location stationlocation = new(stations.First().Longitude, stations.First().Lattitude);
             foreach (var y in stations)
             {
                 tempDistance= DistanceLocation(x, new BO.Location(y.Longitude, y.Lattitude));

@@ -27,7 +27,7 @@ namespace DAL
         {
             if (!DataSource.customers.Exists(x => x.Id.Equals(id)))
             {
-                throw new DO.IdExaption("Id not found.");
+                throw new DO.IdDoseNotExist("Id not found.","costumer",id);
             }
             DO.Costumer find = DataSource.customers.Find(x => x.Id.Equals(id));
             return find;
@@ -40,7 +40,7 @@ namespace DAL
         {
             if (!DataSource.drones.Exists(x => x.Id.Equals(id)))
             {
-                throw new DO.IdExaption("Id not found.");
+                throw new DO.IdDoseNotExist("Id not found.","drone",id);
             }
             DO.Drone found = DataSource.drones.Find(x => x.Id.Equals(id));
             return found;
@@ -52,7 +52,7 @@ namespace DAL
 
             if (!DataSource.stations.Exists(x => x.Id.Equals(id)))
             {
-                throw new DO.IdExaption("Id not found.");
+                throw new DO.IdDoseNotExist("Id not found.","station",id);
             }
             DO.Station find = DataSource.stations.Find(x => x.Id.Equals(id));
             return find;
@@ -65,7 +65,7 @@ namespace DAL
         {
             if (!DataSource.parcels.Exists(x => x.Id.Equals(id)))
             {
-                throw new DO.IdExaption("Id not found.");
+                throw new DO.IdDoseNotExist("Id not found.","parcel",id);
             }
             DO.Parcel found = DataSource.parcels.Find(x => x.Id.Equals(id));
             return found;
@@ -81,7 +81,7 @@ namespace DAL
         {
             if (DataSource.drones.Exists(x => x.Id.Equals(id)))
             {
-                throw new DO.IdExaption("Drone Id alredy use.");
+                throw new DO.IdAlredyExist("Drone Id alredy use.","drone",id);
             }
             DO.Drone temp = new();
             temp.Id = id;
@@ -97,7 +97,7 @@ namespace DAL
         {
             if (DataSource.stations.Exists(x => x.Id == id))
             {
-                throw new DO.IdExaption("Id alredy use.");
+                throw new DO.IdAlredyExist("Id alredy use.","station",id);
             }
             DO.Station temp = new();
             temp.Id = id;
@@ -118,7 +118,7 @@ namespace DAL
 
             if (DataSource.customers.Exists(x => x.Id == _id))
             {
-                throw new DO.IdExaption("Id alredy use.");
+                throw new DO.IdAlredyExist("Id alredy use.","costumer",_id);
             }
             DO.Costumer temp = new();
             temp.Id = _id;
@@ -138,11 +138,11 @@ namespace DAL
         {
             if (!DataSource.customers.Exists(x => x.Id.Equals(_Sender)))
             {
-                throw new DO.IdExaption("Id of sender dose not found.");
+                throw new DO.IdDoseNotExist("Id of sender dose not found.","costumer", _Sender);
             }
             if (!DataSource.customers.Exists(x => x.Id.Equals(_TargetId)))
             {
-                throw new DO.IdExaption("Id of target dose not found.");
+                throw new DO.IdDoseNotExist("Id of target dose not found.","costumer", _TargetId);
             }
 
             DO.Parcel temp = new();
@@ -183,34 +183,47 @@ namespace DAL
         /// <param name="idParcel"> id parcel pickedup</param>
         public void ParceCollectionByDrone(int idParcel)
         {
-            DO.Parcel pocket = SearchParcel(idParcel);
-            //if the parcel exsist
-            if (pocket.Id > 0)
+            try
             {
-                //update picked up time on the parcel lists
-                DO.Parcel tempPocket = pocket;
-                tempPocket.PickedUp = DateTime.Now;
-                DataSource.parcels.Remove(pocket);
-                DataSource.parcels.Add(tempPocket);
+                DO.Parcel pocket = SearchParcel(idParcel);
+                //if the parcel exsist
+                if (pocket.Id > 0)
+                {
+                    //update picked up time on the parcel lists
+                    DO.Parcel tempPocket = pocket;
+                    tempPocket.PickedUp = DateTime.Now;
+                    DataSource.parcels.Remove(pocket);
+                    DataSource.parcels.Add(tempPocket);
+                }
             }
-
+            catch (DO.IdDoseNotExist x)
+            {
+                throw new DO.IdDoseNotExist(x.Message,x.ObjectType, x.Id);
+            }
         }
         /// <summary>method DeliveryParcelToCustomer - the function get parcel and update dilevry time </summary>
         /// <param name="idParcel"> id parcel delivery</param>
         public void DeliveryParcelToCustomer(int idParcel)
         {
-            DO.Parcel pocket = SearchParcel(idParcel);
-            //if the parcel exsist
-            if (pocket.Id > 0)
+            try
             {
-                DO.Parcel tempParcel = pocket;
-                DO.Drone found = SearchDrone(pocket.Id);
-                DO.Drone tempDrone = found;
-                tempParcel.Delivered = DateTime.Now;
-                DataSource.parcels.Remove(pocket);
-                DataSource.parcels.Add(tempParcel);
-                DataSource.drones.Remove(found);
-                DataSource.drones.Add(tempDrone);
+                DO.Parcel pocket = SearchParcel(idParcel);
+                //if the parcel exsist
+                if (pocket.Id > 0)
+                {
+                    DO.Parcel tempParcel = pocket;
+                    DO.Drone found = SearchDrone(pocket.Id);
+                    DO.Drone tempDrone = found;
+                    tempParcel.Delivered = DateTime.Now;
+                    DataSource.parcels.Remove(pocket);
+                    DataSource.parcels.Add(tempParcel);
+                    DataSource.drones.Remove(found);
+                    DataSource.drones.Add(tempDrone);
+                }
+            }
+            catch (DO.IdDoseNotExist x)
+            {
+                throw new DO.IdDoseNotExist(x.Message,x.ObjectType, x.Id);
             }
         }
         /// <summary>method SendDroneToCharge - the function get drone and station and coonect them </summary>
@@ -253,65 +266,105 @@ namespace DAL
         {
             try
             {
-                DO.Drone found = DataSource.drones.First(w => w.Id == id);
+                DO.Drone found =SearchDrone( id);
                 DO.Drone temp = found;
                 temp.Model = model;
                 DataSource.drones.Remove(found);
                 DataSource.drones.Add(temp);
             }
-            catch (Exception)
+            catch (DO.IdDoseNotExist x)
             {
 
-                throw new DO.IdExaption("Id not found."); ;
+                throw new DO.IdDoseNotExist(x.Message,x.ObjectType,x.Id); 
             }
 
         }
         public void AssignPackageToDrone(int idParcel, int idDrone)
         {
-            DO.Parcel found = DataSource.parcels.Find(x => x.Id == idParcel);
-            DO.Parcel temp = found;
-            temp.DroneId = idDrone;
-            temp.Scheduled = DateTime.Now;
-            DataSource.parcels.Remove(found);
-            DataSource.parcels.Add(temp);
+            try
+            {
+
+                DO.Parcel found = SearchParcel(idParcel);
+                DO.Parcel temp = found;
+                temp.DroneId = idDrone;
+                temp.Scheduled = DateTime.Now;
+                DataSource.parcels.Remove(found);
+                DataSource.parcels.Add(temp);
+            }
+            catch(DO.IdDoseNotExist x)
+            {
+                throw new DO.IdDoseNotExist(x.Message, x.ObjectType, x.Id);
+            }
         }
         public void CollectPackage(int idParcel)
         {
-            DO.Parcel found = DataSource.parcels.Find(x => x.Id == idParcel);
-            DO.Parcel temp = found;
-            temp.PickedUp = DateTime.Now;
-            DataSource.parcels.Remove(found);
-            DataSource.parcels.Add(temp);
+            try
+            {
+                DO.Parcel found = SearchParcel(idParcel);
+                DO.Parcel temp = found;
+                temp.PickedUp = DateTime.Now;
+                DataSource.parcels.Remove(found);
+                DataSource.parcels.Add(temp);
+            }
+            catch (DO.IdDoseNotExist x)
+            {
+                throw new DO.IdDoseNotExist(x.Message, x.ObjectType, x.Id);
+            }
+
         }
         public void DeliverPackage(int idParcel)
         {
-            DO.Parcel found = DataSource.parcels.Find(x => x.Id == idParcel);
-            DO.Parcel temp = found;
-            temp.Delivered = DateTime.Now;
-            DataSource.parcels.Remove(found);
-            DataSource.parcels.Add(temp);
+            try
+            {
+                DO.Parcel found = SearchParcel(idParcel);
+                DO.Parcel temp = found;
+                temp.Delivered = DateTime.Now;
+                DataSource.parcels.Remove(found);
+                DataSource.parcels.Add(temp);
+            }
+            catch (DO.IdDoseNotExist x)
+            {
+                throw new DO.IdDoseNotExist(x.Message, x.ObjectType, x.Id);
+            }
+
         }
         public void UpdateStation(int id, string name, int chargeSlots)
         {
-            DO.Station found = DataSource.stations.First(w => w.Id == id);
-            DO.Station temp = found;
-            name = name.Length > 0 ? name : found.Name;
-            chargeSlots = chargeSlots.ToString().Length > 0 ? chargeSlots : found.ChargeSlots;
-            temp.Name = name;
-            temp.ChargeSlots = chargeSlots;
-            DataSource.stations.Remove(found);
-            DataSource.stations.Add(temp);
+            try
+            {
+                DO.Station found = SearchStation(id);
+                DO.Station temp = found;
+                name = name.Length > 0 ? name : found.Name;
+                chargeSlots = chargeSlots.ToString().Length > 0 ? chargeSlots : found.ChargeSlots;
+                temp.Name = name;
+                temp.ChargeSlots = chargeSlots;
+                DataSource.stations.Remove(found);
+                DataSource.stations.Add(temp);
+            }
+            catch (DO.IdDoseNotExist x)
+            {
+                throw new DO.IdDoseNotExist(x.Message, x.ObjectType, x.Id);
+            }
+
         }
         public void UpdateCostumer(int id, string name, string phone)
         {
-            DO.Costumer found = DataSource.customers.First(w => w.Id == id);
-            DO.Costumer temp = found;
-            name = name.Length > 0 ? name : found.Name;
-            phone = phone.Length > 0 ? phone : found.Name;
-            temp.Name = name;
-            temp.Phone = phone;
-            DataSource.customers.Remove(found);
-            DataSource.customers.Add(temp);
+            try
+            {
+                DO.Costumer found = SearchCostumer(id);
+                DO.Costumer temp = found;
+                name = name.Length > 0 ? name : found.Name;
+                phone = phone.Length > 0 ? phone : found.Name;
+                temp.Name = name;
+                temp.Phone = phone;
+                DataSource.customers.Remove(found);
+                DataSource.customers.Add(temp);
+            }
+            catch (DO.IdDoseNotExist x)
+            {
+                throw new DO.IdDoseNotExist(x.Message, x.ObjectType, x.Id);
+            }
+
         }
 
 

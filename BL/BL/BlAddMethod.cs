@@ -15,15 +15,15 @@ namespace BL
         {
             if (numChargeSlot<1)
             {
-                throw new BO.IBException("ChargeSlot full");
+                throw new BO.NumOfChargeSlots("not enough charge slots for a station", numChargeSlot);
             }
             try
             {
                 idal.AddNewStation(id, name, longattitude, lattitude, numChargeSlot);
             }
-            catch (Exception x)
+            catch (DO.IdAlredyExist x)
             {
-                throw new BO.IBException(x.Message); ;
+                throw new BO.IdAlredyExist(x.Message,x.ObjectType,x.Id,x.InnerException); 
 
             }
 
@@ -31,9 +31,9 @@ namespace BL
         }
         public void AddNewDrone(int id, string model, int wheigt, int stationId)
         {
-            if (!( idal.AllStation() as List<DO.Station>).Exists(x => x.Id==stationId))
+            if (!( idal.AllStation() ).Any(x => x.Id==stationId))
             {
-                throw new BO.IBException("not found station");
+                throw new BO.IdDoseNotExist("not found station","station",stationId);
             }
             if (wheigt > 2 || wheigt < 0)
             {
@@ -42,22 +42,24 @@ namespace BL
             try
             {
                 idal.AddNewDrone(id, model);
+                BO.DroneToList tempDroneToList = new();
+                tempDroneToList.Id = id;
+                tempDroneToList.Model = model;
+                tempDroneToList.Battery=100;
+                tempDroneToList.Weight = (BO.WeightCategories)wheigt;
+                DO.Station tempStation = idal.SearchStation(stationId);
+                tempDroneToList.CurrentLocation = new(tempStation.Longitude, tempStation.Lattitude);
+                DronesBl.Add(tempDroneToList);
             }
-            catch (Exception x)
+            catch (DO.IdAlredyExist x)
             {
-                throw new BO.IBException(x.Message); ;
+                throw new BO.IdAlredyExist(x.Message, x.ObjectType, x.Id, x);
 
             }
-
-
-            BO.DroneToList tempDroneToList = new();
-            tempDroneToList.Id = id;
-            tempDroneToList.Model = model;
-            tempDroneToList.Battery=100;
-            tempDroneToList.Weight = (BO.WeightCategories)wheigt;
-            DO.Station tempStation = (idal.AllStation() as List<DO.Station>).Find(x => x.Id == stationId);
-            tempDroneToList.CurrentLocation = new(tempStation.Longitude, tempStation.Lattitude);
-            DronesBl.Add(tempDroneToList);
+            catch(DO.IdDoseNotExist x)
+            { 
+                throw new BO.IdDoseNotExist(x.Message, x.ObjectType, x.Id, x);
+            }
         }
         public void AddNewCustomer(int id, string name, string phone, double longattitude, double lattitude)
         {
@@ -65,9 +67,9 @@ namespace BL
             {
                 idal.AddNewCustomer(id, name, phone, longattitude, lattitude);
             }
-            catch (Exception x)
+            catch (DO.IdAlredyExist x)
             {
-                throw new BO.IBException(x.Message); ;
+                throw new BO.IdAlredyExist(x.Message,x.ObjectType,x.Id,x); 
 
             }
         }
@@ -76,28 +78,28 @@ namespace BL
         {
             if (idal.SearchCostumer(senderId).Equals(new DO.Costumer()))
             {
-                throw new BO.IBException("customer not found");
+                throw new BO.IdDoseNotExist("customer not found","costumer", senderId);
 
             }
             if (idal.SearchCostumer(targetId).Equals(new DO.Costumer()))
             {
-                throw new BO.IBException("customer not found");
+                throw new BO.IdDoseNotExist("customer not found", "costumer", targetId);
             }
             if (Priority>2||Priority<0)
             {
-                throw new BO.IBException("customer not found");
+                throw new BO.WrongInputPriorities(Priority);
             }
             if (wheigt > 2 || wheigt < 0)
             {
-                throw new BO.IBException("customer not found");
+                throw new BO.WrongInputWheigt(wheigt);
             }
             try
             {
                 idal.AddNewParcel(senderId, targetId, wheigt, Priority);
             }
-            catch (Exception x)
+            catch (DO.IdAlredyExist x)
             {
-                throw new BO.IBException(x.Message); ;
+                throw new BO.IdAlredyExist(x.Message,x.ObjectType,x.Id,x); 
 
             }
         }
