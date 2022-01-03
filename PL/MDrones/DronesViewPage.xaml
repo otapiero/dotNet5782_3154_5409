@@ -45,7 +45,16 @@
                 Name="GroupBy" 
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Center"
-                materialDesign:HintAssist.Hint="Group By"/>
+              
+                materialDesign:HintAssist.Hint="Group By" SelectionChanged="GroupBy_SelectionChanged">
+                    <ComboBoxItem>
+                        Weight
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        Status
+                    </ComboBoxItem>
+                </ComboBox>
+
                 <Button
                      Margin="10,0,0,0"
                     Height="25"
@@ -146,7 +155,7 @@
                     <GridViewColumn Header="Drone ID" DisplayMemberBinding="{Binding Path=Id}" />
                     <GridViewColumn Header="Model"  DisplayMemberBinding="{Binding Path=Model}" />
                     <GridViewColumn Header="Weight" DisplayMemberBinding="{Binding Path=Weight}" />
-                    <GridViewColumn Header="Battery"   DisplayMemberBinding="{Binding Path=Battery}" />
+                    <GridViewColumn Header="Battery"   DisplayMemberBinding="{Binding Path=Battery, StringFormat={}{0:0.00}%}" />
                     <GridViewColumn Header="Status"   DisplayMemberBinding="{Binding Path=status}" />
                     <GridViewColumn Header="Parcel ID"  DisplayMemberBinding="{Binding Path=ParcelId}" />
                     <GridViewColumn Header="Location Lattitude"   DisplayMemberBinding="{Binding Path=CurrentLocation.Lattitude}" />
@@ -154,6 +163,15 @@
                 </GridView>
             </ListView.View>
 
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListView.GroupStyle>
         </ListView>
 
         <Button 

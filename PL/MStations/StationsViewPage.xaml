@@ -86,7 +86,6 @@
                     <GridViewColumn Header="Name"  DisplayMemberBinding="{Binding Path=Name}" />
                     <GridViewColumn Header="Avilable" DisplayMemberBinding="{Binding Path=NumAvilableChargeStation}" />
                     <GridViewColumn Header="tafus"   DisplayMemberBinding="{Binding Path=NumNotAvilableChargeStation}" />
-                   
                 </GridView>
             </ListView.View>
 
