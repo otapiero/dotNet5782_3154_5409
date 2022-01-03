@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 using MaterialDesignThemes.Wpf;
-using IBL.BO;
+using BO;
 
 namespace PL
 {

@@ -15,7 +15,7 @@ namespace BL
         {
             if (numChargeSlot<1)
             {
-                throw new BO.NumOfChargeSlots("not enough charge slots for a station", numChargeSlot);
+                throw new BO.NumOfChargeSlots( numChargeSlot);
             }
             try
             {
@@ -23,7 +23,7 @@ namespace BL
             }
             catch (DO.IdAlredyExist x)
             {
-                throw new BO.IdAlredyExist(x.Message,x.ObjectType,x.Id,x.InnerException); 
+                throw new BO.IdAlredyExist(x.ObjectType,x.Id,x.InnerException); 
 
             }
 
@@ -37,7 +37,7 @@ namespace BL
             }
             if (wheigt > 2 || wheigt < 0)
             {
-                throw new BO.IBException("weight not good");
+                throw new BO.WrongInputWheigt(wheigt);
             }
             try
             {
@@ -53,12 +53,12 @@ namespace BL
             }
             catch (DO.IdAlredyExist x)
             {
-                throw new BO.IdAlredyExist(x.Message, x.ObjectType, x.Id, x);
+                throw new BO.IdAlredyExist(x.ObjectType, x.Id, x);
 
             }
             catch(DO.IdDoseNotExist x)
             { 
-                throw new BO.IdDoseNotExist(x.Message, x.ObjectType, x.Id, x);
+                throw new BO.IdDoseNotExist( x.ObjectType, x.Id, x);
             }
         }
         public void AddNewCustomer(int id, string name, string phone, double longattitude, double lattitude)
@@ -69,7 +69,7 @@ namespace BL
             }
             catch (DO.IdAlredyExist x)
             {
-                throw new BO.IdAlredyExist(x.Message,x.ObjectType,x.Id,x); 
+                throw new BO.IdAlredyExist(x.ObjectType,x.Id,x); 
 
             }
         }
@@ -78,12 +78,12 @@ namespace BL
         {
             if (idal.SearchCostumer(senderId).Equals(new DO.Costumer()))
             {
-                throw new BO.IdDoseNotExist("customer not found","costumer", senderId);
+                throw new BO.IdDoseNotExist("sender customer not found","costumer", senderId);
 
             }
             if (idal.SearchCostumer(targetId).Equals(new DO.Costumer()))
             {
-                throw new BO.IdDoseNotExist("customer not found", "costumer", targetId);
+                throw new BO.IdDoseNotExist("target customer not found", "costumer", targetId);
             }
             if (Priority>2||Priority<0)
             {
@@ -99,7 +99,7 @@ namespace BL
             }
             catch (DO.IdAlredyExist x)
             {
-                throw new BO.IdAlredyExist(x.Message,x.ObjectType,x.Id,x); 
+                throw new BO.IdAlredyExist(x.ObjectType,x.Id,x); 
 
             }
         }
