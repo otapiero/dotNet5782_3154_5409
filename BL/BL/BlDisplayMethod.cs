@@ -173,10 +173,13 @@ namespace BL
                 temp.Getter = new(getter.Id, getter.name);
                 temp.weight =(BO.WeightCategories)x.Wheight;
             }
+            catch (DO.IdDoseNotExist x)
+            {
+                throw new BO.IdDoseNotExist(x.ObjectType, x.Id, x);
+            }
             catch (BO.IdDoseNotExist x)
             {
                 throw new BO.IdDoseNotExist(x.ObjectType, x.Id, x);
-
             }
             return temp;
         }

@@ -146,6 +146,7 @@ namespace DAL
             }
 
             DO.Parcel temp = new();
+            temp.Availble = true;
             temp.Id = DataSource.Config.idParcel++;
             temp.Sender = _Sender;
             temp.TargetId = _TargetId;
@@ -201,6 +202,23 @@ namespace DAL
                 throw new DO.IdDoseNotExist(x.Message,x.ObjectType, x.Id);
             }
         }
+        public void DeleteParcel(int idParcel)
+        {
+            try
+            {
+                var parcel = SearchParcel(idParcel);
+
+
+                var temp = parcel;
+                temp.Availble = false;
+                DataSource.parcels.Remove(parcel);
+                DataSource.parcels.Add(temp);
+            }
+            catch(DO.IdDoseNotExist x)
+            {
+                throw new DO.IdDoseNotExist(x.Message, x.ObjectType, x.Id);
+            }
+        }
         /// <summary>method DeliveryParcelToCustomer - the function get parcel and update dilevry time </summary>
         /// <param name="idParcel"> id parcel delivery</param>
         public void DeliveryParcelToCustomer(int idParcel)
@@ -248,9 +266,10 @@ namespace DAL
         /// <param name = "idDrone"> id drone to relese</param>
         public void ReleseDroneFromCharge(int id)
         {
+            if(!DataSource.DroneCharges.Exists(x => x.DroneId.Equals(id)))
+                throw new DO.IdDoseNotExist("Id not found.", "droneCharge ",id);
             try
             {
-
                 DO.DroneCharge relese = DataSource.DroneCharges.Find(x => x.DroneId.Equals(id));
                 DO.Station foundS = SearchStation(relese.StationId);
                 DO.Station tempS = foundS;
@@ -259,7 +278,11 @@ namespace DAL
                 DataSource.stations.Add(tempS);
                 DataSource.DroneCharges.Remove(relese);
             }
-            catch { }
+            catch (DO.IdDoseNotExist ex)
+            {
+                throw new DO.IdDoseNotExist(ex.Message, ex.ObjectType, ex.Id);
+
+            }
         }
 
         public void UpdateDroneModel(int id, string model)
