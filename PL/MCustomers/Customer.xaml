@@ -8,7 +8,7 @@
         Title="Customer"  ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Height="420" 
-        Width="325"
+        Width="400"
         Closing="Window_Closing" 
      Background="Transparent"
         AllowsTransparency="True"
@@ -20,6 +20,7 @@
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto"        
+         Name="CustomerWindows"
         FontFamily="{DynamicResource MaterialDesignFont}">
 
     <Border
@@ -52,8 +53,29 @@
             Height="420"
             >
 
-                <Button
-
+                <Grid
+                  
+                    Width="400"
+                    Height="70"
+                    HorizontalAlignment="Center"
+                >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                  
+                        <materialDesign:PackIcon
+                             Grid.Column="1"
+                            Height="50"
+                            Width="50" 
+                            Margin="0,12,7,0"
+                            HorizontalAlignment="Center"
+                            Foreground="#FF0D3251"
+                            Kind="UserGroup" />
+                      
+                    <Button
+Grid.Column="2"
                 Name="Close"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Right"
@@ -61,22 +83,247 @@
                 Margin="15"
                 Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}" Background="#FFD62525"
             >
-                    <materialDesign:PackIcon
+                        <materialDesign:PackIcon
                     Kind="Close"
                     Width="30"
                     Height="30"
                 />
 
-                </Button>
+                    </Button>
+                </Grid>
+
+                <Grid
+                Height="280"
+                     Width="380"
+                    Name="MainGrid"
+                >
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.8*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label 
+        Content="Name"
+        Grid.Row="0"
+        Grid.Column="0"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="15"
+        FontWeight="Medium"
+        />
+                    <Label 
+        Content="ID"
+        Grid.Row="1"
+        Grid.Column="0"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="15"
+        FontWeight="Medium"
+        />
+                    <Label 
+        Content="Phone"
+        Grid.Row="2"
+        Grid.Column="0"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="15"
+        FontWeight="Medium"
+        />
+                    <Label 
+              Content="Parcel from customer"
+              Grid.Row="4"
+              Grid.Column="0"
+              HorizontalAlignment="Left" 
+              VerticalAlignment="Center"
+              Margin="15,0,0,0"
+              FontSize="15"
+              FontWeight="Medium"
+          />
+                    <Label 
+       
+        Content="Parcel to customers"
+        Grid.Row="5"
+        Grid.Column="0"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="15"
+        FontWeight="Medium"
+        />
+                    <Label 
+                Content="Location"
+                Grid.Row="3"
+                Grid.Column="0"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center"
+                Margin="15,0,0,0"
+                FontSize="15"
+                FontWeight="Medium"
+               
+            />
+                    <Label 
+        Content="Location-longitude"
+        Grid.Row="6"
+        Grid.Column="0"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="15"
+        FontWeight="Medium"
+        />
+                    <Label 
+        Content="Location-latitude"
+        Grid.Row="7"
+        Grid.Column="0"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="15"
+        FontWeight="Medium"
+        />
+
+                    <TextBox
+        x:Name="NameText"  
+                        Text="{Binding Path=name}"
+       PreviewKeyDown="TextBox_PreviewKeyDown"
+        Grid.Row="0"
+        Grid.Column="1"
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+        Width="180"
+        Height="30"
+       
+            />
+                    <TextBox
+                        Text="{Binding Path=Id}"
+        x:Name="CustomerId"   MaxLength="9" PreviewTextInput="TextBoxWithPeriod_OnPreviewTextInput"
+                       
+        Grid.Row="1"
+        Grid.Column="1"
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+        Width="180"
+        Height="30"
+        
+            />
+                    <TextBox
+                        Text="{Binding Path=numberPhone}"
+        x:Name="Phone"   MaxLength="10" PreviewTextInput="TextBoxWithPeriod_OnPreviewTextInput"
+                       
+        Grid.Row="2"
+        Grid.Column="1"
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+        Width="180"
+        Height="30"
+        
+            />
+                    <Button
+                        Content="{Binding Path=location}"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                       Click="Map_OnClick"
+                        ToolTip="Location on Map"
+                        x:Name="Location"
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        HorizontalAlignment="center" 
+                        VerticalAlignment="Center"
+                        FontSize="10"
+                         Height="60"
+                        FontWeight="Medium"/>
+                    <ComboBox 
+                        
+                        SelectionChanged="CustomerCombo_SelectionChanged"
+                        Name="FromCustomer"
+                        FontSize="14"
+                        ItemsSource="{Binding Path=fromCustomer}"
+        Grid.Row="4"
+        Grid.Column="1"
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+        Width="180"
+        Height="30"
+      
+        >
+
+                    </ComboBox>
+                    <ComboBox 
+                        
+                        SelectionChanged="CustomerCombo_SelectionChanged"
+                        Name="ToCustomer"
+                        FontSize="14"
+                        ItemsSource="{Binding Path=toCustomers}"
+        Grid.Row="5"
+        Grid.Column="1"
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+        Width="180"
+        Height="30"
+      
+        >
+
+                    </ComboBox>
+                    <TextBox
+        Name="TextBoxLongitude"
+        Grid.Row="6"
+        Grid.Column="1"
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+        Width="180"
+        Height="30"
+        PreviewTextInput="TextBoxWithPeriod_OnPreviewTextInput" />
+                    <TextBox
+        Name="TextBoxLatitude"
+        Grid.Row="7"
+        Grid.Column="1"
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+        Width="180"
+        Height="30"
+        PreviewTextInput="TextBoxWithPeriod_OnPreviewTextInput"
+            />
 
 
+
+                </Grid>
 
                 <Button
                 Height="60"
                 Width="60"
                 VerticalAlignment="Bottom"
+                    
                
-                Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}" Background="#FF0D3251"
+                Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}" Background="#FF0D3251" Click="Button_Click_1"
                 >
                     <materialDesign:PackIcon
                             Kind="Plus"
