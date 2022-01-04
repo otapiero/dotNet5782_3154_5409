@@ -32,14 +32,11 @@ namespace BL
         {
             List<BO.CustomerToList> allCustomer = new();
             var allParcels = idal.AllParcels();
-            foreach (var x in idal.AllCustomers())
-            {
-                int delivred = allParcels.Count(y => (y.Sender==x.Id)&&y.Delivered!=null);
-                int notDelivred = allParcels.Count(y => (y.Sender==x.Id)&&y.Delivered== null);
-                int getedParcels = allParcels.Count(y => (y.TargetId==x.Id)&&y.Delivered!= null);
-                int inTheWay = allParcels.Count(y => (y.TargetId==x.Id)&&y.Delivered== null);
-                allCustomer.Add(new(x.Id, x.Name, x.Phone, delivred, notDelivred, getedParcels, inTheWay));
-            }
+
+            allCustomer=(from x in idal.AllCustomers()
+                         select (new BO.CustomerToList(x.Id, x.Name, x.Phone, allParcels.Count(y => (y.Sender==x.Id)&&y.Delivered!=null), allParcels.Count(y => (y.Sender==x.Id)&&y.Delivered== null)
+                 , allParcels.Count(y => (y.TargetId==x.Id)&&y.Delivered!= null), allParcels.Count(y => (y.TargetId==x.Id)&&y.Delivered== null)))).ToList();
+            
             return allCustomer;
         }
         /// <summary>
@@ -65,19 +62,27 @@ namespace BL
 
             foreach (var x in idal.AllParcels())
             {
-                var sender = SearchCostumer(x.Sender);
-                var getter = SearchCostumer(x.TargetId);
-                BO.ParcelStatus status;
-                if (x.DroneId==0)
-                    status=BO.ParcelStatus.Defined;
-                else if (x.PickedUp==null)
-                    status=BO.ParcelStatus.Assigned;
-                else if (x.Delivered==null)
-                    status=BO.ParcelStatus.Colected;
-                else
-                    status=BO.ParcelStatus.Delivred;
+                try
+                {
+                    var sender = SearchCostumer(x.Sender);
+                    var getter = SearchCostumer(x.TargetId);
+                    BO.ParcelStatus status;
+                    if (x.DroneId==0)
+                        status=BO.ParcelStatus.Defined;
+                    else if (x.PickedUp==null)
+                        status=BO.ParcelStatus.Assigned;
+                    else if (x.Delivered==null)
+                        status=BO.ParcelStatus.Colected;
+                    else
+                        status=BO.ParcelStatus.Delivred;
 
-                allParcels.Add(new(x.Id, sender.name, getter.name, (BO.WeightCategories)x.Wheight, (BO.Priorities)x.Priority, status));
+                    allParcels.Add(new(x.Id, sender.name, getter.name, (BO.WeightCategories)x.Wheight, (BO.Priorities)x.Priority, status));
+                }
+                catch(DO.IdDoseNotExist ex)
+                {
+                    throw new BO.IdDoseNotExist(ex.ObjectType, ex.Id, ex);
+                }
+
             }
 
             return allParcels;
@@ -91,7 +96,7 @@ namespace BL
             List<BO.ParcelToList> ParcelsNotAssociated = new();
             foreach (var x in idal.ListOfParcels(t => t.DroneId == 0))
             {
-                ; try
+                 try
                 {
                     var sender = SearchCostumer(x.Sender);
                     var getter = SearchCostumer(x.TargetId);
@@ -109,8 +114,11 @@ namespace BL
 
                     ParcelsNotAssociated.Add(new(x.Id, sender.name, getter.name, (BO.WeightCategories)x.Wheight, (BO.Priorities)x.Priority, status));
                 }
-                catch
-                { Console.WriteLine("error"); }
+                catch (DO.IdDoseNotExist ex)
+                {
+                    throw new BO.IdDoseNotExist(ex.ObjectType, ex.Id, ex);
+                }
+
 
             }
 

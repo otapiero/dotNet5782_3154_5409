@@ -25,6 +25,33 @@ namespace BO
         }
     }
     [Serializable]
+    public class BatteryExaption : Exception
+    {
+
+        double minumumBattery;
+        double timeReqested;
+
+        public double MinumumBattery { get => MinumumBattery;  }
+        public double TimeReqested { get => timeReqested; }
+
+        public BatteryExaption(string message, double battery) : base(message+$"need at least {battery} for this") => minumumBattery=battery;
+        public BatteryExaption(string message, double battery, double time) : base(message+$"need at least {battery} for this.\n" +
+            $"charge the drone {time} time for it.")
+        {
+            minumumBattery=battery;
+            timeReqested=time;
+        }
+        public static explicit operator string(BatteryExaption v)
+        {
+            return (string)v;
+
+        }
+        public override string ToString()
+        {
+            return Message;
+        }
+    }
+    [Serializable]
     public class NumOfChargeSlots : Exception
     {
         int numOfCharge;
@@ -32,6 +59,51 @@ namespace BO
         public NumOfChargeSlots( int _numOfCharge) : base("not enough charge slots for a station") => numOfCharge=_numOfCharge;
         public NumOfChargeSlots(string message, int _numOfCharge) : base(message+$"need at least {_numOfCharge} charge slots") => numOfCharge=_numOfCharge;
         public static explicit operator string(NumOfChargeSlots v)
+        {
+            return (string)v;
+        }
+        public override string ToString()
+        {
+            return Message;
+        }
+    }
+    [Serializable]
+    public class NoStationAvailable : Exception
+    {
+        string objectType;
+        public string ObjectType { get => objectType; }
+        int id;
+        public int Id { get => id; }
+        public NoStationAvailable(string _objectType, int _id) : base($"no station available! can not do this action") 
+        {
+            objectType=_objectType;
+            id=_id;
+        }
+        public static explicit operator string(NoStationAvailable v)
+        {
+            return (string)v;
+        }
+        public override string ToString()
+        {
+            return Message;
+        }
+    }
+    [Serializable]
+    public class WrongStatusObject : Exception
+    {
+        string objectType;
+        public string ObjectType { get => objectType; }
+        int id;
+        public int Id { get => id; }
+        string error;
+        public string Error { get => error; }
+        public WrongStatusObject(string _objectType, int _id,string _error) : base($"the {_objectType} with id: {_id} is "+_error)
+        {
+            objectType=_objectType;
+            id=_id;
+            error=_error;
+        }
+        public static explicit operator string(WrongStatusObject v)
         {
             return (string)v;
         }

@@ -113,13 +113,13 @@ namespace BL
 
                         idal.SendDroneToCharge(id, chooseStation.Id);
                     }
-                    else throw new BO.IBException("Not enough battery");
+                    else throw new BO.BatteryExaption("Not enough battery the drone will fall of the sky!!", dis*Rate);
                     // else throw "Not enough battery"
                 }
-                else throw new BO.IBException("There is no station available");
+                else throw new BO.NoStationAvailable("drone", id);
                 // else throw "There is no station available"
             }
-            else throw new BO.IBException("the drone isnt available");
+            else throw new BO.WrongStatusObject("drone",id,"not availble");
             //  else throw ..."the drone isnt available"
 
         }
@@ -130,10 +130,12 @@ namespace BL
         /// <param name="time"></param>
         public void RelesaeDroneFromCharge(int id, double time)
         {
-            try
+
+            if (DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Maintenace))
             {
-                if (DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Maintenace))
+                try
                 {
+
                     BO.DroneToList temp = DronesBl.Find(x => x.Id==id);
                     Double[] vs = idal.ElectricityUse();
                     double chargingRate = vs[4];
@@ -141,16 +143,16 @@ namespace BL
                     temp.Battery = temp.Battery > 1000 ? temp.Battery=100 : temp.Battery;
                     temp.status =  BO.DroneStatuses.Available;
                     idal.ReleseDroneFromCharge(id);
-
                 }
-                else throw new BO.IBException("the drone isnt in Maintenace");
-                // else throw ..."the drone isnt in Maintenace"
+                catch(DO.IdDoseNotExist x)
+                {
+                    throw new BO.IdDoseNotExist(x.ObjectType, x.Id, x);
+                }
+                
             }
-            catch (Exception x)
-            {
-                throw new BO.IBException(x.Message); ;
+            else throw new BO.WrongStatusObject("drone",id, "not in Maintenace");
+            // else throw ..."the drone isnt in Maintenace"
 
-            }
         }
         /// <summary>
         /// asssign a parcel to a drone
@@ -160,14 +162,20 @@ namespace BL
         {
             try
             {
+
+                if (!DronesBl.Exists(x => x.Id==id))
+                    throw new BO.IdDoseNotExist("id dose not exist", "drone", id);
                 if (DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Available))
                 {
+
 
                     BO.DroneToList temp = DronesBl.Find(x => x.Id==id);
                     var parcelsData = idal.ListOfParcels(x => x.DroneId==0 && x.Wheight <= (DO.WeightCategories)temp.Weight);
                     parcelsData=parcelsData.OrderBy(x => (int)x.Priority);
-                    var person = idal.SearchCostumer((parcelsData).First().Sender);
+                    DO.Costumer person = idal.SearchCostumer((parcelsData).First().Sender);
                     BO.Location parcelLocation = new(person.Longitude, person.Lattitude);
+
+
 
                     double tempDistance, dis = DistanceLocation(temp.CurrentLocation, parcelLocation);
                     int parcelTarget = (parcelsData).First().TargetId;
@@ -184,10 +192,12 @@ namespace BL
                             parcelId= y.Id;
                         }
                     }
-                    var target = idal.SearchCostumer(parcelTarget);
-                    List<DO.Station> stationData = idal.ListOfStations(x => x.ChargeSlots > 0).ToList();
 
-                    if (stationData.Count()<1) throw new BO.IBException("no free empty");
+                    var target = idal.SearchCostumer(parcelTarget);
+                    IEnumerable<DO.Station> stationData = idal.ListOfStations(x => x.ChargeSlots > 0);
+
+                    if (stationData.Count()<1)
+                        throw new BO.NoStationAvailable("drone", id);
                     BO.Location closeStation = FindTheClosestStation(new(target.Longitude, target.Lattitude), stationData);
                     double fullDis = DistanceLocation(temp.CurrentLocation, parcelLocation)+DistanceLocation(parcelLocation, new(target.Longitude, target.Lattitude))+DistanceLocation(closeStation, new(target.Longitude, target.Lattitude));
                     Double[] vs = idal.ElectricityUse();
@@ -195,21 +205,36 @@ namespace BL
 
                     if (temp.Battery-Rate*fullDis>0)
                     {
+
                         temp.status=BO.DroneStatuses.Delivery;
                         temp.ParcelId= parcelId;
                         idal.AssignPackageToDrone(parcelId, temp.Id);
                     }
                     else
-                        throw new BO.IBException("Not enough battery");
+                        throw new BO.BatteryExaption("Not enough battery", Rate*fullDis, (Rate*fullDis-temp.Battery)/vs[4]);
                 }
                 else
-                    throw new BO.IBException("the drone isnt in avilable");
-
+                    throw new BO.WrongStatusObject("drone", id, "not avilable");
             }
-            catch (Exception x)
+            catch (DO.IdDoseNotExist ex)
             {
-                throw new BO.IBException(x.Message);
-
+                throw new BO.IdDoseNotExist(ex.ObjectType, ex.Id, ex);
+            }
+            catch (BO.IdDoseNotExist x)
+            {
+                throw new BO.IdDoseNotExist(x.Message, x.ObjectType, x.Id);
+            }
+            catch (BO.BatteryExaption x)
+            {
+                throw new BO.BatteryExaption(x.Message, x.MinumumBattery, x.TimeReqested);
+            }
+            catch (BO.WrongStatusObject x)
+            {
+                throw new BO.WrongStatusObject(x.ObjectType, x.Id, x.Error);
+            }
+            catch (BO.NoStationAvailable x)
+            {
+                throw new BO.NoStationAvailable(x.ObjectType, x.Id);
             }
         }
         /// <summary>
@@ -220,11 +245,13 @@ namespace BL
         {
             try
             {
+
+                if (!DronesBl.Exists(x => x.Id==id))
+                    throw new BO.IdDoseNotExist("id dose not exist", "drone", id);
                 if (DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Delivery))
                 {
                     BO.DroneToList temp = DronesBl.Find(x => x.Id==id);
-                    var parcelsData = idal.AllParcels();
-                    var parcel = (parcelsData).FirstOrDefault(x => x.Id==temp.ParcelId);
+                    var parcel = idal.SearchParcel(temp.ParcelId);
                     if (parcel.PickedUp== null)
                     {
                         var person = idal.SearchCostumer(parcel.Sender);
@@ -234,17 +261,26 @@ namespace BL
                         temp.CurrentLocation=new BO.Location(person.Longitude, person.Lattitude);
                         idal.CollectPackage(parcel.Id);
                     }
-                    else throw new BO.IBException("the parcel was picked up");
+                    else throw new BO.WrongStatusObject("parcel", temp.ParcelId, "already picked up");
                     // else throw ..."the parcel was picked up"
                 }
-                else throw new BO.IBException("the drone isnt in Delivery");
+                else throw new BO.WrongStatusObject("drone", id, "not in Delivery");
                 // else throw ..."the drone isnt in Delivery"
             }
-            catch (Exception x)
+            catch(DO.IdDoseNotExist x)
             {
-                throw new BO.IBException(x.Message); ;
-
+                throw new BO.IdDoseNotExist(x.ObjectType, x.Id, x);
             }
+            catch (BO.IdDoseNotExist x)
+            {
+                throw new BO.IdDoseNotExist(x.Message, x.ObjectType, x.Id);
+            }
+            catch (BO.WrongStatusObject x)
+            {
+                throw new BO.WrongStatusObject(x.ObjectType, x.Id, x.Message);
+            }
+           
+
         }
         /// <summary>
         /// deliver a parcel
@@ -254,14 +290,16 @@ namespace BL
         {
             try
             {
+                if (!DronesBl.Exists(x => x.Id==id))
+                    throw new BO.IdDoseNotExist("id dose not exist", "drone", id);
                 if (DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Delivery))
                 {
                     BO.DroneToList temp = DronesBl.Find(x => x.Id==id);
-                    var parcelsData = idal.AllParcels();
-                    var parcel = (parcelsData).FirstOrDefault(x => x.Id==temp.ParcelId);
+                    
+                    var parcel = idal.SearchParcel(temp.ParcelId);
                     if (parcel.PickedUp==null)
                     {
-                        throw new BO.IBException("the parcel is not pickedup!");
+                        throw new BO.WrongStatusObject("parcel", temp.ParcelId, "not pickedup!");
                     }
                     if (parcel.Delivered == null)
                     {
@@ -278,16 +316,24 @@ namespace BL
                         parcel.Delivered=DateTime.Now;
 
                     }
-                    else throw new BO.IBException("the parcel was delivered");
+                    else
+                        throw new BO.WrongStatusObject("parcel", temp.ParcelId, "already delivered");
                     //else throw ..."the parcel was delivered"
                 }
-                else throw new BO.IBException("the drone isnt in Delivery");
+                else throw new BO.WrongStatusObject("drone ",id,"not in Delivery");
                 // else throw ..."the drone isnt in Delivery"
             }
-            catch (Exception x)
+            catch (DO.IdDoseNotExist x)
             {
-                throw new BO.IBException(x.Message); ;
-
+                throw new BO.IdDoseNotExist(x.ObjectType, x.Id, x);
+            }
+            catch (BO.IdDoseNotExist x)
+            {
+                throw new BO.IdDoseNotExist(x.Message, x.ObjectType, x.Id);
+            }
+            catch (BO.WrongStatusObject x)
+            {
+                throw new BO.WrongStatusObject(x.ObjectType, x.Id, x.Message);
             }
         }
     }

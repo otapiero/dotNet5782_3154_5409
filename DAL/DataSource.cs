@@ -55,6 +55,7 @@ namespace DAL
             {
                 randomCase = r.Next(5);
                 DO.Parcel newParcel = new DO.Parcel();
+                newParcel.Availble = true;
                 newParcel.Id = Config.idParcel++;
                 newParcel.Sender = r.Next(1, numCustomers);
                 newParcel.TargetId = r.Next(1, numCustomers);
