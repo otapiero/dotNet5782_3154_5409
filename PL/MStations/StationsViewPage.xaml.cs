@@ -22,6 +22,8 @@ namespace PL.MStations
     {
         BlApi.IBL ibl;
         int cancel = 0;
+        bool bo1 = true;
+        bool bo2 = true;
         private readonly MainWindow _wnd = (MainWindow)Application.Current.MainWindow;
         public StationsViewPage(BlApi.IBL bl1)
         {
@@ -45,7 +47,7 @@ namespace PL.MStations
 
         private void Add_OnClick(object sender, RoutedEventArgs e)
         {
-            var ab = new Stations();
+            var ab = new Stations(ibl);
             ab.ShowDialog();
             Refresh();
         }
@@ -56,7 +58,11 @@ namespace PL.MStations
 
             if (StationsDataGrid.SelectedIndex > -1)
             {
-                new Stations().ShowDialog();
+                var temp = (BO.BaseStationToList)item;
+                var newStation = new BO.BaseStation();
+                newStation = ibl.SearchStation(temp.Id);
+
+                new Stations(ibl, newStation).ShowDialog();
                 Refresh();
             }
         }
@@ -121,13 +127,38 @@ namespace PL.MStations
         {
             try
             {
-                StationsDataGrid.DataContext = ibl.ListDrones();
-
+                StationsDataGrid.DataContext = ibl.ListStation();
+                bo1 = true;
+                bo2 = true;
+                GroupBy.SelectedItem = null;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Drones Loading Error!");
             }
         }
+        private void GroupBy_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var group = GroupBy.SelectedIndex.ToString();
+            if (group == "1" && bo1)
+            {
+                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(StationsDataGrid.ItemsSource);
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("NumNotAvilableChargeStation");
+                view.GroupDescriptions.Add(groupDescription);
+                bo1 = false;
+
+
+            }
+            if (group == "0" && bo2)
+            {
+                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(StationsDataGrid.ItemsSource);
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("NumAvilableChargeStation");
+                view.GroupDescriptions.Add(groupDescription);
+                bo2 = false;
+
+            }
+        }
+
+   
     }
 }

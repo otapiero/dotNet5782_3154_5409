@@ -45,7 +45,15 @@
                 Name="GroupBy" 
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Center"
-                materialDesign:HintAssist.Hint="Group By"/>
+              
+                materialDesign:HintAssist.Hint="Group By" SelectionChanged="GroupBy_SelectionChanged">
+                    <ComboBoxItem>
+                        Number of places
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        Available spaces
+                    </ComboBoxItem>
+                </ComboBox>
                 <Button
                      Margin="10,0,0,0"
                     Height="25"
@@ -77,7 +85,7 @@
             VerticalAlignment="Center"
             VerticalContentAlignment="Center"
             Margin="0,0,0,80"
-           MinHeight="450"
+           MinHeight="450" 
             >
 
             <ListView.View>
@@ -88,7 +96,15 @@
                     <GridViewColumn Header="tafus"   DisplayMemberBinding="{Binding Path=NumNotAvilableChargeStation}" />
                 </GridView>
             </ListView.View>
-
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListView.GroupStyle>
         </ListView>
 
         <Button 

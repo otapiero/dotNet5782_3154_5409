@@ -9,6 +9,7 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Height="420" 
+        Name="StationWindows"
         Width="325"
         Closing="Window_Closing" 
      Background="Transparent"
@@ -70,14 +71,213 @@
 
                 </Button>
 
-                
+                <Grid
+                Height="280"
+                     Width="280"
+                    Name="MainGrid"
+                >
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.8*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label 
+        Content="Name"
+        Grid.Row="0"
+        Grid.Column="0"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="15"
+        FontWeight="Medium"
+        />
+                    <Label 
+        Content="ID"
+        Grid.Row="1"
+        Grid.Column="0"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="15"
+        FontWeight="Medium"
+        />
+                    <Label 
+              Content="Charge Slots"
+              Grid.Row="3"
+              Grid.Column="0"
+              HorizontalAlignment="Left" 
+              VerticalAlignment="Center"
+              Margin="15,0,0,0"
+              FontSize="15"
+              FontWeight="Medium"
+          />
+                    <Label 
+       
+        Content="Drones in Cahrge"
+        Grid.Row="4"
+        Grid.Column="0"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="13"
+        FontWeight="Medium"
+        />
+                    <Label 
+                Content="Location"
+                Grid.Row="2"
+                Grid.Column="0"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center"
+                Margin="15,0,0,0"
+                FontSize="15"
+                FontWeight="Medium"
+               
+            />
+                    <Label 
+        Content="Loc-longitude"
+        Grid.Row="5"
+        Grid.Column="0"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="15"
+        FontWeight="Medium"
+        />
+                    <Label 
+        Content="Loc-latitude"
+        Grid.Row="6"
+        Grid.Column="0"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="15"
+        FontWeight="Medium"
+        />
+
+                    <TextBox
+        x:Name="NameText"  
+                        Text="{Binding Path=Name}"
+       PreviewKeyDown="TextBox_PreviewKeyDown"
+        Grid.Row="0"
+        Grid.Column="1"
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+        Width="110"
+        Height="30"
+       
+            />
+                    <TextBox
+                        Text="{Binding Path=Id}"
+        x:Name="StationId"   MaxLength="9" PreviewTextInput="TextBoxWithPeriod_OnPreviewTextInput"
+                       
+        Grid.Row="1"
+        Grid.Column="1"
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+        Width="110"
+        Height="30"
+        
+            />
+                  
+                    <Button
+                        Content="{Binding Path=Location}"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                       Click="Map_OnClick"
+                        ToolTip="Location on Map"
+                        x:Name="Location"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        HorizontalAlignment="center" 
+                        VerticalAlignment="Center"
+                        FontSize="10"
+                         Height="60"
+                        FontWeight="Medium"/>
+                    
+                    
+                    <TextBox
+                        Text="{Binding Path=NumAvilableChargeStation}"
+        x:Name="ChargeSlot"   MaxLength="3"
+                        PreviewKeyDown="StationId_PreviewKeyDown"
+        Grid.Row="3"
+        Grid.Column="1"
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+        Width="110"
+        Height="30"
+        
+            />
+             
+                    <ComboBox 
+                        
+                        SelectionChanged="DronesCombo_SelectionChanged"
+                        Name="DronesCombo"
+                        FontSize="10"
+                        ItemsSource="{Binding Path=dronesInCharges}"
+        Grid.Row="4"
+        Grid.Column="1"
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+        Width="110"
+        Height="30"
+      
+        >
+                        
+                    </ComboBox>
+                    <TextBox
+        Name="TextBoxLongitude"
+        Grid.Row="5"
+        Grid.Column="1"
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+        Width="110"
+        Height="30"
+        PreviewTextInput="TextBoxWithPeriod_OnPreviewTextInput" />
+                    <TextBox
+        Name="TextBoxLatitude"
+        Grid.Row="6"
+        Grid.Column="1"
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+        Width="110"
+        Height="30"
+        PreviewTextInput="TextBoxWithPeriod_OnPreviewTextInput"
+            />
+
+
+
+                </Grid>
+
 
                 <Button
                 Height="60"
                 Width="60"
                 VerticalAlignment="Bottom"
                
-                Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}" Background="#FF0D3251"
+                Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}" Background="#FF0D3251" Click="Button_Click_1"
                 >
                     <materialDesign:PackIcon
                             Kind="Plus"

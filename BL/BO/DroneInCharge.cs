@@ -14,7 +14,8 @@ namespace BO
 
         public override string ToString()
         {
-            return "\n  Id: "+Id+"\n  battery: "+Battery+"\n";
+            var temp = Battery.ToString().Length < 5 ? Battery.ToString() : Battery.ToString().Substring(0, 5);
+            return "\n  ID: "+Id+"\n  Battery: "+temp+"\n";
         }
     }
 }

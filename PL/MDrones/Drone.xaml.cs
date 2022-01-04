@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
 using BO;
 namespace PL
 {
@@ -47,6 +48,7 @@ namespace PL
             MainGrid.RowDefinitions[5].Height = new GridLength(0);
             MainGrid.RowDefinitions[6].Height = new GridLength(0);
             MainGrid.RowDefinitions[7].Height = new GridLength(0);
+            MainGrid.RowDefinitions[8].Height = new GridLength(0);
             Weiht_content.Visibility = Visibility.Hidden;
 
 
@@ -79,8 +81,12 @@ namespace PL
             Location.Content = x.CurrentLocation.ToString();
 
             StatusContenetLabel.Content = x.status;
-
-
+            if (x.parcel.Id == 0)
+            {
+                MainGrid.RowDefinitions[8].Height = new GridLength(0);
+            }
+            else ParcelID.Content = x.parcel.Id;
+            
             BatteryText.Content = x.Battery.ToString().Length < 5 ? x.Battery.ToString() : x.Battery.ToString().Substring(0, 5);
             
 
@@ -160,11 +166,13 @@ namespace PL
             }
         }
 
-        private void DroneId_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void DroneId_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (!(e.Key >= Key.D0 && e.Key <= Key.D9) || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9))
+            var regex = new Regex("[^0-9.]+");
+            e.Handled = regex.IsMatch(e.Text);
+            if (e.Handled)
             {
-                e.Handled = true;
+                MessageBox.Show($"digits only\n'{e.Text}' is not a digit");
             }
         }
 
@@ -343,5 +351,7 @@ namespace PL
             }
             else e.Cancel = true;
         }
+
+       
     }
 }
