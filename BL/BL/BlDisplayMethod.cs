@@ -159,7 +159,6 @@ namespace BL
             try
             {
                 var x = idal.SearchParcel(id);
-
                 var drone = SearchDrone(x.DroneId);
                 temp.drone = new();
                 temp.drone.Battery = drone.Battery;

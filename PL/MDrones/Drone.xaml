@@ -85,6 +85,7 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
@@ -180,6 +181,18 @@
                 FontWeight="Medium"
                
             />
+                    <Label 
+               x:Name="Parcel"
+                        Content="Parcel ID"
+                Grid.Row="8"
+                Grid.Column="0"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center"
+                Margin="15,0,0,0"
+                FontSize="15"
+                FontWeight="Medium"
+               
+            />
 
                     <TextBox
         x:Name="ModelText"  
@@ -197,7 +210,7 @@
 
                     <TextBox
         x:Name="DroneId" TextChanged="DroneId_SelectionChanged"  MaxLength="9"
-                        PreviewKeyDown="DroneId_PreviewKeyDown"
+                      PreviewTextInput="DroneId_PreviewTextInput"
         Grid.Row="1"
         Grid.Column="1"
         VerticalAlignment="Stretch"
@@ -298,6 +311,18 @@
                 Height="60"
             />
                    
+                    <Button
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                      
+                        ToolTip="Parcel"
+                        x:Name="ParcelID"
+                        Grid.Row="8"
+                        Grid.Column="1"
+                        HorizontalAlignment="center" 
+                        VerticalAlignment="Center"
+                        FontSize="12"
+                        FontWeight="Medium"/>
+
 
 
                 </Grid>

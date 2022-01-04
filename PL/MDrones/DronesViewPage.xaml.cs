@@ -108,7 +108,11 @@ namespace PL.MDrones
 
             if (DronesDataGrid.SelectedIndex > -1)
             {
-                new Drone(ibl, (BO.DroneToList)item).ShowDialog();
+                var temp = (BO.DroneToList)item;
+                var newDrone = new BO.DroneBL();
+                newDrone = ibl.SearchDrone(temp.Id);
+
+                new Drone(ibl, newDrone).ShowDialog();
                 Refresh();
             }
         }
@@ -173,13 +177,13 @@ namespace PL.MDrones
         {
             try
             {
+                DronesDataGrid.ItemsSource = ibl.ListDrones();
                 WeightSelector.SelectedItem = null;
                 StatusSelector.SelectedItem = null;
                 GroupBy.SelectedItem = null;
                 boWeight = true;
                 boStatus = true;
-                DronesDataGrid.DataContext = ibl.ListDrones();
-               
+    
             }
             catch (Exception ex)
             {
