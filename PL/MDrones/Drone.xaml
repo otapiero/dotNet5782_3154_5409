@@ -103,8 +103,7 @@
         FontSize="15"
         FontWeight="Medium"
         />
-
-                    <Label 
+                    <Label
         Content="ID"
         Grid.Row="1"
         Grid.Column="0"

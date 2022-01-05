@@ -46,6 +46,8 @@
                     </ImageBrush.RelativeTransform>
                 </ImageBrush>
             </Border.Background>
+            
+            
 
             <StackPanel
             VerticalAlignment="Top"
@@ -69,6 +71,194 @@
 
                 </Button>
 
+                <Grid
+                Height="280"
+                     Width="280"
+                    Name="MainGrid"
+                >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.8*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label 
+        Content="ID"
+        Grid.Row="0"
+        Grid.Column="0"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="15"
+        FontWeight="Medium"
+        />
+                    <Label
+        Content="Priority"
+        Grid.Row="1"
+        Grid.Column="0"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="15"
+        FontWeight="Medium"
+        />
+
+                    <Label 
+              Content="Weight"
+              Grid.Row="2"
+              Grid.Column="0"
+              HorizontalAlignment="Left" 
+              VerticalAlignment="Center"
+              Margin="15,0,0,0"
+              FontSize="15"
+              FontWeight="Medium"
+          />
+                    <Label 
+        x:Name="Sender_Label" 
+        Content="Sender"
+        Grid.Row="3"
+        Grid.Column="0"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="15"
+        FontWeight="Medium"
+        />
+
+                    <Label 
+        x:Name="Getter_Label" Content="Getter"
+        Grid.Row="4"
+        Grid.Column="0"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="15"
+        FontWeight="Medium"
+        />
+                    <Label 
+                x:Name="Drone_Label" Content="Drone"
+                Grid.Row="5"
+                Grid.Column="0"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center"
+                Margin="15,0,0,0"
+                FontSize="15"
+                FontWeight="Medium"
+            />
+                    <Label 
+               x:Name="Option_Label" Content="Option"
+                Grid.Row="6"
+                Grid.Column="0"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center"
+                Margin="15,0,0,0"
+                FontSize="15"
+                FontWeight="Medium"
+            />
+
+                    <Label 
+               x:Name="Creation_label"
+                        Content="Creation"
+                Grid.Row="7"
+                Grid.Column="0"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center"
+                Margin="15,0,0,0"
+                FontSize="15"
+                FontWeight="Medium"
+               
+            />
+                    <Label 
+               x:Name="Assignation_Label"
+                        Content="Assignation"
+                Grid.Row="8"
+                Grid.Column="0"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center"
+                Margin="15,0,0,0"
+                FontSize="15"
+                FontWeight="Medium"
+               
+            />
+                    <Label 
+               x:Name="Colection_Label"
+                        Content="Colection"
+                Grid.Row="9"
+                Grid.Column="0"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center"
+                Margin="15,0,0,0"
+                FontSize="15"
+                FontWeight="Medium"
+               
+            />
+                    <Label 
+               x:Name="Delivery_Label"
+                        Content="Delivery"
+                Grid.Row="10"
+                Grid.Column="0"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center"
+                Margin="15,0,0,0"
+                FontSize="15"
+                FontWeight="Medium"
+               
+            />
+                    
+                    
+                       
+                    <TextBox
+        x:Name="IdText"  
+       TextChanged="IdText_SelectionChanged" PreviewKeyDown="TextBox_PreviewKeyDown"
+        Grid.Row="0"
+        Grid.Column="1"
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+        Width="110"
+        Height="30"
+       
+            />
+                    <ComboBox SelectionChanged="PriorityCombo_SelectionChanged" Name="PrioritytCombo" 
+        Grid.Row="1"
+        Grid.Column="1"
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+        Width="110"
+        Height="30"
+      
+        />
+                    <ComboBox SelectionChanged="WeightCombo_SelectionChanged" Name="WeightCombo" 
+        Grid.Row="2"
+        Grid.Column="1"
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+        Width="110"
+        Height="30"
+        />
+
+
+
+
+
+                </Grid>
 
 
                 <Button
