@@ -219,41 +219,7 @@
                     
                     
                        
-                    <TextBox
-        x:Name="IdText"  
-       TextChanged="IdText_SelectionChanged" PreviewKeyDown="TextBox_PreviewKeyDown"
-        Grid.Row="0"
-        Grid.Column="1"
-        VerticalAlignment="Stretch"
-        HorizontalAlignment="Stretch"
-        VerticalContentAlignment="Center"
-        HorizontalContentAlignment="Center"
-        Width="110"
-        Height="30"
-       
-            />
-                    <ComboBox SelectionChanged="PriorityCombo_SelectionChanged" Name="PrioritytCombo" 
-        Grid.Row="1"
-        Grid.Column="1"
-        VerticalAlignment="Stretch"
-        HorizontalAlignment="Stretch"
-        VerticalContentAlignment="Center"
-        HorizontalContentAlignment="Center"
-        Width="110"
-        Height="30"
-      
-        />
-                    <ComboBox SelectionChanged="WeightCombo_SelectionChanged" Name="WeightCombo" 
-        Grid.Row="2"
-        Grid.Column="1"
-        VerticalAlignment="Stretch"
-        HorizontalAlignment="Stretch"
-        VerticalContentAlignment="Center"
-        HorizontalContentAlignment="Center"
-        Width="110"
-        Height="30"
-        />
-
+                
 
 
 

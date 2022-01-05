@@ -111,6 +111,7 @@ namespace BL
                     temp.status = BO.DroneStatuses.Maintenace;
                     int i = rand.Next(stationData.Count());
                     temp.CurrentLocation = new((stationData)[i].Longitude, (stationData )[i].Lattitude);
+                    idal.SendDroneToCharge(temp.Id, (stationData)[i].Id);
                     temp.Battery = rand.NextDouble() * 20;
                 }
                 else
