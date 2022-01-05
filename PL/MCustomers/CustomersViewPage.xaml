@@ -89,7 +89,7 @@
                     <GridViewColumn Header="Parcels Delivred"   DisplayMemberBinding="{Binding Path=NumParcelsDelivred}" />
                     <GridViewColumn Header="Parcels Not Delivred"   DisplayMemberBinding="{Binding Path=NumParcelsNotDelivred}" />
                     <GridViewColumn Header="Parcels Getted"   DisplayMemberBinding="{Binding Path=NumParcelsGetted}" />
-                    <GridViewColumn Header="Parcels In Way"   DisplayMemberBinding="{Binding Path=NumParcelsInTheWay}" />
+                    <GridViewColumn Header="Parcels In Way"   DisplayMemberBinding="{Binding Path=NumParcelsInTheWay}"  />
 
                 </GridView>
             </ListView.View>

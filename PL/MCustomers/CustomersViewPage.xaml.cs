@@ -46,7 +46,7 @@ namespace PL.MCustomers
 
         private void Add_OnClick(object sender, RoutedEventArgs e)
         {
-            var ab = new Customer();
+            var ab = new Customer(ibl);
             ab.ShowDialog();
             Refresh();
         }
@@ -57,7 +57,10 @@ namespace PL.MCustomers
 
             if (CustomersDataGrid.SelectedIndex > -1)
             {
-                new Customer().ShowDialog();
+                var temp = (BO.CustomerToList)item;
+                var newStation = new BO.CustomerBl();
+                newStation = ibl.SearchCostumer(temp.Id);
+                new Customer(ibl, newStation).ShowDialog();
                 Refresh();
             }
         }

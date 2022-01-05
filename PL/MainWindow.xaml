@@ -221,7 +221,7 @@
 
                     <materialDesign:PackIcon
                         Foreground="White"
-                        Kind="EvStation"
+                        Kind="HomeVariant"
                         Height="30"
                         Width="30"
                         Margin="105,0,0,0"
