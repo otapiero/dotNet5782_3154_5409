@@ -28,8 +28,7 @@ namespace BL
                 temp.NumAvilableChargeStation = y.ChargeSlots;//
                 IEnumerable<DO.DroneCharge> ListDrones = idal.ListOfDronesInCharge(x => x.StationId == id);
 
-                IEnumerable<DO.Drone> DronesIncharge = idal.AllDrones();
-                DronesIncharge = from x in DronesIncharge
+              IEnumerable< BO.DroneToList> DronesIncharge = from x in DronesBl
                                  where (ListDrones as List<DO.DroneCharge>).Exists(z => z.DroneId == x.Id)
                                  select x;
 
@@ -37,7 +36,7 @@ namespace BL
                 foreach (var x in DronesIncharge)
                 {
                     var t = new BO.DroneInCharge();
-                    t.Battery = 0;
+                    t.Battery = x.Battery; 
                     t.Id = x.Id;
                     temp.dronesInCharges.Add(t);
                 }

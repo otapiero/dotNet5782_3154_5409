@@ -110,19 +110,35 @@ namespace PL.MCustomers
                 var name = NameText.Text;
                 int.TryParse(CustomerId.Text, out var id);
                 var phone = Phone.Text;
-                if (update)
+                if (id != new int() && (name != "" && phone != ""))
                 {
-                    ibl.UpdateCostumer(id, name, phone);
+                    if (update)
+                    {
+
+                        ibl.UpdateCostumer(id, name, phone);
+                        MessageBox.Show("Done", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                        cancel = 1;
+                        this.Close();
+                    }
+                    else
+                    {
+
+                        double.TryParse(TextBoxLongitude.Text, out var lon);
+                        double.TryParse(TextBoxLatitude.Text, out var lat);
+                        if ((lat != new double() && lon != new double()))
+                        {
+                            ibl.AddNewCustomer(id, name, phone, lon, lat);
+                            MessageBox.Show("Done", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                            cancel = 1;
+                            this.Close();
+                        }
+                        else
+                            MessageBox.Show("not enough information", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+               
                 }
                 else
-                {
-                    double.TryParse(TextBoxLongitude.Text, out var lon);
-                    double.TryParse(TextBoxLatitude.Text, out var lat);
-                    ibl.AddNewCustomer(id, name, phone, lon, lat);
-                }
-                MessageBox.Show("Done", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                cancel = 1;
-                this.Close();
+                    MessageBox.Show("not enough information", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
 
             }
             catch (BO.IBException ex)
@@ -139,6 +155,9 @@ namespace PL.MCustomers
 
         }
 
-      
+        private void CustomerId_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

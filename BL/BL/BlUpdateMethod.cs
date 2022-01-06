@@ -336,6 +336,25 @@ namespace BL
                 throw new BO.WrongStatusObject(x.ObjectType, x.Id, x.Message);
             }
         }
+        void DeleteParcel(int id)
+        {
+            try
+            {
+                var parcel = idal.SearchParcel(id);
+                if(parcel.Scheduled==null)
+                {
+                    idal.DeleteParcel(id);
+                }
+                else
+                { }
+            }
+            catch (DO.IdDoseNotExist x)
+            {
+                throw new BO.IdDoseNotExist(x.ObjectType, x.Id, x);
+            }
+        }
+
+
     }
 }
     

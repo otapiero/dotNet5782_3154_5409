@@ -113,12 +113,15 @@ namespace PL.MStations
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            
-                try
+
+            try
+            {
+
+                var name = NameText.Text;
+                int.TryParse(StationId.Text, out var id);
+                int.TryParse(ChargeSlot.Text, out var ch);
+                if (id != new int() && name != "" && ch != new int())
                 {
-                        var name = NameText.Text;
-                        int.TryParse(StationId.Text, out var id);
-                        int.TryParse(ChargeSlot.Text, out var ch);
                     if (update)
                     {
                         ibl.UpdateStation(id, name, ch);
@@ -130,21 +133,24 @@ namespace PL.MStations
                         ibl.AddNewStation(id, name, lon, lat, ch);
                     }
                     MessageBox.Show("Done", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                    cancel = 1; 
+                    cancel = 1;
                     this.Close();
+                }
+                else
+                    MessageBox.Show("not enough information", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
 
             }
-               catch (BO.IBException ex)
-                {
-                    MessageBox.Show(ex.Message, "Station updating Error!");
-                    return;
-                }
-                
-                catch (Exception)
-                {
-                    MessageBox.Show("Unknown error", "Station updating Error!");
-                    return;
-                }
+            catch (BO.IBException ex)
+            {
+                MessageBox.Show(ex.Message, "Station updating Error!");
+                return;
+            }
+
+            catch (Exception)
+            {
+                MessageBox.Show("Unknown error", "Station updating Error!");
+                return;
+            }
                
             }
 
