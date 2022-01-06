@@ -28,6 +28,7 @@ namespace DalApi
         void UpdateDroneModel(int id, string model);
         void UpdateStation(int id, string name, int chargeSlots);
         void UpdateCostumer(int id, string name, string phone);
+        public void DeleteParcel(int idParcel);
         IEnumerable<DO.Station> AllStation();
         IEnumerable<DO.Drone> AllDrones();
         IEnumerable<DO.Costumer> AllCustomers();

@@ -47,6 +47,8 @@
                     </ImageBrush.RelativeTransform>
                 </ImageBrush>
             </Border.Background>
+            
+            
 
             <StackPanel
             VerticalAlignment="Top"

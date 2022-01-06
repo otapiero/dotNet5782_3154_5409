@@ -25,6 +25,7 @@ namespace BlApi
         void AssignPackageToDrone(int id);
         void RelesaeDroneFromCharge(int id, double time);
         void DeliverPackage(int id);
+        void DeleteParcel(int id);
         IEnumerable<BO.BaseStationToList> ListStation();
         IEnumerable<BO.CustomerToList> ListCustomer();
         IEnumerable<BO.DroneToList> ListDrones();

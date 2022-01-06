@@ -260,7 +260,10 @@ namespace DAL
                 DataSource.DroneCharges.Add(new DO.DroneCharge(idDrone, idStation));
 
             }
-            catch { }
+            catch (DO.IdDoseNotExist x)
+            {
+                throw new DO.IdDoseNotExist(x.Message, x.ObjectType, x.Id);
+            }
         }
         /// <summary>method ReleseDroneFromCharge - the function get drone relese it fron station </summary>
         /// <param name = "idDrone"> id drone to relese</param>

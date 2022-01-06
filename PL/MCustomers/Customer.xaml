@@ -223,7 +223,8 @@ Grid.Column="2"
         VerticalContentAlignment="Center"
         HorizontalContentAlignment="Center"
         Width="180"
-        Height="30"
+        Height="30" TextChanged="CustomerId_TextChanged"
+                         
         
             />
                     <TextBox
