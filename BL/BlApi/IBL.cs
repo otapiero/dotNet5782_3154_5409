@@ -33,7 +33,7 @@ namespace BlApi
         IEnumerable<BO.BaseStationToList> StationWithAvailebalChargePost();
 
         public IEnumerable<BO.DroneToList> ListOfDrones(Predicate<BO.DroneToList> f);
-
+        public IEnumerable<BO.ParcelToList> ListOfParcels(Predicate<BO.ParcelToList> f);
     }
 
 }

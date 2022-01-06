@@ -269,7 +269,8 @@ Grid.Column="2"
         
         />
 
-                    <ComboBox SelectionChanged="StationCombo_SelectionChanged" Name="StationCombo"
+                    <ComboBox SelectionChanged="StationCombo_SelectionChanged"
+                              Name="StationCombo"
         Grid.Row="3"
         Grid.Column="1"
         VerticalAlignment="Stretch"

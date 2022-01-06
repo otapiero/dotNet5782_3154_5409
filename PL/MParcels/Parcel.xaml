@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="Parcel"  ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Height="420" 
-        Width="325"
+        Height="525" 
+        Width="400"
         Closing="Window_Closing" 
      Background="Transparent"
         AllowsTransparency="True"
@@ -19,7 +19,8 @@
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal" 
-        TextOptions.TextRenderingMode="Auto"        
+        TextOptions.TextRenderingMode="Auto"     
+        Name="ParcelWindows"
         FontFamily="{DynamicResource MaterialDesignFont}">
 
     <Border
@@ -49,11 +50,32 @@
 
             <StackPanel
             VerticalAlignment="Top"
-            Height="420"
+            Height="500"
             >
 
-                <Button
+                <Grid
+                  
+                    Width="400"
+                    Height="70"
+                    HorizontalAlignment="Center"
+                >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
+                    <materialDesign:PackIcon
+                             Grid.Column="1"
+                            Height="50"
+                            Width="50" 
+                            Margin="0,12,7,0"
+                            HorizontalAlignment="Center"
+                            Foreground="#FF0D3251"
+                            Kind="PackageVariant" />
+
+                    <Button
+Grid.Column="2"
                 Name="Close"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Right"
@@ -61,19 +83,362 @@
                 Margin="15"
                 Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}" Background="#FFD62525"
             >
-                    <materialDesign:PackIcon
+                        <materialDesign:PackIcon
                     Kind="Close"
                     Width="30"
                     Height="30"
                 />
 
-                </Button>
+                    </Button>
+                </Grid>
+                <Grid
+                Height="350"
+                     Width="330"
+                    Name="MainGrid"
+                >
 
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.8*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label 
+        Content="ID"
+        Grid.Row="0"
+        Grid.Column="0"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="15"
+        FontWeight="Medium"
+        />
+                    <Label 
+        Content="Name Sender"
+        Grid.Row="1"
+        Grid.Column="0"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="15"
+        FontWeight="Medium"
+        />
+                    <Label 
+        Content="Name Getter"
+        Grid.Row="2"
+        Grid.Column="0"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="15"
+        FontWeight="Medium"
+        />
+                    <Label 
+              Content="Weight"
+              Grid.Row="3"
+              Grid.Column="0"
+              HorizontalAlignment="Left" 
+              VerticalAlignment="Center"
+              Margin="15,0,0,0"
+              FontSize="15"
+              FontWeight="Medium"
+          />
+                    <Label 
+       
+        Content="Priorities"
+        Grid.Row="4"
+        Grid.Column="0"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="15"
+        FontWeight="Medium"
+        />
+                    <Label 
+                Content="Drone"
+                Grid.Row="5"
+                Grid.Column="0"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Center"
+                Margin="15,0,0,0"
+                FontSize="15"
+                FontWeight="Medium"
+               
+            />
+                    <Label 
+        Content="Creation Time"
+        Grid.Row="6"
+        Grid.Column="0"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="15"
+        FontWeight="Medium"
+        />
+                    <Label 
+        Content="Assignation Time"
+        Grid.Row="7"
+        Grid.Column="0"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="15"
+        FontWeight="Medium"
+        />
+                    <Label 
+        Content="Colection Time"
+        Grid.Row="8"
+        Grid.Column="0"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="15"
+        FontWeight="Medium"
+        />
+                    <Label 
+        Content="Delivery Time"
+        Grid.Row="9"
+        Grid.Column="0"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="15"
+        FontWeight="Medium"
+        />
+                    <Label 
+        Content="Options"
+        Grid.Row="10"
+        Grid.Column="0"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="15"
+        FontWeight="Medium"
+        />
+
+
+                    <TextBox
+        x:Name="Id"  
+        Text="{Binding Path=Id}"
+        MaxLength="9"
+        PreviewTextInput="TextBoxWithPeriod_OnPreviewTextInput"
+        Grid.Row="0"
+        Grid.Column="1"
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+        Width="160"
+        Height="30"
+       
+            />
+                    <Button
+                        Content="{Binding}"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                       Click="Sender_Click"
+                        ToolTip="View Sender"
+                        x:Name="Sender"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        HorizontalAlignment="center" 
+                        VerticalAlignment="Center"
+                        FontSize="15"
+                         Height="40"
+                        FontWeight="Medium"/>
+                    <ComboBox 
+                         Name="SenderCombo"
+                         ItemsSource="{Binding}"
+        Grid.Row="1"
+        Grid.Column="1"
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+       Width="160"
+        Height="30"
+      
+        />
+                    <Button
+                        Content="{Binding}"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                       Click="Getter_Click"
+                        ToolTip="View Getter"
+                        x:Name="Getter"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        HorizontalAlignment="center" 
+                        VerticalAlignment="Center"
+                        FontSize="15"
+                         Height="40"
+                        FontWeight="Medium"/>
+                    <ComboBox 
+                         Name="GetterCombo"
+                         ItemsSource="{Binding}"
+        Grid.Row="2"
+        Grid.Column="1"
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+       Width="160"
+        Height="30"
+      
+        />
+                    <Label    
+               Content="{Binding Path=weight}"
+                        Name="Weight"
+              Grid.Row="3"
+              Grid.Column="1"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
+            Width="160"
+              Height="30"
+              FontSize="15"
+              FontWeight="Medium"
+          />
+                    <ComboBox 
+                         Name="WeightCombo"
+                         ItemsSource="{Binding}"
+        Grid.Row="3"
+        Grid.Column="1"
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+       Width="160"
+        Height="30"
+      
+        />
+                    <Label  
+                        Name="Priorites"
+               Content="{Binding Path=priorities}"
+              Grid.Row="4"
+              Grid.Column="1"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
+            Width="160"
+              Height="30"
+              FontSize="15"
+              FontWeight="Medium"
+          />
+                    <ComboBox 
+                         Name="PrioritiesCombo"
+                         ItemsSource="{Binding}"
+        Grid.Row="4"
+        Grid.Column="1"
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+       Width="160"
+        Height="30"
+      
+        />
+                    <Button
+                        Click="Drone_Click"
+                        Content="{Binding}"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        ToolTip="View Drone"
+                        x:Name="Drone"
+                        Grid.Row="5"
+                        Grid.Column="1"
+                        HorizontalAlignment="center" 
+                        VerticalAlignment="Center"
+                        FontSize="15"
+                        FontWeight="Medium"/>
+                    <Label    
+               Content="{Binding Path=TimeCreation}"
+              Grid.Row="6"
+              Grid.Column="1"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
+            Width="160"
+              Height="30"
+              FontSize="15"
+              FontWeight="Medium"
+          />
+                    <Label    
+               Content="{Binding Path=Assignation}"
+              Grid.Row="7"
+              Grid.Column="1"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
+            Width="160"
+              Height="30"
+              FontSize="15"
+              FontWeight="Medium"
+          />
+                    <Label    
+               Content="{Binding Path=ColectionTime}"
+              Grid.Row="8"
+              Grid.Column="1"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
+            Width="160"
+              Height="30"
+              FontSize="15"
+              FontWeight="Medium"
+          />
+                    <Label    
+               Content="{Binding Path=DeliveryTime}"
+              Grid.Row="9"
+              Grid.Column="1"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
+            Width="160"
+              Height="30"
+              FontSize="15"
+              FontWeight="Medium"
+          />
+                    <ComboBox 
+                         Name="Options"
+                         
+        Grid.Row="10"
+        Grid.Column="1"
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+       Width="160"
+        Height="30"
+      
+        />
+
+
+
+                </Grid>
 
 
                 <Button
                 Height="60"
                 Width="60"
+                    Margin="0,20,0,0"
                 VerticalAlignment="Bottom"
                
                 Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}" Background="#FF0D3251"
