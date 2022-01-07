@@ -28,10 +28,21 @@ namespace PL
         private bool _hidden;
         public MainWindow()
         {
-            var lp = new LoginPage();
-            lp.ShowDialog();
-            InitializeComponent();
             Ibl = BlApi.BlFactory.GetBl();
+            var lp = new LoginPage(Ibl);
+            lp.ShowDialog();
+            if (lp.working)
+            {
+                /*
+                UserInfo newWin = new UserInfo(win.User);
+                newWin.Show();
+                this.Close();
+                */
+                MessageBox.Show("gfgdf","gfdgdf");
+            }
+           
+            InitializeComponent();
+           
             //_simulationPage = new SimulationPage(_bl);
         }
 

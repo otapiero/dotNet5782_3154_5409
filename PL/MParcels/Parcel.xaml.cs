@@ -123,21 +123,23 @@ namespace PL.MParcels
 
         private void Drone_Click(object sender, RoutedEventArgs e)
         {
-            var temp = (BO.DroneInParcel)parcel.drone;
-            var newDrone = new BO.DroneBL();
-            newDrone = ibl.SearchDrone(temp.Id);
-            new Drone(ibl, newDrone,1).ShowDialog();
+            if (parcel.Assignation != new DateTime() && parcel.DeliveryTime == new DateTime())
+            {
+                var temp = (BO.DroneInParcel)parcel.drone;
+                var newDrone = new BO.DroneBL();
+                newDrone = ibl.SearchDrone(temp.Id);
+                new Drone(ibl, newDrone,1).ShowDialog();
+            }
         }
 
         private void Getter_Click(object sender, RoutedEventArgs e)
         {
-            if (parcel.Assignation != new DateTime() && parcel.DeliveryTime == new DateTime())
-            {
+           
                 var temp = (BO.CustomerInParcel)parcel.Getter;
                 var newC = new BO.CustomerBl();
                 newC = ibl.SearchCostumer(temp.Id);
                 new MCustomers.Customer(ibl, newC, 1).ShowDialog();
-            }
+            
         }
 
         private void Sender_Click(object sender, RoutedEventArgs e)

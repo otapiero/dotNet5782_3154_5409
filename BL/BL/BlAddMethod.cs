@@ -61,7 +61,7 @@ namespace BL
                 throw new BO.IdDoseNotExist( x.ObjectType, x.Id, x);
             }
         }
-        public void AddNewCustomer(int id, string name, string phone, double longattitude, double lattitude)
+        /*public void AddNewCustomer(int id, string name, string phone, double longattitude, double lattitude)
         {
             try
             {
@@ -72,12 +72,14 @@ namespace BL
                 throw new BO.IdAlredyExist(x.ObjectType,x.Id,x); 
 
             }
-        }
+        }*/
         public void AddNewCustomer(int id, string name, string phone, double longattitude, double lattitude, string pass)
         {
             try
             {
-                idal.AddNewCustomer(id, name, phone, longattitude, lattitude);
+                //idal.AddNewCustomer(id, name, phone, longattitude, lattitude);
+                idal.AddNewCustomer(id, name, phone, longattitude, lattitude, pass);
+
             }
             catch (DO.IdAlredyExist x)
             {

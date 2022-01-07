@@ -15,7 +15,7 @@ namespace DalApi
         DO.Station SearchStation(int id);
         void AddNewDrone(int id, string _model);
         void AddNewStation(int id, string _name, double _Longitude, double _Lattitude, int _chargeSlots);
-        void AddNewCustomer(int _id, string _Name, string _Phone, double _Longitude, double _Lattitude);
+        //void AddNewCustomer(int _id, string _Name, string _Phone, double _Longitude, double _Lattitude);
         void AddNewCustomer(int _id, string _Name, string _Phone, double _Longitude, double _Lattitude, string pass);
         void AddNewParcel(int _Sender, int _TargetId, int _Wheight, int _Priority);
         void ConnectParcelToDrone(int idParcel);

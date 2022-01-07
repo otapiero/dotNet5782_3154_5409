@@ -144,7 +144,8 @@ namespace PL.MCustomers
                         double.TryParse(TextBoxLatitude.Text, out var lat);
                         if ((lat != new double() && lon != new double()))
                         {
-                            ibl.AddNewCustomer(id, name, phone, lon, lat);
+                            string pass = "0";
+                            ibl.AddNewCustomer(id, name, phone, lon, lat,pass);
                             MessageBox.Show("Done", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                             cancel = 1;
                             this.Close();

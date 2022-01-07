@@ -46,6 +46,7 @@ namespace DAL
                 newCustomer.Phone = GetRandomPhone();
                 newCustomer.Longitude = r.NextDouble() * 60;
                 newCustomer.Lattitude = r.NextDouble() * 60;
+                newCustomer.Password = "0";
                 customers.Add(newCustomer);
 
             }

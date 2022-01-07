@@ -65,6 +65,7 @@ namespace BL
                 temp.Id = x.Id;
                 temp.name = x.Name;
                 temp.numberPhone = x.Phone;
+                temp.password = x.Password;
                 temp.location = new(x.Longitude, x.Lattitude);
                 var parcels = idal.AllParcels();
                 foreach (var y in parcels)

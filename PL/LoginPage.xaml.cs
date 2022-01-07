@@ -19,10 +19,15 @@ namespace PL
     /// </summary>
     public partial class LoginPage : Window
     {
+        public BlApi.IBL Ibl;
+        public BO.CustomerBl user;
+        public bool working = false;
         MainWindow wind = (MainWindow)Application.Current.MainWindow;
-        public LoginPage()
+        public LoginPage(BlApi.IBL _Ibl)
         {
             InitializeComponent();
+            Ibl = _Ibl;
+            user = new();
         }
 
         private void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
@@ -39,9 +44,28 @@ namespace PL
             {
                 Close();
             }
-            else
+            else if (CheckBoxUser.IsChecked==true)
             {
-                WrongPassword.Text = "username or password are incorrect";
+                try
+                {
+                    int.TryParse(UserNameTextBox.Text, out var id);
+                    user = Ibl.SearchCostumer(id);
+                    if (user.password == PasswordBox.Password)
+                    { 
+                        var ab = new UserWindows(Ibl, user);
+                        ab.ShowDialog();
+                        Close(); 
+                    }
+                    else
+                    {
+                        working = true;
+                        WrongPassword.Text = "username or password are incorrect";
+                    }
+                }
+                catch (Exception ) // can't find the user in bl
+                {
+                    WrongPassword.Text = "ID is not exists. choose another or register.";
+                }
             }
         }
 
@@ -59,6 +83,12 @@ namespace PL
         {
             Close();
             wind.Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var lp = new SignUp(Ibl);
+            lp.ShowDialog();
         }
     }
 }

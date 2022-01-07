@@ -14,7 +14,7 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen"
         Background="{x:Null}"
-        Height="450"
+        Height="500"
         Width="370" WindowStyle="None" AllowsTransparency="True"
        
         >
@@ -109,7 +109,7 @@
                         Name="UserNameTextBox"
                         Width="200"
                         FontSize="18"
-                        materialDesign:HintAssist.Hint="Username"  
+                        materialDesign:HintAssist.Hint="Username or ID"  
                         materialDesign:HintAssist.IsFloating="True"
                         TextChanged="UserNameTextBox_OnTextChanged" CaretBrush="#FF0D3251" SelectionBrush="#FF104470"
                     />
@@ -163,6 +163,7 @@
                             ToolTip="Don't have a user? Sign up now!"
                             Foreground="#FF0D3251"
                             FontSize="12"
+                            Click="Button_Click"    
                             Margin="45,0,0,0"
                             HorizontalAlignment="Right"
                             HorizontalContentAlignment="Right"
