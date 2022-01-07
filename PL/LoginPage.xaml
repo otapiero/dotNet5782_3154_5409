@@ -95,8 +95,9 @@
                     <RowDefinition Height="20"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="20"/>
+                    <RowDefinition Height="20"/>
                     <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+                    </Grid.RowDefinitions>
 
                 <StackPanel
                     Grid.Row="0"
@@ -145,8 +146,35 @@
                         Foreground="#FF0D3251"/>
 
                 </StackPanel>
+                    <StackPanel
+                    Grid.Row="3"
+                    Orientation="Horizontal"
+                    Width="280"
+                >
+                        <CheckBox
+                            Style="{StaticResource MaterialDesignCheckBox}"
+                            Name="CheckBoxUser"
+                            HorizontalAlignment="Left"
+                           >
+                            Login As User
+                        </CheckBox>
+                        <Button
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            ToolTip="Don't have a user? Sign up now!"
+                            Foreground="#FF0D3251"
+                            FontSize="12"
+                            Margin="45,0,0,0"
+                            HorizontalAlignment="Right"
+                            HorizontalContentAlignment="Right"
+                            Height="20">
+                            Don't have a user?
+                        </Button>
 
-                <Grid Grid.Row="4">
+
+
+                    </StackPanel>
+
+                    <Grid Grid.Row="5">
 
                     <Border
                         Grid.Column="0"
@@ -173,7 +201,7 @@
 
                 <TextBlock
                     Name="WrongPassword"
-                    Grid.Row="3"
+                    Grid.Row="4"
                     FontSize="15"
                     TextAlignment="Left"
                     Foreground="Red"

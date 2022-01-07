@@ -336,7 +336,7 @@ namespace BL
                 throw new BO.WrongStatusObject(x.ObjectType, x.Id, x.Message);
             }
         }
-        void DeleteParcel(int id)
+        public void DeleteParcel(int id)
         {
             try
             {

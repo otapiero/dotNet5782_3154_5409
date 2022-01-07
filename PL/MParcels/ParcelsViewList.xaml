@@ -200,7 +200,7 @@
             Width="50"
             Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
             Height="50"
-            HorizontalAlignment="Center"
+            HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
             Click="Remove_Click"
             Grid.RowSpan="2" Background="#FF0D3251"
@@ -212,23 +212,7 @@
                 />
         </Button>
 
-        <Button 
-            Grid.Row="1"
-            x:Name="InActive"
-            Width="50"
-            Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
-            Height="50"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Bottom"
-            Click="InActive_Click"
-            Grid.RowSpan="2" Background="#FF0D3251"
-           >
-            <materialDesign:PackIcon
-                Width="40"
-                Height="40"
-                Kind="PackageDown"
-            />
-        </Button>
+       
 
         <Button
             Grid.Row="1"

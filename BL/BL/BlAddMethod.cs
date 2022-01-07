@@ -73,6 +73,18 @@ namespace BL
 
             }
         }
+        public void AddNewCustomer(int id, string name, string phone, double longattitude, double lattitude, string pass)
+        {
+            try
+            {
+                idal.AddNewCustomer(id, name, phone, longattitude, lattitude);
+            }
+            catch (DO.IdAlredyExist x)
+            {
+                throw new BO.IdAlredyExist(x.ObjectType, x.Id, x);
+
+            }
+        }
 
         public void AddNewParcel(int senderId, int targetId, int wheigt, int Priority)
         {

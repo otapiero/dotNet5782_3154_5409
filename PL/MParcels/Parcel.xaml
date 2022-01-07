@@ -233,19 +233,16 @@ Grid.Column="2"
         />
 
 
-                    <TextBox
+                    <Label
         x:Name="Id"  
-        Text="{Binding Path=Id}"
-        MaxLength="9"
-        PreviewTextInput="TextBoxWithPeriod_OnPreviewTextInput"
+        Content="{Binding Path=Id}"
         Grid.Row="0"
         Grid.Column="1"
-        VerticalAlignment="Stretch"
-        HorizontalAlignment="Stretch"
-        VerticalContentAlignment="Center"
-        HorizontalContentAlignment="Center"
-        Width="160"
-        Height="30"
+         HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="15"
+        FontWeight="Medium"
        
             />
                     <Button
@@ -380,6 +377,7 @@ Grid.Column="2"
               FontWeight="Medium"
           />
                     <Label    
+                        Name="Asig"
                Content="{Binding Path=Assignation}"
               Grid.Row="7"
               Grid.Column="1"
@@ -440,6 +438,8 @@ Grid.Column="2"
                 <Button
                 Height="60"
                 Width="60"
+                    Name="Ok"
+                    Click="Button_Click_1"
                     Margin="0,20,0,0"
                 VerticalAlignment="Bottom"
                

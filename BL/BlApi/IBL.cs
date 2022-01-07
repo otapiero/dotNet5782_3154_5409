@@ -11,6 +11,7 @@ namespace BlApi
         void AddNewStation(int id, string name, double longattitude, double lattitude, int numChargeSlot);
         void AddNewDrone(int id, string model, int wheigt, int stationId);
         void AddNewCustomer(int id, string name, string phone, double longattitude, double lattitude);
+        void AddNewCustomer(int id, string name, string phone, double longattitude, double lattitude, string pass);
         void AddNewParcel(int senderId, int targetId, int wheigt, int Priority);
         BO.BaseStation SearchStation(int id);
         BO.CustomerBl SearchCostumer(int id);
@@ -21,11 +22,12 @@ namespace BlApi
         void UpdateCostumer(int id, string name, string phone);
         void SendDroneToCharge(int id);
 
+        void DeliverPackage(int id);
         void CollectPackage(int id);
+        void DeleteParcel(int id);
+
         void AssignPackageToDrone(int id);
         void RelesaeDroneFromCharge(int id, double time);
-        void DeliverPackage(int id);
-        void DeleteParcel(int id);
         IEnumerable<BO.BaseStationToList> ListStation();
         IEnumerable<BO.CustomerToList> ListCustomer();
         IEnumerable<BO.DroneToList> ListDrones();

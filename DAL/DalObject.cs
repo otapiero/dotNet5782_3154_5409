@@ -129,6 +129,23 @@ namespace DAL
 
             DataSource.customers.Add(temp);
         }
+        public void AddNewCustomer(int _id, string _Name, string _Phone, double _Longitude, double _Lattitude, string pass)
+        {
+
+            if (DataSource.customers.Exists(x => x.Id == _id))
+            {
+                throw new DO.IdAlredyExist("Id alredy use.", "costumer", _id);
+            }
+            DO.Costumer temp = new();
+            temp.password = pass;
+            temp.Id = _id;
+            temp.Name = _Name;
+            temp.Phone = _Phone;
+            temp.Longitude = _Longitude;
+            temp.Lattitude = _Lattitude;
+
+            DataSource.customers.Add(temp);
+        }
         /// <summary>method  AddNewParcel </summary>
         /// <param name="_Sender"> customer id of sender</param>
         /// <param name="_TargetId">customer id of target</param>

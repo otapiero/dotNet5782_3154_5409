@@ -82,10 +82,7 @@ namespace PL.MParcels
             }
         }
 
-        private void InActive_Click(object sender, RoutedEventArgs e)
-        {
-            //_wnd.DataDisplay.Content = new InActiveBusesViewPage(_bl);
-        }
+      
 
         private void Remove_Click(object sender, RoutedEventArgs e)
         {
@@ -98,10 +95,11 @@ namespace PL.MParcels
             {
                 var p = (BO.ParcelToList)ParcelsDataGrid.SelectedItem;
 
-               
                 try
                 {
-                    ibl.SearchParcel(p.Id);
+                    if (p.Status != ParcelStatus.Assigned)
+                    { ibl.DeleteParcel(p.Id); }
+                    else MessageBox.Show("The parcel was asigment", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 catch (BO.IBException ex)
                 {

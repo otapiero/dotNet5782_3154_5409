@@ -335,7 +335,7 @@ Grid.Column="2"
                    
                     <Button
                         Style="{StaticResource MaterialDesignFlatButton}"
-                      
+                        Click="ParcelID_Click"
                         ToolTip="Parcel"
                         x:Name="ParcelID"
                         Grid.Row="8"
@@ -352,6 +352,7 @@ Grid.Column="2"
                 <Button
                 Height="60"
                 Width="60"
+                    Name="Ok"
                 VerticalAlignment="Bottom"
                 Click="Update_Bottun"
                 Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}" Background="#FF0D3251"
