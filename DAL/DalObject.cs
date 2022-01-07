@@ -69,7 +69,6 @@ namespace DAL
             }
             DO.Parcel found = DataSource.parcels.Find(x => x.Id.Equals(id));
             return found;
-
         }
         /// <summary>method AddNewDrone </summary>
         /// <param name="_model"> model of drone</param>
@@ -165,43 +164,22 @@ namespace DAL
             try
             {
                 DO.Drone find = DataSource.drones.Find(x => x.Id > 0);
-                DO.Drone temp = find;
-                DataSource.drones.Remove(find);
-                DataSource.drones.Add(temp);
+             
                 DO.Parcel pocket = SearchParcel(idParcel);
                 DO.Parcel tempParcel = pocket;
                 tempParcel.DroneId = find.Id;
                 DataSource.parcels.Remove(pocket);
                 DataSource.parcels.Add(tempParcel);
             }
-            catch
-            { }
-
-
-
-        }
-        /// <summary>method ParceCollectionByDrone - the function get parcel and update time picked up </summary>
-        /// <param name="idParcel"> id parcel pickedup</param>
-        public void ParceCollectionByDrone(int idParcel)
-        {
-            try
-            {
-                DO.Parcel pocket = SearchParcel(idParcel);
-                //if the parcel exsist
-                if (pocket.Id > 0)
-                {
-                    //update picked up time on the parcel lists
-                    DO.Parcel tempPocket = pocket;
-                    tempPocket.PickedUp = DateTime.Now;
-                    DataSource.parcels.Remove(pocket);
-                    DataSource.parcels.Add(tempPocket);
-                }
-            }
             catch (DO.IdDoseNotExist x)
             {
-                throw new DO.IdDoseNotExist(x.Message,x.ObjectType, x.Id);
+                throw new DO.IdDoseNotExist(x.Message, x.ObjectType, x.Id);
             }
+
+
+
         }
+      
         public void DeleteParcel(int idParcel)
         {
             try
@@ -409,7 +387,7 @@ namespace DAL
         }
         public IEnumerable<DO.Parcel> ListOfParcels(Predicate<DO.Parcel> f)
         {
-            return DataSource.parcels.FindAll(f);
+            return DataSource.parcels.FindAll(x=>(x.Availble==true)).FindAll(f);
         }
         public IEnumerable<DO.DroneCharge> ListOfDronesInCharge(Predicate<DO.DroneCharge> f)
         {
@@ -443,7 +421,7 @@ namespace DAL
         ///<returns>list of all parcels</returns>
         public IEnumerable<DO.Parcel> AllParcels()
         {
-            return DataSource.parcels.Select(item => item);
+            return DataSource.parcels.FindAll(item => item.Availble==true);
         }
         public IEnumerable<DO.DroneCharge> AllDronesIncharge()
         {

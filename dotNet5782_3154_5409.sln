@@ -23,9 +23,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleUI_BL", "ConsoleUI_B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL", "PL\PL.csproj", "{EBD040C7-7D69-47A2-AB2D-6A367BA0BDCC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalFacade", "DalApi\DalFacade.csproj", "{861A0160-E999-4E7A-ACC8-86CFF9A9529C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalFacade", "DalApi\DalFacade.csproj", "{861A0160-E999-4E7A-ACC8-86CFF9A9529C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalXml", "DalXml\DalXml.csproj", "{502FAAC2-2CE5-4940-B2B3-138B4CDA3C40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalXml", "DalXml\DalXml.csproj", "{502FAAC2-2CE5-4940-B2B3-138B4CDA3C40}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{DCE4788D-399C-4946-A506-412645036678}"
+	ProjectSection(SolutionItems) = preProject
+		config.xml = config.xml
+		Costumer.xml = Costumer.xml
+		Drone.xml = Drone.xml
+		DroneCarge.xml = DroneCarge.xml
+		Parcel.xml = Parcel.xml
+		Station.xml = Station.xml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

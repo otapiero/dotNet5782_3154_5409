@@ -18,7 +18,6 @@ namespace DalApi
         void AddNewCustomer(int _id, string _Name, string _Phone, double _Longitude, double _Lattitude);
         void AddNewParcel(int _Sender, int _TargetId, int _Wheight, int _Priority);
         void ConnectParcelToDrone(int idParcel);
-        void ParceCollectionByDrone(int idParcel);
         void DeliveryParcelToCustomer(int idParcel);
         void SendDroneToCharge(int idDrone, int idStation);
         void ReleseDroneFromCharge(int idDrone);

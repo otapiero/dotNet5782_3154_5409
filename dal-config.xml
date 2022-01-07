@@ -1,0 +1,7 @@
+<config>
+<dal>data</dal>
+<dal-packages>
+<data>DalObject</data>
+<xml>DalXml</xml>
+</dal-packages>
+</config>
