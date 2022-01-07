@@ -137,7 +137,8 @@ namespace ConsoleUI_BL
                     if (double.TryParse(Console.ReadLine(), out lattitude) == false) { Console.WriteLine("wrong format of input"); break; };
                     try
                     {
-                        options.AddNewCustomer(id, stringName, phone, longattitude, lattitude);
+                        string pass = "0";
+                        options.AddNewCustomer(id, stringName, phone, longattitude, lattitude, pass);
 
                     }
                     catch (BO.IBException x)

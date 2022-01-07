@@ -1,0 +1,160 @@
+﻿<Window x:Class="PL.UserWindows"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="UserWindows" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStartupLocation="CenterScreen"
+        Background="{x:Null}"
+         Height="650"
+        Width="1000" WindowStyle="None" AllowsTransparency="True"
+       
+        >
+    <Border
+         CornerRadius="40"
+         BorderBrush="#FF0D3251"
+        Background="White">
+        <Border
+        CornerRadius="35,35,35,35"
+        BorderBrush="#FF0D3251"
+        BorderThickness="4"
+        >
+            <Border.Background>
+                <ImageBrush ImageSource="/Items/drone.jpg" Stretch="Fill" TileMode="Tile" Opacity="0.5">
+                    <ImageBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform CenterY="0.5" CenterX="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </ImageBrush.RelativeTransform>
+                </ImageBrush>
+            </Border.Background>
+
+
+            <StackPanel
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Margin="0,0,0,0"
+            >
+
+                <Button
+                Name="Close"
+                HorizontalAlignment="Right"
+                Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
+                Margin="0,20,0,0"
+                Click="Close_OnClick" Background="#FFD62525"
+            >
+                    <materialDesign:PackIcon
+                    Kind="Close"
+                    Width="30"
+                    Height="30"
+                />
+                </Button>
+
+                <StackPanel
+                Orientation="Vertical"
+                >
+
+                    <materialDesign:PackIcon
+                HorizontalAlignment="Center"
+                Height="70"
+                Width="70"
+                Kind="Drone"
+                Opacity="0.9"
+                Foreground="#FF0D3251"/>
+
+                    <TextBlock
+                    HorizontalAlignment="Center"
+                    Style="{StaticResource MaterialDesignButtonTextBlock}"
+                    FontSize="25"
+                    Text="Welcome" Foreground="#FF0D3251"
+                    />
+
+                </StackPanel>
+
+                <Grid
+                Name="LoginGrid"
+                Margin="30"
+                    Width="900"
+                    Height="400"
+                >
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0.2*"/>
+                        
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                        <ListView
+            Grid.Row="0"
+            x:Name="ParcelsDataGrid"
+       MouseDoubleClick="ClickedParcel" 
+            ItemsSource="{Binding}"
+            FontSize="15"
+            HorizontalAlignment="Stretch"
+            HorizontalContentAlignment="Left"
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Center"
+            Margin="0,0,0,80"
+           MinHeight="280" 
+            >
+
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=Id}" />
+                                    <GridViewColumn Header="Name Sender"  DisplayMemberBinding="{Binding Path=NameSender}" />
+                                    <GridViewColumn Header="Name Getter" DisplayMemberBinding="{Binding Path=NameGetter}" />
+                                    <GridViewColumn Header="Weight"   DisplayMemberBinding="{Binding Path=Weight}" />
+                                    <GridViewColumn Header="Priorities" DisplayMemberBinding="{Binding Path=Priorities}" />
+                                    <GridViewColumn Header="Status"   DisplayMemberBinding="{Binding Path=Status}" />
+
+                                </GridView>
+                            </ListView.View>
+
+                        </ListView>
+
+                        <Button
+            Grid.Row="1"
+            x:Name="Add"
+            Click="Add_OnClick"
+            Width="50"
+            Height="50"
+            Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom" Margin="0,0,0,0" Background="#FF0D3251"
+            >
+
+                            <materialDesign:PackIcon
+                Kind="Add"
+                Width="50" 
+                Height="50"
+               >
+
+                            </materialDesign:PackIcon>
+
+                        </Button>
+
+
+              
+
+                </Grid>
+
+            </StackPanel>
+
+        </Border>
+    </Border>
+
+</Window>

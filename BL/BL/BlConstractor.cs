@@ -130,8 +130,6 @@ namespace BL
 
         }
 
-
-
         private static double DistanceLocation(BO.Location x, BO.Location y)
         {
             double locX = Math.Pow(x.Lattitude - y.Lattitude, 2);

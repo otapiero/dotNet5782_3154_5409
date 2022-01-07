@@ -65,6 +65,7 @@ namespace BL
                 temp.Id = x.Id;
                 temp.name = x.Name;
                 temp.numberPhone = x.Phone;
+                temp.password = x.Password;
                 temp.location = new(x.Longitude, x.Lattitude);
                 var parcels = idal.AllParcels();
                 foreach (var y in parcels)
@@ -157,12 +158,17 @@ namespace BL
             BO.ParcelBl temp = new();
             try
             {
+
                 var x = idal.SearchParcel(id);
-                var drone = SearchDrone(x.DroneId);
                 temp.drone = new();
-                temp.drone.Battery = drone.Battery;
-                temp.drone.CurrentLocation = drone.CurrentLocation;
-                temp.drone.Id = drone.Id;
+                if (x.DroneId != 0)
+                {
+                    var drone = SearchDrone(x.DroneId);
+                    temp.drone.Battery = drone.Battery;
+                    temp.drone.CurrentLocation = drone.CurrentLocation;
+                    temp.drone.Id = drone.Id;
+                }
+                else temp.drone.Id = 0;
                 temp.Id = x.Id;
                 temp.priorities =(BO.Priorities)x.Priority;
                 var sender = SearchCostumer(x.Sender);

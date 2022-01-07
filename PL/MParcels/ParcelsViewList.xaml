@@ -46,7 +46,15 @@
                 Name="GroupBy" 
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Center"
-                materialDesign:HintAssist.Hint="Group By"/>
+                materialDesign:HintAssist.Hint="Group By"
+                    SelectionChanged="GroupBy_SelectionChanged">
+                    <ComboBoxItem>
+                        Name Getter
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        Name Sender
+                    </ComboBoxItem>
+                </ComboBox>
                 <Button
                      Margin="10,0,0,0"
                     Height="25"
@@ -63,7 +71,98 @@
                          Foreground="White"/>
                 </Button>
             </StackPanel>
+            <StackPanel
+               
+            Grid.Row="0"
+            Grid.Column="2"
+            Orientation="Horizontal"
+            HorizontalAlignment="Center"
+            Margin="0,20,0,0"
+            >
+                <ComboBox
+                Width="150"
+                SelectionChanged="ComboBox_SelectionChanged" 
+                Name="WeightSelector" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center"
+                materialDesign:HintAssist.Hint="Choose Weight"/>
+                <Button
+                     Margin="10,0,0,0"
+                    Height="25"
+                    Width="25"
+                    Click="Button_Click_Weight"
+                    Background="#FF0D3251"
+                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                    ToolTip="MaterialDesignFloatingActionMiniAccentButton" 
+                    BorderBrush="#FF0970C5">
+                    <materialDesign:PackIcon
+                        Kind="Refresh"
+                        Height="15"
+                         Width="15" 
+                         Foreground="White"/>
+                </Button>
+            </StackPanel>
 
+            <StackPanel
+            Grid.Row="0"
+            Grid.Column="1"
+            Orientation="Horizontal"
+            HorizontalAlignment="Center"
+           Margin="0,20,0,0"
+            >
+                <ComboBox
+                Width="150"
+                SelectionChanged="ComboBox_SelectionChanged" 
+                Name="StatusSelector" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center"
+                materialDesign:HintAssist.Hint="Choose Status"/>
+                <Button
+                     Margin="10,0,0,0"
+                    Height="25"
+                    Width="25"
+                    Background="#FF0D3251"
+                    Click="Button_Click_Status"
+                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                    ToolTip="MaterialDesignFloatingActionMiniAccentButton" 
+                    BorderBrush="#FF0970C5">
+                    <materialDesign:PackIcon
+                        Kind="Refresh"
+                        Height="15"
+                         Width="15" 
+                         Foreground="White"/>
+                </Button>
+            </StackPanel>
+            <StackPanel
+            Grid.Row="0"
+            Grid.Column="3"
+            Orientation="Horizontal"
+            HorizontalAlignment="Center"
+           Margin="0,20,0,0"
+            >
+                <ComboBox
+                Width="150"
+                SelectionChanged="ComboBox_SelectionChanged" 
+                Name="PrioritiesSelector" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center"
+                materialDesign:HintAssist.Hint="Choose Priorities"/>
+                <Button
+                     Margin="10,0,0,0"
+                    Height="25"
+                    Width="25"
+                    Background="#FF0D3251"
+                    Click="Button_Click_Pr" 
+                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                    ToolTip="MaterialDesignFloatingActionMiniAccentButton" 
+                    BorderBrush="#FF0970C5">
+                    <materialDesign:PackIcon
+                        Kind="Refresh"
+                        Height="15"
+                         Width="15" 
+                         Foreground="White"/>
+                </Button>
+            </StackPanel>
 
         </Grid>
 
@@ -78,15 +177,17 @@
             VerticalAlignment="Center"
             VerticalContentAlignment="Center"
             Margin="0,0,0,80"
-           MinHeight="450"
+           MinHeight="450" 
             >
 
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Base ID" DisplayMemberBinding="{Binding Path=Id}" />
-                    <GridViewColumn Header="Name"  DisplayMemberBinding="{Binding Path=Name}" />
-                    <GridViewColumn Header="Avilable" DisplayMemberBinding="{Binding Path=NumAvilableChargeStation}" />
-                    <GridViewColumn Header="tafus"   DisplayMemberBinding="{Binding Path=NumNotAvilableChargeStation}" />
+                    <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=Id}" />
+                    <GridViewColumn Header="Name Sender"  DisplayMemberBinding="{Binding Path=NameSender}" />
+                    <GridViewColumn Header="Name Getter" DisplayMemberBinding="{Binding Path=NameGetter}" />
+                    <GridViewColumn Header="Weight"   DisplayMemberBinding="{Binding Path=Weight}" />
+                    <GridViewColumn Header="Priorities" DisplayMemberBinding="{Binding Path=Priorities}" />
+                    <GridViewColumn Header="Status"   DisplayMemberBinding="{Binding Path=Status}" />
 
                 </GridView>
             </ListView.View>
@@ -99,7 +200,7 @@
             Width="50"
             Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
             Height="50"
-            HorizontalAlignment="Center"
+            HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
             Click="Remove_Click"
             Grid.RowSpan="2" Background="#FF0D3251"
@@ -111,23 +212,7 @@
                 />
         </Button>
 
-        <Button 
-            Grid.Row="1"
-            x:Name="InActive"
-            Width="50"
-            Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
-            Height="50"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Bottom"
-            Click="InActive_Click"
-            Grid.RowSpan="2" Background="#FF0D3251"
-           >
-            <materialDesign:PackIcon
-                Width="40"
-                Height="40"
-                Kind="PackageDown"
-            />
-        </Button>
+       
 
         <Button
             Grid.Row="1"

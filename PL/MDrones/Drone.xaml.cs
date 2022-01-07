@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 using BO;
+using PL.MParcels;
+
 namespace PL
 {
     /// <summary>
@@ -135,6 +137,33 @@ namespace PL
             StationCombo.Items.Add("???");
 
             WeightCombo.SelectedItem = x.Weight;
+
+        }
+        public Drone(BlApi.IBL bl1, BO.DroneBL x, int z)
+        {
+           
+            
+            InitializeComponent();
+            MainGrid.RowDefinitions[2].Height = new GridLength(0);
+            MainGrid.RowDefinitions[3].Height = new GridLength(0);
+            MainGrid.RowDefinitions[6].Height = new GridLength(0);
+            MainGrid.RowDefinitions[8].Height = new GridLength(0);
+            Ok.Visibility = Visibility.Hidden;
+            newDrone = false;
+            ibl = bl1;
+            drone = new();
+            Location.Content = x.CurrentLocation.ToString();
+            StatusContenetLabel.Content = x.status;
+            if (x.parcel.Id == 0)
+            {
+                MainGrid.RowDefinitions[8].Height = new GridLength(0);
+            }
+            else ParcelID.Content = x.parcel.Id;
+            BatteryText.Content = x.Battery.ToString().Length < 5 ? x.Battery.ToString() : x.Battery.ToString().Substring(0, 5);
+            DroneId.IsReadOnly = true;
+            ModelText.IsReadOnly = true;
+            DroneId.Text = x.Id.ToString();
+            ModelText.Text = x.Model;
 
         }
 
@@ -352,6 +381,11 @@ namespace PL
             else e.Cancel = true;
         }
 
-       
+        private void ParcelID_Click(object sender, RoutedEventArgs e)
+        {
+            
+            var newC = ibl.SearchParcel(drone.parcel.Id);
+            new Parcel(ibl, newC, 1).ShowDialog();
+        }
     }
 }

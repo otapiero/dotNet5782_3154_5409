@@ -82,7 +82,8 @@ namespace ConsoleUI
                     phone = Console.ReadLine();
                     double.TryParse(Console.ReadLine(), out longattitude);
                     double.TryParse(Console.ReadLine(), out lattitude);
-                    options.AddNewCustomer(id, stringName, phone, longattitude, lattitude);
+                    string pass = "0";
+                    options.AddNewCustomer(id, stringName, phone, longattitude, lattitude, pass);
                     ; break;
                 case "d":
                     Console.WriteLine("Enter new parcel details:\n SenderId,TargetId, wheigt between 0-2" +

@@ -322,6 +322,7 @@ Grid.Column="2"
                 Height="60"
                 Width="60"
                 VerticalAlignment="Bottom"
+                Name="Ok"
                     
                
                 Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}" Background="#FF0D3251" Click="Button_Click_1"

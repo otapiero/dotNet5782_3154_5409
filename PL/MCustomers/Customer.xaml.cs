@@ -49,6 +49,23 @@ namespace PL.MCustomers
 
 
         }
+        public Customer(BlApi.IBL bl1, BO.CustomerBl x, int z)
+        {
+            ibl = bl1;
+            InitializeComponent();
+            customer = x;
+            CustomerWindows.DataContext = x;
+            CustomerId.IsReadOnly = true;
+            NameText.IsReadOnly = true;
+            Phone.IsReadOnly = true;
+            Ok.Visibility = Visibility.Hidden;
+            MainGrid.RowDefinitions[4].Height = new GridLength(0);
+            MainGrid.RowDefinitions[5].Height = new GridLength(0);
+            MainGrid.RowDefinitions[7].Height = new GridLength(0);
+            MainGrid.RowDefinitions[6].Height = new GridLength(0);
+
+
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -127,7 +144,8 @@ namespace PL.MCustomers
                         double.TryParse(TextBoxLatitude.Text, out var lat);
                         if ((lat != new double() && lon != new double()))
                         {
-                            ibl.AddNewCustomer(id, name, phone, lon, lat);
+                            string pass = "0";
+                            ibl.AddNewCustomer(id, name, phone, lon, lat,pass);
                             MessageBox.Show("Done", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                             cancel = 1;
                             this.Close();

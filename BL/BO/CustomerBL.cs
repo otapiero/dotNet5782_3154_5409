@@ -19,6 +19,7 @@ namespace BO
         public string name { get; set; }
         public string numberPhone { get; set; }
         public Location location { get; set; }
+        public string password { get; set; }
 
         public List<ParcelAtCustomer> fromCustomer { get; set; }
         public List<ParcelAtCustomer> toCustomers { get; set; }

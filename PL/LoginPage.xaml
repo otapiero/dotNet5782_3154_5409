@@ -14,7 +14,7 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen"
         Background="{x:Null}"
-        Height="450"
+        Height="500"
         Width="370" WindowStyle="None" AllowsTransparency="True"
        
         >
@@ -95,8 +95,9 @@
                     <RowDefinition Height="20"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="20"/>
+                    <RowDefinition Height="20"/>
                     <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+                    </Grid.RowDefinitions>
 
                 <StackPanel
                     Grid.Row="0"
@@ -108,7 +109,7 @@
                         Name="UserNameTextBox"
                         Width="200"
                         FontSize="18"
-                        materialDesign:HintAssist.Hint="Username"  
+                        materialDesign:HintAssist.Hint="Username or ID"  
                         materialDesign:HintAssist.IsFloating="True"
                         TextChanged="UserNameTextBox_OnTextChanged" CaretBrush="#FF0D3251" SelectionBrush="#FF104470"
                     />
@@ -145,8 +146,36 @@
                         Foreground="#FF0D3251"/>
 
                 </StackPanel>
+                    <StackPanel
+                    Grid.Row="3"
+                    Orientation="Horizontal"
+                    Width="280"
+                >
+                        <CheckBox
+                            Style="{StaticResource MaterialDesignCheckBox}"
+                            Name="CheckBoxUser"
+                            HorizontalAlignment="Left"
+                           >
+                            Login As User
+                        </CheckBox>
+                        <Button
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            ToolTip="Don't have a user? Sign up now!"
+                            Foreground="#FF0D3251"
+                            FontSize="12"
+                            Click="Button_Click"    
+                            Margin="45,0,0,0"
+                            HorizontalAlignment="Right"
+                            HorizontalContentAlignment="Right"
+                            Height="20">
+                            Don't have a user?
+                        </Button>
 
-                <Grid Grid.Row="4">
+
+
+                    </StackPanel>
+
+                    <Grid Grid.Row="5">
 
                     <Border
                         Grid.Column="0"
@@ -173,7 +202,7 @@
 
                 <TextBlock
                     Name="WrongPassword"
-                    Grid.Row="3"
+                    Grid.Row="4"
                     FontSize="15"
                     TextAlignment="Left"
                     Foreground="Red"

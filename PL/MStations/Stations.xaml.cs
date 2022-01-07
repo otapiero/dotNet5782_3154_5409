@@ -90,8 +90,10 @@ namespace PL.MStations
                 var temp = (BO.DroneInCharge)item;
                 var newDrone = new BO.DroneBL();
                 newDrone = ibl.SearchDrone(temp.Id);
-                new Drone(ibl, newDrone).ShowDialog();
-                
+                new Drone(ibl, newDrone,2).ShowDialog();
+                DronesCombo.SelectedItem = null;
+
+
             }
         }
 

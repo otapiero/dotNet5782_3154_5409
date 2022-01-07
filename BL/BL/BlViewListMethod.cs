@@ -129,6 +129,13 @@ namespace BL
         {
             return DronesBl.FindAll(f);
         }
+       
+        public IEnumerable<BO.ParcelToList> ListOfParcels(Predicate<BO.ParcelToList> f)
+        {
+            List<BO.ParcelToList> Parcel = (List<BO.ParcelToList>)ListParcels();
+
+            return Parcel.FindAll(f); ;
+        }
         /// <summary>
         /// list of station with availebal charge post
         /// </summary>
