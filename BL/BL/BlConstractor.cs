@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace BL
 {
@@ -19,12 +22,12 @@ namespace BL
             Random rand = new();
             idal = DalApi.DalFactory.GetDal();
             //data lists
-            IEnumerable<DO.Drone> dronesData = idal.AllDrones();
-            IEnumerable<DO.Parcel> parcelsData = idal.AllParcels();
-            IEnumerable<DO.Costumer> costumerData = idal.AllCustomers();
+            List<DO.Drone> dronesData = idal.AllDrones().ToList();
+            List<DO.Parcel> parcelsData = idal.AllParcels().ToList();
+            List<DO.Costumer> costumerData = idal.AllCustomers().ToList();
             List<DO.Station> stationData = idal.AllStation().ToList();
-
-            
+            List<DO.DroneCharge> drv = idal.AllDronesIncharge().ToList();
+           
             Double[] vs = idal.ElectricityUse();
             double Avilable = vs[0];
             double Light = vs[1];
@@ -36,25 +39,25 @@ namespace BL
 
             List<DO.Parcel> parcelsNotDelivred = idal.ListOfParcels(x => ((x.DroneId != 0) &&(x.Delivered==null))).ToList();
 
-            foreach (var x in parcelsNotDelivred)
+            foreach (var d in parcelsNotDelivred)
             {
 
-                DO.Drone tempDlDrone =dronesData.FirstOrDefault(z => z.Id.Equals(x.DroneId));
+                DO.Drone tempDlDrone =dronesData.FirstOrDefault(z => z.Id.Equals(d.DroneId));
                 if (tempDlDrone.Id!=0)
                 {
-                    DO.Costumer senderCostumer = idal.SearchCostumer(x.Sender);
-                    DO.Costumer targetCostumer = idal.SearchCostumer(x.TargetId);
+                    DO.Costumer senderCostumer = idal.SearchCostumer(d.Sender);
+                    DO.Costumer targetCostumer = idal.SearchCostumer(d.TargetId);
                     BO.Location senderLocation = new(senderCostumer.Longitude, senderCostumer.Lattitude);
                     BO.Location targetLocation = new(targetCostumer.Longitude, targetCostumer.Lattitude);
                     BO.DroneToList temp = new();
                     temp.Id = tempDlDrone.Id;
                     temp.Model = tempDlDrone.Model;
 
-                    temp.Weight = (BO.WeightCategories)x.Wheight;
+                    temp.Weight = (BO.WeightCategories)d.Wheight;
 
                     temp.status = BO.DroneStatuses.Delivery;
                     temp.Battery=50;
-                    if (x.PickedUp == new DateTime())
+                    if (d.PickedUp == new DateTime())
                     {
                         temp.CurrentLocation = FindTheClosestStation(senderLocation, stationData);
                         double min = DistanceLocation(temp.CurrentLocation, senderLocation);
@@ -82,7 +85,7 @@ namespace BL
                     }
 
 
-                    temp.ParcelId = x.Id;
+                    temp.ParcelId = d.Id;
                     DronesBl.Add(temp);
                 }
             }
@@ -95,14 +98,14 @@ namespace BL
             List<DO.Parcel> parcelsDelivred = idal.ListOfParcels(x => x.DroneId != 0 && x.Delivered != null).ToList();
 
 
-            foreach (var x in freeDrones)
+            foreach (var d in freeDrones)
             {
                 int randomcase = rand.Next(0, 2);
                 BO.DroneToList temp = new();
 
-                temp.Id = x.Id;
+                temp.Id = d.Id;
 
-                temp.Model = x.Model;
+                temp.Model = d.Model;
                 temp.Weight = (BO.WeightCategories)rand.Next(3);
                 temp.ParcelId = 0;
                 

@@ -1,5 +1,31 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Drone>
-	<Id>1235</Id>
-	<Model>gety</Model>
-</Drone>
+<?xml version="1.0"?>
+<ArrayOfDrone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Drone>
+    <Id>1</Id>
+    <Model>Alpha</Model>
+  </Drone>
+  <Drone>
+    <Id>2</Id>
+    <Model>delta</Model>
+  </Drone>
+  <Drone>
+    <Id>3</Id>
+    <Model>gema</Model>
+  </Drone>
+  <Drone>
+    <Id>4</Id>
+    <Model>Alpha</Model>
+  </Drone>
+  <Drone>
+    <Id>5</Id>
+    <Model>delta</Model>
+  </Drone>
+  <Drone>
+    <Id>6</Id>
+    <Model>delta</Model>
+  </Drone>
+  <Drone>
+    <Id>7</Id>
+    <Model>delta</Model>
+  </Drone>
+</ArrayOfDrone>

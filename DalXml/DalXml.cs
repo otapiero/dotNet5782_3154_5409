@@ -382,7 +382,7 @@ namespace DAL
             var drones = from x in dronesRootElem.Elements()
                         select new DO.Drone()
                         {
-                            Id = int.Parse(x.Element("ID").Value),
+                            Id = int.Parse(x.Element("Id").Value),
                           Model=x.Element("Model").Value
                         };
 

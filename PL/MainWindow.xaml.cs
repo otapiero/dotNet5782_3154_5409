@@ -14,6 +14,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Media.Animation;
 using MaterialDesignThemes.Wpf;
+using System.IO;
+using System.Xml.Linq;
+using System.Xml.Serialization;
+
 using BO;
 
 namespace PL
@@ -31,6 +35,7 @@ namespace PL
             Ibl = BlApi.BlFactory.GetBl();
             var lp = new LoginPage(Ibl);
             lp.ShowDialog();
+
             if (lp.working)
             {
                 /*
@@ -41,6 +46,7 @@ namespace PL
                 MessageBox.Show("gfgdf","gfdgdf");
             }
            
+          
             InitializeComponent();
            
             //_simulationPage = new SimulationPage(_bl);
