@@ -141,7 +141,6 @@ namespace BL
                 catch(DO.IdDoseNotExist ex)
                 {
                     throw new BO.IdDoseNotExist(ex.ObjectType, ex.Id, ex);
-
                 }
 
             }

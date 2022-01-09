@@ -2,30 +2,16 @@
 <ArrayOfStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Station>
     <Id>1</Id>
-    <Name>vita</Name>
-    <Longitude>1.453753067857471</Longitude>
-    <Lattitude>10.472179954160088</Lattitude>
-    <ChargeSlots>84</ChargeSlots>
-  </Station>
-  <Station>
-    <Id>2</Id>
-    <Name>krfo</Name>
-    <Longitude>56.4625925554254</Longitude>
-    <Lattitude>43.10918021160605</Lattitude>
-    <ChargeSlots>50</ChargeSlots>
-  </Station>
-  <Station>
-    <Id>3</Id>
-    <Name>xhyk</Name>
-    <Longitude>33.6529785365113</Longitude>
-    <Lattitude>37.570769599439004</Lattitude>
+    <Name>yjko</Name>
+    <Longitude>30.89176209219348</Longitude>
+    <Lattitude>38.4230007223892</Lattitude>
     <ChargeSlots>66</ChargeSlots>
   </Station>
   <Station>
-    <Id>4</Id>
-    <Name>dtee</Name>
-    <Longitude>1.1526590684208364</Longitude>
-    <Lattitude>15.42652806985496</Lattitude>
-    <ChargeSlots>5</ChargeSlots>
+    <Id>2</Id>
+    <Name>lvmr</Name>
+    <Longitude>16.76635651698632</Longitude>
+    <Lattitude>52.61329935519644</Lattitude>
+    <ChargeSlots>59</ChargeSlots>
   </Station>
 </ArrayOfStation>
