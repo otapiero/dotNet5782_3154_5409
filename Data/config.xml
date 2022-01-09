@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Config>
-	<idParcel>1</idParcel>
-	<idDrone>1</idDrone>
-	<IdStation>1</IdStation>
-	<IdCustomer>1</IdCustomer>
-	<Avilable>0.5</Avilable>
-	<Light>0.7</Light>
-	<Intermidiate>1</Intermidiate>
-	<Heavy>1.5</Heavy>
-	<chargingRatePerHoure>0.5</chargingRatePerHoure>
+  <idParcel>5</idParcel>
+  <idDrone>1</idDrone>
+  <IdStation>1</IdStation>
+  <IdCustomer>1</IdCustomer>
+  <Avilable>0.5</Avilable>
+  <Light>0.7</Light>
+  <Intermidiate>1</Intermidiate>
+  <Heavy>1.5</Heavy>
+  <chargingRatePerHoure>0.5</chargingRatePerHoure>
 </Config>

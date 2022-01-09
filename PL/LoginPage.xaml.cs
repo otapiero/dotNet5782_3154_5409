@@ -70,7 +70,7 @@ namespace PL
         }
 
         private void UserNameTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
-        {
+            {
             WrongPassword.Text = "";
         }
 

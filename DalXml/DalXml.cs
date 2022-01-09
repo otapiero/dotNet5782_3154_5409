@@ -141,7 +141,7 @@ namespace DAL
         {
             var parcelList = XmlTools.LoadListFromXMLSerializer<DO.Parcel>(parcelPath);
             var configRootElem = XmlTools.LoadListFromXMLElement(configPath);
-            if (parcelList.Exists(x => x.Id.Equals(_Sender)))
+            if (!parcelList.Exists(x => x.Id.Equals(_Sender)))
             {
                 throw new DO.IdDoseNotExist("Id of sender dose not found.", "costumer", _Sender);
             }

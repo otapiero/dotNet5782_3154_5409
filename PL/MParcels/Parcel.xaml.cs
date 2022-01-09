@@ -29,7 +29,7 @@ namespace PL.MParcels
         public Parcel(BlApi.IBL bl1)
         {
             ibl = bl1;
-            parcel = new BO.ParcelBl();
+            
             InitializeComponent();
             MainGrid.RowDefinitions[0].Height = new GridLength(0);
             MainGrid.RowDefinitions[5].Height = new GridLength(0);
@@ -52,7 +52,7 @@ namespace PL.MParcels
             ibl = bl1;
             sendId = id;
             user = true;
-            parcel = new BO.ParcelBl();
+            
             InitializeComponent();
             MainGrid.RowDefinitions[0].Height = new GridLength(0);
             MainGrid.RowDefinitions[1].Height = new GridLength(0);

@@ -22,6 +22,6 @@ namespace DalApi
     public class DalConfigException : Exception
     {
         public DalConfigException(string msg) : base(msg) { }
-        public DalConfigException(string msg, Exception inr)  { }
+        public DalConfigException(string message, Exception inner) : base(message, inner) { }
     }
 }
