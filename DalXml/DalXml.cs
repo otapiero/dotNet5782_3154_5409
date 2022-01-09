@@ -23,7 +23,7 @@ namespace DAL
         private const string dronpath = @"Drone.xml"; //XElement
         private const string stationPath = @"Station.xml"; //XMLSerializer
         private const string parcelPath = @"Parcel.xml"; //XMLSerializer
-        private const string costumerPath = @"Costumer.xml"; //XMLSerializer
+        private const string costumerPath = @"Customer.xml"; //XMLSerializer
         private const string DroneChargePath = @"DroneCarge.xml"; //XElement
         private const string configPath = @"config.xml"; //XMLSerializer
       
