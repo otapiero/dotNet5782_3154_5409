@@ -62,13 +62,14 @@ namespace DAL
         public DO.Parcel SearchParcel(int id)
         {
             var parcelList = XmlTools.LoadListFromXMLSerializer<DO.Parcel>(parcelPath);
+            var parcel = parcelList.FirstOrDefault(x => x.Id == id);
 
-            if (!parcelList.Exists(x => x.Id.Equals(id)))
+            if (parcel.Equals(new DO.Parcel()))
             {
                 throw new DO.IdDoseNotExist("Id not found.", "parcel", id);
             }
-            DO.Parcel found = parcelList.Find(x => x.Id.Equals(id));
-            return found;
+          
+            return parcel;
         }
         public DO.Station SearchStation(int id)
         {

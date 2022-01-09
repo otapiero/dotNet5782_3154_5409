@@ -22,7 +22,7 @@ namespace DAL
             //Set quantity of var 
             int numDrones = r.Next(5, 10);
             int numCustomers = r.Next(10, 20);
-            int numParcels = r.Next(10, 300);
+            int numParcels = r.Next(10, 100);
             int numStations = r.Next(2, 5);
             //Initialize random drones
             for (int i = 0; i < numDrones; i++)
