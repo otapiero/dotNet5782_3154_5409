@@ -1,5 +1,5 @@
 <config>
-<dal>data</dal>
+<dal>xml</dal>
 <dal-packages>
 <data>DalObject</data>
 <xml>DalXml</xml>

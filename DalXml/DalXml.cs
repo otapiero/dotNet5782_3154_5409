@@ -9,6 +9,7 @@ using System.Xml.Linq;
 
 namespace DAL
 {
+
     public class DalXml: DalApi.IDal
     {
         #region singelton
