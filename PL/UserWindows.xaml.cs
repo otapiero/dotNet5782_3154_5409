@@ -43,7 +43,7 @@ namespace PL
         }
         private void Add_OnClick(object sender, RoutedEventArgs e)
         {
-            var ab = new MParcels.Parcel(ibl);
+            var ab = new MParcels.Parcel(ibl, user.Id);
             ab.ShowDialog();
             Refresh();
         }

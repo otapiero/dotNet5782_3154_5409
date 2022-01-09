@@ -15,7 +15,7 @@
         WindowStartupLocation="CenterScreen"
         Background="{x:Null}"
         Height="600"
-        Width="370" WindowStyle="None" AllowsTransparency="True">
+        Width="400" WindowStyle="None" AllowsTransparency="True">
     <Border
          CornerRadius="40"
          BorderBrush="#FF0D3251"
@@ -43,6 +43,7 @@
             <StackPanel
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
+                Width="360"
             Margin="0,0,0,0"
             >
 
@@ -52,7 +53,7 @@
                 Grid.Column="2"
                 HorizontalAlignment="Right"
                 Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
-                Margin="0,20,0,0"
+                Margin="0,0,0,0"
                 Click="Close_OnClick" Background="#FFD62525"
             >
                     <materialDesign:PackIcon
@@ -85,7 +86,7 @@
 
                 <Grid
                 Name="LoginGrid"
-                Margin="30"
+                Margin="10,0,10,0"
                 >
 
                     <Grid.RowDefinitions>
@@ -100,7 +101,7 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="5"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="20"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
@@ -277,7 +278,7 @@
 
                     <TextBlock
                     Name="WrongPassword"
-                    Grid.Row="4"
+                    Grid.Row="11"
                     FontSize="15"
                     TextAlignment="Left"
                     Foreground="Red"

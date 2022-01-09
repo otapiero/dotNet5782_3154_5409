@@ -24,6 +24,8 @@ namespace PL.MParcels
         BO.ParcelBl parcel;
         int cancel = 0;
         bool update = false;
+        bool user = false;
+        int sendId;
         public Parcel(BlApi.IBL bl1)
         {
             ibl = bl1;
@@ -45,7 +47,29 @@ namespace PL.MParcels
             WeightCombo.DataContext = Enum.GetValues(typeof(BO.WeightCategories));
             PrioritiesCombo.DataContext = Enum.GetValues(typeof(BO.Priorities));
         }
-
+        public Parcel(BlApi.IBL bl1,int id)
+        {
+            ibl = bl1;
+            sendId = id;
+            user = true;
+            parcel = new BO.ParcelBl();
+            InitializeComponent();
+            MainGrid.RowDefinitions[0].Height = new GridLength(0);
+            MainGrid.RowDefinitions[1].Height = new GridLength(0);
+            MainGrid.RowDefinitions[5].Height = new GridLength(0);
+            MainGrid.RowDefinitions[6].Height = new GridLength(0);
+            MainGrid.RowDefinitions[7].Height = new GridLength(0);
+            MainGrid.RowDefinitions[8].Height = new GridLength(0);
+            MainGrid.RowDefinitions[9].Height = new GridLength(0);
+            MainGrid.RowDefinitions[10].Height = new GridLength(0);
+            Sender.Visibility = Visibility.Hidden;
+            Getter.Visibility = Visibility.Hidden;
+            Weight.Visibility = Visibility.Hidden;
+            Priorites.Visibility = Visibility.Hidden;
+            GetterCombo.DataContext = ibl.ListCustomer();
+            WeightCombo.DataContext = Enum.GetValues(typeof(BO.WeightCategories));
+            PrioritiesCombo.DataContext = Enum.GetValues(typeof(BO.Priorities));
+        }
         public Parcel(BlApi.IBL bl1, BO.ParcelBl x)
         {
             ibl = bl1;
@@ -157,14 +181,23 @@ namespace PL.MParcels
             {
                 if (!update)
                 {
-                    if (SenderCombo.SelectedItem != null &&
-                        GetterCombo.SelectedItem != null &&
+                    if (GetterCombo.SelectedItem != null &&
                         WeightCombo.SelectedItem != null &&
                         PrioritiesCombo.SelectedItem != null)
                     {
-                        var se = (BO.CustomerToList)SenderCombo.SelectedItem;
+                        int seId=0;
+                        if (user)
+                        {
+                            seId = sendId;
+                        }
+                        else if (SenderCombo.SelectedItem != null)
+                        {
+                            var se = (BO.CustomerToList)SenderCombo.SelectedItem;
+                            seId = se.Id;
+                        }
+                        else
+                        { MessageBox.Show("not enough information", "Error", MessageBoxButton.OK, MessageBoxImage.Warning); }
                         var ge = (BO.CustomerToList)GetterCombo.SelectedItem;
-                        int seId = se.Id;
                         int geId = ge.Id;
                         var we = (int)(BO.WeightCategories)WeightCombo.SelectedItem;
                         var pr = (int)(BO.Priorities)PrioritiesCombo.SelectedItem;

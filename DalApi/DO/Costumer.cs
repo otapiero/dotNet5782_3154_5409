@@ -18,7 +18,7 @@
         public override string ToString()
             {
                 //The function print detail of the object
-                return "Id: " + Id + "\nName: " + Name + "\nPhone: " + Phone + "\nPass: " + Password +
+                return "Id: " + Id + "\nName: " + Name + "\nPhone: " + Phone + 
                     "\nLongitude: " + DO.Cordinates.LongitudeDoubleToString(Longitude) +
                     "\nLattitude: " + DO.Cordinates.LatitudeDoubleToString(Lattitude);
             }
