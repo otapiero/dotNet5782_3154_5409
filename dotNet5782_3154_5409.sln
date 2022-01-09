@@ -31,6 +31,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{DCE4788D-3
 	ProjectSection(SolutionItems) = preProject
 		config.xml = config.xml
 		Costumer.xml = Costumer.xml
+		dal-config.xml = dal-config.xml
 		Drone.xml = Drone.xml
 		DroneCarge.xml = DroneCarge.xml
 		Parcel.xml = Parcel.xml

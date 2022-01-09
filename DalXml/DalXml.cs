@@ -15,6 +15,8 @@ namespace DAL
         static readonly DalXml instance = new DalXml();
 
         #endregion
+        DalXml() { }
+        public static DalApi.IDal Instance { get { return instance; } }
         #region DS XML Files
 
         private const string dronpath = @"Drone.xml"; //XElement
@@ -79,18 +81,26 @@ namespace DAL
         }
         public void AddNewDrone(int id, string _model)
         {
-            var droneRootElem = XmlTools.LoadListFromXMLElement(dronpath);
-            var drone = (from d in droneRootElem.Elements()
-                         where int.Parse(d.Element("Id").Value) == id
-                         select new DO.Drone()
-                         {
-                             Id = int.Parse(d.Element("Id").Value),
-                             Model = d.Element("Model").Value
-                         }).FirstOrDefault();
-            if (drone.Equals(new DO.Drone()))
-            {
-                throw new DO.IdDoseNotExist("Id not found.", "costumer", id);
-            }
+          
+                var droneRootElem = XmlTools.LoadListFromXMLElement(dronpath);
+
+                //make shore bus does not exist already
+                var drones = (from x in droneRootElem.Elements()
+                          where int.Parse(x.Element("Id").Value) == id
+                          select x).FirstOrDefault();
+
+                if (drones == null)
+                {
+                    var droneElem = new XElement("Drone",
+                                  new XElement("Id", id),
+                                  new XElement("Model",_model));
+
+                droneRootElem.Add(droneElem);
+                }
+                else throw new DO.IdAlredyExist("id already exist","drone",id);
+
+                XmlTools.SaveListToXMLElement(droneRootElem, dronpath);
+             
 
         }
         public void AddNewStation(int id, string _name, double _Longitude, double _Lattitude, int _chargeSlots)
@@ -109,7 +119,7 @@ namespace DAL
             StationsList.Add(temp);
             XmlTools.SaveListToXMLSerializer(StationsList, stationPath);
         }
-        public void AddNewCustomer(int _id, string _Name, string _Phone, double _Longitude, double _Lattitude)
+        public void AddNewCustomer(int _id, string _Name, string _Phone, double _Longitude, double _Lattitude, string pass)
         {
             var costumerList = XmlTools.LoadListFromXMLSerializer<DO.Costumer>(costumerPath);
             if (costumerList.Exists(x => x.Id == _id))
@@ -120,6 +130,7 @@ namespace DAL
             temp.Id = _id;
             temp.Name = _Name;
             temp.Phone = _Phone;
+            temp.Password = pass;
             temp.Longitude = _Longitude;
             temp.Lattitude = _Lattitude;
             costumerList.Add(temp);
@@ -128,6 +139,7 @@ namespace DAL
         public void AddNewParcel(int _Sender, int _TargetId, int _Wheight, int _Priority)
         {
             var parcelList = XmlTools.LoadListFromXMLSerializer<DO.Parcel>(parcelPath);
+            var configRootElem = XmlTools.LoadListFromXMLElement(configPath);
             if (parcelList.Exists(x => x.Id.Equals(_Sender)))
             {
                 throw new DO.IdDoseNotExist("Id of sender dose not found.", "costumer", _Sender);
@@ -139,7 +151,8 @@ namespace DAL
 
             DO.Parcel temp = new();
             temp.Availble = true;
-            temp.Id = DataSource.Config.idParcel++;
+            temp.Id =int.Parse(configRootElem.Element("idParcel").Value);
+            configRootElem.Element("idParcel").Value = (int.Parse(configRootElem.Element("idParcel").Value )+ 1).ToString();
             temp.Sender = _Sender;
             temp.TargetId = _TargetId;
             temp.Wheight = (DO.WeightCategories)_Wheight;
@@ -149,47 +162,11 @@ namespace DAL
             temp.PickedUp = null;
             temp.Delivered = null;
             parcelList.Add(temp);
+            XmlTools.SaveListToXMLElement(configRootElem, configPath); 
         }
-        public void ConnectParcelToDrone(int idParcel)
-        {
-            DO.Drone find = DataSource.drones.Find(x => x.Id > 0);
-            DO.Drone temp = find;
-            DO.Parcel pocket = SearchParcel(idParcel);
-            DO.Parcel tempParcel = pocket;
-            tempParcel.DroneId = find.Id;
-            DataSource.parcels.Remove(pocket);
-            DataSource.parcels.Add(tempParcel);
-
-
-        }
-
-        public void DeliveryParcelToCustomer(int idParcel)
-        {
-            try
-            {
-                var parcelList = XmlTools.LoadListFromXMLSerializer<DO.Parcel>(parcelPath);
-
-                DO.Parcel pocket = SearchParcel(idParcel);
-                //if the parcel exsist
-                if (pocket.Id > 0)
-                {
-                    DO.Parcel tempParcel = pocket;
-                    DO.Drone found = SearchDrone(pocket.Id);
-                    DO.Drone tempDrone = found;
-                    tempParcel.Delivered = DateTime.Now;
-                    parcelList.Remove(pocket);
-                    parcelList.Add(tempParcel);
-                    parcelList.Remove(found);
-                    parcelList.drones.Add(tempDrone);
-                }
-                XmlTools.SaveListToXMLSerializer(parcelList, parcelPath);
-
-            }
-            catch (DO.IdDoseNotExist x)
-            {
-                throw new DO.IdDoseNotExist(x.Message, x.ObjectType, x.Id);
-            }
-        }
+      
+        
+       
         public void SendDroneToCharge(int idDrone, int idStation)
         { 
             try
@@ -299,15 +276,22 @@ namespace DAL
         {
             try
             {
-                DO.Drone found = SearchDrone(id);
-                DO.Drone temp = found;
-                temp.Model = model;
-                DataSource.drones.Remove(found);
-                DataSource.drones.Add(temp);
+                var droneRootElem = XmlTools.LoadListFromXMLElement(dronpath);
+                //make shore bus does not exist already
+                var drone = (from x in droneRootElem.Elements()
+                          where int.Parse(x.Element("Id").Value) == id
+                          select x).FirstOrDefault();
+
+                if(drone!= null)
+                {
+                    drone.Element("Model").Value = model;
+                    XmlTools.SaveListToXMLElement(droneRootElem, dronpath);
+                }
+                else
+                    throw new DO.IdDoseNotExist("Id not found.", "drone", id);
             }
             catch (DO.IdDoseNotExist x)
             {
-
                 throw new DO.IdDoseNotExist(x.Message, x.ObjectType, x.Id);
             }
         }
@@ -392,8 +376,16 @@ namespace DAL
         }
         public IEnumerable<DO.Drone> AllDrones()
         {
+            var dronesRootElem = XmlTools.LoadListFromXMLElement(dronpath);
 
+            var drones = from x in dronesRootElem.Elements()
+                        select new DO.Drone()
+                        {
+                            Id = int.Parse(x.Element("ID").Value),
+                          Model=x.Element("Model").Value
+                        };
 
+            return drones;
         }
         public IEnumerable<DO.Costumer> AllCustomers()
         {
@@ -456,13 +448,29 @@ namespace DAL
         }
         public IEnumerable<DO.Drone> ListOfDrones(Predicate<DO.Drone> f)
         {
-            return DataSource.drones.FindAll(f);
+            var dronesRootElem = XmlTools.LoadListFromXMLElement(dronpath);
 
+            var drones = (from x in dronesRootElem.Elements()
+                          select new DO.Drone()
+                          {
+                              Id = int.Parse(x.Element("ID").Value),
+                              Model = x.Element("Model").Value
+                          }).ToList();
+
+            return (drones as List<DO.Drone>).FindAll(f);
         }
 
         public double[] ElectricityUse()
         {
+            var configRootElem = XmlTools.LoadListFromXMLElement(configPath);
 
+            double[] arr = new double[5];
+            arr[0] =double.Parse( configRootElem.Element("Avilable").Value);
+            arr[1] = double.Parse(configRootElem.Element("Light").Value);
+            arr[2] = double.Parse(configRootElem.Element("Intermidiate").Value);
+            arr[3] = double.Parse(configRootElem.Element("Heavy").Value);
+            arr[4] = double.Parse(configRootElem.Element("chargingRatePerHoure").Value);
+            return arr;
 
         }
 

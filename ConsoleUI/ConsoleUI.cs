@@ -106,7 +106,7 @@ namespace ConsoleUI
         static void UpdateMenu()
         {
             string choise;
-            int id, stationId;
+            int id, stationId,parcelId;
             Console.WriteLine("chose an option:\n a to Assign a package to a drone.\n" +
                 " b to collect a package.\n c to deliver a parcel to a customer.\n d to send a drone to a charge station.\n" +
                 " e to relase a drone from the charge station.\n" +
@@ -116,18 +116,20 @@ namespace ConsoleUI
             {
                 case "a":
                     Console.WriteLine("Enter the parcel id.");
+                    int.TryParse(Console.ReadLine(), out parcelId);
+                    Console.WriteLine("Enter the drone id.");
                     int.TryParse(Console.ReadLine(), out id);
-                    options.ConnectParcelToDrone(id);
+                    options.AssignPackageToDrone(parcelId,id);
                     break;
                 case "b":
                     Console.WriteLine("Enter the parcel id.");
                     int.TryParse(Console.ReadLine(), out id);
-                    options.ParceCollectionByDrone(id);
+                    options.CollectPackage(id);
                     break;
                 case "c":
                     Console.WriteLine("Enter the parcel id.");
                     int.TryParse(Console.ReadLine(), out id);
-                    options.DeliveryParcelToCustomer(id);
+                    options.DeliverPackage(id);
                     break;
                 case "d":
                     Console.WriteLine("Enter the drone id.");

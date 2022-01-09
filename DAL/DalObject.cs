@@ -176,26 +176,7 @@ namespace DAL
         }
         /// <summary>method ConnectParcelToDrone - the function get parcel and connect a avilable drone </summary>
         /// <param name="idParcel"> id parcel to delivery</param>
-        public void ConnectParcelToDrone(int idParcel)
-        {
-            try
-            {
-                DO.Drone find = DataSource.drones.Find(x => x.Id > 0);
-             
-                DO.Parcel pocket = SearchParcel(idParcel);
-                DO.Parcel tempParcel = pocket;
-                tempParcel.DroneId = find.Id;
-                DataSource.parcels.Remove(pocket);
-                DataSource.parcels.Add(tempParcel);
-            }
-            catch (DO.IdDoseNotExist x)
-            {
-                throw new DO.IdDoseNotExist(x.Message, x.ObjectType, x.Id);
-            }
-
-
-
-        }
+       
       
         public void DeleteParcel(int idParcel)
         {
@@ -216,29 +197,7 @@ namespace DAL
         }
         /// <summary>method DeliveryParcelToCustomer - the function get parcel and update dilevry time </summary>
         /// <param name="idParcel"> id parcel delivery</param>
-        public void DeliveryParcelToCustomer(int idParcel)
-        {
-            try
-            {
-                DO.Parcel pocket = SearchParcel(idParcel);
-                //if the parcel exsist
-                if (pocket.Id > 0)
-                {
-                    DO.Parcel tempParcel = pocket;
-                    DO.Drone found = SearchDrone(pocket.Id);
-                    DO.Drone tempDrone = found;
-                    tempParcel.Delivered = DateTime.Now;
-                    DataSource.parcels.Remove(pocket);
-                    DataSource.parcels.Add(tempParcel);
-                    DataSource.drones.Remove(found);
-                    DataSource.drones.Add(tempDrone);
-                }
-            }
-            catch (DO.IdDoseNotExist x)
-            {
-                throw new DO.IdDoseNotExist(x.Message,x.ObjectType, x.Id);
-            }
-        }
+       
         /// <summary>method SendDroneToCharge - the function get drone and station and coonect them </summary>
         /// <param name = "idDrone"> id drone to charge</param>
         /// <param name = "idStation"> id free station</param>
