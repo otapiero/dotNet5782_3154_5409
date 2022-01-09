@@ -30,7 +30,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{DCE4788D-399C-4946-A506-412645036678}"
 	ProjectSection(SolutionItems) = preProject
 		config.xml = config.xml
+		Data\Customer.xml = Data\Customer.xml
 		dal-config.xml = dal-config.xml
+		Data\Drone.xml = Data\Drone.xml
+		Data\DroneCharge.xml = Data\DroneCharge.xml
+		Data\Parcel.xml = Data\Parcel.xml
+		Data\Station.xml = Data\Station.xml
 	EndProjectSection
 EndProject
 Global
