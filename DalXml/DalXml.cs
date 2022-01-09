@@ -37,7 +37,7 @@ namespace DAL
 
             if (!costumerList.Exists(x => x.Id==id))
             {
-                throw new DO.IdDoseNotExist("Id not found.", "costumer", id);
+               throw new DO.IdDoseNotExist("Id not found.", "costumer", id);
             }
             DO.Costumer find = costumerList.Find(x => x.Id.Equals(id));
 
@@ -455,7 +455,7 @@ namespace DAL
             var drones = (from x in dronesRootElem.Elements()
                           select new DO.Drone()
                           {
-                              Id = int.Parse(x.Element("ID").Value),
+                              Id = int.Parse(x.Element("Id").Value),
                               Model = x.Element("Model").Value
                           }).ToList();
 
