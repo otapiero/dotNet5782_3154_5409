@@ -112,22 +112,7 @@ namespace DAL
         /// <param name="_Phone"> customer phone number</param>
         /// <param name="_Longitude"> location of station</param>
         /// <param name="_Lattitude"> location of station</param>
-/*public void AddNewCustomer(int _id, string _Name, string _Phone, double _Longitude, double _Lattitude)
-        {
 
-            if (DataSource.customers.Exists(x => x.Id == _id))
-            {
-                throw new DO.IdAlredyExist("Id alredy use.","costumer",_id);
-            }
-            DO.Costumer temp = new();
-            temp.Id = _id;
-            temp.Name = _Name;
-            temp.Phone = _Phone;
-            temp.Longitude = _Longitude;
-            temp.Lattitude = _Lattitude;
-
-            DataSource.customers.Add(temp);
-        }*/
         public void AddNewCustomer(int _id, string _Name, string _Phone, double _Longitude, double _Lattitude, string pass)
         {
 
