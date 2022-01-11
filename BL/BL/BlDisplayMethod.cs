@@ -67,7 +67,7 @@ namespace BL
                 temp.numberPhone = x.Phone;
                 temp.password = x.Password;
                 temp.location = new(x.Longitude, x.Lattitude);
-                var parcels = idal.AllParcels();
+                var parcels = idal.ListOfParcels(x=>x.TargetId==id||x.Sender==id);
                 temp.fromCustomer=new();
                 temp.toCustomers=new();
                 foreach (var y in parcels)
@@ -87,9 +87,7 @@ namespace BL
 
                     if (y.TargetId==id)
                         temp.fromCustomer.Add(new(y.DroneId, (BO.WeightCategories)y.Wheight, (BO.Priorities)y.Priority, status, new(t.Id, t.Name)));
-
-
-                    if (y.Sender==id)
+                    else if (y.Sender==id)
                         temp.toCustomers.Add(new(y.DroneId, (BO.WeightCategories)y.Wheight, (BO.Priorities)y.Priority, status, new(s.Id, s.Name)));
 
                 }
@@ -172,10 +170,10 @@ namespace BL
                 else temp.drone.Id = 0;
                 temp.Id = x.Id;
                 temp.priorities =(BO.Priorities)x.Priority;
-                var sender = SearchCostumer(x.Sender);
-                var getter = SearchCostumer(x.TargetId);
-                temp.Sender = new(sender.Id, sender.name);
-                temp.Getter = new(getter.Id, getter.name);
+                var sender = idal.SearchCostumer(x.Sender);
+                var getter = idal.SearchCostumer(x.TargetId);
+                temp.Sender = new(sender.Id, sender.Name);
+                temp.Getter = new(getter.Id, getter.Name);
                 temp.weight =(BO.WeightCategories)x.Wheight;
             }
             catch (DO.IdDoseNotExist x)
