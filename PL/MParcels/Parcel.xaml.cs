@@ -41,6 +41,7 @@ namespace PL.MParcels
             MainGrid.RowDefinitions[11].Height = new GridLength(0);
             MainGrid.RowDefinitions[12].Height = new GridLength(0);
             Sender.Visibility = Visibility.Hidden;
+            Idd.Visibility = Visibility.Hidden;
             Getter.Visibility = Visibility.Hidden;
             Weight.Visibility = Visibility.Hidden;
             Priorites.Visibility = Visibility.Hidden;
@@ -67,6 +68,7 @@ namespace PL.MParcels
             MainGrid.RowDefinitions[11].Height = new GridLength(0);
             MainGrid.RowDefinitions[12].Height = new GridLength(0);
             Sender.Visibility = Visibility.Hidden;
+            Idd.Visibility = Visibility.Hidden;
             Getter.Visibility = Visibility.Hidden;
             Weight.Visibility = Visibility.Hidden;
             Priorites.Visibility = Visibility.Hidden;
@@ -78,6 +80,7 @@ namespace PL.MParcels
         {
             ibl = bl1;
             InitializeComponent();
+            Idd.Visibility = Visibility.Hidden;
             MainGrid.RowDefinitions[11].Height = new GridLength(0);
             MainGrid.RowDefinitions[12].Height = new GridLength(0);
             parcel = x;
@@ -110,6 +113,7 @@ namespace PL.MParcels
 
             Sender.Content = x.Sender.Name;
             Getter.Content = x.Getter.Name;
+            Idd.Visibility = Visibility.Hidden;
             SenderCombo.Visibility = Visibility.Hidden;
             GetterCombo.Visibility = Visibility.Hidden;
             WeightCombo.Visibility = Visibility.Hidden;
@@ -128,16 +132,15 @@ namespace PL.MParcels
 
         public Parcel(BlApi.IBL bl1, BO.ParcelAtCustomer x)
         {
-
-            Id.Content = x.Id;
+            ibl = bl1;
+            InitializeComponent();
+            Idd.Content = x.Id;
             Weight.Content = x.Weight;
             Priorites.Content = x.Priorities;
             statusP.Content = x.Status;
             OtherCustomer.Content = x.OtherCustomer.ToString();
-        
+            Id.Visibility = Visibility.Hidden;
 
-            ibl = bl1;
-            InitializeComponent();
             Ok.Visibility = Visibility.Hidden;
             SenderCombo.Visibility = Visibility.Hidden;
             GetterCombo.Visibility = Visibility.Hidden;

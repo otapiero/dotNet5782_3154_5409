@@ -254,7 +254,18 @@ Grid.Column="2"
         FontWeight="Medium"
         />
 
-
+                    <Label 
+        Content=""
+                        x:Name="Idd"
+        Grid.Row="0"
+        Grid.Column="1"
+    VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+        FontSize="15"
+        FontWeight="Medium"
+        />
                     <Label
         x:Name="Id"  
         Content="{Binding Path=Id}"

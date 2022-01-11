@@ -23,6 +23,7 @@ namespace PL.MCustomers
         BlApi.IBL ibl;
         bool update = false;
         BO.CustomerBl customer;
+
         int cancel = 0;
         public Customer(BlApi.IBL bl1)
         {
@@ -96,18 +97,20 @@ namespace PL.MCustomers
 
             if (item1 != null)
             {
-                var temp = (BO.DroneInCharge)item;
-                var newDrone = new BO.DroneBL();
-                newDrone = ibl.SearchDrone(temp.Id);
-                new Drone(ibl, newDrone).ShowDialog();
+
+                var temp = (BO.ParcelAtCustomer)item1;
+                new MParcels.Parcel(ibl, temp).ShowDialog();
+                
 
             }
             else
             {
-
+                var temp = (BO.ParcelAtCustomer)item2;
+                new MParcels.Parcel(ibl, temp).ShowDialog();
+                
             }
-            FromCustomer.SelectedItem = null;
-            ToCustomer.SelectedItem = null;
+           
+            
         }
 
         private void Map_OnClick(object sender, RoutedEventArgs e)
