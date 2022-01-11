@@ -68,6 +68,8 @@ namespace BL
                 temp.password = x.Password;
                 temp.location = new(x.Longitude, x.Lattitude);
                 var parcels = idal.AllParcels();
+                temp.fromCustomer=new();
+                temp.toCustomers=new();
                 foreach (var y in parcels)
                 {
                     BO.ParcelStatus status;
