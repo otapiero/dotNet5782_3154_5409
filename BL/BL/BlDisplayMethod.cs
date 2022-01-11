@@ -63,7 +63,6 @@ namespace BL
             {
                 DO.Costumer x = idal.SearchCostumer(id);
                 temp.Id = x.Id;
-
                 temp.name = x.Name;
                 temp.numberPhone = x.Phone;
                 temp.password = x.Password;
