@@ -112,7 +112,7 @@ namespace PL.MCustomers
            
             
         }
-
+            
         private void Map_OnClick(object sender, RoutedEventArgs e)
         {
             var smw = new ShowMapCWindow(customer);
