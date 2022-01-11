@@ -67,7 +67,7 @@ namespace BL
                 temp.numberPhone = x.Phone;
                 temp.password = x.Password;
                 temp.location = new(x.Longitude, x.Lattitude);
-                var parcels = idal.ListOfParcels(x=>x.TargetId==id||x.Sender==id);
+                var parcels = idal.ListOfParcels(x=>(x.TargetId==id||x.Sender==id));
                 temp.fromCustomer=new();
                 temp.toCustomers=new();
                 foreach (var y in parcels)

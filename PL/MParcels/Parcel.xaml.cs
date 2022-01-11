@@ -38,6 +38,8 @@ namespace PL.MParcels
             MainGrid.RowDefinitions[8].Height = new GridLength(0);
             MainGrid.RowDefinitions[9].Height = new GridLength(0);
             MainGrid.RowDefinitions[10].Height = new GridLength(0);
+            MainGrid.RowDefinitions[11].Height = new GridLength(0);
+            MainGrid.RowDefinitions[12].Height = new GridLength(0);
             Sender.Visibility = Visibility.Hidden;
             Getter.Visibility = Visibility.Hidden;
             Weight.Visibility = Visibility.Hidden;
@@ -62,6 +64,8 @@ namespace PL.MParcels
             MainGrid.RowDefinitions[8].Height = new GridLength(0);
             MainGrid.RowDefinitions[9].Height = new GridLength(0);
             MainGrid.RowDefinitions[10].Height = new GridLength(0);
+            MainGrid.RowDefinitions[11].Height = new GridLength(0);
+            MainGrid.RowDefinitions[12].Height = new GridLength(0);
             Sender.Visibility = Visibility.Hidden;
             Getter.Visibility = Visibility.Hidden;
             Weight.Visibility = Visibility.Hidden;
@@ -74,7 +78,8 @@ namespace PL.MParcels
         {
             ibl = bl1;
             InitializeComponent();
-            
+            MainGrid.RowDefinitions[11].Height = new GridLength(0);
+            MainGrid.RowDefinitions[12].Height = new GridLength(0);
             parcel = x;
             update = true;
             ParcelWindows.DataContext = x;
@@ -109,7 +114,38 @@ namespace PL.MParcels
             GetterCombo.Visibility = Visibility.Hidden;
             WeightCombo.Visibility = Visibility.Hidden;
             PrioritiesCombo.Visibility = Visibility.Hidden;
-            
+            MainGrid.RowDefinitions[5].Height = new GridLength(0);
+            MainGrid.RowDefinitions[6].Height = new GridLength(0);
+            MainGrid.RowDefinitions[7].Height = new GridLength(0);
+            MainGrid.RowDefinitions[8].Height = new GridLength(0);
+            MainGrid.RowDefinitions[9].Height = new GridLength(0);
+            MainGrid.RowDefinitions[10].Height = new GridLength(0);
+            MainGrid.RowDefinitions[11].Height = new GridLength(0);
+            MainGrid.RowDefinitions[12].Height = new GridLength(0);
+
+
+        }
+
+        public Parcel(BlApi.IBL bl1, BO.ParcelAtCustomer x)
+        {
+
+            Id.Content = x.Id;
+            Weight.Content = x.Weight;
+            Priorites.Content = x.Priorities;
+            statusP.Content = x.Status;
+            OtherCustomer.Content = x.OtherCustomer.ToString();
+        
+
+            ibl = bl1;
+            InitializeComponent();
+            Ok.Visibility = Visibility.Hidden;
+            SenderCombo.Visibility = Visibility.Hidden;
+            GetterCombo.Visibility = Visibility.Hidden;
+            WeightCombo.Visibility = Visibility.Hidden;
+            PrioritiesCombo.Visibility = Visibility.Hidden;
+
+            MainGrid.RowDefinitions[1].Height = new GridLength(0);
+            MainGrid.RowDefinitions[2].Height = new GridLength(0);
             MainGrid.RowDefinitions[5].Height = new GridLength(0);
             MainGrid.RowDefinitions[6].Height = new GridLength(0);
             MainGrid.RowDefinitions[7].Height = new GridLength(0);

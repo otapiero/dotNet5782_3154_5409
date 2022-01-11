@@ -111,6 +111,8 @@ Grid.Column="2"
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
 
                     </Grid.RowDefinitions>
 
@@ -224,6 +226,26 @@ Grid.Column="2"
                     <Label 
         Content="Options"
         Grid.Row="10"
+        Grid.Column="0"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="15"
+        FontWeight="Medium"
+        />
+                    <Label 
+        Content="Status"
+        Grid.Row="11"
+        Grid.Column="0"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="15"
+        FontWeight="Medium"
+        />
+                    <Label 
+        Content="Other Customer"
+        Grid.Row="12"
         Grid.Column="0"
         HorizontalAlignment="Left" 
         VerticalAlignment="Center"
@@ -428,6 +450,31 @@ Grid.Column="2"
        Width="160"
         Height="30"
       
+        />
+                    <Label 
+        Content=""
+                        x:Name="statusP"
+        Grid.Row="11"
+        Grid.Column="2"
+      VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+       
+        FontSize="15"
+        FontWeight="Medium"
+        />
+                    <Label 
+        Content=""
+                        x:Name="OtherCustomer"
+        Grid.Row="12"
+        Grid.Column="1"
+    VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+        FontSize="15"
+        FontWeight="Medium"
         />
 
 

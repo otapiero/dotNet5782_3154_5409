@@ -91,16 +91,23 @@ namespace PL.MCustomers
 
         private void CustomerCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            /*var item = DronesCombo.SelectedItem;
+            var item1 = FromCustomer.SelectedItem;
+            var item2 = ToCustomer.SelectedItem;
 
-            if (DronesCombo.SelectedIndex > -1)
+            if (item1 != null)
             {
                 var temp = (BO.DroneInCharge)item;
                 var newDrone = new BO.DroneBL();
                 newDrone = ibl.SearchDrone(temp.Id);
                 new Drone(ibl, newDrone).ShowDialog();
 
-            }*/
+            }
+            else
+            {
+
+            }
+            FromCustomer.SelectedItem = null;
+            ToCustomer.SelectedItem = null;
         }
 
         private void Map_OnClick(object sender, RoutedEventArgs e)
