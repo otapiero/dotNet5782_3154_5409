@@ -424,7 +424,9 @@ namespace DAL
         {
             var parcelList = XmlTools.LoadListFromXMLSerializer<DO.Parcel>(parcelPath);
 
-            return parcelList.FindAll(x => (x.Availble == true)).FindAll(f);
+            Predicate<DO.Parcel> x = f + (x=> x.Availble == true) ;
+
+            return parcelList.FindAll(x);
 
         }
         public IEnumerable<DO.Costumer> ListOfCostumers(Predicate<DO.Costumer> f)

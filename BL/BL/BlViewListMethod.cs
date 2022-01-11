@@ -132,9 +132,9 @@ namespace BL
        
         public IEnumerable<BO.ParcelToList> ListOfParcels(Predicate<BO.ParcelToList> f)
         {
-            List<BO.ParcelToList> Parcel = (List<BO.ParcelToList>)ListParcels();
+            IEnumerable<BO.ParcelToList> Parcel = ListParcels();
 
-            return Parcel.FindAll(f); ;
+            return (Parcel as List<BO.ParcelToList>).FindAll(f); ;
         }
         /// <summary>
         /// list of station with availebal charge post

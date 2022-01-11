@@ -22,7 +22,7 @@ namespace BO
 
         public override string ToString()
         {
-            return "  Id: "+Id+"\n  Weight"+Weight+"\n  priorities: "+Priorities+"\n  status:  "+Status+"\n  Second Customer: "+OtherCustomer +"\n";
+            return "  ID: "+Id+"\n  Weight"+Weight+"\n  Priorities: "+Priorities+"\n  Status:  "+Status+"\n";
         }
     }
 

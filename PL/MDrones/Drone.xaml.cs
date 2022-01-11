@@ -72,7 +72,7 @@ namespace PL
             newDrone = false;
             InitializeComponent();
             ibl = bl1;
-            drone = new();
+            drone = x;
             WeightCombo.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
 
             MainGrid.RowDefinitions[3].Height = new GridLength(0);
@@ -151,7 +151,7 @@ namespace PL
             Ok.Visibility = Visibility.Hidden;
             newDrone = false;
             ibl = bl1;
-            drone = new();
+            drone = x;
             Location.Content = x.CurrentLocation.ToString();
             StatusContenetLabel.Content = x.status;
             if (x.parcel.Id == 0)
