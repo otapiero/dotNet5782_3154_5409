@@ -14,7 +14,7 @@
         AllowsTransparency="True"
         WindowStyle="None"
         SizeToContent="Manual"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -255,7 +255,7 @@ Grid.Column="2"
                          Height="60"
                         FontWeight="Medium"/>
                     <ComboBox 
-                          
+                        
                         SelectionChanged="CustomerCombo_SelectionChanged"
                         Name="FromCustomer"
                         FontSize="14"
