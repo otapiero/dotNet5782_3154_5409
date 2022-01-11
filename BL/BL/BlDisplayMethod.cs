@@ -67,14 +67,14 @@ namespace BL
                 temp.numberPhone = x.Phone;
                 temp.password = x.Password;
                 temp.location = new(x.Longitude, x.Lattitude);
-                var parcels = idal.ListOfParcels(x=>(x.TargetId==id||x.Sender==id));
+                var parcelsTo = idal.ListOfParcels(x => (x.TargetId==id));
+                var parcelsFrom = idal.ListOfParcels(x => x.Sender==id);
                 temp.fromCustomer=new();
-                temp.toCustomers=new();
-                foreach (var y in parcels)
+               temp.toCustomers=new();
+                BO.ParcelStatus status;
+                foreach (var y in parcelsTo)
                 {
-                    BO.ParcelStatus status;
                     var s = idal.SearchCostumer(y.Sender);
-                    var t = idal.SearchCostumer(y.TargetId);
                     if (y.DroneId==0)
                         status=BO.ParcelStatus.Defined;
                     else if (y.Scheduled==null)
@@ -84,17 +84,27 @@ namespace BL
                         status=BO.ParcelStatus.Colected;
                     }
                     else status=BO.ParcelStatus.Delivred;
-
-                    if (y.TargetId==id)
-                        temp.fromCustomer.Add(new(y.DroneId, (BO.WeightCategories)y.Wheight, (BO.Priorities)y.Priority, status, new(t.Id, t.Name)));
-                    else if (y.Sender==id)
-                        temp.toCustomers.Add(new(y.DroneId, (BO.WeightCategories)y.Wheight, (BO.Priorities)y.Priority, status, new(s.Id, s.Name)));
-
+                    temp.fromCustomer.Add(new(y.Id, (BO.WeightCategories)y.Wheight, (BO.Priorities)y.Priority, status, new(s.Id, s.Name)));
+                }
+                foreach (var z in parcelsFrom)
+                {
+                    var t = idal.SearchCostumer(z.TargetId);
+                    if (z.DroneId==0)
+                        status=BO.ParcelStatus.Defined;
+                    else if (z.Scheduled==null)
+                        status= BO.ParcelStatus.Assigned;
+                    else if (z.PickedUp==null)
+                    {
+                        status=BO.ParcelStatus.Colected;
+                    }
+                    else status=BO.ParcelStatus.Delivred;
+                    temp.toCustomers.Add(new(z.Id, (BO.WeightCategories)z.Wheight, (BO.Priorities)z.Priority, status, new(t.Id, t.Name)));
                 }
             }
+
             catch (DO.IdDoseNotExist x)
             {
-                throw new BO.IdDoseNotExist( x.ObjectType, x.Id,x);
+                throw new BO.IdDoseNotExist(x.ObjectType, x.Id, x);
             }
 
             return temp;
