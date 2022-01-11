@@ -426,7 +426,7 @@ namespace DAL
 
             Predicate<DO.Parcel> x = f + (x=> x.Availble == true) ;
 
-            return parcelList.FindAll(x);
+            return parcelList.FindAll(f);
 
         }
         public IEnumerable<DO.Costumer> ListOfCostumers(Predicate<DO.Costumer> f)
