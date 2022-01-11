@@ -68,4 +68,28 @@
     <DroneId>5</DroneId>
     <StationId>1</StationId>
   </DroneCharge>
+  <DroneCharge>
+    <DroneId>2</DroneId>
+    <StationId>1</StationId>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneId>3</DroneId>
+    <StationId>1</StationId>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneId>5</DroneId>
+    <StationId>2</StationId>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneId>5</DroneId>
+    <StationId>2</StationId>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneId>2</DroneId>
+    <StationId>1</StationId>
+  </DroneCharge>
+  <DroneCharge>
+    <DroneId>4</DroneId>
+    <StationId>2</StationId>
+  </DroneCharge>
 </ArrayOfDroneCharge>
