@@ -14,7 +14,7 @@
     <Delivered>2022-01-09T23:30:24.431529+02:00</Delivered>
   </Parcel>
   <Parcel>
-    <Availble>true</Availble> 
+    <Availble>true</Availble>
     <Id>8</Id>
     <Sender>2</Sender>
     <TargetId>3</TargetId>
@@ -662,5 +662,31 @@
     <Scheduled>2022-01-09T23:24:24.4323294+02:00</Scheduled>
     <PickedUp>2022-01-09T23:32:24.4323304+02:00</PickedUp>
     <Delivered>2022-01-11T12:24:06.2376171+02:00</Delivered>
+  </Parcel>
+  <Parcel>
+    <Availble>false</Availble>
+    <Id>3</Id>
+    <Sender>4</Sender>
+    <TargetId>2</TargetId>
+    <Wheight>Heavy</Wheight>
+    <Priority>Fast</Priority>
+    <Requsted>2022-01-09T23:18:24.4323266+02:00</Requsted>
+    <DroneId>0</DroneId>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
+  </Parcel>
+  <Parcel>
+    <Availble>false</Availble>
+    <Id>7</Id>
+    <Sender>3</Sender>
+    <TargetId>4</TargetId>
+    <Wheight>Intermidiate</Wheight>
+    <Priority>Emergency</Priority>
+    <Requsted>2022-01-09T23:18:24.4323345+02:00</Requsted>
+    <DroneId>0</DroneId>
+    <Scheduled xsi:nil="true" />
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
   </Parcel>
 </ArrayOfParcel>
