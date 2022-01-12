@@ -1,51 +1,59 @@
 <?xml version="1.0"?>
 <ArrayOfCostumer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Costumer>
-    <Id>4</Id>
-    <Name>ubbi</Name>
-    <Phone>05863925630</Phone>
-    <Longitude>36.41559171323459</Longitude>
-    <Lattitude>58.685259622840796</Lattitude>
-    <Password>0</Password>
-  </Costumer>
-  <Costumer>
-    <Id>6</Id>
-    <Name>fiub</Name>
-    <Phone>05815574828</Phone>
-    <Longitude>12.63801397412923</Longitude>
-    <Lattitude>33.656595299791825</Lattitude>
+    <Id>1</Id>
+    <Name>dxma</Name>
+    <Phone>05811196469</Phone>
+    <Longitude>58.62115605670081</Longitude>
+    <Lattitude>6.829217079481677</Lattitude>
     <Password>0</Password>
   </Costumer>
   <Costumer>
     <Id>2</Id>
-    <Name>zmiui</Name>
-    <Phone>05885395418</Phone>
-    <Longitude>8.583482666212825</Longitude>
-    <Lattitude>7.704130107399137</Lattitude>
-    <Password>0</Password>
-  </Costumer>
-  <Costumer>
-    <Id>1</Id>
-    <Name>dani</Name>
-    <Phone>05894738151</Phone>
-    <Longitude>36.554919256155806</Longitude>
-    <Lattitude>47.88563975500205</Lattitude>
+    <Name>azga</Name>
+    <Phone>05814228258</Phone>
+    <Longitude>45.60210668742754</Longitude>
+    <Lattitude>7.7121930791587525</Lattitude>
     <Password>0</Password>
   </Costumer>
   <Costumer>
     <Id>3</Id>
-    <Name>david kidron</Name>
-    <Phone>05843362029</Phone>
-    <Longitude>29.947201902953534</Longitude>
-    <Lattitude>41.636195453645755</Lattitude>
+    <Name>pwmi</Name>
+    <Phone>05803207968</Phone>
+    <Longitude>5.466274528515653</Longitude>
+    <Lattitude>57.72583974419434</Lattitude>
+    <Password>0</Password>
+  </Costumer>
+  <Costumer>
+    <Id>4</Id>
+    <Name>vxuz</Name>
+    <Phone>05821386333</Phone>
+    <Longitude>53.903698936991255</Longitude>
+    <Lattitude>12.063334403589058</Lattitude>
     <Password>0</Password>
   </Costumer>
   <Costumer>
     <Id>5</Id>
-    <Name>zilberstein</Name>
-    <Phone>05825621852</Phone>
-    <Longitude>26.213530100050164</Longitude>
-    <Lattitude>32.27721432795619</Lattitude>
+    <Name>zfpi</Name>
+    <Phone>05830675185</Phone>
+    <Longitude>48.90970366490525</Longitude>
+    <Lattitude>1.3379935088278696</Lattitude>
+    <Password>0</Password>
+  </Costumer>
+  <Costumer>
+    <Id>6</Id>
+    <Name>uhdu</Name>
+    <Phone>05832399665</Phone>
+    <Longitude>45.46566525728706</Longitude>
+    <Lattitude>30.57878593475501</Lattitude>
+    <Password>0</Password>
+  </Costumer>
+  <Costumer>
+    <Id>7</Id>
+    <Name>yqvj</Name>
+    <Phone>05840926240</Phone>
+    <Longitude>25.4148491962882</Longitude>
+    <Lattitude>14.047561471372639</Lattitude>
     <Password>0</Password>
   </Costumer>
 </ArrayOfCostumer>

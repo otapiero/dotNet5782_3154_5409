@@ -28,8 +28,8 @@ namespace BL
             List<DO.Station> stationData = idal.AllStation().ToList();
             List<DO.DroneCharge> drv = idal.AllDronesIncharge().ToList();
 
-
-          /*  FileStream file3 = new FileStream(@"C:\Users\Ouriel\source\repos\dotNet5782_3154_5409\Data\Customer.xml", FileMode.Create);
+           /*
+          FileStream file3 = new FileStream(@"C:\Users\Ouriel\source\repos\dotNet5782_3154_5409\Data\Customer.xml", FileMode.Create);
             XmlSerializer x3 = new XmlSerializer(costumerData.GetType());
             x3.Serialize(file3, costumerData);
             file3.Close();
@@ -50,7 +50,7 @@ namespace BL
               XmlSerializer x5 = new XmlSerializer(stationData.GetType());
               x5.Serialize(file5, stationData);
               file5.Close();
-          */
+            */
             Double[] vs = idal.ElectricityUse();
             double Avilable = vs[0];
             double Light = vs[1];
