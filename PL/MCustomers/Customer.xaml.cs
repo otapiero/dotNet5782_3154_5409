@@ -141,9 +141,28 @@ namespace PL.MCustomers
                 {
                     if (update)
                     {
+                        try
+                        {
+                            ibl.UpdateCostumer(id, name, phone);
+                            MessageBox.Show("Done", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                        ibl.UpdateCostumer(id, name, phone);
-                        MessageBox.Show("Done", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        catch (DO.XMLFileLoadCreateException ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                        catch (BO.IdDoseNotExist x)
+                        {
+                            MessageBox.Show($"can not update the customer\nthe {x.ObjectType} with id: {x.Id} is not found!");
+                        }
+                        catch (BO.thePhoneAndNameInputAreIncorrect x)
+                        {
+                            MessageBox.Show(x.Message);
+                        }
+                        catch(BO.XMLFileLoadCreateException x)
+                        {
+                            MessageBox.Show(x.Message);
+                        }
                         cancel = 1;
                         this.Close();
                     }
@@ -155,8 +174,19 @@ namespace PL.MCustomers
                         if ((lat != new double() && lon != new double()))
                         {
                             string pass = "0";
-                            ibl.AddNewCustomer(id, name, phone, lon, lat,pass);
-                            MessageBox.Show("Done", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                            try
+                            {
+                                ibl.AddNewCustomer(id, name, phone, lon, lat, pass);
+                                MessageBox.Show("Done", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                            }
+                            catch (BO.IdAlredyExist x)
+                            {
+                                MessageBox.Show($"can not add the customer\nA {x.ObjectType} with id: {x.Id} is already exsit!");
+                            }
+                            catch (BO.XMLFileLoadCreateException x)
+                            {
+                                MessageBox.Show(x.Message);
+                            }
                             cancel = 1;
                             this.Close();
                         }

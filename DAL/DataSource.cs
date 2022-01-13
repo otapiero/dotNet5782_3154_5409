@@ -20,9 +20,9 @@ namespace DAL
         internal static void Initialize()
         {
             //Set quantity of var 
-            int numDrones = r.Next(5, 10);
+            int numDrones = r.Next(5, 9);
             int numCustomers = r.Next(6, 10);
-            int numParcels = r.Next(20, 55);
+            int numParcels = r.Next(15, 20);
             int numStations = r.Next(2, 5);
             //Initialize random drones
             for (int i = 0; i < numDrones; i++)

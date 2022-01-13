@@ -46,7 +46,10 @@ namespace BL
             {
                 throw new BO.IdDoseNotExist( x.ObjectType, x.Id, x);
             }
-
+            catch (DO.XMLFileLoadCreateException x)
+            {
+                throw new BO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
+            }
             return temp;
         }
         /// <summary>
@@ -107,6 +110,10 @@ namespace BL
             {
                 throw new BO.IdDoseNotExist(x.ObjectType, x.Id, x);
             }
+            catch (DO.XMLFileLoadCreateException x)
+            {
+                throw new BO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
+            }
 
             return temp;
         }
@@ -153,7 +160,10 @@ namespace BL
                 {
                     throw new BO.IdDoseNotExist(ex.ObjectType, ex.Id, ex);
                 }
-
+                catch (DO.XMLFileLoadCreateException ex)
+                {
+                    throw new BO.XMLFileLoadCreateException(ex.XmlFilePath, ex.Message, ex.InnerException);
+                }
             }
             return temp;
         }
@@ -194,6 +204,10 @@ namespace BL
             catch (BO.IdDoseNotExist x)
             {
                 throw new BO.IdDoseNotExist(x.ObjectType, x.Id, x);
+            }
+            catch (DO.XMLFileLoadCreateException x)
+            {
+                throw new BO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
             return temp;
         }

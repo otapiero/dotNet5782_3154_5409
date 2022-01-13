@@ -38,6 +38,10 @@ namespace PL.MCustomers
             {
                 CustomersDataGrid.DataContext = ibl.ListCustomer();
             }
+            catch (DO.XMLFileLoadCreateException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Drones Loading Error!");
@@ -126,6 +130,10 @@ namespace PL.MCustomers
             try
             {
                 CustomersDataGrid.DataContext = ibl.ListCustomer();
+            }
+            catch (DO.XMLFileLoadCreateException ex)
+            {
+                MessageBox.Show(ex.Message);
             }
             catch (Exception ex)
             {

@@ -84,6 +84,10 @@ namespace BL
             {
                 throw new BO.IdDoseNotExist(x.ObjectType, x.Id, x);
             }
+            catch (DO.XMLFileLoadCreateException x)
+            {
+                throw new BO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
+            }
         }
         /// <summary>
         /// send a drone to charge
@@ -148,7 +152,11 @@ namespace BL
                 {
                     throw new BO.IdDoseNotExist(x.ObjectType, x.Id, x);
                 }
-                
+                catch (DO.XMLFileLoadCreateException x)
+                {
+                    throw new BO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
+                }
+
             }
             else throw new BO.WrongStatusObject("drone",id, "not in Maintenace");
             // else throw ..."the drone isnt in Maintenace"
@@ -236,6 +244,10 @@ namespace BL
             {
                 throw new BO.NoStationAvailable(x.ObjectType, x.Id);
             }
+            catch (DO.XMLFileLoadCreateException x)
+            {
+                throw new BO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
+            }
         }
         /// <summary>
         /// colect a parcel by a drone
@@ -279,7 +291,11 @@ namespace BL
             {
                 throw new BO.WrongStatusObject(x.ObjectType, x.Id, x.Message);
             }
-           
+            catch (DO.XMLFileLoadCreateException x)
+            {
+                throw new BO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
+            }
+
 
         }
         /// <summary>
@@ -335,22 +351,32 @@ namespace BL
             {
                 throw new BO.WrongStatusObject(x.ObjectType, x.Id, x.Message);
             }
+            catch (DO.XMLFileLoadCreateException x)
+            {
+                throw new BO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
+            }
         }
         public void DeleteParcel(int id)
         {
             try
             {
                 var parcel = idal.SearchParcel(id);
-                if(parcel.Scheduled==null)
+                if (parcel.Scheduled==null)
                 {
                     idal.DeleteParcel(id);
                 }
                 else
-                { }
+                {
+                    throw new BO.WrongStatusObject("parcel", id, "alredy Scheduled so it can not be delted");
+                }
             }
             catch (DO.IdDoseNotExist x)
             {
                 throw new BO.IdDoseNotExist(x.ObjectType, x.Id, x);
+            }
+            catch (DO.XMLFileLoadCreateException x)
+            {
+                throw new BO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
 

@@ -39,9 +39,11 @@ namespace DO
         }
         public IdAlredyExist() { }
     }
+    [Serializable]
     public class XMLFileLoadCreateException : Exception
     {
         private string xmlFilePath;
+        
         public XMLFileLoadCreateException(string xmlPath) : base() { xmlFilePath = xmlPath; }
         public XMLFileLoadCreateException(string xmlPath, string message) :
             base(message)
@@ -50,7 +52,9 @@ namespace DO
             base(message, innerException)
         { xmlFilePath = xmlPath; }
 
-        public override string ToString() => base.ToString() + $", fail to load or create xml file: {xmlFilePath}";
+        public string XmlFilePath { get => xmlFilePath;  }
+
+        public override string ToString() => base.ToString() + $", fail to load or create xml file: {XmlFilePath}";
     }
 }
 
