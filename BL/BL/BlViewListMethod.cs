@@ -15,14 +15,22 @@ namespace BL
         /// <returns>return the lust of all the station </returns>
         public IEnumerable<BO.BaseStationToList> ListStation()
         {
-
-            List<BO.BaseStationToList> allStation = new();
-            foreach (DO.Station x in idal.AllStation())
+            try
             {
-                int numOfDronesInCharge = idal.AllDronesIncharge().Count(w => w.StationId==x.Id);
-                allStation.Add(new(x.Id, x.Name, x.ChargeSlots, numOfDronesInCharge));
+
+
+                List<BO.BaseStationToList> allStation = new();
+                foreach (DO.Station x in idal.AllStation())
+                {
+                    int numOfDronesInCharge = idal.AllDronesIncharge().Count(w => w.StationId==x.Id);
+                    allStation.Add(new(x.Id, x.Name, x.ChargeSlots, numOfDronesInCharge));
+                }
+                return allStation;
             }
-            return allStation;
+            catch (DO.XMLFileLoadCreateException ex)
+            {
+                throw new BO.XMLFileLoadCreateException(ex.XmlFilePath, ex.Message, ex.InnerException);
+            }
         }
         /// <summary>
         /// list of all costumer
@@ -30,27 +38,45 @@ namespace BL
         /// <returns>return the lust of all the costumer </returns>
         public IEnumerable<BO.CustomerToList> ListCustomer()
         {
-            List<BO.CustomerToList> allCustomer = new();
-            var allParcels = idal.AllParcels();
+            try
+            {
 
-            allCustomer=(from x in idal.AllCustomers()
-                         select (new BO.CustomerToList(x.Id, x.Name, x.Phone, allParcels.Count(y => (y.Sender==x.Id)&&y.Delivered!=null), allParcels.Count(y => (y.Sender==x.Id)&&y.Delivered== null)
-                 , allParcels.Count(y => (y.TargetId==x.Id)&&y.Delivered!= null), allParcels.Count(y => (y.TargetId==x.Id)&&y.Delivered== null)))).ToList();
-            
-            return allCustomer;
+                List<BO.CustomerToList> allCustomer = new();
+                var allParcels = idal.AllParcels();
+
+                allCustomer=(from x in idal.AllCustomers()
+                             select (new BO.CustomerToList(x.Id, x.Name, x.Phone, allParcels.Count(y => (y.Sender==x.Id)&&y.Delivered!=null), allParcels.Count(y => (y.Sender==x.Id)&&y.Delivered== null)
+                     , allParcels.Count(y => (y.TargetId==x.Id)&&y.Delivered!= null), allParcels.Count(y => (y.TargetId==x.Id)&&y.Delivered== null)))).ToList();
+
+                return allCustomer;
+            }
+            catch (DO.XMLFileLoadCreateException ex)
+            {
+                throw new BO.XMLFileLoadCreateException(ex.XmlFilePath, ex.Message, ex.InnerException);
+            }
         }
+
+
         /// <summary>
         /// list of all drone
         /// </summary>
         /// <returns>return the lust of all the drone </returns>
         public IEnumerable<BO.DroneToList> ListDrones()
         {
-            List<BO.DroneToList> allDrones = new();
-            foreach (var x in DronesBl)
+            try
             {
-                allDrones.Add(x);
+
+                List<BO.DroneToList> allDrones = new();
+                foreach (var x in DronesBl)
+                {
+                    allDrones.Add(x);
+                }
+                return allDrones;
             }
-            return allDrones;
+            catch (DO.XMLFileLoadCreateException ex)
+            {
+                throw new BO.XMLFileLoadCreateException(ex.XmlFilePath, ex.Message, ex.InnerException);
+            }
         }
         /// <summary>
         /// list of all parcel
@@ -82,7 +108,10 @@ namespace BL
                 {
                     throw new BO.IdDoseNotExist(ex.ObjectType, ex.Id, ex);
                 }
-
+                catch (DO.XMLFileLoadCreateException ex)
+                {
+                    throw new BO.XMLFileLoadCreateException(ex.XmlFilePath, ex.Message, ex.InnerException);
+                }
             }
 
             return allParcels;
@@ -118,7 +147,10 @@ namespace BL
                 {
                     throw new BO.IdDoseNotExist(ex.ObjectType, ex.Id, ex);
                 }
-
+                catch (DO.XMLFileLoadCreateException ex)
+                {
+                    throw new BO.XMLFileLoadCreateException(ex.XmlFilePath, ex.Message, ex.InnerException);
+                }
 
             }
 
@@ -132,9 +164,16 @@ namespace BL
        
         public IEnumerable<BO.ParcelToList> ListOfParcels(Predicate<BO.ParcelToList> f)
         {
-            IEnumerable<BO.ParcelToList> Parcel = ListParcels();
+            try
+            {
+                IEnumerable<BO.ParcelToList> Parcel = ListParcels();
 
-            return (Parcel as List<BO.ParcelToList>).FindAll(f); ;
+                return (Parcel as List<BO.ParcelToList>).FindAll(f);
+            }
+            catch (DO.XMLFileLoadCreateException ex)
+            {
+                throw new BO.XMLFileLoadCreateException(ex.XmlFilePath, ex.Message, ex.InnerException);
+            }
         }
         /// <summary>
         /// list of station with availebal charge post
@@ -142,13 +181,20 @@ namespace BL
         /// <returns>list of  station</returns>
         public IEnumerable<BO.BaseStationToList> StationWithAvailebalChargePost()
         {
-            List<BO.BaseStationToList> stationWithAvailebalChargePost = new();
-            foreach (DO.Station x in idal.ListOfStations(t => t.ChargeSlots > 0))
+            try
             {
-                int numOfDronesInCharge = idal.AllDronesIncharge().Count(w => w.StationId==x.Id);
-                stationWithAvailebalChargePost.Add(new(x.Id, x.Name, x.ChargeSlots, numOfDronesInCharge));
+                List<BO.BaseStationToList> stationWithAvailebalChargePost = new();
+                foreach (DO.Station x in idal.ListOfStations(t => t.ChargeSlots > 0))
+                {
+                    int numOfDronesInCharge = idal.AllDronesIncharge().Count(w => w.StationId==x.Id);
+                    stationWithAvailebalChargePost.Add(new(x.Id, x.Name, x.ChargeSlots, numOfDronesInCharge));
+                }
+                return stationWithAvailebalChargePost;
             }
-            return stationWithAvailebalChargePost;
+            catch (DO.XMLFileLoadCreateException ex)
+            {
+                throw new BO.XMLFileLoadCreateException(ex.XmlFilePath, ex.Message, ex.InnerException);
+            }
         }
 
 

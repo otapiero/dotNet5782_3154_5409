@@ -179,6 +179,26 @@ namespace BL
             }
             return stationlocation;
         }
+        ~BL()
+        {
+            try
+            {
+
+                var t = idal.AllDronesIncharge();
+                foreach (var x in t)
+                {
+                    idal.ReleseDroneFromCharge(x.DroneId);
+                }
+            }
+            catch (DO.IdDoseNotExist x)
+            {
+                throw new BO.IdDoseNotExist(x.ObjectType, x.Id, x);
+            }
+            catch (DO.XMLFileLoadCreateException x)
+            {
+                throw new BO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
+            }
+        }
     }
 }
 

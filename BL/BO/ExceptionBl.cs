@@ -206,4 +206,21 @@ namespace BO
         }
         public IdAlredyExist() { }
     }
+    [Serializable]
+    public class XMLFileLoadCreateException : Exception
+    {
+        private string xmlFilePath;
+
+        public XMLFileLoadCreateException(string xmlPath) : base() { xmlFilePath = xmlPath; }
+        public XMLFileLoadCreateException(string xmlPath, string message) :
+            base(message)
+        { xmlFilePath = xmlPath; }
+        public XMLFileLoadCreateException(string xmlPath, string message, Exception innerException) :
+            base(message, innerException)
+        { xmlFilePath = xmlPath; }
+
+        public string XmlFilePath { get => xmlFilePath; }
+
+        public override string ToString() => base.ToString() + $", fail to load or create xml file: {XmlFilePath}";
+    }
 }
