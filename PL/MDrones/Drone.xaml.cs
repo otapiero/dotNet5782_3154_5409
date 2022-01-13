@@ -25,6 +25,7 @@ namespace PL
         BlApi.IBL ibl;
         BO.DroneBL drone;
         int cancel = 0;
+        bool runSimulator = false;
 
         private bool newDrone;
         int station;
@@ -45,25 +46,13 @@ namespace PL
             InitializeComponent();
             WeightCombo.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
             StationCombo.ItemsSource = ibl.ListStation();
-
+            Simulator.Visibility = Visibility.Hidden;
             MainGrid.RowDefinitions[4].Height = new GridLength(0);
             MainGrid.RowDefinitions[5].Height = new GridLength(0);
             MainGrid.RowDefinitions[6].Height = new GridLength(0);
             MainGrid.RowDefinitions[7].Height = new GridLength(0);
             MainGrid.RowDefinitions[8].Height = new GridLength(0);
             Weiht_content.Visibility = Visibility.Hidden;
-
-
-
-            /*  cmbActions.Visibility = Visibility.Hidden;
-               btnGO.Visibility = Visibility.Hidden;
-
-               txtBattery.IsReadOnly = true;
-               lblBattery.Foreground = Brushes.Gray;
-               lblLocation.Foreground = Brushes.Gray;
-               txtBattery.Foreground = Brushes.Gray;
-               cmbLocation.Foreground = Brushes.Gray;
-            */
 
         }
         public Drone(BlApi.IBL bl1, BO.DroneBL x)
@@ -114,28 +103,11 @@ namespace PL
 
 
             DroneId.IsReadOnly = true;
-
             StationCombo.IsReadOnly = true;
             WeightCombo.IsReadOnly = true;
-
-
-            /*DroneId.Foreground = Brushes.Gray;
-            BatteryText.Foreground = Brushes.Gray;
-            lblLocation.Foreground = Brushes.Gray;
-            StationCombo.Foreground = Brushes.Gray;
-            lblWeight.Foreground = Brushes.Gray;
-            txtID.Foreground = Brushes.Gray;
-            txtBattery.Foreground = Brushes.Gray;
-            txtStation.Foreground = Brushes.Gray;
-            cmbWeight.Foreground = Brushes.Gray;
-            cmbLocation.Foreground = Brushes.Gray;*/
-
             DroneId.Text = x.Id.ToString();
             ModelText.Text = x.Model;
-
-
             StationCombo.Items.Add("???");
-
             WeightCombo.SelectedItem = x.Weight;
 
         }
@@ -148,6 +120,7 @@ namespace PL
             MainGrid.RowDefinitions[3].Height = new GridLength(0);
             MainGrid.RowDefinitions[6].Height = new GridLength(0);
             MainGrid.RowDefinitions[8].Height = new GridLength(0);
+            Simulator.Visibility = Visibility.Hidden;
             Ok.Visibility = Visibility.Hidden;
             newDrone = false;
             ibl = bl1;
@@ -169,8 +142,11 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            this.cancel = 1;
-            this.Close();
+            if (!runSimulator)
+            {
+                this.cancel = 1;
+                this.Close();
+            }
         }
 
         private void WeightCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -319,7 +295,7 @@ namespace PL
             {
                 if (DroneId.Text.Length < 1 || ModelText.Text.Length < 1 || WeightCombo.SelectedItem == null || StationCombo.SelectedItem == null || drone.Model.Length < 1 || drone.Id.ToString().Length < 1)
                 {
-                    MessageBoxResult mbResult = MessageBox.Show("חסר לך נתונים", "The Drone was uploud!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBoxResult mbResult = MessageBox.Show("Not details", "The Drone was uploud!", MessageBoxButton.OK, MessageBoxImage.Error);
                     switch (mbResult)
                     {
                         case MessageBoxResult.OK:
@@ -334,7 +310,7 @@ namespace PL
                 else
                 {
                     ibl.AddNewDrone(drone.Id, drone.Model, (int)drone.Weight, station);
-                    MessageBoxResult mbResult = MessageBox.Show("The Drone was uploud!", "The Drone was uploud!", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBoxResult mbResult = MessageBox.Show("The drone was uploud!", "The Drone was uploud!", MessageBoxButton.OK, MessageBoxImage.Information);
                     switch (mbResult)
                     {
                         case MessageBoxResult.OK:
@@ -384,8 +360,23 @@ namespace PL
         private void ParcelID_Click(object sender, RoutedEventArgs e)
         {
             
-            var newC = ibl.SearchParcel(drone.parcel.Id);
-            new Parcel(ibl, newC, 1).ShowDialog();
+            new Parcel(ibl, drone.parcel).ShowDialog();
+        }
+
+        private void Simulator_Click(object sender, RoutedEventArgs e)
+        {
+            if (!runSimulator)
+            {
+                runSimulator = true;
+                Ok.Visibility = Visibility.Hidden;
+                MainGrid.RowDefinitions[6].Height = new GridLength(0);
+            }
+            else
+            {
+                Ok.Visibility = Visibility.Visible;
+                MainGrid.RowDefinitions[6].Height = MainGrid.RowDefinitions[0].Height;
+                runSimulator = false;
+            }
         }
     }
 }

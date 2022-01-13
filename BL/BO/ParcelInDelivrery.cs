@@ -16,7 +16,6 @@ namespace BO
         public Location DeliveryLocation { get; set; }
         public CustomerInParcel Sender { get; set; }
         public CustomerInParcel Getter { get; set; }
-
         public double DistanceDelivrery { get; set; }
 
         public override string ToString()

@@ -83,6 +83,9 @@ namespace PL.MParcels
             Idd.Visibility = Visibility.Hidden;
             MainGrid.RowDefinitions[11].Height = new GridLength(0);
             MainGrid.RowDefinitions[12].Height = new GridLength(0);
+            MainGrid.RowDefinitions[13].Height = new GridLength(0);
+            MainGrid.RowDefinitions[14].Height = new GridLength(0);
+            MainGrid.RowDefinitions[15].Height = new GridLength(0);
             parcel = x;
             update = true;
             ParcelWindows.DataContext = x;
@@ -126,10 +129,49 @@ namespace PL.MParcels
             MainGrid.RowDefinitions[10].Height = new GridLength(0);
             MainGrid.RowDefinitions[11].Height = new GridLength(0);
             MainGrid.RowDefinitions[12].Height = new GridLength(0);
+            MainGrid.RowDefinitions[13].Height = new GridLength(0);
+            MainGrid.RowDefinitions[14].Height = new GridLength(0);
+            MainGrid.RowDefinitions[15].Height = new GridLength(0);
 
 
         }
 
+        public Parcel(BlApi.IBL bl1, BO.ParcelInDelivrery x)
+        {
+            ibl = bl1;
+            InitializeComponent();
+            Idd.Content = x.Id;
+            Sender.Content = x.Sender.Name;
+            Getter.Content = x.Getter.Name;
+            Weight.Content = x.weight;
+            Priorites.Content = x.Priorities;
+            DistanceDelivrery.Content = x.DistanceDelivrery;
+            CollectionLocation.Content = x.CollectionLocation.ToString();
+            if (x.DeliveryLocation != null)
+            {
+                DeliveryLocation.Content = x.DeliveryLocation.ToString();
+            }
+            else MainGrid.RowDefinitions[15].Height = new GridLength(0);
+
+            Id.Visibility = Visibility.Hidden;
+            Ok.Visibility = Visibility.Hidden;
+            SenderCombo.Visibility = Visibility.Hidden;
+            GetterCombo.Visibility = Visibility.Hidden;
+            WeightCombo.Visibility = Visibility.Hidden;
+            PrioritiesCombo.Visibility = Visibility.Hidden;
+            Id.Visibility = Visibility.Hidden;
+
+            MainGrid.RowDefinitions[5].Height = new GridLength(0);
+            MainGrid.RowDefinitions[6].Height = new GridLength(0);
+            MainGrid.RowDefinitions[7].Height = new GridLength(0);
+            MainGrid.RowDefinitions[8].Height = new GridLength(0);
+            MainGrid.RowDefinitions[9].Height = new GridLength(0);
+            MainGrid.RowDefinitions[10].Height = new GridLength(0);
+            MainGrid.RowDefinitions[11].Height = new GridLength(0);
+            MainGrid.RowDefinitions[12].Height = new GridLength(0);
+
+
+        }
         public Parcel(BlApi.IBL bl1, BO.ParcelAtCustomer x)
         {
             ibl = bl1;
@@ -155,6 +197,9 @@ namespace PL.MParcels
             MainGrid.RowDefinitions[8].Height = new GridLength(0);
             MainGrid.RowDefinitions[9].Height = new GridLength(0);
             MainGrid.RowDefinitions[10].Height = new GridLength(0);
+            MainGrid.RowDefinitions[13].Height = new GridLength(0);
+            MainGrid.RowDefinitions[14].Height = new GridLength(0);
+            MainGrid.RowDefinitions[15].Height = new GridLength(0);
 
 
         }

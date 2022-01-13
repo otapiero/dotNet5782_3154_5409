@@ -113,6 +113,9 @@ Grid.Column="2"
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
 
                     </Grid.RowDefinitions>
 
@@ -246,6 +249,36 @@ Grid.Column="2"
                     <Label 
         Content="Other Customer"
         Grid.Row="12"
+        Grid.Column="0"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="15"
+        FontWeight="Medium"
+        />
+                    <Label 
+        Content="Distance Delivrery"
+        Grid.Row="13"
+        Grid.Column="0"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="15"
+        FontWeight="Medium"
+        />
+                    <Label 
+        Content="Collection Location"
+        Grid.Row="14"
+        Grid.Column="0"
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,0,0,0"
+        FontSize="15"
+        FontWeight="Medium"
+        />
+                    <Label 
+        Content="Delivery Location"
+        Grid.Row="15"
         Grid.Column="0"
         HorizontalAlignment="Left" 
         VerticalAlignment="Center"
@@ -487,7 +520,42 @@ Grid.Column="2"
         FontSize="15"
         FontWeight="Medium"
         />
-
+                    <Label 
+        Content=""
+                        x:Name="DistanceDelivrery"
+        Grid.Row="13"
+        Grid.Column="1"
+    VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+        FontSize="15"
+        FontWeight="Medium"
+        />
+                    <Label 
+        Content=""
+                        x:Name="CollectionLocation"
+        Grid.Row="14"
+        Grid.Column="1"
+    VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+        FontSize="13"
+        FontWeight="Medium"
+        />
+                    <Label 
+        Content=""
+                        x:Name="DeliveryLocation"
+        Grid.Row="15"
+        Grid.Column="1"
+    VerticalAlignment="Stretch"
+        HorizontalAlignment="Stretch"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+        FontSize="13"
+        FontWeight="Medium"
+        />
 
 
                 </Grid>

@@ -90,6 +90,32 @@ Grid.Column="2"
                 />
 
                     </Button>
+                    <ToggleButton
+                        Background="#FF0D3251"
+                        Grid.Column="0"
+                        Name="Simulator"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        Height="40"
+                        Width="40" 
+                        Margin="15"
+                        Click="Simulator_Click"
+                        Style="{StaticResource MaterialDesignActionToggleButton}"
+                        ToolTip="Run Simulator for this drone">
+                        <ToggleButton.Content>
+                            <materialDesign:PackIcon
+                                Kind="PlayCircleOutline"
+                                Width="30"
+                                Height="30" Foreground="White"/>
+                        </ToggleButton.Content>
+                        <materialDesign:ToggleButtonAssist.OnContent>
+                            <materialDesign:PackIcon
+                                Kind="StopCircleOutline"
+                                Width="30"
+                                Height="30" Foreground="White"/>
+                        </materialDesign:ToggleButtonAssist.OnContent>
+                    </ToggleButton>
+                
                 </Grid>
 
                 <Grid
