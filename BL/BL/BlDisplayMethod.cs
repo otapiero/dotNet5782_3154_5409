@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 using DO;
 namespace BL
@@ -16,6 +17,8 @@ namespace BL
         /// </summary>
         /// <param name="id"> searche the station by id</param>
         /// <returns>return the station if exsist </returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public BO.BaseStation SearchStation(int id)
         {
             BO.BaseStation temp = new();
@@ -57,6 +60,8 @@ namespace BL
         /// </summary>
         /// <param name="id"> searche the costumer by id</param>
         /// <returns>return the costumer if exsist or default costumer</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public BO.CustomerBl SearchCostumer(int id)
         {
 
@@ -122,6 +127,8 @@ namespace BL
         /// </summary>
         /// <param name="id"> searche the drone by id</param>
         /// <returns>return the drone if exsist or default drone</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public BO.DroneBL SearchDrone(int id)
         {
             if (!DronesBl.Exists(y => y.Id==id))
@@ -150,10 +157,10 @@ namespace BL
                     var sender = SearchCostumer(y.Sender);
                     var getter = SearchCostumer(y.TargetId);
                     z.CollectionLocation = sender.location;
-
+                
                     z.Sender = new(sender.Id, sender.name);
                     z.Getter = new(getter.Id, getter.name);
-                    z.DistanceDelivrery = DistanceLocation(temp.CurrentLocation, getter.location);
+                    z.DistanceDelivrery = DistanceLocation(temp.CurrentLocation, getter.location);//kkkk
                     temp.parcel = z;
                 }
                 catch(DO.IdDoseNotExist ex)
@@ -172,6 +179,8 @@ namespace BL
         /// </summary>
         /// <param name="id"> searche the parcel by id</param>
         /// <returns>return the parcel if exsist or default parcel</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public BO.ParcelBl SearchParcel(int id)
         {
 

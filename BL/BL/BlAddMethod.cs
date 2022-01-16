@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 
 
@@ -12,6 +13,8 @@ namespace BL
     partial class BL
     {
         #region add station
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void AddNewStation(int id, string name, double longattitude, double lattitude, int numChargeSlot)
         {
             if (numChargeSlot<1)
@@ -34,6 +37,8 @@ namespace BL
 
         }
         #endregion
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void AddNewDrone(int id, string model, int wheigt, int stationId)
         {
             if (!( idal.AllStation() ).Any(x => x.Id==stationId))
@@ -70,7 +75,8 @@ namespace BL
                 throw new BO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
-      
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void AddNewCustomer(int id, string name, string phone, double longattitude, double lattitude, string pass)
         {
             try
@@ -89,6 +95,7 @@ namespace BL
                 throw new BO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
 
         public void AddNewParcel(int senderId, int targetId, int wheigt, int Priority)
         {
