@@ -8,7 +8,7 @@ using System.Threading;
 using System.Diagnostics;
 namespace BL
 {
-    class Simulator
+  /*  class Simulator
     {
 
         BL bl;
@@ -220,5 +220,5 @@ namespace BL
             }
         }
 
-    }
+    }*/
 }

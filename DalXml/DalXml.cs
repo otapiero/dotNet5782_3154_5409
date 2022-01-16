@@ -16,7 +16,25 @@ namespace DAL
         static readonly DalXml instance = new DalXml();
 
         #endregion
-        DalXml() { }
+        DalXml() {
+            try
+            {
+
+                var t = AllDronesIncharge();
+                foreach (var x in t)
+                {
+                    ReleseDroneFromCharge(x.DroneId);
+                }
+            }
+            catch (DO.IdDoseNotExist x)
+            {
+                throw new DO.IdDoseNotExist(x.Message, x.ObjectType, x.Id);
+            }
+            catch (DO.XMLFileLoadCreateException x)
+            {
+                throw new DO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
+            }
+        }
         public static DalApi.IDal Instance { get { return instance; } }
         #region DS XML Files
 
@@ -24,7 +42,7 @@ namespace DAL
         private const string stationPath = @"Station.xml"; //XMLSerializer
         private const string parcelPath = @"Parcel.xml"; //XMLSerializer
         private const string costumerPath = @"Customer.xml"; //XMLSerializer
-        private const string DroneChargePath = @"DroneCarge.xml"; //XElement
+        private const string DroneChargePath = @"DroneCharge.xml"; //XElement
         private const string configPath = @"config.xml"; //XMLSerializer
 
 
@@ -786,23 +804,7 @@ namespace DAL
         }
         ~DalXml()
         {
-            try
-            {
-
-                var t =AllDronesIncharge();
-                foreach (var x in t)
-                {
-                    ReleseDroneFromCharge(x.DroneId);
-                }
-            }
-            catch (DO.IdDoseNotExist x)
-            {
-                throw new DO.IdDoseNotExist(x.Message, x.ObjectType,  x.Id);
-            }
-            catch (DO.XMLFileLoadCreateException x)
-            {
-                throw new DO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
-            }
+            
         }
 
     }
