@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+using System.Runtime.CompilerServices;
 
 namespace BL
 {
@@ -22,35 +23,37 @@ namespace BL
             Random rand = new();
             idal = DalApi.DalFactory.GetDal();
             //data lists
-            List<DO.Drone> dronesData = idal.AllDrones().ToList();
-            List<DO.Parcel> parcelsData = idal.AllParcels().ToList();
-            List<DO.Costumer> costumerData = idal.AllCustomers().ToList();
+            IEnumerable<DO.Drone> dronesData = idal.AllDrones();
+            IEnumerable<DO.Parcel> parcelsData = idal.AllParcels().ToList();
+            IEnumerable<DO.Costumer> costumerData = idal.AllCustomers();
             List<DO.Station> stationData = idal.AllStation().ToList();
             List<DO.DroneCharge> drv = idal.AllDronesIncharge().ToList();
 
-           /*
-          FileStream file3 = new FileStream(@"C:\Users\Ouriel\source\repos\dotNet5782_3154_5409\Data\Customer.xml", FileMode.Create);
-            XmlSerializer x3 = new XmlSerializer(costumerData.GetType());
-            x3.Serialize(file3, costumerData);
-            file3.Close();
-             FileStream file = new FileStream(@"C:\Users\Ouriel\source\repos\dotNet5782_3154_5409\Data\Drone.xml", FileMode.Create);
-              XmlSerializer x = new XmlSerializer(dronesData.GetType());
-              x.Serialize(file, dronesData);
-              file.Close();
-              FileStream file1 = new FileStream(@"C:\Users\Ouriel\source\repos\dotNet5782_3154_5409\Data\DroneCharge.xml", FileMode.Create);
-              XmlSerializer x1 = new XmlSerializer(drv.GetType());
-              x1.Serialize(file1, drv);
-              file1.Close();
-              FileStream file2 = new FileStream(@"C:\Users\Ouriel\source\repos\dotNet5782_3154_5409\Data\Parcel.xml", FileMode.Create);
-              XmlSerializer x2 = new XmlSerializer(parcelsData.GetType());
-              x2.Serialize(file2, parcelsData);
-              file2.Close();
+            /*
+             List<DO.Costumer> costumerData = idal.AllCustomers().ToList();
+             List<DO.Station> stationData = idal.AllStation().ToList();
+           FileStream file3 = new FileStream(@"C:\Users\Ouriel\source\repos\dotNet5782_3154_5409\Data\Customer.xml", FileMode.Create);
+             XmlSerializer x3 = new XmlSerializer(costumerData.GetType());
+             x3.Serialize(file3, costumerData);
+             file3.Close();
+              FileStream file = new FileStream(@"C:\Users\Ouriel\source\repos\dotNet5782_3154_5409\Data\Drone.xml", FileMode.Create);
+               XmlSerializer x = new XmlSerializer(dronesData.GetType());
+               x.Serialize(file, dronesData);
+               file.Close();
+               FileStream file1 = new FileStream(@"C:\Users\Ouriel\source\repos\dotNet5782_3154_5409\Data\DroneCharge.xml", FileMode.Create);
+               XmlSerializer x1 = new XmlSerializer(drv.GetType());
+               x1.Serialize(file1, drv);
+               file1.Close();
+               FileStream file2 = new FileStream(@"C:\Users\Ouriel\source\repos\dotNet5782_3154_5409\Data\Parcel.xml", FileMode.Create);
+               XmlSerializer x2 = new XmlSerializer(parcelsData.GetType());
+               x2.Serialize(file2, parcelsData);
+               file2.Close();
 
-              FileStream file5 = new FileStream(@"C:\Users\Ouriel\source\repos\dotNet5782_3154_5409\Data\Station.xml", FileMode.Create);
-              XmlSerializer x5 = new XmlSerializer(stationData.GetType());
-              x5.Serialize(file5, stationData);
-              file5.Close();
-            */
+               FileStream file5 = new FileStream(@"C:\Users\Ouriel\source\repos\dotNet5782_3154_5409\Data\Station.xml", FileMode.Create);
+               XmlSerializer x5 = new XmlSerializer(stationData.GetType());
+               x5.Serialize(file5, stationData);
+               file5.Close();
+             */
             Double[] vs = idal.ElectricityUse();
             double Avilable = vs[0];
             double Light = vs[1];
@@ -179,26 +182,7 @@ namespace BL
             }
             return stationlocation;
         }
-        ~BL()
-        {
-            try
-            {
-
-                var t = idal.AllDronesIncharge();
-                foreach (var x in t)
-                {
-                    idal.ReleseDroneFromCharge(x.DroneId);
-                }
-            }
-            catch (DO.IdDoseNotExist x)
-            {
-                throw new BO.IdDoseNotExist(x.ObjectType, x.Id, x);
-            }
-            catch (DO.XMLFileLoadCreateException x)
-            {
-                throw new BO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
-            }
-        }
+       
     }
 }
 

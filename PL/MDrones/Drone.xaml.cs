@@ -14,6 +14,8 @@ using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 using BO;
 using PL.MParcels;
+using System.Windows.Threading;
+using System.ComponentModel;
 
 namespace PL
 {
@@ -28,6 +30,7 @@ namespace PL
 
         private bool newDrone;
         int station;
+        BackgroundWorker bg;
 
         Dictionary<int, string> options = new Dictionary<int, string>(){
              {0,  "Update Model" },
@@ -68,6 +71,11 @@ namespace PL
         }
         public Drone(BlApi.IBL bl1, BO.DroneBL x)
         {
+            bg = new();
+            bg.DoWork += simoulator_doWork;
+            bg.ProgressChanged += updatSimulator;
+            bg.WorkerReportsProgress = true;
+            bg.WorkerSupportsCancellation = true;
 
             newDrone = false;
             InitializeComponent();
@@ -139,6 +147,17 @@ namespace PL
             WeightCombo.SelectedItem = x.Weight;
 
         }
+
+        private void updatSimulator(object sender, ProgressChangedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void simoulator_doWork(object sender, DoWorkEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         public Drone(BlApi.IBL bl1, BO.DroneBL x, int z)
         {
            
@@ -386,6 +405,20 @@ namespace PL
             
             var newC = ibl.SearchParcel(drone.parcel.Id);
             new Parcel(ibl, newC, 1).ShowDialog();
+        }
+        private void f()
+        {
+            bg.ReportProgress(0);
+        }
+       
+        private bool Cancelsimulator()
+        {
+            return NewMethod();
+        }
+
+        private bool NewMethod()
+        {
+            return bg.CancellationPending;
         }
     }
 }

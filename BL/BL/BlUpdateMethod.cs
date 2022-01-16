@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace BL
 {
@@ -13,6 +14,8 @@ namespace BL
         /// </summary>
         /// <param name="id">the id of drone to change</param>
         /// <param name="model">the new model</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void UpdateDroneModel(int id, string model)
         {
 
@@ -39,6 +42,8 @@ namespace BL
         /// <param name="id">the id of the station </param>
         /// <param name="name">the name to update</param>
         /// <param name="chargeSlots">num of charge slots </param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void UpdateStation(int id, string name, int chargeSlots)
         {
             try
@@ -70,6 +75,8 @@ namespace BL
         /// <param name="id">the id of the costumer to update</param>
         /// <param name="name">the name to update</param>
         /// <param name="phone">the phoneto update</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void UpdateCostumer(int id, string name, string phone)
         {
             if (phone.Length<=0&&name.Length<=0)
@@ -93,6 +100,8 @@ namespace BL
         /// send a drone to charge
         /// </summary>
         /// <param name="id">the id of drone sended to charge</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void SendDroneToCharge(int id)
         {
 
@@ -132,6 +141,8 @@ namespace BL
         /// </summary>
         /// <param name="id"></param>
         /// <param name="time"></param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void RelesaeDroneFromCharge(int id, double time)
         {
 
@@ -166,6 +177,8 @@ namespace BL
         /// asssign a parcel to a drone
         /// </summary>
         /// <param name="id">the id of drone to assign</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void AssignPackageToDrone(int id)
         {
             try
@@ -253,6 +266,8 @@ namespace BL
         /// colect a parcel by a drone
         /// </summary>
         /// <param name="id">the id of drone to collect a parcel</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void CollectPackage(int id)
         {
             try
@@ -302,6 +317,8 @@ namespace BL
         /// deliver a parcel
         /// </summary>
         /// <param name="id">the id of drone to deliver a parcel</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void DeliverPackage(int id)
         {
             try
@@ -356,6 +373,8 @@ namespace BL
                 throw new BO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void DeleteParcel(int id)
         {
             try

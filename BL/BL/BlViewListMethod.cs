@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace BL
 {
@@ -13,6 +14,8 @@ namespace BL
         /// list of all station
         /// </summary>
         /// <returns>return the lust of all the station </returns>
+         [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<BO.BaseStationToList> ListStation()
         {
             try
@@ -36,6 +39,8 @@ namespace BL
         /// list of all costumer
         /// </summary>
         /// <returns>return the lust of all the costumer </returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<BO.CustomerToList> ListCustomer()
         {
             try
@@ -61,6 +66,8 @@ namespace BL
         /// list of all drone
         /// </summary>
         /// <returns>return the lust of all the drone </returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<BO.DroneToList> ListDrones()
         {
             try
@@ -82,6 +89,8 @@ namespace BL
         /// list of all parcel
         /// </summary>
         /// <returns>return the lust of all the parcel </returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<BO.ParcelToList> ListParcels()
         {
             List<BO.ParcelToList> allParcels = new();
@@ -120,6 +129,8 @@ namespace BL
         /// list of the not assined parcels
         /// </summary>
         /// <returns>list of  parcels</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<BO.ParcelToList> ListParcelsNotAssigned()
         {
             List<BO.ParcelToList> ParcelsNotAssociated = new();
@@ -156,12 +167,14 @@ namespace BL
 
             return ParcelsNotAssociated;
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
 
         public IEnumerable<BO.DroneToList> ListOfDrones(Predicate<BO.DroneToList> f)
         {
             return DronesBl.FindAll(f);
         }
-       
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<BO.ParcelToList> ListOfParcels(Predicate<BO.ParcelToList> f)
         {
             try
@@ -179,6 +192,8 @@ namespace BL
         /// list of station with availebal charge post
         /// </summary>
         /// <returns>list of  station</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<BO.BaseStationToList> StationWithAvailebalChargePost()
         {
             try

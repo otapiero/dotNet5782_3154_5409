@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using System.Xml.Serialization;
 using System.Xml.Linq;
-
+using System.Runtime.CompilerServices;
 
 namespace DAL
 {
@@ -26,12 +26,17 @@ namespace DAL
         private const string costumerPath = @"Customer.xml"; //XMLSerializer
         private const string DroneChargePath = @"DroneCarge.xml"; //XElement
         private const string configPath = @"config.xml"; //XMLSerializer
-      
+
 
 
         #endregion
 
-       public DO.Costumer SearchCostumer(int id)
+        #region search costumer
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        ///<summary>method <c>SearchCustomer</c> </summary>
+        ///<param name="id"> searche the customer by id</param>
+      
+        public DO.Costumer SearchCostumer(int id)
         {
             try
             {
@@ -51,6 +56,12 @@ namespace DAL
                 throw new DO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
+        #endregion
+        #region search drone
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        /// <summary>method <c>SearchDrone</c> </summary>
+        /// <param name="id"> searche the drone by id</param>
+        /// <returns>the drone if exsist</returns>
         public DO.Drone SearchDrone(int id)
         {
             try
@@ -74,6 +85,12 @@ namespace DAL
                 throw new DO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
+        #endregion
+        #region search parcel
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        /// <summary>method <c> SearchParcel</c> </summary>
+        /// <param name="id"> searche the parcel by id</param>
+        /// <returns>return the parcel if exsist</returns>
         public DO.Parcel SearchParcel(int id)
         {
             try
@@ -93,6 +110,11 @@ namespace DAL
                 throw new DO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
+        #endregion
+        #region search station
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        ///<summary>method <c>SearchStation</c> </summary>
+        ///<param name="id"> searche the Station by id</param>
         public DO.Station SearchStation(int id)
         {
             try
@@ -112,6 +134,14 @@ namespace DAL
                 throw new DO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
+        #endregion
+        #region add drone
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        /// <summary>method AddNewDrone </summary>
+        /// <param name="_model"> model of drone</param>
+        /// <param name="_MaxWheight"> enum of weight drone</param>
+        /// <param name="_status"> enum status of drone</param>
+        /// <param name=" _battery">life battery of drone</param>  
         public void AddNewDrone(int id, string _model)
         {
             try
@@ -143,6 +173,14 @@ namespace DAL
             }
 
         }
+        #endregion
+        #region add station
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        /// <summary>method AddNewStation </summary>
+        /// <param name="_name"> station name</param>
+        /// <param name="_Longitude"> location of station</param>
+        /// <param name="_Lattitude"> location of station</param>
+        /// <param name=" _chargeSlots">status of charge</param>
         public void AddNewStation(int id, string _name, double _Longitude, double _Lattitude, int _chargeSlots)
         {
             try
@@ -166,6 +204,15 @@ namespace DAL
                 throw new DO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
+        #endregion
+        #region add customer
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        /// <summary>method AddNewCustomer </summary>
+        /// <param name="_id"> customer id</param>
+        /// <param name=" _Name">customer name</param>
+        /// <param name="_Phone"> customer phone number</param>
+        /// <param name="_Longitude"> location of station</param>
+        /// <param name="_Lattitude"> location of station</param>
         public void AddNewCustomer(int _id, string _Name, string _Phone, double _Longitude, double _Lattitude, string pass)
         {
             try
@@ -190,6 +237,14 @@ namespace DAL
                 throw new DO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
+        #endregion
+        #region add parcel
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        /// <summary>method  AddNewParcel </summary>
+        /// <param name="_Sender"> customer id of sender</param>
+        /// <param name="_TargetId">customer id of target</param>
+        /// <param name="_Wheight"> enum weight of parcel</param>
+        /// <param name="_Priority"> enum priority of parcel</param>
         public void AddNewParcel(int _Sender, int _TargetId, int _Wheight, int _Priority)
         {
             try
@@ -226,9 +281,15 @@ namespace DAL
                 throw new DO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
-      
-        
-       
+        #endregion
+        #region send to charge
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        /// <summary>method DeliveryParcelToCustomer - the function get parcel and update dilevry time </summary>
+        /// <param name="idParcel"> id parcel delivery</param>
+
+        /// <summary>method SendDroneToCharge - the function get drone and station and coonect them </summary>
+        /// <param name = "idDrone"> id drone to charge</param>
+        /// <param name = "idStation"> id free station</param>
         public void SendDroneToCharge(int idDrone, int idStation)
         { 
             try
@@ -254,6 +315,11 @@ namespace DAL
             }
 
         }
+        #endregion
+        #region relese from charge
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        /// <summary>method ReleseDroneFromCharge - the function get drone relese it fron station </summary>
+        /// <param name = "idDrone"> id drone to relese</param>
         public void ReleseDroneFromCharge(int id)
         {      
             try
@@ -282,6 +348,14 @@ namespace DAL
                 throw new DO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
+        #endregion
+        #region assign parcel
+        /// <summary>
+        /// assing a parcel to a drone
+        /// </summary>
+        /// <param name="idParcel">id of parcel</param>
+        /// <param name="idDrone">id of drone</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AssignPackageToDrone(int idParcel, int idDrone)
         {
             try
@@ -306,6 +380,13 @@ namespace DAL
                 throw new DO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
+        #endregion
+        #region collect parcel
+        /// <summary>
+        /// collect a parcel by drone
+        /// </summary>
+        /// <param name="idParcel">id of parcel</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void CollectPackage(int idParcel)
         {
             try
@@ -330,6 +411,13 @@ namespace DAL
                 throw new DO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
+        #endregion
+        #region deliver parcel
+        /// <summary>
+        /// deliver a parcel by drone
+        /// </summary>
+        /// <param name="idParcel">id of parcel</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeliverPackage(int idParcel)
         {
             try
@@ -353,6 +441,14 @@ namespace DAL
                 throw new DO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
+        #endregion
+        #region update drone
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        /// <summary>
+        /// update drone model
+        /// </summary>
+        /// <param name="id"> id of drone</param>
+        /// <param name="model">new model of drone</param>
         public void UpdateDroneModel(int id, string model)
         {
             try
@@ -380,6 +476,15 @@ namespace DAL
                 throw new DO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
+        #endregion
+        #region update station
+        /// <summary>
+        /// update station
+        /// </summary>
+        /// <param name="id">station id</param>
+        /// <param name="name">new stattion name</param>
+        /// <param name="chargeSlots">new num of charge slots in station</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateStation(int id, string name, int chargeSlots)
         {
             try
@@ -406,6 +511,15 @@ namespace DAL
                 throw new DO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
+        #endregion
+        #region update costumer
+        /// <summary>
+        /// update customer
+        /// </summary>
+        /// <param name="id">id cusomers</param>
+        /// <param name="name">new name of customers</param>
+        /// <param name="phone">new phone of customers</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateCostumer(int id, string name, string phone)
         {
             try
@@ -432,6 +546,14 @@ namespace DAL
             }
 
         }
+        #endregion
+        #region delete parcel
+        /// <summary>
+        /// delete a parcel
+        /// </summary>
+        /// <param name="idParcel">id of parcel</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        
         public void DeleteParcel(int idParcel)
         {
             
@@ -457,6 +579,11 @@ namespace DAL
                 throw new DO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
+        #endregion
+        #region stations
+        ///<summary>List - copy list of station for the main program</summary>
+        ///<returns>list of all stations</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.Station> AllStation()
         {
 
@@ -471,6 +598,11 @@ namespace DAL
             }
 
         }
+        #endregion
+        #region drones
+        ///<summary>List - copy list of drones for the main program</summary>
+        ///<returns>list of all drones</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.Drone> AllDrones()
         {
             try
@@ -491,6 +623,11 @@ namespace DAL
                 throw new DO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
+        #endregion
+        #region customers
+        ///<summary>List - copy list of customers for the main program</summary>
+        ///<returns>list of all costomers</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.Costumer> AllCustomers()
         {
             try
@@ -503,6 +640,11 @@ namespace DAL
                 throw new DO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
+        #endregion
+        #region parcels
+        ///<summary>List - copy list of parcels for the main program</summary>
+        ///<returns>list of all parcels</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.Parcel> AllParcels()
         {
             var parcelList = XmlTools.LoadListFromXMLSerializer<DO.Parcel>(parcelPath);
@@ -510,6 +652,9 @@ namespace DAL
             return parcelList.FindAll(item => item.Availble == true);
 
         }
+        #endregion
+        #region drones in charge
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.DroneCharge> AllDronesIncharge()
         {
             try
@@ -522,6 +667,9 @@ namespace DAL
                 throw new DO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
+        #endregion
+        #region part of parcels
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.Parcel> ListOfParcels(Predicate<DO.Parcel> f)
         {
             try
@@ -538,6 +686,9 @@ namespace DAL
                 throw new DO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
+        #endregion
+        #region part of customers
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.Costumer> ListOfCostumers(Predicate<DO.Costumer> f)
         {
             try
@@ -551,6 +702,9 @@ namespace DAL
                 throw new DO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
+        #endregion
+        #region part of dronecharge
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.DroneCharge> ListOfDronesInCharge(Predicate<DO.DroneCharge> f)
         {
             try
@@ -565,6 +719,9 @@ namespace DAL
             }
 
         }
+        #endregion
+        #region part of stations
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.Station> ListOfStations(Predicate<DO.Station> f)
         {
             try
@@ -580,6 +737,9 @@ namespace DAL
                 throw new DO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
+        #endregion
+        #region part of Drones
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.Drone> ListOfDrones(Predicate<DO.Drone> f)
         {
             try
@@ -602,7 +762,8 @@ namespace DAL
                 throw new DO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
-
+        #endregion
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public double[] ElectricityUse()
         {
             try
@@ -623,7 +784,26 @@ namespace DAL
                 throw new DO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
+        ~DalXml()
+        {
+            try
+            {
 
+                var t =AllDronesIncharge();
+                foreach (var x in t)
+                {
+                    ReleseDroneFromCharge(x.DroneId);
+                }
+            }
+            catch (DO.IdDoseNotExist x)
+            {
+                throw new DO.IdDoseNotExist(x.Message, x.ObjectType,  x.Id);
+            }
+            catch (DO.XMLFileLoadCreateException x)
+            {
+                throw new DO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
+            }
+        }
 
     }
 }
