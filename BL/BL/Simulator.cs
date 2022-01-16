@@ -139,9 +139,9 @@ namespace BL
                         double lonPlus, latPlus, lonMinusLon, latMinusLat;
                         BO.ParcelBl package = bl.SearchParcel(drone.parcel.Id);
 
-                        switch (drone.DronePackageProcess.PackageShipmentStatus)
+                        switch (drone.parcel.statusDelivrery)
                         {
-                            case ShipmentStatus.Waiting:
+                            case false:
 
                                 // For updating the drone position every second, one should check how much to add on each progression of a second (kilometer)
                                 latMinusLat = drone.DronePackageProcess.CollectLocation.Latitude - drone.DroneLocation.Latitude;
@@ -176,7 +176,7 @@ namespace BL
                                 break;
 
 
-                            case ShipmentStatus.OnGoing:
+                            case .OnGoing:
 
                                 // For updating the drone position every second, one should check how much to add on each progression of a second (kilometer)
                                 latMinusLat = drone.DronePackageProcess.DestinationLocation.Latitude - drone.DronePackageProcess.CollectLocation.Latitude;
