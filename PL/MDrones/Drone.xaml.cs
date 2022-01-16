@@ -65,7 +65,6 @@ namespace PL
             bg.ProgressChanged += updatSimulator;
             bg.WorkerReportsProgress = true;
             bg.WorkerSupportsCancellation = true;
-
             newDrone = false;
             InitializeComponent();
             ibl = bl1;

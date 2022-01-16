@@ -21,11 +21,11 @@ namespace BL
             try
             {
 
-
+                int numOfDronesInCharge;
                 List<BO.BaseStationToList> allStation = new();
                 foreach (DO.Station x in idal.AllStation())
                 {
-                    int numOfDronesInCharge = idal.AllDronesIncharge().Count(w => w.StationId==x.Id);
+                    numOfDronesInCharge = idal.AllDronesIncharge().Count(w => w.StationId==x.Id);
                     allStation.Add(new(x.Id, x.Name, x.ChargeSlots, numOfDronesInCharge));
                 }
                 return allStation;
