@@ -15,17 +15,17 @@
     <ChargeSlots>17</ChargeSlots>
   </Station>
   <Station>
-    <Id>4</Id>
-    <Name>oiyr</Name>
-    <Longitude>59.250050028436846</Longitude>
-    <Lattitude>8.370761251249704</Lattitude>
-    <ChargeSlots>73</ChargeSlots>
-  </Station>
-  <Station>
     <Id>2</Id>
     <Name>vsvz</Name>
     <Longitude>28.33907046743625</Longitude>
     <Lattitude>31.205546181279026</Lattitude>
-    <ChargeSlots>96</ChargeSlots>
+    <ChargeSlots>95</ChargeSlots>
+  </Station>
+  <Station>
+    <Id>4</Id>
+    <Name>oiyr</Name>
+    <Longitude>59.250050028436846</Longitude>
+    <Lattitude>8.370761251249704</Lattitude>
+    <ChargeSlots>72</ChargeSlots>
   </Station>
 </ArrayOfStation>
