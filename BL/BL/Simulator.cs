@@ -168,7 +168,7 @@ namespace BL
             {
                 lock (bl)
                 {
-                    if (drone.parcel.DistanceDelivrery>1.5)
+                    while (drone.parcel.DistanceDelivrery>1.5)
                     {
                         latMinusLat = drone.CurrentLocation.Lattitude - drone.parcel.CollectionLocation.Lattitude;
                         lonMinusLon = drone.CurrentLocation.Longitude - drone.parcel.CollectionLocation.Longitude;
@@ -176,8 +176,9 @@ namespace BL
                         lonPlus = lonMinusLon / drone.parcel.DistanceDelivrery;
                         bl.UpdateDroneLocation(drone.Id, lonPlus, latPlus);
                         bl.BatteryMinus(drone.Id, Math.Sqrt(Math.Pow(lonPlus, 2) + Math.Pow(latPlus, 2)));
+                        drone=bl.SearchDrone(id);
                     }
-                    else
+                    
                     {
                         bl.CollectPackage(id);
                         //action(id);
@@ -203,7 +204,7 @@ namespace BL
             {
                 lock (bl)
                 {
-                    if (drone.parcel.DistanceDelivrery>1.5)
+                    while (drone.parcel.DistanceDelivrery>1.5)
                     {
                         latMinusLat = drone.CurrentLocation.Lattitude - drone.parcel.DeliveryLocation.Lattitude;
                         lonMinusLon = drone.CurrentLocation.Longitude - drone.parcel.DeliveryLocation.Longitude;
@@ -212,8 +213,10 @@ namespace BL
                         lonPlus = lonMinusLon / drone.parcel.DistanceDelivrery;
                         bl.UpdateDroneLocation(drone.Id, lonPlus, latPlus);
                         bl.BatteryMinus(drone.Id, Math.Sqrt(Math.Pow(lonPlus, 2) + Math.Pow(latPlus, 2)));
+                        drone=bl.SearchDrone(id);
+
                     }
-                    else
+
                     {
                         bl.DeliverPackage(id); 
                     }

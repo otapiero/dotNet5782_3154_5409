@@ -285,7 +285,15 @@ namespace PL.MParcels
                         int geId = ge.Id;
                         var we = (int)(BO.WeightCategories)WeightCombo.SelectedItem;
                         var pr = (int)(BO.Priorities)PrioritiesCombo.SelectedItem;
-                        ibl.AddNewParcel(seId, geId, we, pr);
+                        try
+                        {
+                            ibl.AddNewParcel(seId, geId, we, pr);
+
+                        }
+                        catch(BO.IdDoseNotExist x)
+                        {
+                            MessageBox.Show($"id {x.Id} of {x.ObjectType} dose not exsit");
+                        }
                         MessageBox.Show("Done", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                         cancel = 1;
                         this.Close();

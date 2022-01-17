@@ -20,4 +20,8 @@
     <Id>5</Id>
     <Model>Alpha</Model>
   </Drone>
+  <Drone>
+    <Id>12345</Id>
+    <Model>kl</Model>
+  </Drone>
 </ArrayOfDrone>

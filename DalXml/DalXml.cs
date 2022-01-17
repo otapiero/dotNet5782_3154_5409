@@ -274,14 +274,7 @@ namespace DAL
 
                 var parcelList = XmlTools.LoadListFromXMLSerializer<DO.Parcel>(parcelPath);
                 var configRootElem = XmlTools.LoadListFromXMLElement(configPath);
-                if (!parcelList.Exists(x => x.Id.Equals(_Sender)))
-                {
-                    throw new DO.IdDoseNotExist("Id of sender dose not found.", "costumer", _Sender);
-                }
-                if (!parcelList.Exists(x => x.Id.Equals(_TargetId)))
-                {
-                    throw new DO.IdDoseNotExist("Id of target dose not found.", "costumer", _TargetId);
-                }
+                
 
                 DO.Parcel temp = new();
                 temp.Availble = true;
@@ -297,6 +290,7 @@ namespace DAL
                 temp.Delivered = null;
                 parcelList.Add(temp);
                 XmlTools.SaveListToXMLElement(configRootElem, configPath);
+                XmlTools.SaveListToXMLSerializer(parcelList, parcelPath);
             }
             catch (DO.XMLFileLoadCreateException x)
             {
