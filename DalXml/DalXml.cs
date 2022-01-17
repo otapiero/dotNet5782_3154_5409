@@ -10,13 +10,25 @@ using System.Runtime.CompilerServices;
 namespace DAL
 {
 
-    public class DalXml: DalApi.IDal
+
+    public class DalXml : DalApi.IDal
     {
         #region singelton
         static readonly DalXml instance = new DalXml();
 
         #endregion
-        DalXml() {
+        #region DS XML Files
+
+        private const string dronpath = @"Drone.xml"; //XElement
+        private const string stationPath = @"Station.xml"; //XMLSerializer
+        private const string parcelPath = @"Parcel.xml"; //XMLSerializer
+        private const string costumerPath = @"Customer.xml"; //XMLSerializer
+        private const string DroneChargePath = @"DroneCharge.xml"; //XElement
+        private const string configPath = @"config.xml"; //XMLSerializer
+
+        #endregion
+        DalXml()
+        {
             try
             {
 
@@ -35,19 +47,11 @@ namespace DAL
                 throw new DO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
-        public static DalApi.IDal Instance { get { return instance; } }
-        #region DS XML Files
-
-        private const string dronpath = @"Drone.xml"; //XElement
-        private const string stationPath = @"Station.xml"; //XMLSerializer
-        private const string parcelPath = @"Parcel.xml"; //XMLSerializer
-        private const string costumerPath = @"Customer.xml"; //XMLSerializer
-        private const string DroneChargePath = @"DroneCharge.xml"; //XElement
-        private const string configPath = @"config.xml"; //XMLSerializer
-
-
-
-        #endregion
+        public static DalApi.IDal Instance
+        {
+            get { return instance; }
+        }
+      
 
         #region search costumer
         [MethodImpl(MethodImplOptions.Synchronized)]

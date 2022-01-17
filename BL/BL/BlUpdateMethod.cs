@@ -431,6 +431,15 @@ namespace BL
                 throw new BO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
+        public  void startSimulator( int id, Func<bool> stop)
+        {
+            try
+            {
+                Simulator sim = new Simulator(this, id, stop);
+            }
+            catch
+            { }
+        }
 
         public void  BatteryPlus(int id, double plus)
         {

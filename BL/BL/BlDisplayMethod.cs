@@ -144,24 +144,26 @@ namespace BL
             temp.Model = x.Model;
             temp.status = x.status;
             temp.Weight = x.Weight;
+            temp.parcel=new();
             if (x.ParcelId != 0)
             {
                 try
                 {
                     var y = idal.SearchParcel(x.ParcelId);
-                    BO.ParcelInDelivrery z = new();
-                    z.Id = y.Id;
-                    z.statusDelivrery = true;
-                    z.weight =(BO.WeightCategories) y.Wheight;
-                    z.Priorities =(BO.Priorities) y.Priority;
+
+                    temp.parcel.Id = y.Id;
+                    temp.parcel.statusDelivrery = true;
+                    temp.parcel.weight =(BO.WeightCategories) y.Wheight;
+                    temp.parcel.Priorities =(BO.Priorities) y.Priority;
                     var sender = SearchCostumer(y.Sender);
                     var getter = SearchCostumer(y.TargetId);
-                    z.CollectionLocation = sender.location;
-                
-                    z.Sender = new(sender.Id, sender.name);
-                    z.Getter = new(getter.Id, getter.name);
-                    z.DistanceDelivrery = DistanceLocation(temp.CurrentLocation, getter.location);//kkkk
-                    temp.parcel = z;
+                    temp.parcel.CollectionLocation = sender.location;
+
+                    temp.parcel.Sender = new(sender.Id, sender.name);
+                    temp.parcel.Getter = new(getter.Id, getter.name);
+                    temp.parcel.DistanceDelivrery = DistanceLocation(temp.CurrentLocation, getter.location);//kkkk
+                    temp.parcel.DeliveryLocation=getter.location;
+                    temp.parcel.CollectionLocation=sender.location;
                 }
                 catch(DO.IdDoseNotExist ex)
                 {
