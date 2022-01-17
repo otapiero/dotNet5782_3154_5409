@@ -32,4 +32,12 @@
     <Lattitude>12.063334403589058</Lattitude>
     <Password>0</Password>
   </Costumer>
+  <Costumer>
+    <Id>1222222</Id>
+    <Name>david</Name>
+    <Phone>05999999</Phone>
+    <Longitude>54</Longitude>
+    <Lattitude>52</Lattitude>
+    <Password>0</Password>
+  </Costumer>
 </ArrayOfCostumer>

@@ -112,12 +112,12 @@ namespace BL
                     case BO.DroneStatuses.Maintenace:
                         try
                         {
-                            if (drone.Battery<95)
+                            while (drone.Battery<95)
                             {
                                 bl.BatteryPlus(id, 5);
                                 Thread.Sleep(delay);
                             }
-                            else
+                            
                             {
                                 bl.RelesaeDroneFromCharge(id, 10);
                                 Thread.Sleep(delay);
