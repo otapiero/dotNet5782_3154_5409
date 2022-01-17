@@ -31,7 +31,7 @@ namespace PL
 
         private bool newDrone;
         int station;
-        BackgroundWorker bg;
+        BackgroundWorker worker;
 
         Dictionary<int, string> options = new Dictionary<int, string>(){
              {0,  "Update Model" },
@@ -60,13 +60,15 @@ namespace PL
         }
         public Drone(BlApi.IBL bl1, BO.DroneBL x)
         {
-            bg = new();
-            bg.DoWork += simoulator_doWork;
-            bg.ProgressChanged += updatSimulator;
-            bg.WorkerReportsProgress = true;
-            bg.WorkerSupportsCancellation = true;
-            newDrone = false;
+          
             InitializeComponent();
+            worker = new();
+            worker.DoWork += Worker_DoWork;
+            worker.ProgressChanged += Worker_ProgressChanged;
+            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+            worker.WorkerReportsProgress = true;
+            worker.WorkerSupportsCancellation = true;
+            newDrone = false;
             ibl = bl1;
             drone = x;
             WeightCombo.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
@@ -119,15 +121,7 @@ namespace PL
 
         }
 
-        private void updatSimulator(object sender, ProgressChangedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void simoulator_doWork(object sender, DoWorkEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public Drone(BlApi.IBL bl1, BO.DroneBL x, int z)
         {
@@ -385,30 +379,70 @@ namespace PL
         {
             if (!runSimulator)
             {
-                runSimulator = true;
-                Ok.Visibility = Visibility.Hidden;
-                MainGrid.RowDefinitions[6].Height = new GridLength(0);
+                if (worker.IsBusy != true)
+                {
+                    worker.RunWorkerAsync(); 
+                    runSimulator = true;
+                    Ok.Visibility = Visibility.Hidden;
+                    MainGrid.RowDefinitions[6].Height = new GridLength(0);
+                }
             }
             else
             {
-                Ok.Visibility = Visibility.Visible;
-                MainGrid.RowDefinitions[6].Height = MainGrid.RowDefinitions[0].Height;
-                runSimulator = false;
+                if (worker.IsBusy)
+                {
+                    MessageBox.Show($"Cancelling Simulator Mode, Please Wait", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    worker.CancelAsync();
+                    Ok.Visibility = Visibility.Visible;
+                    MainGrid.RowDefinitions[6].Height = MainGrid.RowDefinitions[0].Height;
+                   
+                }
+                
             }
         }
         private void f()
         {
-            bg.ReportProgress(0);
+            worker.ReportProgress(0);
         }
-       
-        private bool Cancelsimulator()
+    
+        private bool StatusSimulator()
         {
-            return NewMethod();
+            return worker.CancellationPending;
         }
 
-        private bool NewMethod()
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            return bg.CancellationPending;
+            // BackgroundWorker worker = sender as BackgroundWorker;
+           ibl.Simulator(ibl, drone.Id, StatusSimulator);
+        }
+
+
+
+        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            drone = ibl.SearchDrone(drone.Id);
+            Location.Content = drone.CurrentLocation.ToString();
+            StatusContenetLabel.Content = drone.status;
+            if (drone.parcel.Id == 0)
+            {
+                MainGrid.RowDefinitions[8].Height = new GridLength(0);
+            }
+            else ParcelID.Content = drone.parcel.Id;
+
+            BatteryText.Content = drone.Battery.ToString().Length < 5 ? drone.Battery.ToString() : drone.Battery.ToString().Substring(0, 5);
+            DroneId.Text = drone.Id.ToString();
+            ModelText.Text = drone.Model;
+            WeightCombo.SelectedItem = drone.Weight;
+           
+        }
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            runSimulator = false;
+        }
+
+        private void DroneId_SelectionChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }
