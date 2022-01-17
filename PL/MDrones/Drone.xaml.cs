@@ -413,7 +413,7 @@ namespace PL
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             // BackgroundWorker worker = sender as BackgroundWorker;
-           ibl.Simulator(ibl, drone.Id, StatusSimulator);
+           ibl.Simulator(drone.Id, StatusSimulator);
         }
 
 
