@@ -14,16 +14,16 @@ namespace BL
         BO.DroneBL drone;
         int id;
         Func<bool> stop;
-       // Action< int> action;
-        const int delay=100;
+        Action action;
+        const int delay= 500;
         const int speed = 1;
         double lonPlus, latPlus, lonMinusLon, latMinusLat;
-        public Simulator(BL _bl,int _id, Func<bool> _stop)
+        public Simulator(BL _bl,int _id, Func<bool> _stop, Action report)
         {
             bl=_bl;
             id=_id;
             stop=_stop;
-           // action=_action;
+            action=report;
             
             RunSimulator();
         } 
@@ -31,6 +31,7 @@ namespace BL
         {
             while(stop.Invoke()==false)
             {
+               
                 lock (bl)
                 {
                     drone = bl.SearchDrone(id);
@@ -44,6 +45,7 @@ namespace BL
                             {
                                 bl.AssignPackageToDrone(id);
                                 drone = bl.SearchDrone(id);
+                                action();
                             }
                             Thread.Sleep(delay);
                             //action(drone.Id);
@@ -52,7 +54,8 @@ namespace BL
                         {
                             sendToCharge();
                             Thread.Sleep(delay);
-                           //action(id);
+                            action();
+                           
                         }
                         #region other catches
                         catch (BO.NoParcelAvilable )
@@ -86,13 +89,13 @@ namespace BL
                                 {
                                     Deliver();
                                     Thread.Sleep(delay);
-                                    //action(drone.Id);
+                                    action();
                                 }
                                 else
                                 {
                                     Colecte();
                                     Thread.Sleep(delay);
-                                 //   action(drone.Id);
+                                    action();
                                 }
                             }
                         }
@@ -112,16 +115,19 @@ namespace BL
                     case BO.DroneStatuses.Maintenace:
                         try
                         {
-                            if (drone.Battery<95)
+                            while (drone.Battery<95)
                             {
                                 bl.BatteryPlus(id, 5);
+                                drone=bl.SearchDrone(id);
                                 Thread.Sleep(delay);
+                                action();
                             }
-                            else
-                            {
-                                bl.RelesaeDroneFromCharge(id, 10);
-                                Thread.Sleep(delay);
-                            }
+                            
+                            bl.RelesaeDroneFromCharge(id, 10);
+                            drone=bl.SearchDrone(id);
+                            Thread.Sleep(delay);
+                            action();
+
                             break;
                         }
                         catch (BO.IdDoseNotExist x)
@@ -147,6 +153,7 @@ namespace BL
                 lock (bl)
                 {
                     bl.SendDroneToCharge(id);
+                    action();
                 }
             }
             catch (BO.WrongStatusObject x)
@@ -168,20 +175,23 @@ namespace BL
             {
                 lock (bl)
                 {
+                    latMinusLat = drone.parcel.CollectionLocation.Lattitude - drone.CurrentLocation.Lattitude;
+                    lonMinusLon = drone.parcel.CollectionLocation.Longitude - drone.CurrentLocation.Longitude;
+                    latPlus = latMinusLat / drone.parcel.DistanceDelivrery;
+                    lonPlus = lonMinusLon / drone.parcel.DistanceDelivrery;
+
                     while (drone.parcel.DistanceDelivrery>1.5)
                     {
-                        latMinusLat = drone.CurrentLocation.Lattitude - drone.parcel.CollectionLocation.Lattitude;
-                        lonMinusLon = drone.CurrentLocation.Longitude - drone.parcel.CollectionLocation.Longitude;
-                        latPlus = latMinusLat / drone.parcel.DistanceDelivrery;
-                        lonPlus = lonMinusLon / drone.parcel.DistanceDelivrery;
+                        action();
                         bl.UpdateDroneLocation(drone.Id, lonPlus, latPlus);
                         bl.BatteryMinus(drone.Id, Math.Sqrt(Math.Pow(lonPlus, 2) + Math.Pow(latPlus, 2)));
                         drone=bl.SearchDrone(id);
+                        
                     }
                     
                     {
                         bl.CollectPackage(id);
-                        //action(id);
+                        action();
                     }
                 }
             }
@@ -204,21 +214,28 @@ namespace BL
             {
                 lock (bl)
                 {
+                    
+
+
+                    latMinusLat = drone.parcel.DeliveryLocation.Lattitude - drone.CurrentLocation.Lattitude;
+                    lonMinusLon = drone.parcel.DeliveryLocation.Longitude - drone.CurrentLocation.Longitude;
+                    latPlus = latMinusLat / drone.parcel.DistanceDelivrery;
+                    lonPlus = lonMinusLon / drone.parcel.DistanceDelivrery;
+
                     while (drone.parcel.DistanceDelivrery>1.5)
                     {
-                        latMinusLat = drone.CurrentLocation.Lattitude - drone.parcel.DeliveryLocation.Lattitude;
-                        lonMinusLon = drone.CurrentLocation.Longitude - drone.parcel.DeliveryLocation.Longitude;
-
-                        latPlus = latMinusLat / drone.parcel.DistanceDelivrery;
-                        lonPlus = lonMinusLon / drone.parcel.DistanceDelivrery;
+                        
+                        
                         bl.UpdateDroneLocation(drone.Id, lonPlus, latPlus);
                         bl.BatteryMinus(drone.Id, Math.Sqrt(Math.Pow(lonPlus, 2) + Math.Pow(latPlus, 2)));
                         drone=bl.SearchDrone(id);
+                        action();
 
                     }
 
                     {
-                        bl.DeliverPackage(id); 
+                        bl.DeliverPackage(id);
+                        action();
                     }
                 }
             }

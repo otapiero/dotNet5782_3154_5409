@@ -401,8 +401,7 @@ namespace PL
                 {
                     MessageBox.Show($"Cancelling Simulator Mode, Please Wait", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                     worker.CancelAsync();
-                    Ok.Visibility = Visibility.Visible;
-                    MainGrid.RowDefinitions[6].Height = MainGrid.RowDefinitions[0].Height;
+                    
                    
                 }
                 
@@ -415,11 +414,22 @@ namespace PL
             //worker.ReportProgress(0);
             return worker.CancellationPending;
         }
-
+        private void Report()
+        {
+            worker.ReportProgress(0);
+            
+        }
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             // BackgroundWorker worker = sender as BackgroundWorker;
-           ibl.startSimulator(drone.Id, StatusSimulator);
+            try
+            {
+                ibl.startSimulator(drone.Id, StatusSimulator, Report);
+            }
+            catch(Exception x)
+            {
+                MessageBox.Show(x.Message);
+            }
 
 
            
@@ -447,6 +457,8 @@ namespace PL
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             runSimulator = false;
+            Ok.Visibility = Visibility.Visible;
+            MainGrid.RowDefinitions[6].Height = MainGrid.RowDefinitions[0].Height;
         }
 
         private void DroneId_SelectionChanged(object sender, TextChangedEventArgs e)

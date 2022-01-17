@@ -1,11 +1,18 @@
 <?xml version="1.0"?>
 <ArrayOfStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Station>
+    <Id>1</Id>
+    <Name>efsk</Name>
+    <Longitude>9.173437249461859</Longitude>
+    <Lattitude>23.877201743366758</Lattitude>
+    <ChargeSlots>27</ChargeSlots>
+  </Station>
+  <Station>
     <Id>3</Id>
     <Name>dmux</Name>
     <Longitude>17.80708513120519</Longitude>
     <Lattitude>33.285978079440994</Lattitude>
-    <ChargeSlots>16</ChargeSlots>
+    <ChargeSlots>2</ChargeSlots>
   </Station>
   <Station>
     <Id>4</Id>
@@ -15,24 +22,17 @@
     <ChargeSlots>70</ChargeSlots>
   </Station>
   <Station>
-    <Id>2</Id>
-    <Name>vsvz</Name>
-    <Longitude>28.33907046743625</Longitude>
-    <Lattitude>31.205546181279026</Lattitude>
-    <ChargeSlots>89</ChargeSlots>
-  </Station>
-  <Station>
-    <Id>1</Id>
-    <Name>efsk</Name>
-    <Longitude>9.173437249461859</Longitude>
-    <Lattitude>23.877201743366758</Lattitude>
-    <ChargeSlots>25</ChargeSlots>
-  </Station>
-  <Station>
     <Id>3</Id>
     <Name>dmux</Name>
     <Longitude>17.80708513120519</Longitude>
     <Lattitude>33.285978079440994</Lattitude>
-    <ChargeSlots>15</ChargeSlots>
+    <ChargeSlots>29</ChargeSlots>
+  </Station>
+  <Station>
+    <Id>2</Id>
+    <Name>vsvz</Name>
+    <Longitude>28.33907046743625</Longitude>
+    <Lattitude>31.205546181279026</Lattitude>
+    <ChargeSlots>90</ChargeSlots>
   </Station>
 </ArrayOfStation>
