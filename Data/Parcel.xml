@@ -2,19 +2,6 @@
 <ArrayOfParcel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Parcel>
     <Availble>true</Availble>
-    <Id>1</Id>
-    <Sender>1</Sender>
-    <TargetId>1</TargetId>
-    <Wheight>Intermidiate</Wheight>
-    <Priority>Emergency</Priority>
-    <Requsted>2022-01-12T16:40:15.7324615+02:00</Requsted>
-    <DroneId>0</DroneId>
-    <Scheduled xsi:nil="true" />
-    <PickedUp xsi:nil="true" />
-    <Delivered xsi:nil="true" />
-  </Parcel>
-  <Parcel>
-    <Availble>true</Availble>
     <Id>3</Id>
     <Sender>4</Sender>
     <TargetId>6</TargetId>
@@ -24,19 +11,6 @@
     <DroneId>0</DroneId>
     <Scheduled xsi:nil="true" />
     <PickedUp xsi:nil="true" />
-    <Delivered xsi:nil="true" />
-  </Parcel>
-  <Parcel>
-    <Availble>true</Availble>
-    <Id>4</Id>
-    <Sender>5</Sender>
-    <TargetId>5</TargetId>
-    <Wheight>Light</Wheight>
-    <Priority>Emergency</Priority>
-    <Requsted>2022-01-12T16:40:15.7404958+02:00</Requsted>
-    <DroneId>5</DroneId>
-    <Scheduled>2022-01-12T16:47:15.7404963+02:00</Scheduled>
-    <PickedUp>2022-01-12T16:43:15.7405108+02:00</PickedUp>
     <Delivered xsi:nil="true" />
   </Parcel>
   <Parcel>
@@ -168,5 +142,31 @@
     <Scheduled xsi:nil="true" />
     <PickedUp>2022-01-16T16:49:49.6764877+02:00</PickedUp>
     <Delivered>2022-01-16T16:49:55.1176232+02:00</Delivered>
+  </Parcel>
+  <Parcel>
+    <Availble>true</Availble>
+    <Id>4</Id>
+    <Sender>5</Sender>
+    <TargetId>5</TargetId>
+    <Wheight>Light</Wheight>
+    <Priority>Emergency</Priority>
+    <Requsted>2022-01-12T16:40:15.7404958+02:00</Requsted>
+    <DroneId>5</DroneId>
+    <Scheduled>2022-01-12T16:47:15.7404963+02:00</Scheduled>
+    <PickedUp>2022-01-12T16:43:15.7405108+02:00</PickedUp>
+    <Delivered>2022-01-17T12:46:47.7385303+02:00</Delivered>
+  </Parcel>
+  <Parcel>
+    <Availble>true</Availble>
+    <Id>1</Id>
+    <Sender>1</Sender>
+    <TargetId>1</TargetId>
+    <Wheight>Intermidiate</Wheight>
+    <Priority>Emergency</Priority>
+    <Requsted>2022-01-12T16:40:15.7324615+02:00</Requsted>
+    <DroneId>5</DroneId>
+    <Scheduled>2022-01-17T12:47:00.8700946+02:00</Scheduled>
+    <PickedUp xsi:nil="true" />
+    <Delivered xsi:nil="true" />
   </Parcel>
 </ArrayOfParcel>

@@ -400,20 +400,21 @@ namespace PL
                 
             }
         }
-        private void f()
-        {
-            worker.ReportProgress(0);
-        }
+       
     
         private bool StatusSimulator()
         {
+            //worker.ReportProgress(0);
             return worker.CancellationPending;
         }
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             // BackgroundWorker worker = sender as BackgroundWorker;
-           ibl.startSimulator( drone.Id, StatusSimulator);
+           ibl.startSimulator(drone.Id, StatusSimulator);
+
+
+           
         }
 
 
