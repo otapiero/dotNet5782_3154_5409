@@ -14,16 +14,16 @@ namespace BL
         BO.DroneBL drone;
         int id;
         Func<bool> stop;
-        Action< int> action;
+       // Action< int> action;
         const int delay=2000;
         const int speed = 1;
         double lonPlus, latPlus, lonMinusLon, latMinusLat;
-        public Simulator(BL _bl,int _id, Action< int> _action, Func<bool> _stop)
+        public Simulator(BL _bl,int _id, Func<bool> _stop)
         {
             bl=_bl;
             id=_id;
             stop=_stop;
-            action=_action;
+           // action=_action;
             
             RunSimulator();
         } 
@@ -46,13 +46,13 @@ namespace BL
                                 drone = bl.SearchDrone(id);
                             }
                             Thread.Sleep(delay);
-                            action(drone.Id);
+                            //action(drone.Id);
                         }
                         catch (BO.BatteryExaption)
                         {
                             sendToCharge();
                             Thread.Sleep(delay);
-                            action(id);
+                           //action(id);
                         }
                         #region other catches
                         catch (BO.NoParcelAvilable )
@@ -86,13 +86,13 @@ namespace BL
                                 {
                                     Deliver();
                                     Thread.Sleep(delay);
-                                    action(drone.Id);
+                                    //action(drone.Id);
                                 }
                                 else
                                 {
                                     Colecte();
                                     Thread.Sleep(delay);
-                                    action(drone.Id);
+                                 //   action(drone.Id);
                                 }
                             }
                         }
@@ -180,7 +180,7 @@ namespace BL
                     else
                     {
                         bl.CollectPackage(id);
-                        action(id);
+                        //action(id);
                     }
                 }
             }
