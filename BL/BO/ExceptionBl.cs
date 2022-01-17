@@ -31,7 +31,7 @@ namespace BO
         double minumumBattery;
         double timeReqested;
 
-        public double MinumumBattery { get => MinumumBattery;  }
+        public double MinumumBattery { get => MinumumBattery; }
         public double TimeReqested { get => timeReqested; }
 
         public BatteryExaption(string message, double battery) : base(message+$"need at least {battery} for this") => minumumBattery=battery;
@@ -55,8 +55,8 @@ namespace BO
     public class NumOfChargeSlots : Exception
     {
         int numOfCharge;
-        public int NumOfCharge { get => numOfCharge;  }
-        public NumOfChargeSlots( int _numOfCharge) : base("not enough charge slots for a station") => numOfCharge=_numOfCharge;
+        public int NumOfCharge { get => numOfCharge; }
+        public NumOfChargeSlots(int _numOfCharge) : base("not enough charge slots for a station") => numOfCharge=_numOfCharge;
         public NumOfChargeSlots(string message, int _numOfCharge) : base(message+$"need at least {_numOfCharge} charge slots") => numOfCharge=_numOfCharge;
         public static explicit operator string(NumOfChargeSlots v)
         {
@@ -74,7 +74,7 @@ namespace BO
         public string ObjectType { get => objectType; }
         int id;
         public int Id { get => id; }
-        public NoStationAvailable(string _objectType, int _id) : base($"no station available! can not do this action") 
+        public NoStationAvailable(string _objectType, int _id) : base($"no station available! can not do this action")
         {
             objectType=_objectType;
             id=_id;
@@ -97,7 +97,7 @@ namespace BO
         public int Id { get => id; }
         string error;
         public string Error { get => error; }
-        public WrongStatusObject(string _objectType, int _id,string _error) : base($"the {_objectType} with id: {_id} is "+_error)
+        public WrongStatusObject(string _objectType, int _id, string _error) : base($"the {_objectType} with id: {_id} is "+_error)
         {
             objectType=_objectType;
             id=_id;
@@ -115,9 +115,23 @@ namespace BO
     [Serializable]
     public class TheNameModelNotValid : Exception
     {
-        
+
         public TheNameModelNotValid() : base("The name model are invalid, please enter a valid name") { }
         public static explicit operator string(TheNameModelNotValid v)
+        {
+            return (string)v;
+        }
+        public override string ToString()
+        {
+            return Message;
+        }
+    }
+    [Serializable]
+    public class NoParcelAvilable : Exception
+    {
+
+        public NoParcelAvilable() : base("There is 0parcel to deliver, wait new parcels") { }
+        public static explicit operator string(NoParcelAvilable v)
         {
             return (string)v;
         }
@@ -144,8 +158,8 @@ namespace BO
     {
         int num;
         public int Num { get => num; }
-        public WrongInputPriorities( int _num) : base($"The input for Priorities must be beetween 0-2 ,the number {_num} is invalide") => num=_num;
-        
+        public WrongInputPriorities(int _num) : base($"The input for Priorities must be beetween 0-2 ,the number {_num} is invalide") => num=_num;
+
         public override string ToString()
         {
             return Message;
@@ -164,6 +178,18 @@ namespace BO
         }
     }
     [Serializable]
+    public class WrongInputBattery : Exception
+    {
+        double num;
+        public double Num { get => num; }
+        public WrongInputBattery(double _num) : base($"The input for battery must be beetween 0-100 ,the number {_num} is invalide") => num=_num;
+
+        public override string ToString()
+        {
+            return Message;
+        }
+    }
+    [Serializable]
     public class IdDoseNotExist : Exception
     {
         int id;
@@ -172,9 +198,9 @@ namespace BO
         public string ObjectType { get => objectType; }
         public int Id { get => id; }
 
-        public IdDoseNotExist( string _objectType, int _id, Exception innerExeptiont) : base(innerExeptiont.Message, innerExeptiont)
-        { 
-            id = _id;  
+        public IdDoseNotExist(string _objectType, int _id, Exception innerExeptiont) : base(innerExeptiont.Message, innerExeptiont)
+        {
+            id = _id;
             objectType = _objectType;
         }
         public IdDoseNotExist(string message, string _objectType, int _id) : base(message)
