@@ -21,7 +21,7 @@ namespace BlApi
         void UpdateStation(int id, string name, int chargeSlots);
         void UpdateCostumer(int id, string name, string phone);
         void SendDroneToCharge(int id);
-
+        void startSimulator( int _id, Func<bool> _stop);
         void DeliverPackage(int id);
         void CollectPackage(int id);
         void DeleteParcel(int id);
