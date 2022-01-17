@@ -29,9 +29,7 @@ namespace BO
         public int NumParcelsInTheWay { get; set; }
         public override string ToString()
         {
-            return "\nid: "+Id +"\nName: "+Name+"\nPhone: "+NumberPhone+"\nnumber of parcels delivred: "+NumParcelsDelivred+
-                "\nnumber of parcels not delivred: "+NumParcelsNotDelivred+
-                "\nnumber of parcels getted: "+NumParcelsGetted+"\nnumber of parcels in the way: "+NumParcelsInTheWay+"\n";
+            return "id: "+Id +"\nName: "+Name+"\nPhone: "+NumberPhone+"\n";
 
         }
     }

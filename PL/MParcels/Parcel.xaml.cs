@@ -40,6 +40,9 @@ namespace PL.MParcels
             MainGrid.RowDefinitions[10].Height = new GridLength(0);
             MainGrid.RowDefinitions[11].Height = new GridLength(0);
             MainGrid.RowDefinitions[12].Height = new GridLength(0);
+            MainGrid.RowDefinitions[13].Height = new GridLength(0);
+            MainGrid.RowDefinitions[14].Height = new GridLength(0);
+            MainGrid.RowDefinitions[15].Height = new GridLength(0);
             Sender.Visibility = Visibility.Hidden;
             Idd.Visibility = Visibility.Hidden;
             Getter.Visibility = Visibility.Hidden;

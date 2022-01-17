@@ -152,7 +152,11 @@ namespace BL
                     var y = idal.SearchParcel(x.ParcelId);
 
                     temp.parcel.Id = y.Id;
-                    temp.parcel.statusDelivrery = true;
+                    if(y.PickedUp == null)
+                    {
+                        temp.parcel.statusDelivrery = false;
+                    }
+                    else temp.parcel.statusDelivrery = true;
                     temp.parcel.weight =(BO.WeightCategories) y.Wheight;
                     temp.parcel.Priorities =(BO.Priorities) y.Priority;
                     var sender = idal.SearchCostumer(y.Sender);

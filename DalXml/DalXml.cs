@@ -693,8 +693,7 @@ namespace DAL
 
                 var parcelList = XmlTools.LoadListFromXMLSerializer<DO.Parcel>(parcelPath);
 
-                Predicate<DO.Parcel> x = f + (x => x.Availble == true);
-                var temp = parcelList.FindAll(x);
+                var temp = parcelList.FindAll(f).FindAll(x => x.Availble == true);
                 return temp;
             }
             catch (DO.XMLFileLoadCreateException x)

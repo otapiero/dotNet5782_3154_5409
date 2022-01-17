@@ -415,12 +415,12 @@ namespace BL
             try
             {
                 double[] vs = idal.ElectricityUse();
-            var temp = SearchDrone(id);
-            var t = vs[(int)temp.Weight+1];
+                var temp = DronesBl.Find(x => x.Id == id);
+                var t = vs[(int)temp.Weight+1];
             double minus = t*distance;
             temp.Battery-= minus;
-            if (temp.Battery<0)
-                temp.Battery=0;
+                if (temp.Battery<0)
+                { temp.Battery=0; }
             }
             catch (DO.IdDoseNotExist x)
             {
@@ -431,14 +431,16 @@ namespace BL
                 throw new BO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
-        public  void startSimulator( int id, Func<bool> stop)
+        public  void startSimulator( int id, Func<bool> stop, Action report)
         {
             try
             {
-                Simulator sim = new Simulator(this, id, stop);
+                Simulator sim = new Simulator(this, id, stop,report);
             }
-            catch
-            { }
+            catch (Exception x)
+            {
+                throw new Exception(x.Message);
+            }
         }
 
         public void  BatteryPlus(int id, double plus)
@@ -446,9 +448,8 @@ namespace BL
           
             try
             {
-                double[] vs = idal.ElectricityUse();
-                var temp = SearchDrone(id);
-               
+                
+                var temp = DronesBl.Find(x=> x.Id == id);
                 temp.Battery+=plus;
                 if (temp.Battery>100) temp.Battery=100;
                

@@ -24,7 +24,7 @@ namespace BL
             idal = DalApi.DalFactory.GetDal();
             //data lists
             IEnumerable<DO.Drone> dronesData = idal.AllDrones();
-            IEnumerable<DO.Parcel> parcelsData = idal.AllParcels().ToList();
+            IEnumerable<DO.Parcel> parcelsData = idal.AllParcels();
             IEnumerable<DO.Costumer> costumerData = idal.AllCustomers();
             List<DO.Station> stationData = idal.AllStation().ToList();
             List<DO.DroneCharge> drv = idal.AllDronesIncharge().ToList();
@@ -60,10 +60,9 @@ namespace BL
             double Intermidiate = vs[2];
             double Heavy = vs[3];
             double chargingRate = vs[4];
-             //Filter parcel
+            //Filter parcel
 
-
-            List<DO.Parcel> parcelsNotDelivred = idal.ListOfParcels(x => ((x.DroneId != 0) &&(x.Delivered==null))).ToList();
+            List<DO.Parcel> parcelsNotDelivred = idal.ListOfParcels(x => (x.DroneId != 0) &&(x.Delivered==null)).ToList();
 
             foreach (var d in parcelsNotDelivred)
             {

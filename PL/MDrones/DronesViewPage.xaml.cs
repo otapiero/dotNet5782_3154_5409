@@ -112,7 +112,7 @@ namespace PL.MDrones
                 var newDrone = new BO.DroneBL();
                 newDrone = ibl.SearchDrone(temp.Id);
 
-                new Drone(ibl, newDrone).Show();
+                new Drone(ibl, newDrone).ShowDialog();
                 Refresh();
             }
         }
