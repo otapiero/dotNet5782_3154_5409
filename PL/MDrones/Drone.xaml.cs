@@ -321,7 +321,15 @@ namespace PL
                 }
                 else
                 {
-                    ibl.AddNewDrone(drone.Id, drone.Model, (int)drone.Weight, station);
+                    try
+                    {
+                        ibl.AddNewDrone(drone.Id, drone.Model, (int)drone.Weight, station);
+
+                    }
+                    catch(BO.IdAlredyExist x)
+                    {
+                        MessageBox.Show($"id {x.Id} of {x.ObjectType} already exist");
+                    }
                     MessageBoxResult mbResult = MessageBox.Show("The drone was uploud!", "The Drone was uploud!", MessageBoxButton.OK, MessageBoxImage.Information);
                     switch (mbResult)
                     {
@@ -443,7 +451,7 @@ namespace PL
 
         private void DroneId_SelectionChanged(object sender, TextChangedEventArgs e)
         {
-
+            drone.Id = int.Parse(DroneId.Text);
         }
     }
 }
