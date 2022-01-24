@@ -245,25 +245,25 @@ namespace BL
             {
                 throw new BO.IdDoseNotExist(ex.ObjectType, ex.Id, ex);
             }
-            catch (BO.IdDoseNotExist x)
+            catch (BO.IdDoseNotExist ex)
             {
-                throw new BO.IdDoseNotExist(x.Message, x.ObjectType, x.Id);
+                throw new BO.IdDoseNotExist(ex.Message, ex.ObjectType, ex.Id);
             }
-            catch (BO.BatteryExaption x)
+            /*catch (BO.BatteryExaption ex)
             {
-                throw new BO.BatteryExaption(x.Message, x.MinumumBattery, x.TimeReqested);
+                throw new BO.BatteryExaption(ex.Message,ex);
+            }*/
+            catch (BO.WrongStatusObject ex)
+            {
+                throw new BO.WrongStatusObject(ex.ObjectType, ex.Id, ex.Error);
             }
-            catch (BO.WrongStatusObject x)
+            catch (BO.NoStationAvailable ex)
             {
-                throw new BO.WrongStatusObject(x.ObjectType, x.Id, x.Error);
+                throw new BO.NoStationAvailable(ex.ObjectType, ex.Id);
             }
-            catch (BO.NoStationAvailable x)
+            catch (DO.XMLFileLoadCreateException ex)
             {
-                throw new BO.NoStationAvailable(x.ObjectType, x.Id);
-            }
-            catch (DO.XMLFileLoadCreateException x)
-            {
-                throw new BO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
+                throw new BO.XMLFileLoadCreateException(ex.XmlFilePath, ex.Message, ex.InnerException);
             }
         }
         /// <summary>
@@ -415,12 +415,12 @@ namespace BL
             try
             {
                 double[] vs = idal.ElectricityUse();
-                var temp = DronesBl.Find(x => x.Id == id);
-                var t = vs[(int)temp.Weight+1];
+                DroneToList drone = DronesBl.Find(x => x.Id == id);
+                var t = vs[(int)drone.Weight+1];
             double minus = t*distance;
-            temp.Battery-= minus;
-                if (temp.Battery<0)
-                { temp.Battery=0; }
+                drone.Battery-= minus;
+                if (drone.Battery<0)
+                { drone.Battery=0; }
             }
             catch (DO.IdDoseNotExist x)
             {

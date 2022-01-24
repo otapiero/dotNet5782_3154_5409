@@ -161,17 +161,17 @@ namespace BL
                     temp.parcel.Priorities =(BO.Priorities) y.Priority;
                     var sender = idal.SearchCostumer(y.Sender);
                     var getter = idal.SearchCostumer(y.TargetId);
-                    temp.parcel.CollectionLocation =new BO.Location( sender.Lattitude,sender.Longitude);
+                    temp.parcel.CollectionLocation =new BO.Location( sender.Longitude, sender.Lattitude);
 
                     temp.parcel.Sender = new(sender.Id, sender.Name);
                     temp.parcel.Getter = new(getter.Id, getter.Name);
                     if (temp.parcel.statusDelivrery)
-                        temp.parcel.DistanceDelivrery = DistanceLocation(temp.CurrentLocation, new BO.Location(getter.Lattitude, getter.Longitude));//kkkk
+                        temp.parcel.DistanceDelivrery = DistanceLocation(temp.CurrentLocation, new BO.Location(getter.Longitude, getter.Lattitude));//kkkk
                     else
-                        temp.parcel.DistanceDelivrery = DistanceLocation(temp.CurrentLocation, new BO.Location(sender.Lattitude, sender.Longitude));//kkkk
+                        temp.parcel.DistanceDelivrery = DistanceLocation(temp.CurrentLocation, new BO.Location(sender.Longitude, sender.Lattitude));//kkkk
 
-                    temp.parcel.DeliveryLocation=new BO.Location(getter.Lattitude, getter.Longitude);
-                    temp.parcel.CollectionLocation=new BO.Location(sender.Lattitude, sender.Longitude);
+                    temp.parcel.DeliveryLocation=new BO.Location(getter.Longitude, getter.Lattitude);
+                    temp.parcel.CollectionLocation=new BO.Location(sender.Longitude, sender.Lattitude);
                 }
                 catch(DO.IdDoseNotExist ex)
                 {
