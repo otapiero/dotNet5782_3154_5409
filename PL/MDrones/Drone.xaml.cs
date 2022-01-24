@@ -416,7 +416,7 @@ namespace PL
         }
         private void Report()
         {
-            worker.ReportProgress(0);
+            //worker.ReportProgress(0);
             
         }
         private void Worker_DoWork(object sender, DoWorkEventArgs e)

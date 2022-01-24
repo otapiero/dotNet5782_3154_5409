@@ -233,10 +233,9 @@ namespace BL
 
                     }
 
-                    {
-                        bl.DeliverPackage(id);
-                        action();
-                    }
+                    bl.DeliverPackage(id);
+                    action();
+                   
                 }
             }
             catch (BO.IdDoseNotExist x)

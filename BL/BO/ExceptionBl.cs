@@ -41,6 +41,11 @@ namespace BO
             minumumBattery=battery;
             timeReqested=time;
         }
+        public BatteryExaption(string message, BatteryExaption innerexaption) : base(message)
+        {
+            minumumBattery=innerexaption.MinumumBattery;
+            timeReqested=innerexaption.timeReqested;
+        }
         public static explicit operator string(BatteryExaption v)
         {
             return (string)v;
