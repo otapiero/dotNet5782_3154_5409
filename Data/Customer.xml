@@ -1,43 +1,27 @@
 <?xml version="1.0"?>
 <ArrayOfCostumer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Costumer>
-    <Id>1222222</Id>
-    <Name>david</Name>
-    <Phone>0599999999</Phone>
-    <Longitude>54</Longitude>
-    <Lattitude>52</Lattitude>
+    <Id>100</Id>
+    <Name>Yosi</Name>
+    <Phone>0528131313</Phone>
+    <Longitude>31.80278706322</Longitude>
+    <Lattitude>35.1580194809</Lattitude>
     <Password>0</Password>
   </Costumer>
   <Costumer>
-    <Id>1</Id>
-    <Name>dan zilberstein</Name>
-    <Phone>0581119646</Phone>
-    <Longitude>58.62115605670081</Longitude>
-    <Lattitude>6.829217079481677</Lattitude>
+    <Id>101</Id>
+    <Name>Dani</Name>
+    <Phone>0501234567</Phone>
+    <Longitude>32.081391369</Longitude>
+    <Lattitude>34.88147031499</Lattitude>
     <Password>0</Password>
   </Costumer>
   <Costumer>
-    <Id>2</Id>
-    <Name>kidron</Name>
-    <Phone>0581422828</Phone>
-    <Longitude>45.60210668742754</Longitude>
-    <Lattitude>7.7121930791587525</Lattitude>
-    <Password>0</Password>
-  </Costumer>
-  <Costumer>
-    <Id>3</Id>
-    <Name>gad</Name>
-    <Phone>0580320798</Phone>
-    <Longitude>5.466274528515653</Longitude>
-    <Lattitude>57.72583974419434</Lattitude>
-    <Password>0</Password>
-  </Costumer>
-  <Costumer>
-    <Id>4</Id>
-    <Name>noam a tambal</Name>
-    <Phone>0582138633</Phone>
-    <Longitude>53.903698936991255</Longitude>
-    <Lattitude>12.063334403589058</Lattitude>
+    <Id>102</Id>
+    <Name>Menachem</Name>
+    <Phone>0531234567</Phone>
+    <Longitude>32.0482210774</Longitude>
+    <Lattitude>34.773480551</Lattitude>
     <Password>0</Password>
   </Costumer>
 </ArrayOfCostumer>
