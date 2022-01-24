@@ -308,7 +308,7 @@ namespace BL
             }
             catch (BO.WrongStatusObject x)
             {
-                throw new BO.WrongStatusObject(x.ObjectType, x.Id, x.Message);
+                throw new BO.WrongStatusObject(x.ObjectType, x.Id, x.Error);
             }
             catch (DO.XMLFileLoadCreateException x)
             {
@@ -370,7 +370,7 @@ namespace BL
             }
             catch (BO.WrongStatusObject x)
             {
-                throw new BO.WrongStatusObject(x.ObjectType, x.Id, x.Message);
+                throw new BO.WrongStatusObject(x.ObjectType, x.Id, x.Error);
             }
             catch (DO.XMLFileLoadCreateException x)
             {

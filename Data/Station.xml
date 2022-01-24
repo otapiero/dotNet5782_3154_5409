@@ -19,7 +19,7 @@
     <Name>efsk</Name>
     <Longitude>9.173437249461859</Longitude>
     <Lattitude>23.877201743366758</Lattitude>
-    <ChargeSlots>27</ChargeSlots>
+    <ChargeSlots>21</ChargeSlots>
   </Station>
   <Station>
     <Id>3</Id>

@@ -58,7 +58,7 @@ namespace BL
                            
                         }
                         #region other catches
-                        catch (BO.NoParcelAvilable )
+                         catch (BO.NoParcelAvilable )
                         {
                             throw new BO.NoParcelAvilable();
                         }
