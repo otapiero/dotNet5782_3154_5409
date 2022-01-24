@@ -15,24 +15,24 @@
     <ChargeSlots>89</ChargeSlots>
   </Station>
   <Station>
+    <Id>1</Id>
+    <Name>efsk</Name>
+    <Longitude>9.173437249461859</Longitude>
+    <Lattitude>23.877201743366758</Lattitude>
+    <ChargeSlots>20</ChargeSlots>
+  </Station>
+  <Station>
+    <Id>1</Id>
+    <Name>efsk</Name>
+    <Longitude>9.173437249461859</Longitude>
+    <Lattitude>23.877201743366758</Lattitude>
+    <ChargeSlots>30</ChargeSlots>
+  </Station>
+  <Station>
     <Id>4</Id>
     <Name>oiyr</Name>
     <Longitude>59.250050028436846</Longitude>
     <Lattitude>8.370761251249704</Lattitude>
-    <ChargeSlots>70</ChargeSlots>
-  </Station>
-  <Station>
-    <Id>1</Id>
-    <Name>efsk</Name>
-    <Longitude>9.173437249461859</Longitude>
-    <Lattitude>23.877201743366758</Lattitude>
-    <ChargeSlots>28</ChargeSlots>
-  </Station>
-  <Station>
-    <Id>1</Id>
-    <Name>efsk</Name>
-    <Longitude>9.173437249461859</Longitude>
-    <Lattitude>23.877201743366758</Lattitude>
-    <ChargeSlots>21</ChargeSlots>
+    <ChargeSlots>69</ChargeSlots>
   </Station>
 </ArrayOfStation>
