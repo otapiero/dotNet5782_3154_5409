@@ -24,4 +24,12 @@
     <Lattitude>34.773480551</Lattitude>
     <Password>0</Password>
   </Costumer>
+  <Costumer>
+    <Id>104</Id>
+    <Name>Omer</Name>
+    <Phone>0545435764</Phone>
+    <Longitude>29.566197502666785</Longitude>
+    <Lattitude>34.95981288846283</Lattitude>
+    <Password>0</Password>
+  </Costumer>
 </ArrayOfCostumer>

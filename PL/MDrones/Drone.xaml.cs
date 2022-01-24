@@ -14,7 +14,6 @@ using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 using BO;
 using PL.MParcels;
-using System.Windows.Threading;
 using System.ComponentModel;
 
 namespace PL
@@ -40,7 +39,6 @@ namespace PL
              {3, "Suplay a parcel to costumer" },
              {4,"Send the drone to Charge " },
              {5,"Release drown from charging" } };
-
         public Drone(BlApi.IBL bl1)
         {
             newDrone = true;
@@ -402,7 +400,6 @@ namespace PL
                     MessageBox.Show($"Cancelling Simulator Mode, Please Wait", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                     worker.CancelAsync();
                     
-                   
                 }
                 
             }
@@ -416,8 +413,7 @@ namespace PL
         }
         private void Report()
         {
-            //worker.ReportProgress(0);
-            
+            worker.ReportProgress(0);  
         }
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -429,6 +425,7 @@ namespace PL
             catch(Exception x)
             {
                 MessageBox.Show(x.Message);
+                worker.CancelAsync();
             }
 
 
@@ -446,7 +443,11 @@ namespace PL
             {
                 MainGrid.RowDefinitions[8].Height = new GridLength(0);
             }
-            else ParcelID.Content = drone.parcel.Id;
+            else
+            {
+                MainGrid.RowDefinitions[8].Height = MainGrid.RowDefinitions[0].Height;
+                ParcelID.Content = drone.parcel.Id;
+            }
 
             BatteryText.Content = drone.Battery.ToString().Length < 5 ? drone.Battery.ToString() : drone.Battery.ToString().Substring(0, 5);
             DroneId.Text = drone.Id.ToString();

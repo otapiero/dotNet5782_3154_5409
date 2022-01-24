@@ -14,8 +14,8 @@ namespace BL
         BO.DroneBL drone;
         int id;
         Func<bool> stop;
-        Action action;
-        const int delay= 500;
+       Action action;
+        const int delay= 400;
         const int speed = 1;
         double lonPlus, latPlus, lonMinusLon, latMinusLat;
         public Simulator(BL _bl,int _id, Func<bool> _stop, Action report)
@@ -24,9 +24,32 @@ namespace BL
             id=_id;
             stop=_stop;
             action=report;
-            
-            RunSimulator();
-        } 
+            try
+            {
+                RunSimulator();
+            }
+            catch (BO.NoParcelAvilable)
+            {
+                throw new BO.NoParcelAvilable();
+            }
+            catch (BO.IdDoseNotExist x)
+            {
+                throw new BO.IdDoseNotExist(x.Message, x.ObjectType, x.Id);
+            }
+            catch (BO.WrongStatusObject x)
+            {
+                throw new BO.WrongStatusObject(x.ObjectType, x.Id, x.Error);
+            }
+            catch (BO.NoStationAvailable x)
+            {
+                throw new BO.NoStationAvailable(x.ObjectType, x.Id);
+            }
+            catch (BO.XMLFileLoadCreateException x)
+            {
+                throw new BO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
+            }
+        }
+     
         void RunSimulator()
         {
             while(stop.Invoke()==false)
@@ -35,6 +58,7 @@ namespace BL
                 lock (bl)
                 {
                     drone = bl.SearchDrone(id);
+                    
                 }
                 switch(drone.status)
                 {
@@ -45,17 +69,15 @@ namespace BL
                             {
                                 bl.AssignPackageToDrone(id);
                                 drone = bl.SearchDrone(id);
-                                action();
                             }
-                            Thread.Sleep(delay);
+                            action();
+                            Thread.Sleep(delay*3);
                             //action(drone.Id);
                         }
                         catch (BO.BatteryExaption)
                         {
                             sendToCharge();
-                            Thread.Sleep(delay);
                             action();
-                           
                         }
                         #region other catches
                          catch (BO.NoParcelAvilable )
@@ -83,22 +105,19 @@ namespace BL
                     case BO.DroneStatuses.Delivery:
                         try
                         {
-                            lock (bl)
-                            {
-                                if (drone.parcel.statusDelivrery)
+                             if (drone.parcel.statusDelivrery)
                                 {
                                     Deliver();
-                                    Thread.Sleep(delay);
                                     action();
+                                    Thread.Sleep(delay);
                                 }
                                 else
                                 {
                                     Colecte();
-                                    Thread.Sleep(delay);
                                     action();
                                 }
                             }
-                        }
+                        
                         catch (BO.IdDoseNotExist x)
                         {
                             throw new BO.IdDoseNotExist(x.Message, x.ObjectType, x.Id);
@@ -117,16 +136,18 @@ namespace BL
                         {
                             while (drone.Battery<95)
                             {
-                                bl.BatteryPlus(id, 5);
+                                bl.BatteryPlus(id, 7.5348);
                                 drone=bl.SearchDrone(id);
-                                Thread.Sleep(delay);
                                 action();
+                                Thread.Sleep(delay);
+                               
                             }
                             
                             bl.RelesaeDroneFromCharge(id, 10);
                             drone=bl.SearchDrone(id);
-                            Thread.Sleep(delay);
                             action();
+                            Thread.Sleep(delay);
+                            
 
                             break;
                         }
@@ -153,8 +174,9 @@ namespace BL
                 lock (bl)
                 {
                     bl.SendDroneToCharge(id);
-                    action();
                 }
+                action();
+                Thread.Sleep(delay);
             }
             catch (BO.WrongStatusObject x)
             {
@@ -173,28 +195,32 @@ namespace BL
         {
             try
             {
-                lock (bl)
-                {
-                    latMinusLat = drone.parcel.CollectionLocation.Lattitude - drone.CurrentLocation.Lattitude;
-                    lonMinusLon = drone.parcel.CollectionLocation.Longitude - drone.CurrentLocation.Longitude;
-                    latPlus = latMinusLat / drone.parcel.DistanceDelivrery;
-                    lonPlus = lonMinusLon / drone.parcel.DistanceDelivrery;
 
-                    while (drone.parcel.DistanceDelivrery>1.5)
+                latMinusLat = drone.parcel.CollectionLocation.Lattitude - drone.CurrentLocation.Lattitude;
+                lonMinusLon = drone.parcel.CollectionLocation.Longitude - drone.CurrentLocation.Longitude;
+                latPlus = latMinusLat / 12;
+                lonPlus = lonMinusLon / 12;
+
+                for (int i = 0; i < 12; i++)
+                {
+                    lock (bl)
                     {
-                        action();
                         bl.UpdateDroneLocation(drone.Id, lonPlus, latPlus);
                         bl.BatteryMinus(drone.Id, Math.Sqrt(Math.Pow(lonPlus, 2) + Math.Pow(latPlus, 2)));
                         drone=bl.SearchDrone(id);
-                        
                     }
-                    
-                    {
-                        bl.CollectPackage(id);
-                        action();
-                    }
+                    action();
+                    Thread.Sleep(delay);
                 }
+                lock (bl)
+                {
+                    bl.CollectPackage(id);
+                }
+                action();
+                Thread.Sleep(delay);
+
             }
+
             catch (BO.IdDoseNotExist x)
             {
                 throw new BO.IdDoseNotExist(x.Message, x.ObjectType, x.Id);
@@ -212,31 +238,31 @@ namespace BL
         {
             try
             {
-                lock (bl)
+
+                latMinusLat = drone.parcel.DeliveryLocation.Lattitude - drone.CurrentLocation.Lattitude;
+                lonMinusLon = drone.parcel.DeliveryLocation.Longitude - drone.CurrentLocation.Longitude;
+                latPlus = latMinusLat / 12;
+                lonPlus = lonMinusLon / 12;
+
+                for (int i = 0; i < 12; i++)
                 {
-                    
-
-
-                    latMinusLat = drone.parcel.DeliveryLocation.Lattitude - drone.CurrentLocation.Lattitude;
-                    lonMinusLon = drone.parcel.DeliveryLocation.Longitude - drone.CurrentLocation.Longitude;
-                    latPlus = latMinusLat / drone.parcel.DistanceDelivrery;
-                    lonPlus = lonMinusLon / drone.parcel.DistanceDelivrery;
-
-                    while (drone.parcel.DistanceDelivrery>1.5)
+                    lock (bl)
                     {
-                        
-                        
                         bl.UpdateDroneLocation(drone.Id, lonPlus, latPlus);
                         bl.BatteryMinus(drone.Id, Math.Sqrt(Math.Pow(lonPlus, 2) + Math.Pow(latPlus, 2)));
                         drone=bl.SearchDrone(id);
-                        action();
-
                     }
-
-                    bl.DeliverPackage(id);
                     action();
-                   
+                    Thread.Sleep(delay);
+
                 }
+                lock (bl)
+                {
+                    bl.DeliverPackage(id);
+                }
+                action();
+                Thread.Sleep(delay);
+
             }
             catch (BO.IdDoseNotExist x)
             {

@@ -5,23 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen"
-       
-        Title="Drone"  Height="420" 
-        Width="325"
-        Closing="Window_Closing" 
-     Background="Transparent"
-        AllowsTransparency="True"
-        WindowStyle="None"
-        SizeToContent="Manual"
-         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto"        
-        FontFamily="{DynamicResource MaterialDesignFont}">
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True"
+         WindowStyle="None"
+        ResizeMode="NoResize"
+        Title="Drone"  
+        Height="420" 
+        Width="325"
+        Background="Transparent">
  
     <Border
          CornerRadius="40"
@@ -29,11 +27,8 @@
         Background="White">
 
         <Border
-       
-        
        CornerRadius="35"
         BorderBrush="#FF0D3251"
-     
         BorderThickness="4">
         <Border.Background>
                 <ImageBrush ImageSource="/Items/drone.jpg" Stretch="Fill" TileMode="Tile" Opacity="0.23">

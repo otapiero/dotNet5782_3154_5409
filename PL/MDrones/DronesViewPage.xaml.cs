@@ -24,7 +24,6 @@ namespace PL.MDrones
         BlApi.IBL ibl;
         bool boStatus = true;
         bool boWeight = true;
-        int cancel = 0;
         private readonly MainWindow _wnd = (MainWindow)Application.Current.MainWindow;
         public DronesViewPage(BlApi.IBL bl1)
         {
@@ -111,9 +110,10 @@ namespace PL.MDrones
                 var temp = (BO.DroneToList)item;
                 var newDrone = new BO.DroneBL();
                 newDrone = ibl.SearchDrone(temp.Id);
-
-                new Drone(ibl, newDrone).ShowDialog();
+                var dp = new Drone(ibl, newDrone);
+                dp.Show();
                 Refresh();
+
             }
         }
 

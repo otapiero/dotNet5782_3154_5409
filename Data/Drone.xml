@@ -1,27 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfDrone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Drone>
-    <Id>1</Id>
-    <Model>Alpha</Model>
+	<Drone>
+		<Id>1000</Id>
+		<Model>Kidron</Model>
+	</Drone>
+	<Drone>
+    <Id>1001</Id>
+    <Model>Yechezkel</Model>
   </Drone>
   <Drone>
-    <Id>2</Id>
-    <Model>beta</Model>
+    <Id>1002</Id>
+    <Model>Zilbershtein</Model>
   </Drone>
   <Drone>
-    <Id>3</Id>
-    <Model>gema</Model>
+    <Id>1003</Id>
+    <Model>Komar</Model>
   </Drone>
   <Drone>
-    <Id>4</Id>
-    <Model>delta</Model>
+    <Id>1004</Id>
+    <Model>Sckar</Model>
   </Drone>
   <Drone>
-    <Id>5</Id>
-    <Model>Alpha</Model>
+    <Id>1005</Id>
+    <Model>Koche</Model>
   </Drone>
   <Drone>
-    <Id>12345</Id>
-    <Model>kl</Model>
+    <Id>1006</Id>
+    <Model>Buchnik</Model>
   </Drone>
+  
 </ArrayOfDrone>

@@ -155,7 +155,7 @@ namespace BL
                     Double[] vs = idal.ElectricityUse();
                     double chargingRate = vs[4];
                     temp.Battery+= time*chargingRate;
-                    temp.Battery = temp.Battery > 1000 ? temp.Battery=100 : temp.Battery;
+                    temp.Battery = temp.Battery > 100 ? temp.Battery=100 : temp.Battery;
                     temp.status =  BO.DroneStatuses.Available;
                     idal.ReleseDroneFromCharge(id);
                 }
@@ -203,8 +203,9 @@ namespace BL
 
 
                     double tempDistance, dis = DistanceLocation(temp.CurrentLocation, parcelLocation);
-                    int parcelTarget = (parcelsData).First().TargetId;
-                    int parcelId = (parcelsData).First().Id;
+                    int parcelTarget = parcelsData.First().TargetId;
+                    int wheight = (int)parcelsData.First().Wheight;
+                    int parcelId = parcelsData.First().Id;
                     foreach (var y in parcelsData)
                     {
                         var personT = idal.SearchCostumer((parcelsData).First().Sender);
@@ -213,7 +214,8 @@ namespace BL
                         {
                             dis = tempDistance;
                             parcelLocation = new BO.Location(personT.Longitude, personT.Lattitude);
-                            parcelTarget =(y.TargetId);
+                            parcelTarget =y.TargetId;
+                            wheight = (int)y.Wheight;
                             parcelId= y.Id;
                         }
                     }
@@ -224,19 +226,20 @@ namespace BL
                     if (stationData.Count()<1)
                         throw new BO.NoStationAvailable("drone", id);
                     BO.Location closeStation = FindTheClosestStation(new(target.Longitude, target.Lattitude), stationData);
-                    double fullDis = DistanceLocation(temp.CurrentLocation, parcelLocation)+DistanceLocation(parcelLocation, new(target.Longitude, target.Lattitude))+DistanceLocation(closeStation, new(target.Longitude, target.Lattitude));
+                    double disToCollect = DistanceLocation(temp.CurrentLocation, parcelLocation);
+                    double disToDeliver = DistanceLocation(parcelLocation, new(target.Longitude, target.Lattitude));
+                    double disToStation = DistanceLocation(closeStation, new(target.Longitude, target.Lattitude));
                     Double[] vs = idal.ElectricityUse();
-                    double Rate = vs[0];
-
-                    if (temp.Battery-Rate*fullDis>0)
+                    double batteryTemp = (disToCollect+disToStation)*vs[0]+ disToDeliver*vs[wheight+1];
+                    
+                    if (temp.Battery-batteryTemp>0)
                     {
-
                         temp.status=BO.DroneStatuses.Delivery;
                         temp.ParcelId= parcelId;
                         idal.AssignPackageToDrone(parcelId, temp.Id);
                     }
                     else
-                        throw new BO.BatteryExaption("Not enough battery", Rate*fullDis, (Rate*fullDis-temp.Battery)/vs[4]);
+                        throw new BO.BatteryExaption("Not enough battery", batteryTemp, (batteryTemp-temp.Battery)/vs[4]);
                 }
                 else
                     throw new BO.WrongStatusObject("drone", id, "not avilable");
@@ -288,7 +291,8 @@ namespace BL
                         var person = idal.SearchCostumer(parcel.Sender);
                         double fullDis = DistanceLocation(temp.CurrentLocation, new BO.Location(person.Longitude, person.Lattitude));
                         Double[] vs = idal.ElectricityUse();
-                        temp.Battery-=fullDis*vs[(int)parcel.Wheight+1];
+                        temp.Battery =  temp.Battery - fullDis*vs[(int)parcel.Wheight+1] < 0 ? 4.34654 : temp.Battery - fullDis*vs[(int)parcel.Wheight+1];
+                      
                         temp.CurrentLocation=new BO.Location(person.Longitude, person.Lattitude);
                         idal.CollectPackage(parcel.Id);
                     }
@@ -344,7 +348,7 @@ namespace BL
                         var person = idal.SearchCostumer(parcel.TargetId);
                         double fullDis = DistanceLocation(temp.CurrentLocation, new BO.Location(person.Longitude, person.Lattitude));
                         Double[] vs = idal.ElectricityUse();
-                        temp.Battery-=fullDis*vs[(int)parcel.Wheight+1];
+                        temp.Battery = fullDis*vs[(int)parcel.Wheight+1] < 0 ? 7.34 : temp.Battery - fullDis*vs[(int)parcel.Wheight+1];
                         temp.CurrentLocation=new BO.Location(person.Longitude, person.Lattitude);
                         temp.status=BO.DroneStatuses.Available;
                         temp.ParcelId=0;

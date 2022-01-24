@@ -217,31 +217,7 @@ namespace PL
         }
         #endregion
 
-        #region Simulator
-        private void SimulatorSidePanel_OnMouseEnter(object sender, MouseEventArgs e)
-        {
-            var bc = new BrushConverter();
-            SimulatorSidePanel.Background = (Brush)bc.ConvertFrom("#30ABFF");
-        }
-        private void SimulatorSidePanel_OnMouseLeave(object sender, MouseEventArgs e)
-        {
-            var bc = new BrushConverter();
-            SimulatorSidePanel.Background = (Brush)bc.ConvertFrom("#FF0D3251");
-        }
-        private void SimulatorSidePanel_OnClick(object sender, RoutedEventArgs e)
-        {
-            if (!_hidden)
-            {
-                ButtonBase_OnClick(sender, e);
-            }
-            /*
-            if (!(DataDisplay.Content is SimulationPage))
-            {
-                DataDisplay.Content = _simulationPage;
-            }*/
-        }
-
-        #endregion
+        
 
        
     }
