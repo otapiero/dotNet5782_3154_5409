@@ -1,6 +1,13 @@
 <?xml version="1.0"?>
 <ArrayOfStation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Station>
+    <Id>2</Id>
+    <Name>Beer-Sheva</Name>
+    <Longitude>31.243157502128597</Longitude>
+    <Lattitude>34.79710918958908</Lattitude>
+    <ChargeSlots>18</ChargeSlots>
+  </Station>
+  <Station>
     <Id>3</Id>
     <Name>Jerusalem</Name>
     <Longitude>31.78912146591777</Longitude>
@@ -13,12 +20,5 @@
     <Longitude>32.05657504851606</Longitude>
     <Lattitude>34.7787006186855</Lattitude>
     <ChargeSlots>8</ChargeSlots>
-  </Station>
-  <Station>
-    <Id>2</Id>
-    <Name>Beer-Sheva</Name>
-    <Longitude>31.243157502128597</Longitude>
-    <Lattitude>34.79710918958908</Lattitude>
-    <ChargeSlots>18</ChargeSlots>
   </Station>
 </ArrayOfStation>

@@ -28,8 +28,8 @@ namespace BO
     public class BatteryExaption : Exception
     {
 
-        double minumumBattery;
-        double timeReqested;
+        double minumumBattery=0;
+        double timeReqested=0;
 
         public double MinumumBattery { get => MinumumBattery; }
         public double TimeReqested { get => timeReqested; }
@@ -41,7 +41,7 @@ namespace BO
             minumumBattery=battery;
             timeReqested=time;
         }
-        public BatteryExaption(string message, BatteryExaption innerexaption) : base(message)
+        public BatteryExaption(string message, BatteryExaption innerexaption) : base(message,innerexaption)
         {
             minumumBattery=innerexaption.MinumumBattery;
             timeReqested=innerexaption.timeReqested;

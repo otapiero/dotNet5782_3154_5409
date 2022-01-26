@@ -252,10 +252,6 @@ namespace BL
             {
                 throw new BO.IdDoseNotExist(ex.Message, ex.ObjectType, ex.Id);
             }
-            /*catch (BO.BatteryExaption ex)
-            {
-                throw new BO.BatteryExaption(ex.Message,ex);
-            }*/
             catch (BO.WrongStatusObject ex)
             {
                 throw new BO.WrongStatusObject(ex.ObjectType, ex.Id, ex.Error);
@@ -348,7 +344,7 @@ namespace BL
                         var person = idal.SearchCostumer(parcel.TargetId);
                         double fullDis = DistanceLocation(temp.CurrentLocation, new BO.Location(person.Longitude, person.Lattitude));
                         Double[] vs = idal.ElectricityUse();
-                        temp.Battery = fullDis*vs[(int)parcel.Wheight+1] < 0 ? 7.34 : temp.Battery - fullDis*vs[(int)parcel.Wheight+1];
+                        temp.Battery =temp.Battery - fullDis*vs[(int)parcel.Wheight+1] < 0 ? 7.34 : temp.Battery - fullDis*vs[(int)parcel.Wheight+1];
                         temp.CurrentLocation=new BO.Location(person.Longitude, person.Lattitude);
                         temp.status=BO.DroneStatuses.Available;
                         temp.ParcelId=0;
@@ -367,14 +363,6 @@ namespace BL
             catch (DO.IdDoseNotExist x)
             {
                 throw new BO.IdDoseNotExist(x.ObjectType, x.Id, x);
-            }
-            catch (BO.IdDoseNotExist x)
-            {
-                throw new BO.IdDoseNotExist(x.Message, x.ObjectType, x.Id);
-            }
-            catch (BO.WrongStatusObject x)
-            {
-                throw new BO.WrongStatusObject(x.ObjectType, x.Id, x.Error);
             }
             catch (DO.XMLFileLoadCreateException x)
             {
@@ -421,7 +409,7 @@ namespace BL
                 double[] vs = idal.ElectricityUse();
                 DroneToList drone = DronesBl.Find(x => x.Id == id);
                 var t = vs[(int)drone.Weight+1];
-            double minus = t*distance;
+                double minus = t*distance;
                 drone.Battery-= minus;
                 if (drone.Battery<0)
                 { drone.Battery=0; }
@@ -440,6 +428,10 @@ namespace BL
             try
             {
                 Simulator sim = new Simulator(this, id, stop,report);
+            }
+            catch(BO.BatteryExaption ex)
+            {
+                throw new BO.BatteryExaption(ex.Message, ex);
             }
             catch (Exception x)
             {

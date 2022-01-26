@@ -32,7 +32,14 @@ namespace PL
         private bool _hidden;
         public MainWindow()
         {
-            Ibl = BlApi.BlFactory.GetBl();
+            try
+            {
+                Ibl = BlApi.BlFactory.GetBl();
+            }
+            catch (BO.XMLFileLoadCreateException x)
+            {
+                MessageBox.Show(x.Message);
+            }
             var lp = new LoginPage(Ibl);
             lp.ShowDialog();
 

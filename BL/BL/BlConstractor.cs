@@ -21,7 +21,16 @@ namespace BL
         {
             
             Random rand = new();
-            idal = DalApi.DalFactory.GetDal();
+            try
+            {
+
+
+                idal = DalApi.DalFactory.GetDal();
+            }
+            catch (DO.XMLFileLoadCreateException x)
+            {
+                throw new BO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
+            }
             //data lists
             IEnumerable<DO.Drone> dronesData = idal.AllDrones();
             IEnumerable<DO.Parcel> parcelsData = idal.AllParcels();
