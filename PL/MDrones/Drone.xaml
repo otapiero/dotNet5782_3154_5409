@@ -239,7 +239,7 @@ Grid.Column="2"
 
                     <TextBox
         x:Name="ModelText"  
-       TextChanged="ModelText_SelectionChanged" PreviewKeyDown="TextBox_PreviewKeyDown"
+       PreviewKeyDown="TextBox_PreviewKeyDown"
         Grid.Row="0"
         Grid.Column="1"
         VerticalAlignment="Stretch"
@@ -252,8 +252,8 @@ Grid.Column="2"
             />
 
                     <TextBox
-        x:Name="DroneId" TextChanged="DroneId_SelectionChanged"  MaxLength="9"
-                      PreviewTextInput="DroneId_PreviewTextInput"
+        x:Name="DroneId" PreviewTextInput="TextBoxWithPeriod_OnPreviewTextInput"  MaxLength="9"
+                     
         Grid.Row="1"
         Grid.Column="1"
         VerticalAlignment="Stretch"
@@ -265,7 +265,7 @@ Grid.Column="2"
         
             />
 
-                    <ComboBox SelectionChanged="WeightCombo_SelectionChanged" Name="WeightCombo" 
+                    <ComboBox  Name="WeightCombo" 
         Grid.Row="2"
         Grid.Column="1"
         VerticalAlignment="Stretch"
@@ -290,7 +290,7 @@ Grid.Column="2"
         
         />
 
-                    <ComboBox SelectionChanged="StationCombo_SelectionChanged"
+                    <ComboBox 
                               Name="StationCombo"
         Grid.Row="3"
         Grid.Column="1"
