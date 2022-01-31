@@ -135,7 +135,7 @@ namespace BO
     public class NoParcelAvilable : Exception
     {
 
-        public NoParcelAvilable() : base("There is 0parcel to deliver, wait new parcels") { }
+        public NoParcelAvilable() : base("There is 0 parcel to deliver, wait new parcels") { }
         public static explicit operator string(NoParcelAvilable v)
         {
             return (string)v;

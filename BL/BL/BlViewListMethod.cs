@@ -168,13 +168,11 @@ namespace BL
             return ParcelsNotAssociated;
         }
         [MethodImpl(MethodImplOptions.Synchronized)]
-
         public IEnumerable<BO.DroneToList> ListOfDrones(Predicate<BO.DroneToList> f)
         {
             return DronesBl.FindAll(f);
         }
         [MethodImpl(MethodImplOptions.Synchronized)]
-
         public IEnumerable<BO.ParcelToList> ListOfParcels(Predicate<BO.ParcelToList> f)
         {
             try
@@ -193,7 +191,6 @@ namespace BL
         /// </summary>
         /// <returns>list of  station</returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
-
         public IEnumerable<BO.BaseStationToList> StationWithAvailebalChargePost()
         {
             try
@@ -211,7 +208,5 @@ namespace BL
                 throw new BO.XMLFileLoadCreateException(ex.XmlFilePath, ex.Message, ex.InnerException);
             }
         }
-
-
     }
 }

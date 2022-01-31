@@ -426,6 +426,11 @@ namespace PL
             {
                 MessageBox.Show(ex.Message);
             }
+            catch(NoParcelAvilable ex)
+            {
+                MessageBox.Show(ex.Message);
+                worker.CancelAsync();
+            }
             catch (Exception x)
             {
                 MessageBox.Show(x.Message);
