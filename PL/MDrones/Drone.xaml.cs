@@ -424,9 +424,15 @@ namespace PL
             }
             catch(Exception x)
             {
-                MessageBox.Show(x.Message);
+                if (x.Message.Length >0)
+                {
+                    MessageBox.Show(x.Message);
+                }
+                else MessageBox.Show("Error","Error");
                 worker.CancelAsync();
+                Simulator.IsChecked = false;
             }
+
 
 
            

@@ -70,8 +70,8 @@ namespace BL
                                 bl.AssignPackageToDrone(id);
                                 drone = bl.SearchDrone(id);
                             }
+                            Thread.Sleep(delay*6);
                             action();
-                            Thread.Sleep(delay*3);
                             //action(drone.Id);
                         }
                         catch (BO.BatteryExaption)
@@ -108,8 +108,9 @@ namespace BL
                              if (drone.parcel.statusDelivrery)
                                 {
                                     Deliver();
-                                    action();
-                                    Thread.Sleep(delay);
+                                Thread.Sleep(delay);
+                                action();
+                                    
                                 }
                                 else
                                 {
@@ -138,15 +139,17 @@ namespace BL
                             {
                                 bl.BatteryPlus(id, 7.5348);
                                 drone=bl.SearchDrone(id);
-                                action();
                                 Thread.Sleep(delay);
+                                action();
+                                
                                
                             }
                             
                             bl.RelesaeDroneFromCharge(id, 10);
                             drone=bl.SearchDrone(id);
-                            action();
                             Thread.Sleep(delay);
+                            action();
+                            
                             
 
                             break;
@@ -175,8 +178,9 @@ namespace BL
                 {
                     bl.SendDroneToCharge(id);
                 }
-                action();
                 Thread.Sleep(delay);
+                action();
+                
             }
             catch (BO.WrongStatusObject x)
             {
@@ -209,15 +213,17 @@ namespace BL
                         bl.BatteryMinus(drone.Id, Math.Sqrt(Math.Pow(lonPlus, 2) + Math.Pow(latPlus, 2)));
                         drone=bl.SearchDrone(id);
                     }
-                    action();
                     Thread.Sleep(delay);
+                    action();
+                    
                 }
                 lock (bl)
                 {
                     bl.CollectPackage(id);
                 }
-                action();
                 Thread.Sleep(delay);
+                action();
+                
 
             }
 
@@ -252,16 +258,18 @@ namespace BL
                         bl.BatteryMinus(drone.Id, Math.Sqrt(Math.Pow(lonPlus, 2) + Math.Pow(latPlus, 2)));
                         drone=bl.SearchDrone(id);
                     }
-                    action();
                     Thread.Sleep(delay);
+                    action();
+                    
 
                 }
                 lock (bl)
                 {
                     bl.DeliverPackage(id);
                 }
-                action();
                 Thread.Sleep(delay);
+                action();
+                
 
             }
             catch (BO.IdDoseNotExist x)
