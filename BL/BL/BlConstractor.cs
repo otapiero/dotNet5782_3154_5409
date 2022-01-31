@@ -36,11 +36,11 @@ namespace BL
             IEnumerable<DO.Parcel> parcelsData = idal.AllParcels();
             IEnumerable<DO.Costumer> costumerData = idal.AllCustomers();
             List<DO.Station> stationData = idal.AllStation().ToList();
-            List<DO.DroneCharge> drv = idal.AllDronesIncharge().ToList();
 
             /*
              List<DO.Costumer> costumerData = idal.AllCustomers().ToList();
              List<DO.Station> stationData = idal.AllStation().ToList();
+                        List<DO.DroneCharge> drv = idal.AllDronesIncharge().ToList();
            FileStream file3 = new FileStream(@"C:\Users\Ouriel\source\repos\dotNet5782_3154_5409\Data\Customer.xml", FileMode.Create);
              XmlSerializer x3 = new XmlSerializer(costumerData.GetType());
              x3.Serialize(file3, costumerData);

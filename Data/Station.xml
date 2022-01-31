@@ -26,6 +26,6 @@
     <Name>Jerusalem</Name>
     <Longitude>31.78912146591777</Longitude>
     <Lattitude>35.20328196325503</Lattitude>
-    <ChargeSlots>13</ChargeSlots>
+    <ChargeSlots>15</ChargeSlots>
   </Station>
 </ArrayOfStation>

@@ -51,13 +51,13 @@ namespace DAL
         {
             get { return instance; }
         }
-      
+
 
         #region search costumer
-        [MethodImpl(MethodImplOptions.Synchronized)]
+
         ///<summary>method <c>SearchCustomer</c> </summary>
         ///<param name="id"> searche the customer by id</param>
-      
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public DO.Costumer SearchCostumer(int id)
         {
             try
@@ -80,10 +80,11 @@ namespace DAL
         }
         #endregion
         #region search drone
-        [MethodImpl(MethodImplOptions.Synchronized)]
+
         /// <summary>method <c>SearchDrone</c> </summary>
         /// <param name="id"> searche the drone by id</param>
         /// <returns>the drone if exsist</returns>
+       [MethodImpl(MethodImplOptions.Synchronized)]
         public DO.Drone SearchDrone(int id)
         {
             try
@@ -109,10 +110,12 @@ namespace DAL
         }
         #endregion
         #region search parcel
-        [MethodImpl(MethodImplOptions.Synchronized)]
         /// <summary>method <c> SearchParcel</c> </summary>
         /// <param name="id"> searche the parcel by id</param>
         /// <returns>return the parcel if exsist</returns>
+       
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public DO.Parcel SearchParcel(int id)
         {
             try
@@ -134,9 +137,10 @@ namespace DAL
         }
         #endregion
         #region search station
-        [MethodImpl(MethodImplOptions.Synchronized)]
         ///<summary>method <c>SearchStation</c> </summary>
         ///<param name="id"> searche the Station by id</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public DO.Station SearchStation(int id)
         {
             try
@@ -261,12 +265,13 @@ namespace DAL
         }
         #endregion
         #region add parcel
-        [MethodImpl(MethodImplOptions.Synchronized)]
         /// <summary>method  AddNewParcel </summary>
         /// <param name="_Sender"> customer id of sender</param>
         /// <param name="_TargetId">customer id of target</param>
         /// <param name="_Wheight"> enum weight of parcel</param>
         /// <param name="_Priority"> enum priority of parcel</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void AddNewParcel(int _Sender, int _TargetId, int _Wheight, int _Priority)
         {
             try
@@ -299,13 +304,13 @@ namespace DAL
         }
         #endregion
         #region send to charge
-        [MethodImpl(MethodImplOptions.Synchronized)]
+
         /// <summary>method DeliveryParcelToCustomer - the function get parcel and update dilevry time </summary>
         /// <param name="idParcel"> id parcel delivery</param>
-
         /// <summary>method SendDroneToCharge - the function get drone and station and coonect them </summary>
         /// <param name = "idDrone"> id drone to charge</param>
         /// <param name = "idStation"> id free station</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void SendDroneToCharge(int idDrone, int idStation)
         { 
             try
@@ -333,9 +338,10 @@ namespace DAL
         }
         #endregion
         #region relese from charge
-        [MethodImpl(MethodImplOptions.Synchronized)]
         /// <summary>method ReleseDroneFromCharge - the function get drone relese it fron station </summary>
         /// <param name = "idDrone"> id drone to relese</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void ReleseDroneFromCharge(int id)
         {      
             try
@@ -353,11 +359,6 @@ namespace DAL
                 droneCargeList.Remove(relese);
                 XmlTools.SaveListToXMLSerializer(StationsList, stationPath);
                 XmlTools.SaveListToXMLSerializer(droneCargeList, DroneChargePath);
-            }
-            catch (DO.IdDoseNotExist ex)
-            {
-                throw new DO.IdDoseNotExist(ex.Message, ex.ObjectType, ex.Id);
-
             }
             catch (DO.XMLFileLoadCreateException x)
             {
@@ -459,12 +460,13 @@ namespace DAL
         }
         #endregion
         #region update drone
-        [MethodImpl(MethodImplOptions.Synchronized)]
         /// <summary>
         /// update drone model
         /// </summary>
         /// <param name="id"> id of drone</param>
         /// <param name="model">new model of drone</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void UpdateDroneModel(int id, string model)
         {
             try
@@ -482,10 +484,6 @@ namespace DAL
                 }
                 else
                     throw new DO.IdDoseNotExist("Id not found.", "drone", id);
-            }
-            catch (DO.IdDoseNotExist x)
-            {
-                throw new DO.IdDoseNotExist(x.Message, x.ObjectType, x.Id);
             }
             catch (DO.XMLFileLoadCreateException x)
             {
@@ -799,10 +797,7 @@ namespace DAL
                 throw new DO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
-        ~DalXml()
-        {
-            
-        }
+       
 
     }
 }

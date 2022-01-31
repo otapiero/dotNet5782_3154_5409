@@ -46,8 +46,7 @@ namespace BL
 
         public void UpdateStation(int id, string name, int chargeSlots)
         {
-            try
-            {
+           
                 if ((idal.AllStation()).Any(x => x.Id==id))
                 {
 
@@ -61,12 +60,7 @@ namespace BL
                 }
                 else throw new BO.IdDoseNotExist("Id not found.", "station", id);
 
-            }
-            catch (Exception x)
-            {
-                throw new BO.IBException(x.Message); ;
-
-            }
+            
 
         }
         /// <summary>
@@ -248,18 +242,6 @@ namespace BL
             {
                 throw new BO.IdDoseNotExist(ex.ObjectType, ex.Id, ex);
             }
-            catch (BO.IdDoseNotExist ex)
-            {
-                throw new BO.IdDoseNotExist(ex.Message, ex.ObjectType, ex.Id);
-            }
-            catch (BO.WrongStatusObject ex)
-            {
-                throw new BO.WrongStatusObject(ex.ObjectType, ex.Id, ex.Error);
-            }
-            catch (BO.NoStationAvailable ex)
-            {
-                throw new BO.NoStationAvailable(ex.ObjectType, ex.Id);
-            }
             catch (DO.XMLFileLoadCreateException ex)
             {
                 throw new BO.XMLFileLoadCreateException(ex.XmlFilePath, ex.Message, ex.InnerException);
@@ -273,11 +255,10 @@ namespace BL
 
         public void CollectPackage(int id)
         {
+            if (!DronesBl.Exists(x => x.Id==id))
+                throw new BO.IdDoseNotExist("id dose not exist", "drone", id);
             try
             {
-
-                if (!DronesBl.Exists(x => x.Id==id))
-                    throw new BO.IdDoseNotExist("id dose not exist", "drone", id);
                 if (DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Delivery))
                 {
                     BO.DroneToList temp = DronesBl.Find(x => x.Id==id);
@@ -306,10 +287,6 @@ namespace BL
             {
                 throw new BO.IdDoseNotExist(x.Message, x.ObjectType, x.Id);
             }
-            catch (BO.WrongStatusObject x)
-            {
-                throw new BO.WrongStatusObject(x.ObjectType, x.Id, x.Error);
-            }
             catch (DO.XMLFileLoadCreateException x)
             {
                 throw new BO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
@@ -325,10 +302,10 @@ namespace BL
 
         public void DeliverPackage(int id)
         {
+            if (!DronesBl.Exists(x => x.Id==id))
+                throw new BO.IdDoseNotExist("id dose not exist", "drone", id);
             try
             {
-                if (!DronesBl.Exists(x => x.Id==id))
-                    throw new BO.IdDoseNotExist("id dose not exist", "drone", id);
                 if (DronesBl.Exists(x => x.Id == id && x.status == BO.DroneStatuses.Delivery))
                 {
                     BO.DroneToList temp = DronesBl.Find(x => x.Id==id);
@@ -432,6 +409,10 @@ namespace BL
             catch(BO.BatteryExaption ex)
             {
                 throw new BO.BatteryExaption(ex.Message, ex);
+            }
+            catch(NoParcelAvilable )
+            {
+                throw new NoParcelAvilable();
             }
             catch (Exception x)
             {

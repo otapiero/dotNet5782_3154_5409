@@ -428,6 +428,11 @@ namespace PL
                 worker.CancelAsync();
                 
             }
+            catch(NoParcelAvilable ex)
+            {
+                MessageBox.Show(ex.Message);
+                worker.CancelAsync();
+            }
             catch (Exception x)
             {
                 if (x.Message.Length >0)
