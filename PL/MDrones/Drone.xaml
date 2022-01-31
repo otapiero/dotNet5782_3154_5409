@@ -24,7 +24,8 @@
     <Border
          CornerRadius="40"
          BorderBrush="#FF0D3251"
-        Background="White">
+        Background="White"
+         MouseDown="UIElement_OnMouseDown">
 
         <Border
        CornerRadius="35"
@@ -331,7 +332,7 @@ Grid.Column="2"
         
         />
 
-                    <ComboBox SelectionChanged="OptionCombo_SelectionChanged" x:Name="OptionCombo"
+                    <ComboBox x:Name="OptionCombo"
         Grid.Row="6"
         Grid.Column="1"
         VerticalAlignment="Stretch"

@@ -29,7 +29,7 @@ namespace PL
             Ibl = _Ibl;
             user = new();
         }
-
+        #region Windows
         private void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -68,17 +68,6 @@ namespace PL
                 }
             }
         }
-
-        private void UserNameTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
-            {
-            WrongPassword.Text = "";
-        }
-
-        private void PasswordBox_OnPasswordChanged(object sender, RoutedEventArgs e)
-        {
-            WrongPassword.Text = "";
-        }
-
         private void Close_OnClick(object sender, RoutedEventArgs e)
         {
             Close();
@@ -90,5 +79,19 @@ namespace PL
             var lp = new SignUp(Ibl);
             lp.ShowDialog();
         }
+        #endregion
+        #region User Action
+        private void UserNameTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
+            {
+            WrongPassword.Text = "";
+        }
+
+        private void PasswordBox_OnPasswordChanged(object sender, RoutedEventArgs e)
+        {
+            WrongPassword.Text = "";
+        }
+        #endregion
+
+
     }
 }

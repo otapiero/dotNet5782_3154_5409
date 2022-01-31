@@ -30,17 +30,7 @@ namespace PL
             user = _user;
             Refresh();
         }
-        private void Refresh()
-        {
-            try
-            {
-                ParcelsDataGrid.DataContext = ibl.ListOfParcels(x=>x.NameSender == user.name || x.NameGetter==user.name);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Parcels Loading Error!");
-            }
-        }
+        #region User Action
         private void Add_OnClick(object sender, RoutedEventArgs e)
         {
             var ab = new MParcels.Parcel(ibl, user.Id);
@@ -68,6 +58,19 @@ namespace PL
 
             }
         }
+        #endregion
+        #region Windows
+        private void Refresh()
+        {
+            try
+            {
+                ParcelsDataGrid.DataContext = ibl.ListOfParcels(x => x.NameSender == user.name || x.NameGetter == user.name);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Parcels Loading Error!");
+            }
+        }
         private void Add_MouseEnter(object sender, MouseEventArgs e)
         {
             Button b = sender as Button;
@@ -93,7 +96,7 @@ namespace PL
             Close();
             wind.Close();
         }
-
+        #endregion
 
     }
 }

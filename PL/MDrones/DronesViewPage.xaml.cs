@@ -116,41 +116,6 @@ namespace PL.MDrones
             }
         }
 
-        private void InActive_Click(object sender, RoutedEventArgs e)
-        {
-            //_wnd.DataDisplay.Content = new InActiveBusesViewPage(_bl);
-        }
-
-        private void Remove_Click(object sender, RoutedEventArgs e)
-        {
-            /*
-            if (BusesDataGrid.SelectedItem == null)
-            {
-                MessageBox.Show("Please choose at least one bus and then click remove!");
-            }
-            else
-            {
-                var lb = (IEnumerable)(BusesDataGrid.SelectedItems);
-
-                foreach (var b in lb)
-                {
-                    try
-                    {
-                        _bl.DeleteBus(((Bus)b).LicenseNum);
-                    }
-                    catch (BO.DoesNotExistException ex)
-                    {
-                        MessageBox.Show(ex.Message, "Buses Loading Error!");
-                    }
-                }
-
-                Refresh();
-
-            }
-            */
-        }
-
-
         private void Add_MouseEnter(object sender, MouseEventArgs e)
         {
             Button b = sender as Button;

@@ -29,12 +29,18 @@ namespace PL
             user = new();
         }
 
+        #region Windows
         private void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 DragMove();
             }
+        }
+        private void Close_OnClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+
         }
         private void TextBoxWithPeriod_OnPreviewTextInput(object sender, TextCompositionEventArgs e)
         {
@@ -45,12 +51,15 @@ namespace PL
                 MessageBox.Show($"digits only\n'{e.Text}' is not a digit");
             }
         }
+        #endregion
+
+        #region Check User
         private void UIElement_OnMouseLeave(object sender, MouseEventArgs e)
         {
-            if (Id.Text.Length > 0 && 
-                Name.Text.Length >0 &&
-                Phone.Text.Length >0 &&
-                Longattitude.Text.Length>0 &&
+            if (Id.Text.Length > 0 &&
+                Name.Text.Length > 0 &&
+                Phone.Text.Length > 0 &&
+                Longattitude.Text.Length > 0 &&
                 Lattitude.Text.Length > 0 &&
                 PasswordBox.Password.Length > 0)
             {
@@ -76,9 +85,8 @@ namespace PL
                 }
             }
             else WrongPassword.Text = "You must fill in all the entries!";
-                
-        }
 
+        }
         private void UserNameTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             WrongPassword.Text = "";
@@ -88,11 +96,7 @@ namespace PL
         {
             WrongPassword.Text = "";
         }
-        private void Close_OnClick(object sender, RoutedEventArgs e)
-        {
-            Close();
-            
-        }
+        #endregion
     }
 
 }

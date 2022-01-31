@@ -26,12 +26,10 @@ namespace PL
         BlApi.IBL ibl;
         BO.DroneBL drone;
         int cancel = 0;
-        bool runSimulator = false;
-
-        private bool newDrone;
         int station;
+        private bool newDrone;
         BackgroundWorker worker;
-
+        bool runSimulator = false;
         Dictionary<int, string> options = new Dictionary<int, string>(){
              {0,  "Update Model" },
              {1, "Assign a parcel to the drown" },
@@ -39,6 +37,8 @@ namespace PL
              {3, "Suplay a parcel to costumer" },
              {4,"Send the drone to Charge " },
              {5,"Release drown from charging" } };
+
+        #region Constructors
         public Drone(BlApi.IBL bl1)
         {
             newDrone = true;
@@ -118,9 +118,6 @@ namespace PL
             WeightCombo.SelectedItem = x.Weight;
 
         }
-
-        
-
         public Drone(BlApi.IBL bl1, BO.DroneBL x, int z)
         {
            
@@ -149,7 +146,9 @@ namespace PL
             ModelText.Text = x.Model;
 
         }
+        #endregion
 
+        #region Windows
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (!runSimulator)
@@ -158,11 +157,32 @@ namespace PL
                 this.Close();
             }
         }
+        private void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
+        }
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (this.cancel == 1)
+            {
+                e.Cancel = false;
+            }
+            else e.Cancel = true;
+        }
+        private void ParcelID_Click(object sender, RoutedEventArgs e)
+        {
 
+            new Parcel(ibl, drone.parcel).ShowDialog();
+        }
+        #endregion
+
+        #region Change Drone Detail
         private void WeightCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             drone.Weight = (WeightCategories)WeightCombo.SelectedItem;
-            // NewDrone.Weight = (WeightCategories)WeightCombo.SelectedItem;
         }
 
         private void StationCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -191,7 +211,6 @@ namespace PL
             }
         }
 
-
         private void ModelText_SelectionChanged(object sender, RoutedEventArgs e)
         {
             drone.Model = ModelText.Text;
@@ -203,7 +222,14 @@ namespace PL
             drone.Id = number;
 
         }
+        private void DroneId_SelectionChanged(object sender, TextChangedEventArgs e)
+        {
+            drone.Id = int.Parse(DroneId.Text);
+        }
 
+        #endregion
+
+        #region Update / Add Drone
         private void Update_Bottun(object sender, RoutedEventArgs e)
         {
 
@@ -252,7 +278,6 @@ namespace PL
                 }
             }
         }
-
         private void updateADrone()
         {
             try
@@ -357,30 +382,9 @@ namespace PL
             }
         }
 
+        #endregion
 
-        private void OptionCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-
-        }
-
-
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if (this.cancel == 1)
-            {
-                e.Cancel = false;
-            }
-            else e.Cancel = true;
-        }
-
-        private void ParcelID_Click(object sender, RoutedEventArgs e)
-        {
-            
-            new Parcel(ibl, drone.parcel).ShowDialog();
-        }
-
+        #region Start simulator
         private void Simulator_Click(object sender, RoutedEventArgs e)
         {
             if (!runSimulator)
@@ -404,11 +408,8 @@ namespace PL
                 
             }
         }
-       
-    
         private bool StatusSimulator()
         {
-            //worker.ReportProgress(0);
             return worker.CancellationPending;
         }
         private void Report()
@@ -417,7 +418,6 @@ namespace PL
         }
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            // BackgroundWorker worker = sender as BackgroundWorker;
             try
             {
                 ibl.startSimulator(drone.Id, StatusSimulator, Report);
@@ -425,6 +425,8 @@ namespace PL
             catch (BO.BatteryExaption ex)
             {
                 MessageBox.Show(ex.Message);
+                worker.CancelAsync();
+                
             }
             catch (Exception x)
             {
@@ -434,16 +436,13 @@ namespace PL
                 }
                 else MessageBox.Show("Error","Error");
                 worker.CancelAsync();
-                Simulator.IsChecked = false;
+                
             }
 
 
 
            
         }
-
-
-
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             drone = ibl.SearchDrone(drone.Id);
@@ -470,11 +469,9 @@ namespace PL
             runSimulator = false;
             Ok.Visibility = Visibility.Visible;
             MainGrid.RowDefinitions[6].Height = MainGrid.RowDefinitions[0].Height;
+            Simulator.IsChecked = false;
         }
-
-        private void DroneId_SelectionChanged(object sender, TextChangedEventArgs e)
-        {
-            drone.Id = int.Parse(DroneId.Text);
-        }
+        #endregion
+        
     }
 }

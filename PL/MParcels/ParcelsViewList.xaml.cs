@@ -24,7 +24,6 @@ namespace PL.MParcels
         BlApi.IBL ibl;
         bool boSender = true;
         bool boGeeter = true;
-        int cancel = 0;
         private readonly MainWindow _wnd = (MainWindow)Application.Current.MainWindow;
         public ParcelsViewList(BlApi.IBL bl1)
         {

@@ -90,7 +90,6 @@ namespace PL
         {
             if (_hidden)
             {
-                //PlaySound(@"..\PR_PL\Icons\navigation_forward-selection-minimal.wav");
                 var sb = Resources["OpenMenu"] as Storyboard;
                 sb?.Begin(SideBar);
                 _hidden = false;
@@ -98,7 +97,6 @@ namespace PL
             }
             else
             {
-                //PlaySound(@"..\PR_PL\Icons\navigation_backward-selection-minimal.wav");
                 var sb = Resources["CloseMenu"] as Storyboard;
                 sb?.Begin(SideBar);
                 _hidden = true;

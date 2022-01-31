@@ -6,7 +6,6 @@
         mc:Ignorable="d"
         Title="MainWindow"
         WindowStyle="None"
-    
         Height="600"
         Width="1000"
         WindowStartupLocation="CenterScreen"
@@ -21,8 +20,6 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-
-      
         >
 
     <Window.Resources>
