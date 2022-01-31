@@ -190,10 +190,8 @@ namespace BL
         /// <param name="id"> searche the parcel by id</param>
         /// <returns>return the parcel if exsist or default parcel</returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
-
         public BO.ParcelBl SearchParcel(int id)
         {
-
             BO.ParcelBl temp = new();
             try
             {
