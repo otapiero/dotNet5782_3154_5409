@@ -26,6 +26,10 @@ namespace PL.MParcels
         bool update = false;
         bool user = false;
         int sendId;
+        Dictionary<int, string> options = new Dictionary<int, string>(){
+            {0,"Delete Parcel" },
+             {1, "Deliver Parcel" },
+             {2,  "Collect Parcel"} };
         public Parcel(BlApi.IBL bl1)
         {
             ibl = bl1;
@@ -103,10 +107,8 @@ namespace PL.MParcels
             GetterCombo.Visibility = Visibility.Hidden;
             WeightCombo.Visibility = Visibility.Hidden;
             PrioritiesCombo.Visibility = Visibility.Hidden;
-            Options.Items.Add("Collect Parcel");
-            Options.Items.Add("Deliver Parcel");
-            Options.Items.Add("Delete Parcel");
-            
+            Options.ItemsSource = from y in options
+                            select new string(y.Value);        
         }
         public Parcel(BlApi.IBL bl1, BO.ParcelBl x, int z)
         {
@@ -272,7 +274,7 @@ namespace PL.MParcels
                         WeightCombo.SelectedItem != null &&
                         PrioritiesCombo.SelectedItem != null)
                     {
-                        int seId=0;
+                        int seId = 0;
                         if (user)
                         {
                             seId = sendId;
@@ -293,7 +295,7 @@ namespace PL.MParcels
                             ibl.AddNewParcel(seId, geId, we, pr);
 
                         }
-                        catch(BO.IdDoseNotExist x)
+                        catch (BO.IdDoseNotExist x)
                         {
                             MessageBox.Show($"id {x.Id} of {x.ObjectType} dose not exsit");
                         }
@@ -315,11 +317,12 @@ namespace PL.MParcels
                             else MessageBox.Show("The parcel was asigment", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                             break;
                         case "Deliver Parcel":
-                            ibl.DeliverPackage(parcel.Id);
+                            ibl.DeliverPackage(parcel.drone.Id);
                             break;
                         case "Collect Parcel":
-                            ibl.CollectPackage(parcel.Id);
+                            ibl.CollectPackage(parcel.drone.Id);
                             break;
+                        
                     }
                     MessageBox.Show("Done", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                     cancel = 1;
@@ -329,18 +332,38 @@ namespace PL.MParcels
                  
 
             }
+            catch (BO.IdDoseNotExist x)
+            {
+                MessageBox.Show($"id {x.Id} of {x.ObjectType} dose not exsit");
+            }
             catch (BO.IBException ex)
             {
                 MessageBox.Show(ex.Message, "Parcel updating Error!");
                 return;
             }
-
+            catch(BO.WrongStatusObject ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             catch (Exception x)
             {
                 MessageBox.Show("Error: "+ x, "Parcel updating Error!");
                 return;
             }
 
+        }
+
+        private void Options_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            try
+            {
+
+            }
+            catch (BO.IdDoseNotExist x)
+            {
+                MessageBox.Show($"id {x.Id} of {x.ObjectType} dose not exsit");
+            }
         }
     }
 }

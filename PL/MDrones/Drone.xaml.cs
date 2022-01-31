@@ -422,7 +422,11 @@ namespace PL
             {
                 ibl.startSimulator(drone.Id, StatusSimulator, Report);
             }
-            catch(Exception x)
+            catch (BO.BatteryExaption ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception x)
             {
                 if (x.Message.Length >0)
                 {

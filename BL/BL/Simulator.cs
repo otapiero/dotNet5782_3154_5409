@@ -14,8 +14,8 @@ namespace BL
         BO.DroneBL drone;
         int id;
         Func<bool> stop;
-       Action action;
-        const int delay= 400;
+        Action action;
+        const int delay= 500;
         const int speed = 1;
         double lonPlus, latPlus, lonMinusLon, latMinusLat;
         public Simulator(BL _bl,int _id, Func<bool> _stop, Action report)
@@ -31,6 +31,10 @@ namespace BL
             catch (BO.NoParcelAvilable)
             {
                 throw new BO.NoParcelAvilable();
+            }
+            catch (BO.BatteryExaption ex)
+            {
+                throw new BO.BatteryExaption(ex.Message, ex.MinumumBattery);
             }
             catch (BO.IdDoseNotExist x)
             {
@@ -123,6 +127,10 @@ namespace BL
                         {
                             throw new BO.IdDoseNotExist(x.Message, x.ObjectType, x.Id);
                         }
+                        catch (BO.BatteryExaption ex)
+                        {
+                            throw new BO.BatteryExaption(ex.Message, ex.MinumumBattery);
+                        }
                         catch (BO.WrongStatusObject x)
                         {
                             throw new BO.WrongStatusObject(x.ObjectType, x.Id, x.Message);
@@ -165,6 +173,10 @@ namespace BL
                         catch(BO.WrongStatusObject x)
                         {
                             throw new BO.WrongStatusObject(x.ObjectType, x.Id, x.Error);
+                        }
+                        catch (BO.BatteryExaption ex)
+                        {
+                            throw new BO.BatteryExaption(ex.Message, ex.MinumumBattery);
                         }
                 }
 
@@ -231,6 +243,10 @@ namespace BL
             {
                 throw new BO.IdDoseNotExist(x.Message, x.ObjectType, x.Id);
             }
+            catch (BO.BatteryExaption ex)
+            {
+                throw new BO.BatteryExaption(ex.Message, ex.MinumumBattery);
+            }
             catch (BO.WrongStatusObject x)
             {
                 throw new BO.WrongStatusObject(x.ObjectType, x.Id, x.Message);
@@ -279,6 +295,10 @@ namespace BL
             catch (BO.WrongStatusObject x)
             {
                 throw new BO.WrongStatusObject(x.ObjectType, x.Id, x.Message);
+            }
+            catch (BO.BatteryExaption ex)
+            {
+                throw new BO.BatteryExaption(ex.Message, ex.MinumumBattery);
             }
             catch (DO.XMLFileLoadCreateException x)
             {
