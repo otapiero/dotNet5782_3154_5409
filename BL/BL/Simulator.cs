@@ -15,7 +15,7 @@ namespace BL
         int id;
         Func<bool> stop;
         Action action;
-        const int delay= 1000;
+        const int delay= 500;
         const int speed = 1;
         double lonPlus, latPlus, lonMinusLon, latMinusLat;
         public Simulator(BL _bl,int _id, Func<bool> _stop, Action report)

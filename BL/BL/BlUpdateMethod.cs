@@ -232,7 +232,7 @@ namespace BL
                     Double[] vs = idal.ElectricityUse();
                     double batteryTemp = (disToCollect+disToStation)*vs[0]+ disToDeliver*vs[wheight+1];
                     
-                    if (temp.Battery-batteryTemp>0)
+                    if (temp.Battery-batteryTemp>10)
                     {
                         temp.status=BO.DroneStatuses.Delivery;
                         temp.ParcelId= parcelId;
