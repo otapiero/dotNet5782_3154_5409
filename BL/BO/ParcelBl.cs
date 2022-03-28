@@ -14,10 +14,10 @@ namespace BO
         public WeightCategories weight { get; set; }
         public Priorities priorities { get; set; }
         public DroneInParcel drone { get; set; }
-        public DateTime TimeCreation { get; set; }
-        public DateTime Assignation { get; set; }
-        public DateTime ColectionTime { get; set; }
-        public DateTime DeliveryTime { get; set; }
+        public DateTime? TimeCreation { get; set; }
+        public DateTime? Assignation { get; set; }
+        public DateTime? ColectionTime { get; set; }
+        public DateTime? DeliveryTime { get; set; }
 
         public override string ToString()
         {

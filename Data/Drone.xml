@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfDrone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	<Drone>
-		<Id>1000</Id>
-		<Model>Kidron</Model>
-	</Drone>
-	<Drone>
+  <Drone>
+    <Id>1000</Id>
+    <Model>Kidron</Model>
+  </Drone>
+  <Drone>
     <Id>1001</Id>
     <Model>Yechezkel</Model>
   </Drone>
@@ -28,5 +28,12 @@
     <Id>1006</Id>
     <Model>Buchnik</Model>
   </Drone>
-  
+  <Drone>
+    <Id>1007</Id>
+    <Model>Partush</Model>
+  </Drone>
+  <Drone>
+    <Id>1008</Id>
+    <Model>Sigron</Model>
+  </Drone>
 </ArrayOfDrone>

@@ -25,11 +25,14 @@ namespace PL.MParcels
         int cancel = 0;
         bool update = false;
         bool user = false;
+        int senderID;
+        int geterID;
         int sendId;
         Dictionary<int, string> options = new Dictionary<int, string>(){
             {0,"Delete Parcel" },
              {1, "Deliver Parcel" },
              {2,  "Collect Parcel"} };
+        #region Constructors
         public Parcel(BlApi.IBL bl1)
         {
             ibl = bl1;
@@ -94,6 +97,9 @@ namespace PL.MParcels
             MainGrid.RowDefinitions[14].Height = new GridLength(0);
             MainGrid.RowDefinitions[15].Height = new GridLength(0);
             parcel = x;
+            geterID = x.Getter.Id;
+            senderID = x.Sender.Id;
+
             update = true;
             ParcelWindows.DataContext = x;
             if (x.drone.Id == 0)
@@ -114,7 +120,8 @@ namespace PL.MParcels
         {
             ibl = bl1;
             InitializeComponent();
-
+            geterID = x.Getter.Id;
+            senderID = x.Sender.Id;
             parcel = x;
             Ok.Visibility = Visibility.Hidden;
             ParcelWindows.DataContext = x;
@@ -140,7 +147,6 @@ namespace PL.MParcels
 
 
         }
-
         public Parcel(BlApi.IBL bl1, BO.ParcelInDelivrery x)
         {
             ibl = bl1;
@@ -151,6 +157,8 @@ namespace PL.MParcels
             Weight.Content = x.weight;
             Priorites.Content = x.Priorities;
             DistanceDelivrery.Content = x.DistanceDelivrery;
+            geterID = x.Getter.Id;
+            senderID = x.Sender.Id;
             CollectionLocation.Content = x.CollectionLocation.ToString();
             if (x.DeliveryLocation != null)
             {
@@ -208,7 +216,7 @@ namespace PL.MParcels
 
 
         }
-
+        #endregion
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -247,19 +255,14 @@ namespace PL.MParcels
 
         private void Getter_Click(object sender, RoutedEventArgs e)
         {
-           
-                var temp = (BO.CustomerInParcel)parcel.Getter;
-                var newC = new BO.CustomerBl();
-                newC = ibl.SearchCostumer(temp.Id);
+                var newC = ibl.SearchCostumer(geterID);
                 new MCustomers.Customer(ibl, newC, 1).ShowDialog();
             
         }
 
         private void Sender_Click(object sender, RoutedEventArgs e)
         {
-            var temp = (BO.CustomerInParcel)parcel.Sender;
-            var newC = new BO.CustomerBl();
-            newC = ibl.SearchCostumer(temp.Id);
+            var newC = ibl.SearchCostumer(senderID);
             new MCustomers.Customer(ibl, newC,1).ShowDialog();
         }
 

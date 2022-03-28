@@ -213,6 +213,11 @@ namespace BL
                 temp.Sender = new(sender.Id, sender.Name);
                 temp.Getter = new(getter.Id, getter.Name);
                 temp.weight =(BO.WeightCategories)x.Wheight;
+                temp.Assignation = x.Scheduled;
+                temp.ColectionTime = x.PickedUp;
+                temp.DeliveryTime = x.Delivered;
+                temp.TimeCreation = x.Requsted;
+
             }
             catch (DO.IdDoseNotExist x)
             {

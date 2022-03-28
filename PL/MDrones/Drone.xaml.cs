@@ -179,29 +179,83 @@ namespace PL
         }
         #endregion
 
-        #region Change Drone Detail
-        private void WeightCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        #region ADD Drone Detail
+        private void addNewDrone()
         {
-            drone.Weight = (WeightCategories)WeightCombo.SelectedItem;
+            try
+            {
+                if (DroneId.Text.Length < 1 || ModelText.Text.Length < 1
+                    || WeightCombo.SelectedItem == null
+                    || StationCombo.SelectedItem == null)
+                {
+                   
+
+                    MessageBoxResult mbResult = MessageBox.Show("Not details", "The Drone was uploud!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    switch (mbResult)
+                    {
+                        case MessageBoxResult.OK:
+                            ModelText.BorderBrush = ModelText.Text.Length < 1 ? Brushes.Red : Brushes.Gray;
+                            DroneId.BorderBrush = DroneId.Text.Length < 1 ? Brushes.Red : Brushes.Gray;
+                            WeightCombo.BorderBrush = WeightCombo.SelectedItem == default ? Brushes.Red : Brushes.Gray;
+                            StationCombo.BorderBrush = new SolidColorBrush(Color.FromRgb(255, 0, 0));
+                            break;
+
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        drone.Weight = (WeightCategories)WeightCombo.SelectedItem;
+                        var item = StationCombo.SelectedItem;
+                        var x = (BO.BaseStationToList)item;
+                        station = x.Id;
+                        drone.Model = ModelText.Text;
+                        drone.Id = int.Parse(DroneId.Text);
+                        ibl.AddNewDrone(drone.Id, drone.Model, (int)drone.Weight, station);
+
+                    }
+                    catch (BO.IdAlredyExist x)
+                    {
+                        MessageBox.Show($"id {x.Id} of {x.ObjectType} already exist");
+                    }
+                    MessageBoxResult mbResult = MessageBox.Show("The drone was uploud!", "The Drone was uploud!", MessageBoxButton.OK, MessageBoxImage.Information);
+                    switch (mbResult)
+                    {
+                        case MessageBoxResult.OK:
+                            cancel = 1;
+                            this.Close();
+                            break;
+
+                    }
+                }
+
+
+            }
+            catch (Exception x)
+            {
+                MessageBoxResult mbResult = MessageBox.Show(x.ToString(), "Error Occurred", MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                switch (mbResult)
+                {
+                    case MessageBoxResult.OK:
+                        break;
+                    case MessageBoxResult.Cancel:
+
+                        this.Close();
+
+                        break;
+                }
+            }
         }
-
-        private void StationCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            var item = StationCombo.SelectedItem;
-            var x = (BO.BaseStationToList)item;
-            station = x.Id;
-        }
-
         private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if ((e.Key >= Key.D0 && e.Key <= Key.D9) || (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9))
             {
                 e.Handled = true;
+                MessageBox.Show($"Letter only\n'{e.Key}' is not a Letter");
             }
         }
-
-        private void DroneId_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void TextBoxWithPeriod_OnPreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             var regex = new Regex("[^0-9.]+");
             e.Handled = regex.IsMatch(e.Text);
@@ -211,21 +265,6 @@ namespace PL
             }
         }
 
-        private void ModelText_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-            drone.Model = ModelText.Text;
-        }
-
-        private void DroneId_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-            var number = int.Parse(DroneId.Text);
-            drone.Id = number;
-
-        }
-        private void DroneId_SelectionChanged(object sender, TextChangedEventArgs e)
-        {
-            drone.Id = int.Parse(DroneId.Text);
-        }
 
         #endregion
 
@@ -241,7 +280,7 @@ namespace PL
                     {
                         addNewDrone();
                     }
-                    catch (Exception x)
+                    catch (BO.IdAlredyExist x)
                     {
                         MessageBoxResult mbResult = MessageBox.Show(x.ToString(), "Error Occurred", MessageBoxButton.OK, MessageBoxImage.Error);
                         switch (mbResult)
@@ -321,67 +360,10 @@ namespace PL
             }
             catch (Exception ex)
             {
-                throw ex;
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
-        private void addNewDrone()
-        {
-            try
-            {
-                if (DroneId.Text.Length < 1 || ModelText.Text.Length < 1 || WeightCombo.SelectedItem == null || StationCombo.SelectedItem == null || drone.Model.Length < 1 || drone.Id.ToString().Length < 1)
-                {
-                    MessageBoxResult mbResult = MessageBox.Show("Not details", "The Drone was uploud!", MessageBoxButton.OK, MessageBoxImage.Error);
-                    switch (mbResult)
-                    {
-                        case MessageBoxResult.OK:
-                            ModelText.BorderBrush = ModelText.Text.Length < 1 ? Brushes.Red : Brushes.Gray;
-                            DroneId.BorderBrush = DroneId.Text.Length < 1 ? Brushes.Red : Brushes.Gray;
-                            WeightCombo.BorderBrush = WeightCombo.SelectedItem == default ? Brushes.Red : Brushes.Gray;
-                            StationCombo.BorderBrush = new SolidColorBrush(Color.FromRgb(255, 0, 0));
-                            break;
-
-                    }
-                }
-                else
-                {
-                    try
-                    {
-                        ibl.AddNewDrone(drone.Id, drone.Model, (int)drone.Weight, station);
-
-                    }
-                    catch(BO.IdAlredyExist x)
-                    {
-                        MessageBox.Show($"id {x.Id} of {x.ObjectType} already exist");
-                    }
-                    MessageBoxResult mbResult = MessageBox.Show("The drone was uploud!", "The Drone was uploud!", MessageBoxButton.OK, MessageBoxImage.Information);
-                    switch (mbResult)
-                    {
-                        case MessageBoxResult.OK:
-                            cancel = 1;
-                            this.Close();
-                            break;
-
-                    }
-                }
-
-
-            }
-            catch (Exception x)
-            {
-                MessageBoxResult mbResult = MessageBox.Show(x.ToString(), "Error Occurred", MessageBoxButton.OKCancel, MessageBoxImage.Error);
-                switch (mbResult)
-                {
-                    case MessageBoxResult.OK:
-                        break;
-                    case MessageBoxResult.Cancel:
-
-                        this.Close();
-
-                        break;
-                }
-            }
-        }
-
+     
         #endregion
 
         #region Start simulator

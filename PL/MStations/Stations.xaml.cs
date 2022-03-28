@@ -122,21 +122,29 @@ namespace PL.MStations
                 var name = NameText.Text;
                 int.TryParse(StationId.Text, out var id);
                 int.TryParse(ChargeSlot.Text, out var ch);
+                
                 if (id != new int() && name != "" && ch != new int())
                 {
                     if (update)
                     {
                         ibl.UpdateStation(id, name, ch);
+                        MessageBox.Show("Done", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                        cancel = 1;
+                        this.Close();
                     }
                     else
                     {
                         double.TryParse(TextBoxLongitude.Text, out var lon);
                         double.TryParse(TextBoxLatitude.Text, out var lat);
-                        ibl.AddNewStation(id, name, lon, lat, ch);
+                        if (lon != new double() && lat != new double())
+                        {
+                            ibl.AddNewStation(id, name, lon, lat, ch);
+                            MessageBox.Show("Done", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                            cancel = 1;
+                            this.Close();
+                        }
+                        else MessageBox.Show("not enough information", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
-                    MessageBox.Show("Done", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                    cancel = 1;
-                    this.Close();
                 }
                 else
                     MessageBox.Show("not enough information", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);

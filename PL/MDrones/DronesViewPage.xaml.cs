@@ -86,7 +86,7 @@ namespace PL.MDrones
         {
             try
             {
-                DronesDataGrid.DataContext = ibl.ListDrones();
+                DronesDataGrid.ItemsSource = ibl.ListDrones();
             }
             catch (Exception ex)
             {
@@ -110,7 +110,7 @@ namespace PL.MDrones
                 var temp = (BO.DroneToList)item;
                 var newDrone = new BO.DroneBL();
                 newDrone = ibl.SearchDrone(temp.Id);
-                new Drone(ibl, newDrone).Show();
+                new Drone(ibl, newDrone).ShowDialog();
                 Refresh();
 
             }
