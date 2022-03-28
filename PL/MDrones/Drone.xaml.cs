@@ -23,6 +23,7 @@ namespace PL
     /// </summary>
     public partial class Drone : Window
     {
+        Action refresh;
         BlApi.IBL ibl;
         BO.DroneBL drone;
         int cancel = 0;
@@ -56,10 +57,11 @@ namespace PL
             Weiht_content.Visibility = Visibility.Hidden;
 
         }
-        public Drone(BlApi.IBL bl1, BO.DroneBL x)
+        public Drone(BlApi.IBL bl1, BO.DroneBL x, Action action)
         {
           
             InitializeComponent();
+            refresh = action;
             worker = new();
             worker.DoWork += Worker_DoWork;
             worker.ProgressChanged += Worker_ProgressChanged;
@@ -406,13 +408,13 @@ namespace PL
             }
             catch (BO.BatteryExaption ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Drone Model " + drone.Model.ToString() + ":\n" + ex.Message);
                 worker.CancelAsync();
                 
             }
             catch(NoParcelAvilable ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Drone Model " + drone.Model.ToString() + ":\n" + ex.Message);
                 worker.CancelAsync();
             }
             catch (Exception x)
@@ -449,7 +451,9 @@ namespace PL
             DroneId.Text = drone.Id.ToString();
             ModelText.Text = drone.Model;
             WeightCombo.SelectedItem = drone.Weight;
-           
+            refresh();
+
+
         }
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {

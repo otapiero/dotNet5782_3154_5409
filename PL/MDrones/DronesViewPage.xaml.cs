@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,8 @@ namespace PL.MDrones
         bool boStatus = true;
         bool boWeight = true;
         private readonly MainWindow _wnd = (MainWindow)Application.Current.MainWindow;
+       
+
         public DronesViewPage(BlApi.IBL bl1)
         {
             InitializeComponent();
@@ -86,7 +89,7 @@ namespace PL.MDrones
         {
             try
             {
-                DronesDataGrid.ItemsSource = ibl.ListDrones();
+                this.DronesDataGrid.DataContext = ibl.ListDrones();
             }
             catch (Exception ex)
             {
@@ -110,7 +113,7 @@ namespace PL.MDrones
                 var temp = (BO.DroneToList)item;
                 var newDrone = new BO.DroneBL();
                 newDrone = ibl.SearchDrone(temp.Id);
-                new Drone(ibl, newDrone).ShowDialog();
+                new Drone(ibl, newDrone, Refresh).Show();
                 Refresh();
 
             }
