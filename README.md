@@ -1,5 +1,5 @@
 # dotNet5782_3154_5409
-# Noam karmon & Uriel Tapiro
+Noam karmon & Uriel Tapiro
 
 # In two words:
 A project written in C# and WPF based on 3 tier, using various software designs, such as factory, singelton, RDD, multithreading, user interface and more.
@@ -12,8 +12,7 @@ Based one 3-layer model PL, BL, DAL architecture and design pattern such as obse
 Data handeled in XML files. wide use of multi threading.
 
 # Gifs
-Login:
 [<img src="/.Gifs/login.gif">]("Login interface")
 
-Demo:
+
 [<img src="/Gifs/demo.gif">]("Demo")
