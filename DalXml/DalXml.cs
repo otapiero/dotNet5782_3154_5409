@@ -33,7 +33,7 @@ namespace DAL
 
         #endregion
 
-        #region constractor
+        #region Constractor
         DalXml()
         {
             try

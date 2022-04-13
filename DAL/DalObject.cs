@@ -461,7 +461,7 @@ namespace DAL
             return allStations;
         }
         #endregion
-        #region drones
+        #region Drones
         ///<summary>List - copy list of drones for the main program</summary>
         ///<returns>list of all drones</returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
