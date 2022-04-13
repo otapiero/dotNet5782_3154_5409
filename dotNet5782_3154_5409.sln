@@ -35,7 +35,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{DCE4788D-3
 		Data\Drone.xml = Data\Drone.xml
 		Data\DroneCharge.xml = Data\DroneCharge.xml
 		Data\Parcel.xml = Data\Parcel.xml
-		..\..\..\Desktop\ParcelFree.xml = ..\..\..\Desktop\ParcelFree.xml
 		Data\Station.xml = Data\Station.xml
 	EndProjectSection
 EndProject
