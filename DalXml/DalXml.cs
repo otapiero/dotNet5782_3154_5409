@@ -16,7 +16,12 @@ namespace DAL
         #region singelton
         static readonly DalXml instance = new DalXml();
 
+        public static DalApi.IDal Instance
+        {
+            get { return instance; }
+        }
         #endregion
+
         #region DS XML Files
 
         private const string dronpath = @"Drone.xml"; //XElement
@@ -27,6 +32,8 @@ namespace DAL
         private const string configPath = @"config.xml"; //XMLSerializer
 
         #endregion
+
+        #region constractor
         DalXml()
         {
             try
@@ -47,12 +54,9 @@ namespace DAL
                 throw new DO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
-        public static DalApi.IDal Instance
-        {
-            get { return instance; }
-        }
+        #endregion
 
-
+        #region Search
         #region search costumer
 
         ///<summary>method <c>SearchCustomer</c> </summary>
@@ -161,6 +165,9 @@ namespace DAL
             }
         }
         #endregion
+        #endregion
+
+        #region Add
         #region add drone
         [MethodImpl(MethodImplOptions.Synchronized)]
         /// <summary>method AddNewDrone </summary>
@@ -303,6 +310,9 @@ namespace DAL
             }
         }
         #endregion
+        #endregion
+
+       #region Update
         #region send to charge
 
         /// <summary>method DeliveryParcelToCustomer - the function get parcel and update dilevry time </summary>
@@ -594,6 +604,9 @@ namespace DAL
             }
         }
         #endregion
+        #endregion
+
+        #region Full list
         #region stations
         ///<summary>List - copy list of station for the main program</summary>
         ///<returns>list of all stations</returns>
@@ -682,6 +695,9 @@ namespace DAL
             }
         }
         #endregion
+        #endregion
+
+        #region Part list
         #region part of parcels
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.Parcel> ListOfParcels(Predicate<DO.Parcel> f)
@@ -776,6 +792,8 @@ namespace DAL
             }
         }
         #endregion
+        #endregion
+
         [MethodImpl(MethodImplOptions.Synchronized)]
         public double[] ElectricityUse()
         {
