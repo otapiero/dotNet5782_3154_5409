@@ -59,7 +59,7 @@ namespace PL
                     else
                     {
                         working = true;
-                        WrongPassword.Text = "username or password are incorrect";
+                        WrongPassword.Text = "Username or password are incorrect";
                     }
                 }
                 catch (Exception ) // can't find the user in bl
