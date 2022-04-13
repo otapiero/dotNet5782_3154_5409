@@ -13,7 +13,7 @@ Data handeled in XML files. wide use of multi threading.
 
 # Gifs
 Login:
-[<img src="/login.gif">]("Login interface")
+[<img src="/.Gifs/login.gif">]("Login interface")
 
 Demo:
-[<img src="/demo.gif">]("Demo")
+[<img src="/Gifs/demo.gif">]("Demo")
