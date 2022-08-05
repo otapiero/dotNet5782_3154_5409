@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace BO
 {
+    /// <summary>
+    /// The base station for list.
+    /// </summary>
     public class BaseStationToList
     {
         public int Id { get; set; }

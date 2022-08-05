@@ -8,6 +8,9 @@ using System.Runtime.CompilerServices;
 namespace BL
 {
 
+    /// <summary>
+    /// partial class of bl for displays of lists
+    /// </summary>
     partial class BL
     {
         /// <summary>
@@ -25,7 +28,7 @@ namespace BL
                 List<BO.BaseStationToList> allStation = new();
                 foreach (DO.Station x in idal.AllStation())
                 {
-                    numOfDronesInCharge = idal.AllDronesIncharge().Count(w => w.StationId==x.Id);
+                    numOfDronesInCharge = idal.AllDronesInCharge().Count(w => w.StationId==x.Id);
                     allStation.Add(new(x.Id, x.Name, x.ChargeSlots, numOfDronesInCharge));
                 }
                 return allStation;
@@ -198,7 +201,7 @@ namespace BL
                 List<BO.BaseStationToList> stationWithAvailebalChargePost = new();
                 foreach (DO.Station x in idal.ListOfStations(t => t.ChargeSlots > 0))
                 {
-                    int numOfDronesInCharge = idal.AllDronesIncharge().Count(w => w.StationId==x.Id);
+                    int numOfDronesInCharge = idal.AllDronesInCharge().Count(w => w.StationId==x.Id);
                     stationWithAvailebalChargePost.Add(new(x.Id, x.Name, x.ChargeSlots, numOfDronesInCharge));
                 }
                 return stationWithAvailebalChargePost;

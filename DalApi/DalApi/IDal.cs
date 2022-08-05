@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace DalApi
@@ -31,7 +28,7 @@ namespace DalApi
         IEnumerable<DO.Drone> AllDrones();
         IEnumerable<DO.Costumer> AllCustomers();
         IEnumerable<DO.Parcel> AllParcels();
-        public IEnumerable<DO.DroneCharge> AllDronesIncharge();
+        public IEnumerable<DO.DroneCharge> AllDronesInCharge();
 
 
 

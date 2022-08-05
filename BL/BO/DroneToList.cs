@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace BO
 {
+    /// <summary>
+    /// The drone to list.
+    /// </summary>
     public class DroneToList
     {
         public DroneToList()

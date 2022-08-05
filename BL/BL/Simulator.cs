@@ -8,6 +8,9 @@ using System.Threading;
 using System.Diagnostics;
 namespace BL
 {
+    /// <summary>
+    /// The simulator.
+    /// </summary>
     class Simulator
     {
         BL bl;
@@ -17,6 +20,13 @@ namespace BL
         Action action;
         const int delay= 500;
         double lonPlus, latPlus, lonMinusLon, latMinusLat;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Simulator"/> class.
+        /// </summary>
+        /// <param name="_bl">The _bl.</param>
+        /// <param name="_id">The _id.</param>
+        /// <param name="_stop">The _stop.</param>
+        /// <param name="report">The report.</param>
         public Simulator(BL _bl,int _id, Func<bool> _stop, Action report)
         {
             bl=_bl;
@@ -52,7 +62,10 @@ namespace BL
                 throw new BO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
-     
+
+        /// <summary>
+        /// Runs the simulator.
+        /// </summary>
         void RunSimulator()
         {
             while(stop.Invoke()==false)
@@ -181,6 +194,9 @@ namespace BL
 
             }
         }
+        /// <summary>
+        /// sends the drone to charge.
+        /// </summary>
         void sendToCharge()
         {
             try
@@ -206,6 +222,9 @@ namespace BL
                 throw new BO.BatteryExaption(ex.Message, ex.MinumumBattery);
             }
         }
+        /// <summary>
+        /// Colectes the parcel
+        /// </summary>
         void Colecte()
         {
             try
@@ -255,6 +274,9 @@ namespace BL
                 throw new BO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
+        /// <summary>
+        /// Delivers the parcel
+        /// </summary>
         void Deliver()
         {
             try

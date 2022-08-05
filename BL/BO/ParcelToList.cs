@@ -6,8 +6,20 @@ using System.Threading.Tasks;
 
 namespace BO
 {
+    /// <summary>
+    /// The parcel to list.
+    /// </summary>
     public class ParcelToList
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ParcelToList"/> class.
+        /// </summary>
+        /// <param name="id">The id.</param>
+        /// <param name="nameSender">The name sender.</param>
+        /// <param name="nameGetter">The name getter.</param>
+        /// <param name="weight">The weight.</param>
+        /// <param name="priorities">The priorities.</param>
+        /// <param name="status">The status.</param>
         public ParcelToList(int id, string nameSender, string nameGetter, WeightCategories weight, Priorities priorities, ParcelStatus status)
         {
             Id=id;

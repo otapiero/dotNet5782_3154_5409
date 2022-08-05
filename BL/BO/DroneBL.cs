@@ -5,6 +5,9 @@ namespace BO
 {
     public class DroneBL
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DroneBL"/> class.
+        /// </summary>
         public DroneBL()
         {
             this.parcel=new();

@@ -5,10 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 
    namespace DO
-    {
+    {   /// <summary>enum of weight categories </summary>
         public enum WeightCategories
         { Light, Intermidiate, Heavy }
-        public enum Priorities
+
+    /// <summary>enum of priorities categories </summary>
+    public enum Priorities
         { Emergency, Fast, Normal }
 
 

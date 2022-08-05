@@ -39,7 +39,7 @@ namespace DAL
             try
             {
 
-                var t = AllDronesIncharge();
+                var t = AllDronesInCharge();
                 foreach (var x in t)
                 {
                     ReleseDroneFromCharge(x.DroneId);
@@ -682,7 +682,7 @@ namespace DAL
         #endregion
         #region drones in charge
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public IEnumerable<DO.DroneCharge> AllDronesIncharge()
+        public IEnumerable<DO.DroneCharge> AllDronesInCharge()
         {
             try
             {

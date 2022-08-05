@@ -10,6 +10,9 @@ using System.Runtime.CompilerServices;
 namespace BL
 {
 
+    /// <summary>
+    /// partial class of bl for add method
+    /// </summary>
     partial class BL
     {
         #region add station
@@ -37,6 +40,13 @@ namespace BL
 
         }
         #endregion
+        /// <summary>
+        /// Adds the new drone.
+        /// </summary>
+        /// <param name="id">The id.</param>
+        /// <param name="model">The model.</param>
+        /// <param name="wheigt">The wheigt.</param>
+        /// <param name="stationId">The station id.</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
 
         public void AddNewDrone(int id, string model, int wheigt, int stationId)
@@ -47,7 +57,7 @@ namespace BL
             }
             if (wheigt > 2 || wheigt < 0)
             {
-                throw new BO.WrongInputWheigt(wheigt);
+                throw new BO.WrongInputWheight(wheigt);
             }
             try
             {
@@ -75,6 +85,15 @@ namespace BL
                 throw new BO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
+        /// <summary>
+        /// Adds the new customer.
+        /// </summary>
+        /// <param name="id">The id.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="phone">The phone.</param>
+        /// <param name="longattitude">The longattitude.</param>
+        /// <param name="lattitude">The lattitude.</param>
+        /// <param name="pass">The pass.</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
 
         public void AddNewCustomer(int id, string name, string phone, double longattitude, double lattitude, string pass)
@@ -95,6 +114,13 @@ namespace BL
                 throw new BO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
+        /// <summary>
+        /// Adds the new parcel.
+        /// </summary>
+        /// <param name="senderId">The sender id.</param>
+        /// <param name="targetId">The target id.</param>
+        /// <param name="wheigt">The wheigt.</param>
+        /// <param name="Priority">The priority.</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
 
         public void AddNewParcel(int senderId, int targetId, int wheigt, int Priority)
@@ -111,14 +137,14 @@ namespace BL
                 }
                 if (wheigt > 2 || wheigt < 0)
                 {
-                    throw new BO.WrongInputWheigt(wheigt);
+                    throw new BO.WrongInputWheight(wheigt);
                 }
 
                 idal.AddNewParcel(senderId, targetId, wheigt, Priority);
             }
-            catch(BO.WrongInputWheigt )
+            catch(BO.WrongInputWheight )
             {
-                throw new BO.WrongInputWheigt(wheigt);
+                throw new BO.WrongInputWheight(wheigt);
             }
             catch (DO.IdDoseNotExist x)
             {

@@ -12,11 +12,17 @@ using System.Runtime.CompilerServices;
 namespace BL
 {
 
+    /// <summary>
+    /// partial class of bl for the constractor
+    /// </summary>
     partial class BL : BlApi.IBL
     {
         private DalApi.IDal idal;
         private List<BO.DroneToList> DronesBl = new();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BL"/> class.
+        /// </summary>
         public BL()
         {
             
@@ -167,6 +173,12 @@ namespace BL
 
         }
 
+        /// <summary>
+        /// Distances the location.
+        /// </summary>
+        /// <param name="x">The x.</param>
+        /// <param name="y">The y.</param>
+        /// <returns>A double.</returns>
         private static double DistanceLocation(BO.Location x, BO.Location y)
         {
             double locX = Math.Pow(x.Lattitude - y.Lattitude, 2);
@@ -175,6 +187,12 @@ namespace BL
             return dis;
         }
 
+        /// <summary>
+        /// Finds the the closest station.
+        /// </summary>
+        /// <param name="x">The x.</param>
+        /// <param name="stations">The stations.</param>
+        /// <returns>A BO.Location.</returns>
         private static BO.Location FindTheClosestStation(BO.Location x, IEnumerable<DO.Station> stations)
         {
             double tempDistance, dis = DistanceLocation(x, new BO.Location(stations.First().Longitude, stations.First().Lattitude));

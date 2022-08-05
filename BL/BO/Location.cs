@@ -6,8 +6,16 @@ using System.Threading.Tasks;
 
 namespace BO
 {
+    /// <summary>
+    /// Class for the location.
+    /// </summary>
     public class Location
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Location"/> class.
+        /// </summary>
+        /// <param name="longitude">The longitude.</param>
+        /// <param name="lattitude">The lattitude.</param>
         public Location(double longitude, double lattitude)
         {
             Longitude = longitude;

@@ -25,6 +25,10 @@ namespace PL.MCustomers
         BO.CustomerBl customer;
 
         int cancel = 0;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Customer"/> class.
+        /// </summary>
+        /// <param name="bl1">The bl1.</param>
         public Customer(BlApi.IBL bl1)
         {
             ibl = bl1;
@@ -35,6 +39,11 @@ namespace PL.MCustomers
             MainGrid.RowDefinitions[3].Height = new GridLength(0);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Customer"/> class.
+        /// </summary>
+        /// <param name="bl1">The bl1.</param>
+        /// <param name="x">The x.</param>
         public Customer(BlApi.IBL bl1, BO.CustomerBl x)
         {
             ibl = bl1;
@@ -50,6 +59,12 @@ namespace PL.MCustomers
 
 
         }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Customer"/> class.
+        /// </summary>
+        /// <param name="bl1">The bl1.</param>
+        /// <param name="x">The x.</param>
+        /// <param name="z">The z.</param>
         public Customer(BlApi.IBL bl1, BO.CustomerBl x, int z)
         {
             ibl = bl1;
@@ -68,6 +83,11 @@ namespace PL.MCustomers
 
         }
 
+        /// <summary>
+        /// Button click.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The e.</param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.cancel = 1;

@@ -21,9 +21,9 @@ namespace DAL
         }
         DalObject() { }
         public static DalApi.IDal Instance { get { return instance; } }
+        #region search costumer
         ///<summary>method <c>SearchCustomer</c> </summary>
         ///<param name="id"> searche the customer by id</param>
-         #region search costumer
         [MethodImpl(MethodImplOptions.Synchronized)]
         public DO.Costumer SearchCostumer(int id)
         {
@@ -36,10 +36,10 @@ namespace DAL
         }
         #endregion
         #region search drone
-        [MethodImpl(MethodImplOptions.Synchronized)]
         /// <summary>method <c>SearchDrone</c> </summary>
         /// <param name="id"> searche the drone by id</param>
         /// <returns>the drone if exsist</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public DO.Drone SearchDrone(int id)
         {
             if (!DataSource.drones.Exists(x => x.Id.Equals(id)))
@@ -51,9 +51,9 @@ namespace DAL
         }
         #endregion
         #region search station
-        [MethodImpl(MethodImplOptions.Synchronized)]
         ///<summary>method <c>SearchStation</c> </summary>
         ///<param name="id"> searche the Station by id</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public DO.Station SearchStation(int id)
         {
 
@@ -67,10 +67,10 @@ namespace DAL
         }
         #endregion
         #region search parcel
-        [MethodImpl(MethodImplOptions.Synchronized)]
         /// <summary>method <c> SearchParcel</c> </summary>
         /// <param name="id"> searche the parcel by id</param>
         /// <returns>return the parcel if exsist</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public DO.Parcel SearchParcel(int id)
         {
             if (!DataSource.parcels.Exists(x => x.Id.Equals(id)))
@@ -82,12 +82,12 @@ namespace DAL
         }
         #endregion
         #region add drone
-        [MethodImpl(MethodImplOptions.Synchronized)]
         /// <summary>method AddNewDrone </summary>
         /// <param name="_model"> model of drone</param>
         /// <param name="_MaxWheight"> enum of weight drone</param>
         /// <param name="_status"> enum status of drone</param>
-        /// <param name=" _battery">life battery of drone</param>       
+        /// <param name=" _battery">life battery of drone</param> 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddNewDrone(int id, string _model)
         {
             if (DataSource.drones.Exists(x => x.Id.Equals(id)))
@@ -101,12 +101,12 @@ namespace DAL
         }
         #endregion
         #region add station
-        [MethodImpl(MethodImplOptions.Synchronized)]
         /// <summary>method AddNewStation </summary>
         /// <param name="_name"> station name</param>
         /// <param name="_Longitude"> location of station</param>
         /// <param name="_Lattitude"> location of station</param>
         /// <param name=" _chargeSlots">status of charge</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddNewStation(int id, string _name, double _Longitude, double _Lattitude, int _chargeSlots)
         {
             if (DataSource.stations.Exists(x => x.Id == id))
@@ -123,14 +123,13 @@ namespace DAL
         }
         #endregion
         #region add customer
-        [MethodImpl(MethodImplOptions.Synchronized)]
         /// <summary>method AddNewCustomer </summary>
         /// <param name="_id"> customer id</param>
         /// <param name=" _Name">customer name</param>
         /// <param name="_Phone"> customer phone number</param>
         /// <param name="_Longitude"> location of station</param>
         /// <param name="_Lattitude"> location of station</param>
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddNewCustomer(int _id, string _Name, string _Phone, double _Longitude, double _Lattitude, string pass)
         {
 
@@ -150,12 +149,12 @@ namespace DAL
         }
         #endregion
         #region add parcel
-        [MethodImpl(MethodImplOptions.Synchronized)]
         /// <summary>method  AddNewParcel </summary>
         /// <param name="_Sender"> customer id of sender</param>
         /// <param name="_TargetId">customer id of target</param>
         /// <param name="_Wheight"> enum weight of parcel</param>
         /// <param name="_Priority"> enum priority of parcel</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddNewParcel(int _Sender, int _TargetId, int _Wheight, int _Priority)
         {
             if (!DataSource.customers.Exists(x => x.Id.Equals(_Sender)))
@@ -182,12 +181,11 @@ namespace DAL
         }
         #endregion
         #region delete parcel
-        [MethodImpl(MethodImplOptions.Synchronized)]
         /// <summary>
         /// delete a parcel
         /// </summary>
         /// <param name="idParcel">id of parcel</param>
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteParcel(int idParcel)
         {
             try
@@ -207,13 +205,13 @@ namespace DAL
         }
         #endregion
         #region send to charge
-        [MethodImpl(MethodImplOptions.Synchronized)]
         /// <summary>method DeliveryParcelToCustomer - the function get parcel and update dilevry time </summary>
         /// <param name="idParcel"> id parcel delivery</param>
 
         /// <summary>method SendDroneToCharge - the function get drone and station and coonect them </summary>
         /// <param name = "idDrone"> id drone to charge</param>
         /// <param name = "idStation"> id free station</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void SendDroneToCharge(int idDrone, int idStation)
         {
             try
@@ -234,9 +232,9 @@ namespace DAL
         }
         #endregion
         #region relese from charge
-        [MethodImpl(MethodImplOptions.Synchronized)]
         /// <summary>method ReleseDroneFromCharge - the function get drone relese it fron station </summary>
         /// <param name = "idDrone"> id drone to relese</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void ReleseDroneFromCharge(int id)
         {
             if(!DataSource.DroneCharges.Exists(x => x.DroneId.Equals(id)))
@@ -413,6 +411,11 @@ namespace DAL
         }
         #endregion
         #region part of stations
+        /// <summary>
+        /// Lists  of the stations with a filter.
+        /// </summary>
+        /// <param name="f">The f.</param>
+        /// <returns>A list of DO.Station.</returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.Station> ListOfStations(Predicate<DO.Station> f)
         {
@@ -420,6 +423,11 @@ namespace DAL
         }
         #endregion
         #region part of Drones
+        /// <summary>
+        /// Lists of the drones with a filter.
+        /// </summary>
+        /// <param name="f">The f.</param>
+        /// <returns>A list of DO.Drone.</returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.Drone> ListOfDrones(Predicate<DO.Drone> f)
         {
@@ -427,6 +435,11 @@ namespace DAL
         }
         #endregion
         #region part of customers
+        /// <summary>
+        /// Lists the of costumers with a filter.
+        /// </summary>
+        /// <param name="f">The f.</param>
+        /// <returns>A list of DO.Costumer.</returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.Costumer> ListOfCostumers(Predicate<DO.Costumer> f)
         {
@@ -434,6 +447,11 @@ namespace DAL
         }
         #endregion
         #region part of parcels
+        /// <summary>
+        /// Lists the of parcels with a filter.
+        /// </summary>
+        /// <param name="f">The f.</param>
+        /// <returns>A list of DO.Parcel.</returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.Parcel> ListOfParcels(Predicate<DO.Parcel> f)
         {
@@ -441,6 +459,11 @@ namespace DAL
         }
         #endregion
         #region part of dronecharge
+        /// <summary>
+        /// Lists  of drones in charge with a filter.
+        /// </summary>
+        /// <param name="f">The f.</param>
+        /// <returns>A list of DO.DroneCharge.</returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DO.DroneCharge> ListOfDronesInCharge(Predicate<DO.DroneCharge> f)
         {
@@ -488,15 +511,25 @@ namespace DAL
         {
             return DataSource.parcels.FindAll(item => item.Availble==true);
         }
-        public IEnumerable<DO.DroneCharge> AllDronesIncharge()
+        #endregion
+        #region DronesInCharge
+        /// <summary>
+        /// All the drones in charge.
+        /// </summary>
+        /// <returns>A list of DO.DroneCharge.</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public IEnumerable<DO.DroneCharge> AllDronesInCharge()
         {
             return DataSource.DroneCharges.Select(item => item);
         }
         #endregion
 
 
+        /// <summary>
+        /// load the Data of the differtnt uses of electricity.
+        /// </summary>
+        /// <returns>An array of double.</returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
-
         public double[] ElectricityUse()
         {
             double[] arr = new double[5];

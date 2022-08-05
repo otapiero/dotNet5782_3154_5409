@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace BO
 {
+    /// <summary>
+    /// The base station.
+    /// </summary>
     public class BaseStation
     {
         public BaseStation() { dronesInCharges=new(); }

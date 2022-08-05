@@ -5,20 +5,20 @@
     <Name>Beer-Sheva</Name>
     <Longitude>31.243157502128597</Longitude>
     <Lattitude>34.79710918958908</Lattitude>
-    <ChargeSlots>19</ChargeSlots>
-  </Station>
-  <Station>
-    <Id>1</Id>
-    <Name>Tel-Aviv</Name>
-    <Longitude>32.05657504851606</Longitude>
-    <Lattitude>34.7787006186855</Lattitude>
-    <ChargeSlots>9</ChargeSlots>
+    <ChargeSlots>20</ChargeSlots>
   </Station>
   <Station>
     <Id>3</Id>
     <Name>Jerusalem</Name>
     <Longitude>31.78912146591777</Longitude>
     <Lattitude>35.20328196325503</Lattitude>
-    <ChargeSlots>12</ChargeSlots>
+    <ChargeSlots>15</ChargeSlots>
+  </Station>
+  <Station>
+    <Id>1</Id>
+    <Name>Tel-Aviv</Name>
+    <Longitude>32.05657504851606</Longitude>
+    <Lattitude>34.7787006186855</Lattitude>
+    <ChargeSlots>10</ChargeSlots>
   </Station>
 </ArrayOfStation>

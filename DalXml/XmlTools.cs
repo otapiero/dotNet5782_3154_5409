@@ -10,16 +10,27 @@ using System.Xml.Serialization;
 
 namespace DAL
 {
+    /// <summary>
+    ///  functions for load and save xml files.
+    /// </summary>
     internal static class XmlTools
     {
         private const string dir = @"Data\";
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="XmlTools"/> class.
+        /// </summary>
         static XmlTools()
         {
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
         }
         #region SaveLoadWithXElement
+        /// <summary>
+        /// Saves the list to xml element.
+        /// </summary>
+        /// <param name="rootElem">The root elem.</param>
+        /// <param name="filePath">The file path.</param>
         public static void SaveListToXMLElement(XElement rootElem, string filePath)
         {
             try
@@ -32,6 +43,11 @@ namespace DAL
             }
         }
 
+        /// <summary>
+        /// Loads the list from xml element.
+        /// </summary>
+        /// <param name="filePath">The file path.</param>
+        /// <returns>A XElement.</returns>
         public static XElement LoadListFromXMLElement(string filePath)
         {
             try
@@ -53,6 +69,11 @@ namespace DAL
         #endregion
 
         #region SaveLoadWithXMLSerializer
+        /// <summary>
+        /// Saves the list to xml serializer.
+        /// </summary>
+        /// <param name="list">The list.</param>
+        /// <param name="filePath">The file path.</param>
         public static void SaveListToXMLSerializer<T>(List<T> list, string filePath)
         {
             try
@@ -67,6 +88,11 @@ namespace DAL
                 throw new DO.XMLFileLoadCreateException(filePath, $"fail to create xml file: {filePath}", ex);
             }
         }
+        /// <summary>
+        /// Loads the list from xml serializer.
+        /// </summary>
+        /// <param name="filePath">The file path.</param>
+        /// <returns>A list of TS.</returns>
         public static List<T> LoadListFromXMLSerializer<T>(string filePath)
         {
             try
@@ -84,6 +110,11 @@ namespace DAL
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="src">The src.</param>
+        /// <param name="dst">The dst.</param>
         internal static void Mover<T>(this T src, T dst)
         {
             foreach (var pi in typeof(T).GetProperties())

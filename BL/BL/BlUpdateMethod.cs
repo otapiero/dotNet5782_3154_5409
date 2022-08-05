@@ -7,6 +7,9 @@ using System.Runtime.CompilerServices;
 using BO;
 namespace BL
 {
+    /// <summary>
+    /// partial class of bl for updates method
+    /// </summary>
     partial class BL
     {
         /// <summary>
@@ -346,6 +349,10 @@ namespace BL
                 throw new BO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
+        /// <summary>
+        /// Deletes the parcel.
+        /// </summary>
+        /// <param name="id">The id.</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
 
         public void DeleteParcel(int id)
@@ -371,6 +378,12 @@ namespace BL
                 throw new BO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
+        /// <summary>
+        /// Updates the drone location.
+        /// </summary>
+        /// <param name="id">The id.</param>
+        /// <param name="lonPlus">The lon plus.</param>
+        /// <param name="latPlus">The lat plus.</param>
         internal void UpdateDroneLocation(int id, double lonPlus, double latPlus)
         {
 
@@ -379,6 +392,11 @@ namespace BL
             drone.CurrentLocation.Lattitude += latPlus;
             drone.CurrentLocation.Longitude += lonPlus;
         }
+        /// <summary>
+        /// decrease the battry by calculing the distance the drone pass (a method for  simulator mode only)
+        /// </summary>
+        /// <param name="id">The id.</param>
+        /// <param name="distance">The distance.</param>
         internal void BatteryMinus(int id, double distance)
         {
             try
@@ -400,6 +418,12 @@ namespace BL
                 throw new BO.XMLFileLoadCreateException(x.XmlFilePath, x.Message, x.InnerException);
             }
         }
+        /// <summary>
+        /// starts the simulator.
+        /// </summary>
+        /// <param name="id">The id.</param>
+        /// <param name="stop">The stop.</param>
+        /// <param name="report">The report.</param>
         public  void startSimulator( int id, Func<bool> stop, Action report)
         {
             try
@@ -420,6 +444,11 @@ namespace BL
             }
         }
 
+        /// <summary>
+        /// charge the battery (a method for  simulator mode only)
+        /// </summary>
+        /// <param name="id">The id.</param>
+        /// <param name="plus">The plus.</param>
         public void  BatteryPlus(int id, double plus)
         {
           

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BlApi
 {
+    /// <summary>
+    /// bl interface
+    /// </summary>
     public interface IBL
     {
         void AddNewStation(int id, string name, double longattitude, double lattitude, int numChargeSlot);

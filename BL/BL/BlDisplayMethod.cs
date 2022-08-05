@@ -10,6 +10,9 @@ namespace BL
 {
 
 
+    /// <summary>
+    /// partial class of bl for displays method
+    /// </summary>
     partial class BL
     {
         /// <summary>

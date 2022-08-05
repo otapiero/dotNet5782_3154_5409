@@ -7,8 +7,14 @@ using System.Threading.Tasks;
 
 namespace BO
 {
+    /// <summary>
+    /// The customerBl.
+    /// </summary>
     public class CustomerBl
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CustomerBl"/> class.
+        /// </summary>
         public CustomerBl()
         {
             fromCustomer=new();
