@@ -1,5 +1,5 @@
 # dotNet5782_3154_5409
-Noam karmon & Uriel Tapiro
+Noam karmon & Ouriel Tapiro
 
 # In two words:
 A project written in C# and WPF based on 3 tier, using various software designs, such as factory, singelton, RDD, multithreading, user interface and more.
